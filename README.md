@@ -4,6 +4,10 @@
 
 ### 이제 합니다!
 
+## 기능
+
+- 앨범, 피드, 음악, 공지사항, 이벤트
+
 ## Stack
 
 1. Front - React, Next, Typescript, Styled-components
