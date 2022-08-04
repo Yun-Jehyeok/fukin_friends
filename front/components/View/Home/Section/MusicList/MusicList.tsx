@@ -1,14 +1,15 @@
 import { NextPage } from 'next';
-import { Container, Cover, Item, List, Title } from './style';
-import Zico from './img/zico.jpeg';
+import { Container, Description, Item, List, Title } from './style';
+import zico from './img/zico.jpeg';
 import thinking from './img/thinking.jpeg';
 import randombox from './img/randombox.jpeg';
 import dontknow from './img/dontknow.jpeg';
+import Image from 'next/image';
 
 let itemList = [
   {
     id: 1,
-    img: Zico,
+    img: zico,
     title: '괴짜',
     singer: 'Zico',
   },
@@ -30,6 +31,24 @@ let itemList = [
     title: 'Veni Vidi Vici',
     singer: 'Zico',
   },
+  {
+    id: 5,
+    img: thinking,
+    title: '사람',
+    singer: 'Zico',
+  },
+  {
+    id: 6,
+    img: randombox,
+    title: '웬수',
+    singer: 'Zico',
+  },
+  {
+    id: 7,
+    img: dontknow,
+    title: 'Veni Vidi Vici',
+    singer: 'Zico',
+  },
 ];
 
 const MusicList: NextPage = () => {
@@ -39,11 +58,11 @@ const MusicList: NextPage = () => {
       <List>
         {itemList.map((item) => (
           <Item key={item.id}>
-            <Cover src={item.img} />
-            <div>
+            <Image src={item.img} alt={item.title} width={120} height={150} />
+            <Description>
               <div>{item.title}</div>
               <div>{item.singer}</div>
-            </div>
+            </Description>
           </Item>
         ))}
       </List>

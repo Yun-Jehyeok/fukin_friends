@@ -18,19 +18,11 @@ export const List = styled.div`
 `;
 
 export const Item = styled.div`
-  width: 120px;
-  height: fit-content;
+  width: 400px;
+  height: 280px;
   margin-right: 24px;
-`;
 
-export const Description = styled.div`
-  width: 100%;
-  margin-top: 8px;
-
-  & > div {
-    font-size: 14px;
-  }
-  & > div:last-child {
-    color: gray;
+  & img {
+    border-radius: 16px;
   }
 `;
