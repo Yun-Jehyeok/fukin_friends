@@ -3,16 +3,42 @@ import { Body, Container } from './style';
 
 import Header from '../components/Header/Header';
 import Navigation from '../components/Navigation/Navigation';
+import { useState } from 'react';
+import Home from '../components/View/Home/Home';
+import Event from '../components/View/Event/Event';
+import Notice from '../components/View/Notice/Notice';
+import Album from '../components/View/Album/Album';
+import PlayList from '../components/View/PlayList/PlayList';
+import Feed from '../components/View/Feed/Feed';
 
-const Home: NextPage = () => {
+const App: NextPage = () => {
+  const [path, setPath] = useState<string>('Home');
+  const [component, setComponent] = useState([
+    { name: 'Home', comp: <Home /> },
+    { name: 'Event', comp: <Event /> },
+    { name: 'Notice', comp: <Notice /> },
+    { name: 'Album', comp: <Album /> },
+    { name: 'Play list', comp: <PlayList /> },
+    { name: 'Feed', comp: <Feed /> },
+  ]);
+
+  const handleChangeView = (name: string) => {
+    setPath(name);
+  };
+
   return (
     <Container>
       <Header />
       <Body>
-        <Navigation />
+        <Navigation handleChangeView={handleChangeView} />
+        {component.map((item) => {
+          if (item.name === path) {
+            return item.comp;
+          }
+        })}
       </Body>
     </Container>
   );
 };
 
-export default Home;
+export default App;

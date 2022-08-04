@@ -1,3 +1,4 @@
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import {
   faBars,
   faBolt,
@@ -11,8 +12,19 @@ import { NextPage } from 'next';
 import { useState } from 'react';
 import { Container, IconContainer } from './style';
 
-const Navigation: NextPage = () => {
-  const [itemList, setItemList] = useState([
+interface Item {
+  name: string;
+  icon?: IconProp;
+  clicked?: boolean;
+  class?: string;
+}
+
+interface child {
+  handleChangeView: (name: string) => void;
+}
+
+const Navigation: NextPage = ({ handleChangeView }: child) => {
+  const [itemList, setItemList] = useState<Item[]>([
     {
       name: 'Home',
       icon: faHouse,
@@ -53,7 +65,7 @@ const Navigation: NextPage = () => {
     },
   ]);
 
-  const handleChangeView = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleChangeNavigation = (e: React.MouseEvent<HTMLDivElement>) => {
     let tempList = itemList.map((item) => {
       item.clicked = false;
 
@@ -64,6 +76,7 @@ const Navigation: NextPage = () => {
       return item;
     });
 
+    handleChangeView(e.currentTarget.dataset.name || 'Home');
     setItemList(tempList);
   };
 
@@ -72,14 +85,14 @@ const Navigation: NextPage = () => {
       {itemList.map((item) =>
         item.class ? (
           <div key={item.name} className={item.class}>
-            item.name
+            {item.name}
           </div>
         ) : (
           <div
             key={item.name}
             data-name={item.name}
             data-clicked={item.clicked}
-            onClick={handleChangeView}
+            onClick={handleChangeNavigation}
           >
             <IconContainer>
               <FontAwesomeIcon icon={item.icon} />
