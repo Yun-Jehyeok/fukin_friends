@@ -24,6 +24,10 @@ export const Container = styled.div`
     color: #5455dd;
     background-color: #eeeefc;
   }
+  & > div:not(.division)[data-clicked='true'] {
+    color: #5455dd;
+    background-color: #eeeefc;
+  }
   & > .division {
     font-size: 12px;
     color: #cacaca;
