@@ -5,7 +5,7 @@ const Header: NextPage = () => {
   return (
     <Wrap>
       <Container>
-        <Logo>LOGO</Logo>
+        <Logo>FUKIN FRIENDS</Logo>
         <SearchInput placeholder="Search" />
         <Profile>
           <div></div>

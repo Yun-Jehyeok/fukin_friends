@@ -22,6 +22,7 @@ export const Logo = styled.div`
   flex-grow: 1;
   height: 100%;
   line-height: 32px;
+  font-size: 18px;
 `;
 
 export const SearchInput = styled.input`
