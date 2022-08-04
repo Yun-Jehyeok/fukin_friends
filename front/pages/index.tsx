@@ -1,15 +1,16 @@
 import type { NextPage } from 'next';
+import { useState } from 'react';
+
 import { Body, Container } from './style';
 
-import Header from '../components/Header/Header';
-import Navigation from '../components/Navigation/Navigation';
-import { useState } from 'react';
-import Home from '../components/View/Home/Home';
-import Event from '../components/View/Event/Event';
-import Notice from '../components/View/Notice/Notice';
-import Album from '../components/View/Album/Album';
-import PlayList from '../components/View/PlayList/PlayList';
-import Feed from '../components/View/Feed/Feed';
+import Header from 'components/Header/Header';
+import Navigation from 'components/Navigation/Navigation';
+import Home from 'components/View/Home/Home';
+import Event from 'components/View/Event/Event';
+import Notice from 'components/View/Notice/Notice';
+import Album from 'components/View/Album/Album';
+import PlayList from 'components/View/PlayList/PlayList';
+import Feed from 'components/View/Feed/Feed';
 
 const App: NextPage = () => {
   const [path, setPath] = useState<string>('Home');
