@@ -17,7 +17,7 @@ export const Container = styled.div`
     border-radius: 4px;
     margin-bottom: 8px;
     line-height: 40px;
-    padding-left: 8px;
+    padding-left: 12px;
     cursor: pointer;
   }
   & > div:not(.division):hover {

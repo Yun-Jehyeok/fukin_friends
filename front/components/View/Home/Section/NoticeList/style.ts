@@ -17,11 +17,11 @@ export const List = styled.div`
   margin-top: 18px;
 
   & > div {
-    width: 360px;
-    height: 280px;
+    width: 400px;
+    height: 260px;
     border-radius: 16px;
     background-color: #5455dd;
-    margin-right: 24px;
+    margin-right: 16px;
     padding: 32px;
     color: white;
     display: flex;
