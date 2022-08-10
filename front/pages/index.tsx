@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import { useState } from 'react';
 
-import { Body, Container } from './style';
+import { Body, Container } from '../styles/styleRepo/style';
 
 import Header from 'components/Header/Header';
 import Navigation from 'components/Navigation/Navigation';

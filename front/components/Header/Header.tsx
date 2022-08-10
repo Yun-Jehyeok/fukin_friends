@@ -1,15 +1,18 @@
 import { NextPage } from 'next';
+import Link from 'next/link';
 import { Container, Logo, Profile, SearchInput, Wrap } from './style';
 
 const Header: NextPage = () => {
   return (
     <Wrap>
       <Container>
-        <Logo>내가 결국 만들어냈다</Logo>
+        <Logo>FUKIN FRIENDS</Logo>
         <SearchInput placeholder="Search" />
-        <Profile>
-          <div></div>
-        </Profile>
+        <Link href="/login">
+          <Profile>
+            <div></div>
+          </Profile>
+        </Link>
       </Container>
     </Wrap>
   );

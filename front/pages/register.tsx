@@ -3,22 +3,22 @@ import { useCallback } from 'react';
 import { useInput } from 'hooks/useInput';
 import KakaoBtn from '../public/img/kakao_login.png';
 import {
-  LoginContainer,
-  LoginForm,
-  LoginLabel,
-  LoginInput,
-  LoginTitle,
-  LoginButton,
-  OtherSection,
+  RegisterContainer,
+  RegisterForm,
+  RegisterLabel,
+  RegisterInput,
+  RegisterTitle,
+  RegisterButton,
   GoogleBtn,
   SocialLogin,
-} from '../styles/styleRepo/loginStyle';
+} from '../styles/styleRepo/registerStyle';
 import Image from 'next/image';
 import Link from 'next/link';
 
-const Login: NextPage = () => {
+const Register: NextPage = () => {
   const email = useInput('');
   const password = useInput('');
+  const passwordCheck = useInput('');
 
   const handleSubmit = useCallback(
     (e: React.FormEvent<HTMLFormElement>) => {
@@ -31,31 +31,32 @@ const Login: NextPage = () => {
   );
 
   return (
-    <LoginContainer>
-      <LoginForm>
+    <RegisterContainer>
+      <RegisterForm>
         <div>
           <div>
-            <LoginTitle>
-              <Link href="/">Sign In</Link>
-            </LoginTitle>
+            <RegisterTitle>
+              <Link href="/">Sign Up</Link>
+            </RegisterTitle>
             <form onSubmit={handleSubmit}>
-              <LoginLabel>Email</LoginLabel>
-              <LoginInput type="email" name="email" required {...email} />
-              <LoginLabel>Password</LoginLabel>
-              <LoginInput
+              <RegisterLabel>Email</RegisterLabel>
+              <RegisterInput type="email" name="email" required {...email} />
+              <RegisterLabel>Password</RegisterLabel>
+              <RegisterInput
                 type="password"
                 name="password"
                 required
                 {...password}
               />
-              <LoginButton>Sign In</LoginButton>
+              <RegisterLabel>Password Check</RegisterLabel>
+              <RegisterInput
+                type="password"
+                name="passwordCheck"
+                required
+                {...passwordCheck}
+              />
+              <RegisterButton>Sign In</RegisterButton>
             </form>
-            <OtherSection>
-              <Link href="#">Forgot a password?</Link>
-              <div>
-                Is not a member?&nbsp;<Link href="/register">Sign up</Link>
-              </div>
-            </OtherSection>
           </div>
         </div>
         <div>
@@ -63,9 +64,9 @@ const Login: NextPage = () => {
           <GoogleBtn>Sign in with Google</GoogleBtn>
           <Image src={KakaoBtn} alt="kakao" />
         </div>
-      </LoginForm>
-    </LoginContainer>
+      </RegisterForm>
+    </RegisterContainer>
   );
 };
 
-export default Login;
+export default Register;

@@ -42,6 +42,7 @@ export const SearchInput = styled.input`
 export const Profile = styled.div`
   width: fit-content;
   height: 100%;
+  cursor: pointer;
 
   & > div:first-child {
     width: 32px;
