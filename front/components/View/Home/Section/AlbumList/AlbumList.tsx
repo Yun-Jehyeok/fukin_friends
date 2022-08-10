@@ -1,9 +1,9 @@
 import { NextPage } from 'next';
 import Image from 'next/image';
 import { Container, Item, List, Title } from './style';
-import rainbow from './img/rainbow.jpg';
-import dresden from './img/dresden.jpg';
-import cat from './img/cat1.jpg';
+import rainbow from 'public/img/rainbow.jpg';
+import dresden from 'public/img/dresden.jpg';
+import cat from 'public/img/cat1.jpg';
 
 let itemList = [
   {

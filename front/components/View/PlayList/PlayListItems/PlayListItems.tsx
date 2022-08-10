@@ -9,7 +9,7 @@ import {
   Title,
 } from './style';
 
-import back1 from './img/back1.jpg';
+import back1 from 'public/img/back1.jpg';
 
 const itemList = [
   {

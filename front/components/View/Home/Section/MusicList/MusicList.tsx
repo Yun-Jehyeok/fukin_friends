@@ -1,9 +1,9 @@
 import { NextPage } from 'next';
 import { Container, Description, Item, List, Title } from './style';
-import zico from './img/zico.jpeg';
-import thinking from './img/thinking.jpeg';
-import randombox from './img/randombox.jpeg';
-import dontknow from './img/dontknow.jpeg';
+import zico from 'public/img/zico.jpeg';
+import thinking from 'public/img/thinking.jpeg';
+import randombox from 'public/img/randombox.jpeg';
+import dontknow from 'public/img/dontknow.jpeg';
 import Image from 'next/image';
 
 let itemList = [

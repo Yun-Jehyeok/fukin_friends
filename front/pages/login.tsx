@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import { useCallback } from 'react';
 import { useInput } from 'hooks/useInput';
-import KakaoBtn from '../public/img/kakao_login.png';
+import KakaoBtn from 'public/img/kakao_login.png';
 import {
   LoginContainer,
   LoginForm,
@@ -12,7 +12,7 @@ import {
   OtherSection,
   GoogleBtn,
   SocialLogin,
-} from '../styles/styleRepo/loginStyle';
+} from 'styles/styleRepo/loginStyle';
 import Image from 'next/image';
 import Link from 'next/link';
 

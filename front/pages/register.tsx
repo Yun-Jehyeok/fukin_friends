@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import { useCallback } from 'react';
 import { useInput } from 'hooks/useInput';
-import KakaoBtn from '../public/img/kakao_login.png';
+import KakaoBtn from 'public/img/kakao_login.png';
 import {
   RegisterContainer,
   RegisterForm,
@@ -11,7 +11,7 @@ import {
   RegisterButton,
   GoogleBtn,
   SocialLogin,
-} from '../styles/styleRepo/registerStyle';
+} from 'styles/styleRepo/registerStyle';
 import Image from 'next/image';
 import Link from 'next/link';
 
