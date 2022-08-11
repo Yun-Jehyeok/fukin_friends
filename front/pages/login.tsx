@@ -39,28 +39,28 @@ const Login: NextPage = () => {
               <Link href="/">Sign In</Link>
             </LoginTitle>
             <form onSubmit={handleSubmit}>
-              <LoginLabel>Email</LoginLabel>
+              <LoginLabel>이메일</LoginLabel>
               <LoginInput type="email" name="email" required {...email} />
-              <LoginLabel>Password</LoginLabel>
+              <LoginLabel>비밀번호</LoginLabel>
               <LoginInput
                 type="password"
                 name="password"
                 required
                 {...password}
               />
-              <LoginButton>Sign In</LoginButton>
+              <LoginButton>로그인</LoginButton>
             </form>
             <OtherSection>
-              <Link href="#">Forgot a password?</Link>
+              <Link href="#">비밀번호를 잊어버리셨나요?</Link>
               <div>
-                Is not a member?&nbsp;<Link href="/register">Sign up</Link>
+                회원이 아니신가요?&nbsp;<Link href="/register">회원가입</Link>
               </div>
             </OtherSection>
           </div>
         </div>
         <div>
           <SocialLogin>소셜 로그인</SocialLogin>
-          <GoogleBtn>Sign in with Google</GoogleBtn>
+          <GoogleBtn></GoogleBtn>
           <Image src={KakaoBtn} alt="kakao" />
         </div>
       </LoginForm>

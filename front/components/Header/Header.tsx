@@ -1,11 +1,11 @@
 import { NextPage } from 'next';
 import Link from 'next/link';
-import { Container, Logo, Profile, SearchInput, Wrap } from './style';
+import { HeaderContainer, Logo, Profile, SearchInput, Wrap } from './style';
 
 const Header: NextPage = () => {
   return (
     <Wrap>
-      <Container>
+      <HeaderContainer>
         <Logo>FUKIN FRIENDS</Logo>
         <SearchInput placeholder="Search" />
         <Link href="/login">
@@ -13,7 +13,7 @@ const Header: NextPage = () => {
             <div></div>
           </Profile>
         </Link>
-      </Container>
+      </HeaderContainer>
     </Wrap>
   );
 };

@@ -1,6 +1,6 @@
 import { NextPage } from 'next';
+import { Container } from 'styles/styleRepo/global';
 import PlayListItems from './PlayListItems/PlayListItems';
-import { Container } from './style';
 
 const PlayList: NextPage = () => {
   return (

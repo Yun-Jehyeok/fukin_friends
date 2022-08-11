@@ -58,22 +58,24 @@ export const RegisterInput = styled.input`
   height: 40px;
   margin-bottom: 16px;
   padding-left: 12px;
+  outline: none;
 `;
 
-export const PasswordCheckErr = styled.div`
+export const InputErrMsg = styled.div`
   font-size: 12px;
   color: red;
   margin-bottom: 16px;
   margin-top: -8px;
 `;
 
-export const RegisterButton = styled.div`
+export const RegisterButton = styled.button`
   width: 100%;
   height: 48px;
-  line-height: 48px;
   color: white;
   background-color: #5455dd;
   text-align: center;
+  border: none;
+  cursor: pointer;
 `;
 
 export const SocialLogin = styled.div`

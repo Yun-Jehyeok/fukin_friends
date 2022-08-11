@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 // App
-export const Container = styled.div`
+export const AppContainer = styled.div`
   width: 100%;
 `;
 

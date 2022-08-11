@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
+export const NoticeListContainer = styled.div`
   width: 100%;
   margin-top: 24px;
 `;

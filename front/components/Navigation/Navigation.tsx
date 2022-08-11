@@ -10,7 +10,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { NextPage } from 'next';
 import { useState } from 'react';
-import { Container, IconContainer } from './style';
+import { NavigationContainer, IconContainer } from './style';
 
 interface Item {
   name: string;
@@ -81,7 +81,7 @@ const Navigation: NextPage = ({ handleChangeView }: child) => {
   };
 
   return (
-    <Container>
+    <NavigationContainer>
       {itemList.map((item) =>
         item.class ? (
           <div key={item.name} className={item.class}>
@@ -101,7 +101,7 @@ const Navigation: NextPage = ({ handleChangeView }: child) => {
           </div>
         ),
       )}
-    </Container>
+    </NavigationContainer>
   );
 };
 

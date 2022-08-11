@@ -11,7 +11,7 @@ import {
   RegisterButton,
   GoogleBtn,
   SocialLogin,
-  PasswordCheckErr,
+  InputErrMsg,
 } from 'styles/styleRepo/registerStyle';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -25,6 +25,9 @@ const Register: NextPage = () => {
   const password = useInput('');
   const passwordCheck = useInput('');
 
+  const [isNameBlank, setIsNameBlank] = useState(false);
+  const [isEmailBlank, setIsEmailBlank] = useState(false);
+  const [isPasswordBlank, setIsPasswordBlank] = useState(false);
   const [isPasswordCheckErr, setIsPasswordCheckErr] = useState(false);
 
   // const dispatch = useDispatch();
@@ -33,20 +36,40 @@ const Register: NextPage = () => {
     (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
 
-      if (password.value === passwordCheck.value) {
-        const user = {
-          name: name.value,
-          email: email.value,
-          password: password.value,
-        };
+      if (name.value === '') {
+        setIsNameBlank(true);
+      }
+      if (email.value === '') {
+        setIsEmailBlank(true);
+      }
+      if (password.value === '') {
+        setIsPasswordBlank(true);
+      }
 
-        console.log(user);
-        // dispatch(registerUser(user));
-      } else {
-        setIsPasswordCheckErr(true);
+      if (!isNameBlank && !isEmailBlank && !isPasswordBlank) {
+        if (password.value === passwordCheck.value) {
+          const user = {
+            name: name.value,
+            email: email.value,
+            password: password.value,
+          };
+
+          console.log(user);
+          // dispatch(registerUser(user));
+        } else {
+          setIsPasswordCheckErr(true);
+        }
       }
     },
-    [name, email, password, passwordCheck],
+    [
+      isNameBlank,
+      isEmailBlank,
+      isPasswordBlank,
+      name,
+      email,
+      password,
+      passwordCheck,
+    ],
   );
 
   return (
@@ -58,18 +81,33 @@ const Register: NextPage = () => {
               <Link href="/">Sign Up</Link>
             </RegisterTitle>
             <form onSubmit={handleSubmit}>
-              <RegisterLabel>Name</RegisterLabel>
+              <RegisterLabel>이름</RegisterLabel>
               <RegisterInput type="text" name="name" required {...name} />
-              <RegisterLabel>Email</RegisterLabel>
+              {isNameBlank ? (
+                <InputErrMsg>* 이름은 필수값입니다.</InputErrMsg>
+              ) : (
+                ''
+              )}
+              <RegisterLabel>이메일</RegisterLabel>
               <RegisterInput type="email" name="email" required {...email} />
-              <RegisterLabel>Password</RegisterLabel>
+              {isEmailBlank ? (
+                <InputErrMsg>* 이메일은 필수값입니다.</InputErrMsg>
+              ) : (
+                ''
+              )}
+              <RegisterLabel>비밀번호</RegisterLabel>
               <RegisterInput
                 type="password"
                 name="password"
                 required
                 {...password}
               />
-              <RegisterLabel>Password Check</RegisterLabel>
+              {isPasswordBlank ? (
+                <InputErrMsg>* 비밀번호는 필수값입니다.</InputErrMsg>
+              ) : (
+                ''
+              )}
+              <RegisterLabel>비밀번호 확인</RegisterLabel>
               <RegisterInput
                 type="password"
                 name="passwordCheck"
@@ -77,19 +115,19 @@ const Register: NextPage = () => {
                 {...passwordCheck}
               />
               {isPasswordCheckErr ? (
-                <PasswordCheckErr>
+                <InputErrMsg>
                   * 비밀번호 확인란은 비밀번호와 같아야 합니다.
-                </PasswordCheckErr>
+                </InputErrMsg>
               ) : (
                 ''
               )}
-              <RegisterButton>Sign In</RegisterButton>
+              <RegisterButton>회원가입</RegisterButton>
             </form>
           </div>
         </div>
         <div>
           <SocialLogin>소셜 로그인</SocialLogin>
-          <GoogleBtn>Sign in with Google</GoogleBtn>
+          <GoogleBtn></GoogleBtn>
           <Image src={KakaoBtn} alt="kakao" />
         </div>
       </RegisterForm>

@@ -56,6 +56,8 @@ export const LoginInput = styled.input`
   width: 100%;
   height: 48px;
   margin-bottom: 24px;
+  outline: none;
+  padding-left: 12px;
 `;
 
 export const LoginButton = styled.div`

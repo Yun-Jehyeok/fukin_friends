@@ -1,5 +1,5 @@
 import { NextPage } from 'next';
-import { Container, Description, Item, List, Title } from './style';
+import { MusicListContainer, Description, Item, List, Title } from './style';
 import zico from 'public/img/zico.jpeg';
 import thinking from 'public/img/thinking.jpeg';
 import randombox from 'public/img/randombox.jpeg';
@@ -53,8 +53,8 @@ let itemList = [
 
 const MusicList: NextPage = () => {
   return (
-    <Container>
-      <Title>Recently Played</Title>
+    <MusicListContainer>
+      <Title>최근에 들은</Title>
       <List>
         {itemList.map((item) => (
           <Item key={item.id}>
@@ -66,7 +66,7 @@ const MusicList: NextPage = () => {
           </Item>
         ))}
       </List>
-    </Container>
+    </MusicListContainer>
   );
 };
 

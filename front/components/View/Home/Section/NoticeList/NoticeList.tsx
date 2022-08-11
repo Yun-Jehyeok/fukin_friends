@@ -1,8 +1,7 @@
 import { NextPage } from 'next';
-import Image from 'next/image';
 import {
   Attendees,
-  Container,
+  NoticeListContainer,
   ItemSection,
   ItemTitle,
   List,
@@ -70,8 +69,8 @@ let sampleData = [
 
 const NoticeList: NextPage = () => {
   return (
-    <Container>
-      <Title>Notice</Title>
+    <NoticeListContainer>
+      <Title>공지사항</Title>
       <List>
         {sampleData.map((item) => (
           <div key={item.id}>
@@ -101,7 +100,7 @@ const NoticeList: NextPage = () => {
           </div>
         ))}
       </List>
-    </Container>
+    </NoticeListContainer>
   );
 };
 

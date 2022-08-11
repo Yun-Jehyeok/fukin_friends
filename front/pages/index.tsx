@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import { useState } from 'react';
 
-import { Body, Container } from 'styles/styleRepo/style';
+import { Body, AppContainer } from 'styles/styleRepo/style';
 
 import Header from 'components/Header/Header';
 import Navigation from 'components/Navigation/Navigation';
@@ -28,7 +28,7 @@ const App: NextPage = () => {
   };
 
   return (
-    <Container>
+    <AppContainer>
       <Header />
       <Body>
         <Navigation handleChangeView={handleChangeView} />
@@ -38,7 +38,7 @@ const App: NextPage = () => {
           }
         })}
       </Body>
-    </Container>
+    </AppContainer>
   );
 };
 

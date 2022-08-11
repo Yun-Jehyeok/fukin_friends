@@ -9,7 +9,7 @@ export const Wrap = styled.div`
   box-sizing: border-box;
 `;
 
-export const Container = styled.div`
+export const HeaderContainer = styled.div`
   width: 100%;
   height: 32px;
   margin-top: 12px;

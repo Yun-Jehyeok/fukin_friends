@@ -1,6 +1,6 @@
 import { NextPage } from 'next';
 import Image from 'next/image';
-import { Container, Item, List, Title } from './style';
+import { AlbumListContainer, Item, List, Title } from './style';
 import rainbow from 'public/img/rainbow.jpg';
 import dresden from 'public/img/dresden.jpg';
 import cat from 'public/img/cat1.jpg';
@@ -25,8 +25,8 @@ let itemList = [
 
 const AlbumList: NextPage = () => {
   return (
-    <Container>
-      <Title>Photos</Title>
+    <AlbumListContainer>
+      <Title>사진</Title>
       <List>
         {itemList.map((item) => (
           <Item key={item.id}>
@@ -34,7 +34,7 @@ const AlbumList: NextPage = () => {
           </Item>
         ))}
       </List>
-    </Container>
+    </AlbumListContainer>
   );
 };
 
