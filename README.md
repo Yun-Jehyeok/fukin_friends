@@ -10,6 +10,6 @@
 
 ## Stack
 
-1. Front - React, Next, Typescript, Styled-components
+1. Front - React, Next.js, Typescript, Styled-components, Redux
 2. Back - Node, Express
-3. DB - MongoDB Free Cluster
+3. DB - MongoDB
