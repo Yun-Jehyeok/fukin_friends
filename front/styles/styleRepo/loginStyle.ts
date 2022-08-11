@@ -87,6 +87,7 @@ export const SocialLogin = styled.div`
   text-align: center;
   margin-bottom: 18px;
 `;
+
 export const GoogleBtn = styled(GoogleButton)`
   width: 100% !important;
   margin-bottom: 8px;

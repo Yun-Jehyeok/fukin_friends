@@ -65,7 +65,6 @@ router.post('/:id', async (req, res) => {
 // DELETE COMMENT / DELETE
 router.delete('/:id', async (req, res) => {
   await Comment.deleteOne({ _id: req.params.id });
-  // User에서 comment가 안지워지네....
   await User.findByIdAndUpdate(req.body.userId, {
     $pull: {
       comments: { comment_id: req.params.id },

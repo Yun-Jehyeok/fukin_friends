@@ -50,12 +50,21 @@ export const RegisterTitle = styled.div`
 
 export const RegisterLabel = styled.div`
   margin-bottom: 8px;
+  font-size: 14px;
 `;
 
 export const RegisterInput = styled.input`
   width: 100%;
-  height: 48px;
-  margin-bottom: 24px;
+  height: 40px;
+  margin-bottom: 16px;
+  padding-left: 12px;
+`;
+
+export const PasswordCheckErr = styled.div`
+  font-size: 12px;
+  color: red;
+  margin-bottom: 16px;
+  margin-top: -8px;
 `;
 
 export const RegisterButton = styled.div`

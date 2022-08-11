@@ -11,23 +11,42 @@ import {
   RegisterButton,
   GoogleBtn,
   SocialLogin,
+  PasswordCheckErr,
 } from 'styles/styleRepo/registerStyle';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useDispatch } from 'react-redux';
+import { registerUser } from 'src/store/api/userApi';
+import { useState } from 'react';
 
 const Register: NextPage = () => {
+  const name = useInput('');
   const email = useInput('');
   const password = useInput('');
   const passwordCheck = useInput('');
+
+  const [isPasswordCheckErr, setIsPasswordCheckErr] = useState(false);
+
+  // const dispatch = useDispatch();
 
   const handleSubmit = useCallback(
     (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
 
-      console.log(email.value);
-      console.log(password.value);
+      if (password.value === passwordCheck.value) {
+        const user = {
+          name: name.value,
+          email: email.value,
+          password: password.value,
+        };
+
+        console.log(user);
+        // dispatch(registerUser(user));
+      } else {
+        setIsPasswordCheckErr(true);
+      }
     },
-    [email, password],
+    [name, email, password, passwordCheck],
   );
 
   return (
@@ -39,6 +58,8 @@ const Register: NextPage = () => {
               <Link href="/">Sign Up</Link>
             </RegisterTitle>
             <form onSubmit={handleSubmit}>
+              <RegisterLabel>Name</RegisterLabel>
+              <RegisterInput type="text" name="name" required {...name} />
               <RegisterLabel>Email</RegisterLabel>
               <RegisterInput type="email" name="email" required {...email} />
               <RegisterLabel>Password</RegisterLabel>
@@ -55,6 +76,13 @@ const Register: NextPage = () => {
                 required
                 {...passwordCheck}
               />
+              {isPasswordCheckErr ? (
+                <PasswordCheckErr>
+                  * 비밀번호 확인란은 비밀번호와 같아야 합니다.
+                </PasswordCheckErr>
+              ) : (
+                ''
+              )}
               <RegisterButton>Sign In</RegisterButton>
             </form>
           </div>

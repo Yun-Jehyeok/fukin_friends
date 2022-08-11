@@ -5,9 +5,11 @@ import type { AnyAction, CombinedState } from '@reduxjs/toolkit';
 import postReducer, { PostStateType } from './postReducer';
 
 import { postActions } from './postReducer';
+import userReducer, { UserStateType } from './userReducer';
 
 type ReducerState = {
   post: PostStateType;
+  user: UserStateType;
 };
 
 const rootReducer = (
@@ -24,6 +26,7 @@ const rootReducer = (
     default:
       return combineReducers({
         post: postReducer,
+        user: userReducer,
       })(state, action);
   }
 };
