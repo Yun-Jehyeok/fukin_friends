@@ -1,5 +1,5 @@
 import type { NextPage } from 'next';
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 
 import { Body, AppContainer } from 'styles/styleRepo/style';
 
@@ -15,12 +15,12 @@ import Feed from 'components/View/Feed/Feed';
 const App: NextPage = () => {
   const [path, setPath] = useState<string>('Home');
   const [component, setComponent] = useState([
-    { name: 'Home', comp: <Home /> },
-    { name: 'Event', comp: <Event /> },
-    { name: 'Notice', comp: <Notice /> },
-    { name: 'Album', comp: <Album /> },
-    { name: 'Play list', comp: <PlayList /> },
-    { name: 'Feed', comp: <Feed /> },
+    { id: 1, name: 'Home', comp: <Home /> },
+    { id: 2, name: 'Event', comp: <Event /> },
+    { id: 3, name: 'Notice', comp: <Notice /> },
+    { id: 4, name: 'Album', comp: <Album /> },
+    { id: 5, name: 'Play list', comp: <PlayList /> },
+    { id: 6, name: 'Feed', comp: <Feed /> },
   ]);
 
   const handleChangeView = (name: string) => {
@@ -34,7 +34,7 @@ const App: NextPage = () => {
         <Navigation handleChangeView={handleChangeView} />
         {component.map((item) => {
           if (item.name === path) {
-            return item.comp;
+            return <Fragment key={item.id}>{item.comp}</Fragment>;
           }
         })}
       </Body>

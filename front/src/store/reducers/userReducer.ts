@@ -7,16 +7,14 @@ import { IUser } from '../types/user';
 
 export type UserStateType = {
   user: IUser;
-  registerUserLoading: boolean;
-  registerUserDone: null | string;
-  registerUserError: null | string;
+  userLoading: boolean;
+  errMsg: null | string;
 };
 
 const initialState: UserStateType = {
   user: { id: '', name: '', email: '' },
-  registerUserLoading: false,
-  registerUserDone: null,
-  registerUserError: null,
+  userLoading: false,
+  errMsg: null,
 };
 
 const userSlice = createSlice({
@@ -24,18 +22,16 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     registerUserRequest(state, action: PayloadAction<RegisterUserReq>) {
-      state.registerUserLoading = true;
-      state.registerUserDone = null;
-      state.registerUserError = null;
+      state.userLoading = true;
+      state.errMsg = null;
     },
     registerUserSuccess(state, action: PayloadAction<RegisterUserRes>) {
-      state.registerUserLoading = false;
-      state.registerUserDone = action.payload.data.msg;
+      state.userLoading = false;
       state.user = action.payload.data.user;
     },
     registerUserFailure(state, action: PayloadAction<ResponseFailure>) {
-      state.registerUserLoading = false;
-      state.registerUserError = action.payload.data.msg;
+      state.userLoading = false;
+      state.errMsg = action.payload.data.msg;
     },
   },
 });

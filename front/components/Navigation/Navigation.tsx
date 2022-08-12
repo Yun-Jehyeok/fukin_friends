@@ -13,6 +13,7 @@ import { useState } from 'react';
 import { NavigationContainer, IconContainer } from './style';
 
 interface Item {
+  id: string;
   name: string;
   icon?: IconProp;
   clicked?: boolean;
@@ -26,39 +27,47 @@ interface child {
 const Navigation: NextPage = ({ handleChangeView }: child) => {
   const [itemList, setItemList] = useState<Item[]>([
     {
+      id: '1',
       name: 'Home',
       icon: faHouse,
       clicked: true,
     },
     {
+      id: '2',
       name: 'Feed',
       icon: faBars,
       clicked: false,
     },
     {
+      id: '3',
       name: 'Event',
       class: 'division',
     },
     {
+      id: '4',
       name: 'Notice',
       icon: faBolt,
       clicked: false,
     },
     {
+      id: '5',
       name: 'Event',
       icon: faFlag,
       clicked: false,
     },
     {
+      id: '6',
       name: 'Collections',
       class: 'division',
     },
     {
+      id: '7',
       name: 'Album',
       icon: faImage,
       clicked: false,
     },
     {
+      id: '8',
       name: 'Play list',
       icon: faMusic,
       clicked: false,
@@ -84,12 +93,12 @@ const Navigation: NextPage = ({ handleChangeView }: child) => {
     <NavigationContainer>
       {itemList.map((item) =>
         item.class ? (
-          <div key={item.name} className={item.class}>
+          <div key={item.id} className={item.class}>
             {item.name}
           </div>
         ) : (
           <div
-            key={item.name}
+            key={item.id}
             data-name={item.name}
             data-clicked={item.clicked}
             onClick={handleChangeNavigation}

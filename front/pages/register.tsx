@@ -30,7 +30,7 @@ const Register: NextPage = () => {
   const [isPasswordBlank, setIsPasswordBlank] = useState(false);
   const [isPasswordCheckErr, setIsPasswordCheckErr] = useState(false);
 
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const handleSubmit = useCallback(
     (e: React.FormEvent<HTMLFormElement>) => {
@@ -48,20 +48,22 @@ const Register: NextPage = () => {
 
       if (!isNameBlank && !isEmailBlank && !isPasswordBlank) {
         if (password.value === passwordCheck.value) {
-          const user = {
+          setIsPasswordCheckErr(false);
+
+          let user = {
             name: name.value,
             email: email.value,
             password: password.value,
           };
 
-          console.log(user);
-          // dispatch(registerUser(user));
+          dispatch(registerUser(user));
         } else {
           setIsPasswordCheckErr(true);
         }
       }
     },
     [
+      dispatch,
       isNameBlank,
       isEmailBlank,
       isPasswordBlank,

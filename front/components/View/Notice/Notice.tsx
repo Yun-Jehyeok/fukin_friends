@@ -16,6 +16,7 @@ const Notice: NextPage = () => {
   const [year, setYear] = useState('');
   const [month, setMonth] = useState('');
   const [date, setDate] = useState('');
+  const [calendarData, setCalendarData] = useState();
 
   useEffect(() => {
     let today = new Date();
@@ -32,6 +33,16 @@ const Notice: NextPage = () => {
     setYear(todayYear);
     setMonth(todayMonth);
     setDate(todayDate);
+
+    // 이전 달의 마지막 날 날짜 및 요일
+    let startDay = new Date(Number(year), Number(month) - 1, 0);
+    let prevDate = startDay.getDate();
+    let prevDay = startDay.getDay();
+
+    // 이번 달의 마지막날 날짜와 요일 구하기
+    let endDay = new Date(Number(year), Number(month), 0);
+    let nextDate = endDay.getDate();
+    let nextDay = endDay.getDay();
   }, []);
 
   const goPrev = () => {
