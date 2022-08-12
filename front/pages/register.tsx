@@ -15,9 +15,9 @@ import {
 } from 'styles/styleRepo/registerStyle';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useDispatch } from 'react-redux';
 import { registerUser } from 'src/store/api/userApi';
 import { useState } from 'react';
+import { useAppDispatch } from 'hooks/reduxHooks';
 
 const Register: NextPage = () => {
   const name = useInput('');
@@ -30,7 +30,7 @@ const Register: NextPage = () => {
   const [isPasswordBlank, setIsPasswordBlank] = useState(false);
   const [isPasswordCheckErr, setIsPasswordCheckErr] = useState(false);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const handleSubmit = useCallback(
     (e: React.FormEvent<HTMLFormElement>) => {
@@ -50,7 +50,7 @@ const Register: NextPage = () => {
         if (password.value === passwordCheck.value) {
           setIsPasswordCheckErr(false);
 
-          let user = {
+          const user = {
             name: name.value,
             email: email.value,
             password: password.value,

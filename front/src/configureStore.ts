@@ -7,10 +7,10 @@ import rootSaga from './store/sagas';
 
 const createStore = () => {
   const sagaMiddleware = createSagaMiddleware();
-  const middlewares = [sagaMiddleware];
   const store = configureStore({
     reducer: rootReducer,
-    middleware: middlewares,
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware().concat(sagaMiddleware),
     devTools: process.env.NEXT_PUBLIC_NODE_ENV === 'developer',
   });
 
@@ -24,6 +24,8 @@ const wrapper = createWrapper(createStore, {
 });
 
 const store = createStore();
+
+export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
 
 export default wrapper;

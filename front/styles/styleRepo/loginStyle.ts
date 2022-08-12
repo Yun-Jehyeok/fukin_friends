@@ -52,7 +52,7 @@ export const LoginLabel = styled.div`
   margin-bottom: 8px;
 `;
 
-export const LoginInput = styled.input`
+export const LoginInput = styled.input.attrs({ autoComplete: 'off' })`
   width: 100%;
   height: 48px;
   margin-bottom: 24px;

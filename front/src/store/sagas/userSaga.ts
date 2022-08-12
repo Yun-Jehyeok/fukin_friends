@@ -7,12 +7,14 @@ import type { RegisterUserReq, RegisterUserRes } from '../types/user';
 import { registerUser } from '../api/userApi';
 import { userActions } from '../reducers/userReducer';
 
-function* registerUserApi(action: PayloadAction<RegisterUserRes>) {
+function* registerUserApi(action: PayloadAction<RegisterUserReq>) {
   try {
-    const { data }: AxiosResponse<RegisterUserReq> = yield call(
+    const { data }: AxiosResponse<RegisterUserRes> = yield call(
       registerUser,
       action.payload,
     );
+
+    console.log('sagaData:::', data);
 
     yield put(userActions.registerUserSuccess(data));
   } catch (e: any) {

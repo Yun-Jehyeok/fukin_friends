@@ -53,7 +53,7 @@ export const RegisterLabel = styled.div`
   font-size: 14px;
 `;
 
-export const RegisterInput = styled.input`
+export const RegisterInput = styled.input.attrs({ autoComplete: 'off' })`
   width: 100%;
   height: 40px;
   margin-bottom: 16px;
