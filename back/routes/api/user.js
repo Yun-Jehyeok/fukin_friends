@@ -27,7 +27,7 @@ router.get('/', async (req, res) => {
 
 // Register User / POST
 router.post('/register', (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, email, password } = req.body.user;
 
   if (!name) return res.status(400).json({ msg: '이름을 작성해주세요.' });
   else if (!email)

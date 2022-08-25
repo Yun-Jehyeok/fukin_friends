@@ -13,6 +13,7 @@ export const Title = styled.div`
 export const List = styled.div`
   width: 100%;
   overflow-x: auto;
+  overflow-y: hidden;
   display: flex;
   margin-top: 18px;
 `;

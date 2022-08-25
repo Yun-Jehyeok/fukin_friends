@@ -9,12 +9,14 @@ export type UserStateType = {
   user: IUser;
   userLoading: boolean;
   errMsg: null | string;
+  token: null | string;
 };
 
 const initialState: UserStateType = {
   user: { id: '', name: '', email: '' },
   userLoading: false,
   errMsg: null,
+  token: null
 };
 
 const userSlice = createSlice({
@@ -27,7 +29,8 @@ const userSlice = createSlice({
     },
     registerUserSuccess(state, action: PayloadAction<RegisterUserRes>) {
       state.userLoading = false;
-      state.user = action.payload.data.user;
+      state.user = action.payload.user;
+      state.token = action.payload.token;
     },
     registerUserFailure(state, action: PayloadAction<ResponseFailure>) {
       state.userLoading = false;

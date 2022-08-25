@@ -1,5 +1,3 @@
-import type { ResponseData, ResponseStatus } from '.';
-
 export type RegisterUserReq = {
   user: {
     name: string;
@@ -14,9 +12,7 @@ export interface IUser {
   email: string;
 }
 
-export type RegisterUserRes = ResponseStatus & {
-  data: ResponseData & {
-    user: IUser;
-    token: string;
-  };
+export type RegisterUserRes = {
+  user: IUser;
+  token: string;
 };

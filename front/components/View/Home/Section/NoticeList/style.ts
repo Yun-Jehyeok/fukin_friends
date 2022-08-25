@@ -28,6 +28,14 @@ export const List = styled.div`
     justify-content: space-between;
     flex-direction: column;
   }
+
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #2f3542;
+    border-radius: 10px;
+  }
 `;
 
 export const ItemTitle = styled.div`

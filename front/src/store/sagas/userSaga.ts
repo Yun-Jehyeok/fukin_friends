@@ -14,13 +14,11 @@ function* registerUserApi(action: PayloadAction<RegisterUserReq>) {
       action.payload,
     );
 
-    console.log('sagaData:::', data);
-
     yield put(userActions.registerUserSuccess(data));
   } catch (e: any) {
     const msg =
       e?.name === 'AxiosError'
-        ? e.response.data.data.message
+        ? e.response.data.msg
         : '서버에러입니다.';
 
     yield put(

@@ -64,7 +64,7 @@ let sampleData = [
         src: 'https://placeimg.com/30/30/people',
       },
     ],
-  },
+  }
 ];
 
 const NoticeList: NextPage = () => {

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export const useInput = (initialValue: string | number) => {
+export const useStringInput = (initialValue: string) => {
   const [value, setValue] = useState(initialValue);
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const {
@@ -11,4 +11,17 @@ export const useInput = (initialValue: string | number) => {
   };
 
   return { value, onChange };
+};
+
+export const useNumberInput = (initialValue: number) => {
+  const [numVal, setNumVal] = useState(initialValue);
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const {
+      target: { value },
+    } = e;
+
+    setNumVal(numVal);
+  };
+
+  return { numVal, onChange };
 };
