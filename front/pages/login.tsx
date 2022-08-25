@@ -1,6 +1,6 @@
 import type { NextPage } from 'next';
 import { useCallback } from 'react';
-import { useInput } from 'hooks/useInput';
+import { useStringInput } from 'hooks/useInput';
 import KakaoBtn from 'public/img/kakao_login.png';
 import {
   LoginContainer,
@@ -17,8 +17,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 const Login: NextPage = () => {
-  const email = useInput('');
-  const password = useInput('');
+  const email = useStringInput('');
+  const password = useStringInput('');
 
   const handleSubmit = useCallback(
     (e: React.FormEvent<HTMLFormElement>) => {

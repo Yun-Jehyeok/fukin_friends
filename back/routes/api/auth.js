@@ -1,6 +1,8 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const CryptoJS = require('crypto-js');
+const request = require('request');
 const { auth } = require('../../middleware/auth');
 const config = require('../../config/index');
 
@@ -148,6 +150,66 @@ router.post('/password/email', (req, res) => {
       .json({ success: true, msg: '이메일이 인증되었습니다.' });
   });
 });
+
+// Check Phone / POST
+router.post('/phone', async (req, res) => {
+  let authNum = ''
+  for (let i = 0; i < 6; i++) {
+    authNum += Math.floor(Math.random() * 10)
+  }  
+  
+  console.log("req:::", req.body);
+  let user_phone_number = '01056294023';
+
+  const date = Date.now().toString();
+  const uri = 'ncp:sms:kr:291519131115:fukinfriends'; //서비스 ID
+  const secretKey = 'Dljv9eXbcArxR9QomY5vk6rWIlmd9P6xFBH0rqKd';
+  const accessKey = '2zhD9dT9rnNJWgIYd6rs';
+  const method = "POST";
+  const space = " ";
+  const newLine = "\n";
+  const url = `https://sens.apigw.ntruss.com/sms/v2/services/${uri}/messages`;
+  const url2 = `/sms/v2/services/${uri}/messages`;
+  const hmac = CryptoJS.algo.HMAC.create(CryptoJS.algo.SHA256, secretKey);
+
+  hmac.update(method);
+  hmac.update(space);
+  hmac.update(url2);
+  hmac.update(newLine);
+  hmac.update(date);
+  hmac.update(newLine);
+  hmac.update(accessKey);
+
+  const hash = hmac.finalize();
+  const signature = hash.toString(CryptoJS.enc.Base64);
+
+  await request({
+    method: method,
+    json: true,
+    uri: url,
+    headers: {
+      "Contenc-type": "application/json; charset=utf-8",
+      "x-ncp-iam-access-key": accessKey,
+      "x-ncp-apigw-timestamp": date,
+      "x-ncp-apigw-signature-v2": signature,
+    },
+    body: {
+      type: "SMS",
+      countryCode: "82",
+      from: req.phoneNum,
+      content: `인증번호 [${authNum}]를 입력해주세요.`,
+      messages: [
+        { to: `${user_phone_number}`, },],
+    },
+  }, function (err) {
+      if (err) {
+        res.json({ success: false })
+      } else {
+        res.json({ success: true, num: authNum })
+      }
+    }
+  );
+})
 
 // Authentication / GET
 router.get('/user', auth, async (req, res) => {

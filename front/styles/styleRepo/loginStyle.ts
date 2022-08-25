@@ -8,7 +8,7 @@ export const LoginContainer = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
-  background-color: #5455dd;
+  background-color: #F4F9FC;
 `;
 
 export const LoginForm = styled.div`
@@ -18,7 +18,8 @@ export const LoginForm = styled.div`
   border-radius: 16px;
   margin: 0 auto;
   display: flex;
-
+  border: 1px solid #e8e8e8;
+  
   & > div {
     height: 100%;
     padding: 48px;

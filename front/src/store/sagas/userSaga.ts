@@ -2,9 +2,9 @@ import { all, call, fork, put, takeLatest } from 'redux-saga/effects';
 
 import type { AxiosResponse } from 'axios';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import type { RegisterUserReq, RegisterUserRes } from '../types/user';
+import type { PAReq, PARes, RegisterUserReq, RegisterUserRes } from '../types/user';
 
-import { registerUser } from '../api/userApi';
+import { registerUser, sendPhoneAuth } from '../api/userApi';
 import { userActions } from '../reducers/userReducer';
 
 function* registerUserApi(action: PayloadAction<RegisterUserReq>) {
@@ -31,6 +31,25 @@ function* watchRegisterUser() {
   yield takeLatest(userActions.registerUserRequest, registerUserApi);
 }
 
+function* paApi(action: PayloadAction<PAReq>) {
+  try {
+    const { data }: AxiosResponse<PARes> = yield call(
+      sendPhoneAuth,
+      action.payload,
+    );
+
+    yield put(userActions.userPASuccess(data));
+  } catch (e: any) {
+    yield put(
+      userActions.userPAFailure({ success: false }),
+    );
+  }
+}
+
+function* watchPA() {
+  yield takeLatest(userActions.userPARequest, paApi);
+}
+
 export default function* userSaga() {
-  yield all([fork(watchRegisterUser)]);
+  yield all([fork(watchRegisterUser), fork(watchPA)]);
 }
