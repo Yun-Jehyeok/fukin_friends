@@ -21,8 +21,9 @@ export const HeaderContainer = styled.div`
 export const Logo = styled.div`
   flex-grow: 1;
   height: 100%;
-  line-height: 32px;
-  font-size: 18px;
+  line-height: 28px;
+  font-size: 24px;
+  font-weight: bold;
 `;
 
 export const SearchInput = styled.input`

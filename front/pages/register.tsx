@@ -73,6 +73,7 @@ const Register: NextPage = () => {
 
       if (secondsRemaining < 0) { 
         setSendPASuccess(false);
+        alert("인증 시간을 초과했습니다. 인증번호를 다시 보내주세요.")
         clearInterval(countInterval);
       };
     }, 1000);
@@ -222,7 +223,7 @@ const Register: NextPage = () => {
                         />
                       </div>
                       <div>
-                        <RegisterAuthBtn onClick={checkPA}>확인</RegisterAuthBtn>
+                        <RegisterAuthBtn sendPASuccess={false} onClick={checkPA}>확인</RegisterAuthBtn>
                       </div>
                     </RegisterAuthContainer>
                     {isPasswordCheckErr ? (

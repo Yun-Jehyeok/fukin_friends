@@ -6,7 +6,11 @@ const Header: NextPage = () => {
   return (
     <Wrap>
       <HeaderContainer>
-        <Logo>FUKIN FRIENDS</Logo>
+        <Logo>
+          <Link href="/">
+            FUKIN FRIENDS 
+          </Link>
+        </Logo>
         <SearchInput placeholder="Search" />
         <Link href="/login">
           <Profile>

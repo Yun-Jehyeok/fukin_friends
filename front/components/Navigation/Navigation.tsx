@@ -40,7 +40,7 @@ const Navigation: NextPage = ({ handleChangeView }: child) => {
     },
     {
       id: '3',
-      name: 'Event',
+      name: 'EVENT',
       class: 'division',
     },
     {
@@ -57,7 +57,7 @@ const Navigation: NextPage = ({ handleChangeView }: child) => {
     },
     {
       id: '6',
-      name: 'Collections',
+      name: 'COLLECTIONS',
       class: 'division',
     },
     {

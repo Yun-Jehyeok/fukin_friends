@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+interface IAuthBtn {
+  sendPASuccess: boolean;
+}
+
 export const RegisterContainer = styled.div`
   width: 100%;
   min-height: 100vh;
@@ -89,13 +93,14 @@ export const RegisterAuthContainer = styled.div`
   }
 `;
 
-export const RegisterAuthBtn = styled.button`
+export const RegisterAuthBtn = styled.button<IAuthBtn>`
   width: 100%;
   height: 100%;
   color: white;
   background-color: #5455dd;
   text-align: center;
   border: none;
-  cursor: ${props => props.sendPASuccess ? "initial" : "cursor"};
+  cursor: ${props => props.sendPASuccess ? "initial" : "pointer"};
+  pointer-events: ${props => props.sendPASuccess ? 'none' : ''};
   font-size: 16px;
 `;
