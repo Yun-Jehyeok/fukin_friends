@@ -12,7 +12,7 @@ export const RegisterContainer = styled.div`
 `;
 
 export const RegisterForm = styled.div`
-  width: 40%;
+  width: 530px;
   border-radius: 16px;
   margin: 0 auto;
 
@@ -38,6 +38,12 @@ export const RegisterLabel = styled.div`
   font-size: 14px;
   color: black;
   font-weight: bold;
+
+  & > span {
+    font-size: 12px;
+    color: gray;
+    margin-left: 4px;
+  }
 `;
 
 export const RegisterInput = styled.input.attrs({ autoComplete: 'off' })`
@@ -47,6 +53,7 @@ export const RegisterInput = styled.input.attrs({ autoComplete: 'off' })`
   padding-left: 12px;
   outline: none;
   border: 1px solid black;
+  font-size: 16px;
 `;
 
 export const InputErrMsg = styled.div`
@@ -89,6 +96,6 @@ export const RegisterAuthBtn = styled.button`
   background-color: #5455dd;
   text-align: center;
   border: none;
-  cursor: pointer;
+  cursor: ${props => props.sendPASuccess ? "initial" : "cursor"};
   font-size: 16px;
 `;

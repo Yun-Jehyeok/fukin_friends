@@ -12,8 +12,16 @@ export type RegisterUserReq = {
     password: string;
   };
 };
-
 export type RegisterUserRes = { user: IUser; token: string; };
+
+// 로그인
+export type LoginUserReq = {
+  user: {
+    email: string;
+    password: string;
+  };
+};
+export type LoginUserRes = { user: IUser; token: string; };
 
 // 휴대폰 인증
 export type PAReq = { name: string; phoneNum: string; };

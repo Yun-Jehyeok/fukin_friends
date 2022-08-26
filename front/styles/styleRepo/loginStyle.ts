@@ -2,9 +2,10 @@ import GoogleButton from 'react-google-button';
 import styled from 'styled-components';
 
 export const LoginContainer = styled.div`
-  width: 100vw;
+  width: 100%;
   height: 100vh;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -12,13 +13,8 @@ export const LoginContainer = styled.div`
 `;
 
 export const LoginForm = styled.div`
-  width: 1000px;
-  height: 600px;
-  background-color: white;
-  border-radius: 16px;
+  width: 530px;
   margin: 0 auto;
-  display: flex;
-  border: 1px solid #e8e8e8;
   
   & > div {
     height: 100%;
@@ -27,47 +23,42 @@ export const LoginForm = styled.div`
     justify-content: center;
     flex-direction: column;
   }
-  & > div:first-child {
-    border-right: 1px solid #eaeaea;
-    width: 55%;
-  }
-  & > div:last-child {
-    width: 45%;
-
-    & > span {
-      box-shadow: rgb(0 0 0 / 25%) 0px 2px 4px 0px;
-      border-radius: 8px;
-      height: 50px;
-    }
-  }
 `;
 
 export const LoginTitle = styled.div`
-  font-size: 32px;
+  font-size: 48px;
+  color: #5455dd;
   font-weight: bold;
-  margin-bottom: 24px;
+  margin-bottom: 32px;
   text-align: center;
 `;
 
 export const LoginLabel = styled.div`
   margin-bottom: 8px;
+  font-size: 14px;
+  color: black;
+  font-weight: bold;
 `;
 
 export const LoginInput = styled.input.attrs({ autoComplete: 'off' })`
   width: 100%;
   height: 48px;
-  margin-bottom: 24px;
+  margin-bottom: 16px;
   outline: none;
   padding-left: 12px;
+  border: 1px solid black;
+  font-size: 16px;
 `;
 
 export const LoginButton = styled.div`
   width: 100%;
-  height: 48px;
-  line-height: 48px;
+  height: 56px;
+  line-height: 56px;
   color: white;
   background-color: #5455dd;
   text-align: center;
+  font-size: 18px;
+  cursor: pointer;
 `;
 
 export const OtherSection = styled.div`
@@ -79,16 +70,43 @@ export const OtherSection = styled.div`
   & a {
     text-decoration: underline;
     color: #5455dd;
+    font-weight: bold;
   }
   & > div {
     margin-top: 8px;
   }
 `;
 
-export const SocialLogin = styled.div`
-  font-size: 18px;
+export const SocialLoginContainer = styled.div`
+  width: 100%;
+  margin-bottom: 32px;
+`;
+
+export const Divider = styled.div`
+  font-size: 16px;
+  font-weight: bold;
   text-align: center;
   margin-bottom: 18px;
+  position: relative;
+
+  &::before {
+    content: '';
+    width: calc(50% - 60px);
+    height: 1px;
+    background-color: black;
+    position: absolute;
+    left: 0;
+    top: 50%;
+  }
+  &::after {
+    content: '';
+    width: calc(50% - 60px);
+    height: 1px;
+    background-color: black;
+    position: absolute;
+    right: 0;
+    top: 50%;
+  }
 `;
 
 export const GoogleBtn = styled(GoogleButton)`

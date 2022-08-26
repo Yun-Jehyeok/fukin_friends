@@ -1,6 +1,12 @@
 import type { NextPage } from 'next';
-import { useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { useStringInput } from 'hooks/useInput';
+import Link from 'next/link';
+import { useAppDispatch } from 'hooks/reduxHooks';
+import { userActions } from 'src/store/reducers/userReducer';
+import TermsOfService from 'components/Auth/TermsOfService/TermsOfService';
+import { RootState } from 'src/configureStore';
+import { useSelector } from 'react-redux';
 import {
   RegisterContainer,
   RegisterForm,
@@ -12,13 +18,6 @@ import {
   RegisterAuthContainer,
   RegisterAuthBtn,
 } from 'styles/styleRepo/registerStyle';
-import Link from 'next/link';
-import { useState } from 'react';
-import { useAppDispatch } from 'hooks/reduxHooks';
-import { userActions } from 'src/store/reducers/userReducer';
-import TermsOfService from 'components/Auth/TermsOfService/TermsOfService';
-import { RootState } from 'src/configureStore';
-import { useSelector } from 'react-redux';
 
 const Register: NextPage = () => {
   const name = useStringInput('');
@@ -34,7 +33,11 @@ const Register: NextPage = () => {
   const [isEmailBlank, setIsEmailBlank] = useState(false);
   const [isPasswordBlank, setIsPasswordBlank] = useState(false);
   const [isPasswordCheckErr, setIsPasswordCheckErr] = useState(false);
+  const [sendPASuccess, setSendPASuccess] = useState(false);
   const [isPASuccess, setIsPASuccess] = useState(false);
+
+  const [minute, setMinute] = useState('3');
+  const [second, setSecond] = useState('00');
 
   const { PANum } = useSelector((state: RootState) => state.user);
 
@@ -51,19 +54,38 @@ const Register: NextPage = () => {
   const sendPA = useCallback((e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
 
-    console.log("name:::", name);
-    console.log("phone:::", phone.value);
-    
+    setSendPASuccess(true);
+
+    let secondsRemaining = 180;
+    let min = 0;
+    let sec = 0;
+
+    let countInterval = setInterval(function () {
+      secondsRemaining = secondsRemaining - 1;
+
+      min = secondsRemaining / 60;
+      sec = secondsRemaining % 60;
+
+      let strSec = sec < 10 ? '0' + String(sec) : String(sec);
+
+      setMinute(String(parseInt(String(min))));
+      setSecond(strSec);
+
+      if (secondsRemaining < 0) { 
+        setSendPASuccess(false);
+        clearInterval(countInterval);
+      };
+    }, 1000);
+
     dispatch(userActions.userPARequest({ name: name.value, phoneNum: phone.value }))
-  }, [dispatch]);
+  }, [dispatch, name, phone]);
 
-  const checkPA = () => {
-    console.log("PANum:::", PANum);
-    console.log("authNum:::", authNum.value);
+  const checkPA = (e: React.MouseEvent<HTMLElement>) => {
+    e.preventDefault();
 
-    console.log
     if(PANum === authNum.value) {
       setIsPASuccess(true);
+      alert("인증번호가 확인되었습니다.")
     } else {
       setIsPASuccess(false);
     }
@@ -72,9 +94,9 @@ const Register: NextPage = () => {
   const handleSubmit = useCallback(
     (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-
+      
       if(!isPASuccess) {
-        alert("인증번호 확인!!")
+        alert("인증번호를 확인해주세요.");
       }
       if (name.value === '') {
         setIsNameBlank(true);
@@ -86,7 +108,13 @@ const Register: NextPage = () => {
         setIsPasswordBlank(true);
       }
 
-      if (!isNameBlank && !isEmailBlank && !isPasswordBlank && !isPASuccess) {
+      let reg = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+
+      if (!reg.test(password.value)) {
+        alert("비밀번호는 최소 8자 이상, 문자와 숫자 조합이어야 합니다.")
+      }
+
+      if (!isNameBlank && !isEmailBlank && !isPasswordBlank && isPASuccess) {
         if (password.value === passwordCheck.value) {
           setIsPasswordCheckErr(false);
 
@@ -107,6 +135,7 @@ const Register: NextPage = () => {
       isNameBlank,
       isEmailBlank,
       isPasswordBlank,
+      isPASuccess,
       name,
       email,
       password,
@@ -140,7 +169,10 @@ const Register: NextPage = () => {
                     ) : (
                       ''
                     )}
-                    <RegisterLabel>비밀번호</RegisterLabel>
+                    <RegisterLabel>
+                      비밀번호
+                      <span>(비밀번호는 8자 이상, 문자와 숫자 조합)</span>
+                    </RegisterLabel>
                     <RegisterInput
                       type="password"
                       name="password"
@@ -173,7 +205,9 @@ const Register: NextPage = () => {
                         />
                       </div>
                       <div>
-                        <RegisterAuthBtn onClick={sendPA}>보내기</RegisterAuthBtn>
+                        <RegisterAuthBtn sendPASuccess={sendPASuccess} onClick={sendPA}>
+                          {sendPASuccess ? minute + ':' + second : '보내기'}
+                        </RegisterAuthBtn>
                       </div>
                     </RegisterAuthContainer>
                     

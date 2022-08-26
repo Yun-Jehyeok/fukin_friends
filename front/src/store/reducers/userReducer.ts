@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import type { PayloadAction } from '@reduxjs/toolkit';
-import type { PAReq, PARes, PAResFail, RegisterUserReq, RegisterUserRes } from '../types/user';
+import type { LoginUserReq, LoginUserRes, PAReq, PARes, PAResFail, RegisterUserReq, RegisterUserRes } from '../types/user';
 import type { ResponseFailure } from '../types';
 import { IUser } from '../types/user';
 
@@ -45,14 +45,30 @@ const userSlice = createSlice({
       state.userLoading = false;
       state.errMsg = action.payload.data.msg;
     },
+
+    // 로그인
+    loginUserRequest(state, action: PayloadAction<LoginUserReq>) {
+      state.userLoading = true;
+      state.errMsg = null;
+    },
+    loginUserSuccess(state, action: PayloadAction<LoginUserRes>) {
+      window.location.href = "/";
+
+      state.userLoading = false;
+      state.user = action.payload.user;
+      state.token = action.payload.token;
+    },
+    loginUserFailure(state, action: PayloadAction<ResponseFailure>) {
+      state.userLoading = false;
+      state.errMsg = action.payload.data.msg;
+    },
+
     // 휴대폰 인증
     userPARequest(state, action: PayloadAction<PAReq>) {
-      console.log("데이터:::", action.payload)
       state.authLoading = true;
       state.errMsg = null;
     },
     userPASuccess(state, action: PayloadAction<PARes>) {
-      console.log("인증번호:::", action.payload.num);
       state.authLoading = false;
       state.PASuccess = true;
       state.PANum = action.payload.num;

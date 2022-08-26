@@ -14,7 +14,7 @@ const router = express.Router();
 
 // LOGIN / POST
 router.post('/login', (req, res) => {
-  const { email, password } = req.body;
+  const { email, password } = req.body.user;
 
   if (!email) return res.status(400).json({ msg: '이메일을 작성해주세요.' });
   else if (!password)
@@ -152,13 +152,12 @@ router.post('/password/email', (req, res) => {
 });
 
 // Check Phone / POST
-router.post('/phone', async (req, res) => {
+router.post('/phone', (req, res) => {
   let authNum = ''
   for (let i = 0; i < 6; i++) {
     authNum += Math.floor(Math.random() * 10)
   }  
   
-  console.log("req:::", req.body);
   let user_phone_number = '01056294023';
 
   const date = Date.now().toString();
@@ -183,7 +182,7 @@ router.post('/phone', async (req, res) => {
   const hash = hmac.finalize();
   const signature = hash.toString(CryptoJS.enc.Base64);
 
-  await request({
+  request({
     method: method,
     json: true,
     uri: url,
@@ -196,7 +195,7 @@ router.post('/phone', async (req, res) => {
     body: {
       type: "SMS",
       countryCode: "82",
-      from: req.phoneNum,
+      from: req.body.paData.phoneNum,
       content: `인증번호 [${authNum}]를 입력해주세요.`,
       messages: [
         { to: `${user_phone_number}`, },],

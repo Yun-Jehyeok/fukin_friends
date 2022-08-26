@@ -1,7 +1,9 @@
 import type { NextPage } from 'next';
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import { useStringInput } from 'hooks/useInput';
-import KakaoBtn from 'public/img/kakao_login.png';
+import Link from 'next/link';
+import { userActions } from 'src/store/reducers/userReducer';
+import { useAppDispatch } from 'hooks/reduxHooks';
 import {
   LoginContainer,
   LoginForm,
@@ -11,23 +13,42 @@ import {
   LoginButton,
   OtherSection,
   GoogleBtn,
-  SocialLogin,
+  Divider,
+  SocialLoginContainer,
 } from 'styles/styleRepo/loginStyle';
-import Image from 'next/image';
-import Link from 'next/link';
 
 const Login: NextPage = () => {
   const email = useStringInput('');
   const password = useStringInput('');
 
+  const [isEmailBlank, setIsEmailBlank] = useState(false);
+  const [isPasswordBlank, setIsPasswordBlank] = useState(false);
+
+  const dispatch = useAppDispatch();
+
   const handleSubmit = useCallback(
     (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
 
-      console.log(email.value);
-      console.log(password.value);
+      console.log("here");
+      
+      if (email.value === '') {
+        setIsEmailBlank(true);
+      }
+      if (password.value === '') {
+        setIsPasswordBlank(true);
+      }
+
+      if (!isEmailBlank && !isPasswordBlank) {        
+        const user = {
+          email: email.value,
+          password: password.value,
+        };
+
+        dispatch(userActions.loginUserRequest(user));
+      }
     },
-    [email, password],
+    [dispatch, isEmailBlank, isPasswordBlank, email, password]
   );
 
   return (
@@ -36,16 +57,22 @@ const Login: NextPage = () => {
         <div>
           <div>
             <LoginTitle>
-              <Link href="/">Sign In</Link>
+              <Link href="/">SIGN IN</Link>
             </LoginTitle>
+            <SocialLoginContainer>
+              <Divider>소셜 로그인</Divider>
+              <GoogleBtn></GoogleBtn>
+            </SocialLoginContainer>
+            <Divider>이메일 로그인</Divider>
             <form onSubmit={handleSubmit}>
               <LoginLabel>이메일</LoginLabel>
-              <LoginInput type="email" name="email" required {...email} />
+              <LoginInput type="email" name="email" placeholder="이메일을 입력하세요" required {...email} />
               <LoginLabel>비밀번호</LoginLabel>
               <LoginInput
                 type="password"
                 name="password"
                 required
+                placeholder="비밀번호를 입력하세요"
                 {...password}
               />
               <LoginButton>로그인</LoginButton>
@@ -57,11 +84,6 @@ const Login: NextPage = () => {
               </div>
             </OtherSection>
           </div>
-        </div>
-        <div>
-          <SocialLogin>소셜 로그인</SocialLogin>
-          <GoogleBtn></GoogleBtn>
-          <Image src={KakaoBtn} alt="kakao" />
         </div>
       </LoginForm>
     </LoginContainer>
