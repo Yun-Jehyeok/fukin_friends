@@ -4,6 +4,8 @@ import { useStringInput } from 'hooks/useInput';
 import Link from 'next/link';
 import { userActions } from 'src/store/reducers/userReducer';
 import { useAppDispatch } from 'hooks/reduxHooks';
+import { useSelector } from 'react-redux';
+import { RootState } from 'src/configureStore';
 import {
   LoginContainer,
   LoginForm,
@@ -15,6 +17,7 @@ import {
   GoogleBtn,
   Divider,
   SocialLoginContainer,
+  InputErrMsg,
 } from 'styles/styleRepo/loginStyle';
 
 const Login: NextPage = () => {
@@ -24,13 +27,13 @@ const Login: NextPage = () => {
   const [isEmailBlank, setIsEmailBlank] = useState(false);
   const [isPasswordBlank, setIsPasswordBlank] = useState(false);
 
+  const { errMsg } = useSelector((state: RootState) => state.user);
+
   const dispatch = useAppDispatch();
 
   const handleSubmit = useCallback(
     (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-
-      console.log("here");
       
       if (email.value === '') {
         setIsEmailBlank(true);
@@ -39,7 +42,7 @@ const Login: NextPage = () => {
         setIsPasswordBlank(true);
       }
 
-      if (!isEmailBlank && !isPasswordBlank) {        
+      if (!isEmailBlank && !isPasswordBlank) {
         const user = {
           email: email.value,
           password: password.value,
@@ -67,6 +70,7 @@ const Login: NextPage = () => {
             <form onSubmit={handleSubmit}>
               <LoginLabel>이메일</LoginLabel>
               <LoginInput type="email" name="email" placeholder="이메일을 입력하세요" required {...email} />
+              {errMsg && errMsg.includes('이메일') ? <InputErrMsg>{errMsg}</InputErrMsg> : ''}
               <LoginLabel>비밀번호</LoginLabel>
               <LoginInput
                 type="password"
@@ -75,6 +79,7 @@ const Login: NextPage = () => {
                 placeholder="비밀번호를 입력하세요"
                 {...password}
               />
+              {errMsg && errMsg.includes('비밀번호') ? <InputErrMsg>{errMsg}</InputErrMsg> : ''}
               <LoginButton>로그인</LoginButton>
             </form>
             <OtherSection>

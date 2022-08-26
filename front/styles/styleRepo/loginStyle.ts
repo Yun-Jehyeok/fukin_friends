@@ -50,7 +50,14 @@ export const LoginInput = styled.input.attrs({ autoComplete: 'off' })`
   font-size: 16px;
 `;
 
-export const LoginButton = styled.div`
+export const InputErrMsg = styled.div`
+  font-size: 12px;
+  color: red;
+  margin-bottom: 16px;
+  margin-top: -8px;
+`;
+
+export const LoginButton = styled.button`
   width: 100%;
   height: 56px;
   line-height: 56px;
@@ -59,6 +66,8 @@ export const LoginButton = styled.div`
   text-align: center;
   font-size: 18px;
   cursor: pointer;
+  border: none;
+  outline: none;
 `;
 
 export const OtherSection = styled.div`

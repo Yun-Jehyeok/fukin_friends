@@ -36,12 +36,15 @@ const userSlice = createSlice({
     },
     registerUserSuccess(state, action: PayloadAction<RegisterUserRes>) {
       window.location.href = "/";
+      localStorage.setItem('token', action.payload.token);
 
       state.userLoading = false;
       state.user = action.payload.user;
       state.token = action.payload.token;
     },
     registerUserFailure(state, action: PayloadAction<ResponseFailure>) {
+      localStorage.removeItem('token');
+
       state.userLoading = false;
       state.errMsg = action.payload.data.msg;
     },
@@ -53,12 +56,15 @@ const userSlice = createSlice({
     },
     loginUserSuccess(state, action: PayloadAction<LoginUserRes>) {
       window.location.href = "/";
+      localStorage.setItem('token', action.payload.token);
 
       state.userLoading = false;
       state.user = action.payload.user;
       state.token = action.payload.token;
     },
     loginUserFailure(state, action: PayloadAction<ResponseFailure>) {
+      localStorage.removeItem('token');
+
       state.userLoading = false;
       state.errMsg = action.payload.data.msg;
     },
