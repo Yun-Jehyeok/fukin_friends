@@ -2,9 +2,23 @@ import { all, call, fork, put, takeLatest } from 'redux-saga/effects';
 
 import type { AxiosResponse } from 'axios';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import type { LoginUserReq, LoginUserRes, PAReq, PARes, RegisterUserReq, RegisterUserRes } from '../types/user';
+import type {
+  LoadUserReq,
+  LoadUserRes,
+  LoginUserReq,
+  LoginUserRes,
+  PAReq,
+  PARes,
+  RegisterUserReq,
+  RegisterUserRes,
+} from '../types/user';
 
-import { loginUser, registerUser, sendPhoneAuth } from '../api/userApi';
+import {
+  loadUser,
+  loginUser,
+  registerUser,
+  sendPhoneAuth,
+} from '../api/userApi';
 import { userActions } from '../reducers/userReducer';
 
 // 회원가입
@@ -18,9 +32,7 @@ function* registerUserApi(action: PayloadAction<RegisterUserReq>) {
     yield put(userActions.registerUserSuccess(data));
   } catch (e: any) {
     const msg =
-      e?.name === 'AxiosError'
-        ? e.response.data.msg
-        : '서버에러입니다.';
+      e?.name === 'AxiosError' ? e.response.data.msg : '서버에러입니다.';
 
     yield put(
       userActions.registerUserFailure({ status: { ok: false }, data: { msg } }),
@@ -43,9 +55,7 @@ function* loginUserApi(action: PayloadAction<LoginUserReq>) {
     yield put(userActions.loginUserSuccess(data));
   } catch (e: any) {
     const msg =
-      e?.name === 'AxiosError'
-        ? e.response.data.msg
-        : '서버에러입니다.';
+      e?.name === 'AxiosError' ? e.response.data.msg : '서버에러입니다.';
 
     yield put(
       userActions.loginUserFailure({ status: { ok: false }, data: { msg } }),
@@ -55,6 +65,29 @@ function* loginUserApi(action: PayloadAction<LoginUserReq>) {
 
 function* watchLoginUser() {
   yield takeLatest(userActions.loginUserRequest, loginUserApi);
+}
+
+// 로그인
+function* loadUserApi(action: PayloadAction<LoadUserReq>) {
+  try {
+    const { data }: AxiosResponse<LoadUserRes> = yield call(
+      loadUser,
+      action.payload,
+    );
+
+    yield put(userActions.loadUserSuccess(data));
+  } catch (e: any) {
+    const msg =
+      e?.name === 'AxiosError' ? e.response.data.msg : '서버에러입니다.';
+
+    yield put(
+      userActions.loadUserFailure({ status: { ok: false }, data: { msg } }),
+    );
+  }
+}
+
+function* watchloadUser() {
+  yield takeLatest(userActions.loadUserRequest, loadUserApi);
 }
 
 // 휴대폰 인증
@@ -67,9 +100,7 @@ function* paApi(action: PayloadAction<PAReq>) {
 
     yield put(userActions.userPASuccess(data));
   } catch (e: any) {
-    yield put(
-      userActions.userPAFailure({ success: false }),
-    );
+    yield put(userActions.userPAFailure({ success: false }));
   }
 }
 
@@ -78,5 +109,10 @@ function* watchPA() {
 }
 
 export default function* userSaga() {
-  yield all([fork(watchRegisterUser), fork(watchLoginUser), fork(watchPA)]);
+  yield all([
+    fork(watchRegisterUser),
+    fork(watchLoginUser),
+    fork(watchPA),
+    fork(watchloadUser),
+  ]);
 }

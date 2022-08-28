@@ -153,20 +153,20 @@ router.post('/password/email', (req, res) => {
 
 // Check Phone / POST
 router.post('/phone', (req, res) => {
-  let authNum = ''
+  let authNum = '';
   for (let i = 0; i < 6; i++) {
-    authNum += Math.floor(Math.random() * 10)
-  }  
-  
+    authNum += Math.floor(Math.random() * 10);
+  }
+
   let user_phone_number = '01056294023';
 
   const date = Date.now().toString();
   const uri = 'ncp:sms:kr:291519131115:fukinfriends'; //서비스 ID
   const secretKey = 'Dljv9eXbcArxR9QomY5vk6rWIlmd9P6xFBH0rqKd';
   const accessKey = '2zhD9dT9rnNJWgIYd6rs';
-  const method = "POST";
-  const space = " ";
-  const newLine = "\n";
+  const method = 'POST';
+  const space = ' ';
+  const newLine = '\n';
   const url = `https://sens.apigw.ntruss.com/sms/v2/services/${uri}/messages`;
   const url2 = `/sms/v2/services/${uri}/messages`;
   const hmac = CryptoJS.algo.HMAC.create(CryptoJS.algo.SHA256, secretKey);
@@ -182,36 +182,37 @@ router.post('/phone', (req, res) => {
   const hash = hmac.finalize();
   const signature = hash.toString(CryptoJS.enc.Base64);
 
-  request({
-    method: method,
-    json: true,
-    uri: url,
-    headers: {
-      "Contenc-type": "application/json; charset=utf-8",
-      "x-ncp-iam-access-key": accessKey,
-      "x-ncp-apigw-timestamp": date,
-      "x-ncp-apigw-signature-v2": signature,
+  request(
+    {
+      method: method,
+      json: true,
+      uri: url,
+      headers: {
+        'Contenc-type': 'application/json; charset=utf-8',
+        'x-ncp-iam-access-key': accessKey,
+        'x-ncp-apigw-timestamp': date,
+        'x-ncp-apigw-signature-v2': signature,
+      },
+      body: {
+        type: 'SMS',
+        countryCode: '82',
+        from: req.body.paData.phoneNum,
+        content: `인증번호 [${authNum}]를 입력해주세요.`,
+        messages: [{ to: `${user_phone_number}` }],
+      },
     },
-    body: {
-      type: "SMS",
-      countryCode: "82",
-      from: req.body.paData.phoneNum,
-      content: `인증번호 [${authNum}]를 입력해주세요.`,
-      messages: [
-        { to: `${user_phone_number}`, },],
-    },
-  }, function (err) {
+    function (err) {
       if (err) {
-        res.json({ success: false })
+        res.json({ success: false });
       } else {
-        res.json({ success: true, num: authNum })
+        res.json({ success: true, num: authNum });
       }
-    }
+    },
   );
-})
+});
 
-// Authentication / GET
-router.get('/user', auth, async (req, res) => {
+// Authentication / POST
+router.post('/user', auth, async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select('-password');
 
@@ -219,7 +220,13 @@ router.get('/user', auth, async (req, res) => {
       return res.status(400).json({ msg: '유저가 존재하지 않습니다.' });
     }
 
-    res.json(user);
+    const userRes = {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+    };
+
+    res.json(userRes);
   } catch (e) {
     res.status(400).json({ msg: e.message });
   }

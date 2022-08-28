@@ -1,7 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import type { PayloadAction } from '@reduxjs/toolkit';
-import type { LoginUserReq, LoginUserRes, PAReq, PARes, PAResFail, RegisterUserReq, RegisterUserRes } from '../types/user';
+import type {
+  LoadUserReq,
+  LoadUserRes,
+  LoginUserReq,
+  LoginUserRes,
+  PAReq,
+  PARes,
+  PAResFail,
+  RegisterUserReq,
+  RegisterUserRes,
+} from '../types/user';
 import type { ResponseFailure } from '../types';
 import { IUser } from '../types/user';
 
@@ -22,7 +32,7 @@ const initialState: UserStateType = {
   errMsg: null,
   token: null,
   PASuccess: false,
-  PANum: ''
+  PANum: '',
 };
 
 const userSlice = createSlice({
@@ -35,7 +45,7 @@ const userSlice = createSlice({
       state.errMsg = null;
     },
     registerUserSuccess(state, action: PayloadAction<RegisterUserRes>) {
-      window.location.href = "/";
+      window.location.href = '/';
       localStorage.setItem('token', action.payload.token);
 
       state.userLoading = false;
@@ -55,7 +65,7 @@ const userSlice = createSlice({
       state.errMsg = null;
     },
     loginUserSuccess(state, action: PayloadAction<LoginUserRes>) {
-      window.location.href = "/";
+      window.location.href = '/';
       localStorage.setItem('token', action.payload.token);
 
       state.userLoading = false;
@@ -65,6 +75,20 @@ const userSlice = createSlice({
     loginUserFailure(state, action: PayloadAction<ResponseFailure>) {
       localStorage.removeItem('token');
 
+      state.userLoading = false;
+      state.errMsg = action.payload.data.msg;
+    },
+
+    // 유저 인증
+    loadUserRequest(state, action: PayloadAction<LoadUserReq>) {
+      state.userLoading = true;
+      state.errMsg = null;
+    },
+    loadUserSuccess(state, action: PayloadAction<LoadUserRes>) {
+      state.userLoading = false;
+      state.user = action.payload.user;
+    },
+    loadUserFailure(state, action: PayloadAction<ResponseFailure>) {
       state.userLoading = false;
       state.errMsg = action.payload.data.msg;
     },

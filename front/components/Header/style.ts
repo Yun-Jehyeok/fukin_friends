@@ -53,3 +53,12 @@ export const Profile = styled.div`
     border: 1px solid #cacaca;
   }
 `;
+
+export const LoginText = styled.div`
+  height: 100%;
+  line-height: 32px;
+
+  & > a {
+    font-size: 14px;
+  }
+`;

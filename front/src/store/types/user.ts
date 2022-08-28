@@ -12,7 +12,7 @@ export type RegisterUserReq = {
     password: string;
   };
 };
-export type RegisterUserRes = { user: IUser; token: string; };
+export type RegisterUserRes = { user: IUser; token: string };
 
 // 로그인
 export type LoginUserReq = {
@@ -21,9 +21,14 @@ export type LoginUserReq = {
     password: string;
   };
 };
-export type LoginUserRes = { user: IUser; token: string; };
+export type LoginUserRes = { user: IUser; token: string };
+
+export type LoadUserReq = {
+  token: string | null;
+};
+export type LoadUserRes = { user: IUser };
 
 // 휴대폰 인증
-export type PAReq = { name: string; phoneNum: string; };
-export type PARes = { success: boolean; num?: string; };
-export type PAResFail = { success: boolean; }
+export type PAReq = { name: string; phoneNum: string };
+export type PARes = { success: boolean; num?: string };
+export type PAResFail = { success: boolean };
