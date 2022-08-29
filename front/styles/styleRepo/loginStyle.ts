@@ -68,6 +68,10 @@ export const LoginButton = styled.button`
   cursor: pointer;
   border: none;
   outline: none;
+
+  &:hover {
+    background-color: #3D3EBE;
+  }
 `;
 
 export const OtherSection = styled.div`

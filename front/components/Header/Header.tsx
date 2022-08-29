@@ -21,7 +21,7 @@ import {
 const Header: NextPage = () => {
   const [isShowDropdown, setIsShowDropdown] = useState(false);
 
-  const { token, user } = useSelector((state: RootState) => state.user);
+  const { token, user, hasGroup } = useSelector((state: RootState) => state.user);
 
   const dispatch = useAppDispatch();
 
@@ -37,7 +37,7 @@ const Header: NextPage = () => {
     <Wrap>
       <HeaderContainer>
         <Logo>
-          <Link href="/">FUKIN FRIENDS</Link>
+          {hasGroup ? "" : <Link href="/">FUKIN FRIENDS</Link>}
         </Logo>
         <SearchInput placeholder="Search" />
         {token ? (
@@ -60,7 +60,7 @@ const Header: NextPage = () => {
                   </DropdownProfile>
                   <Logout onClick={logoutHandler}>로그아웃</Logout>
                 </div>
-              </DropdownItem> 
+              </DropdownItem>
               : ""
             }
           </ProfileContainer>

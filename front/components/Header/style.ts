@@ -55,6 +55,10 @@ export const Profile = styled.div`
     border-radius: 50%;
     background-color: #f5f4f7;
     border: 1px solid #cacaca;
+
+    &:hover {
+      box-shadow: 0px 2px 4px rgb(0 0 0 / 8%);
+    }
   }
 `;
 
@@ -102,11 +106,22 @@ export const DropdownProfile = styled.div`
     & > div:first-child {
       width: 40px;
       height: 40px;
+      &:hover {
+        box-shadow: none;
+      }
     }
   }
   & > div:last-child {
     margin-left: 16px;
     font-size: 14px;
+
+    & > div:first-child {
+      font-weight: bold;
+    }
+    & > div:last-child {
+      font-size: 13px;
+      margin-top: 3px;
+    }
   }
 `;
 

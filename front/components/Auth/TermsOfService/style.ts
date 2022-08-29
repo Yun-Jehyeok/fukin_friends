@@ -87,9 +87,17 @@ export const TOSButton = styled.button`
 
     &:first-child {
         background-color: #8E8E8E;
+
+        &:hover {
+            background-color: gray;
+        }
     }
     &:last-child {
         background-color: #5455dd;
+
+        &:hover {
+            background-color: #3D3EBE;
+        }
     }
 `;
 

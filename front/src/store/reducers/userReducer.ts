@@ -24,6 +24,7 @@ export type UserStateType = {
   authLoading: boolean;
   PASuccess: boolean; // PA : Phone Authentication
   PANum?: string;
+  hasGroup: boolean;
 };
 
 const initialState: UserStateType = {
@@ -34,6 +35,7 @@ const initialState: UserStateType = {
   token: null,
   PASuccess: false,
   PANum: '',
+  hasGroup: false,
 };
 
 const userSlice = createSlice({
@@ -46,7 +48,7 @@ const userSlice = createSlice({
       state.errMsg = null;
     },
     registerUserSuccess(state, action: PayloadAction<RegisterUserRes>) {
-      window.location.href = '/';
+      window.location.href = '/group';
       localStorage.setItem('token', action.payload.token);
 
       state.userLoading = false;

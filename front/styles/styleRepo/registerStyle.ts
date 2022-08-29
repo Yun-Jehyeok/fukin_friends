@@ -76,6 +76,10 @@ export const RegisterButton = styled.button`
   border: none;
   cursor: pointer;
   font-size: 18px;
+
+  &:hover {
+    background-color: #3D3EBE;
+  }
 `;
 
 export const RegisterAuthContainer = styled.div`
@@ -103,4 +107,8 @@ export const RegisterAuthBtn = styled.button<IAuthBtn>`
   cursor: ${props => props.sendPASuccess ? "initial" : "pointer"};
   pointer-events: ${props => props.sendPASuccess ? 'none' : ''};
   font-size: 16px;
+
+  &:hover {
+    background-color: #3D3EBE;
+  }
 `;
