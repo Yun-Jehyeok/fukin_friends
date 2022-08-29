@@ -6,6 +6,7 @@ import type {
   LoadUserRes,
   LoginUserReq,
   LoginUserRes,
+  LogoutUserReq,
   PAReq,
   PARes,
   PAResFail,
@@ -84,13 +85,31 @@ const userSlice = createSlice({
       state.userLoading = true;
       state.errMsg = null;
     },
-    loadUserSuccess(state, action: PayloadAction<LoadUserRes>) {
+    loadUserSuccess(state, action: PayloadAction<LoadUserRes>) {   
       state.userLoading = false;
-      state.user = action.payload.user;
+      state.user = action.payload;
+      state.token = localStorage.getItem("token");
     },
     loadUserFailure(state, action: PayloadAction<ResponseFailure>) {
       state.userLoading = false;
       state.errMsg = action.payload.data.msg;
+    },
+
+    // 로그아웃
+    logoutRequest(state, action: PayloadAction<LogoutUserReq>) {
+      state.userLoading = true;
+      state.authLoading = true;
+    },
+    logoutSuccess(state) {
+      state.user = { id: '', name: '', email: '' };
+      state.userLoading = false;
+      state.authLoading = false;
+      state.errMsg = null;
+      state.token = null;
+    },
+    logoutFailure(state) {
+      state.userLoading = false;
+      state.authLoading = false;
     },
 
     // 휴대폰 인증

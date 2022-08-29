@@ -40,18 +40,81 @@ export const SearchInput = styled.input`
   margin-right: 16px;
 `;
 
+export const ProfileContainer = styled.div`
+  position: relative;
+`;
+
 export const Profile = styled.div`
   width: fit-content;
-  height: 100%;
+  height: 32px;
   cursor: pointer;
 
   & > div:first-child {
     width: 32px;
-    height: 100%;
+    height: 32px;
     border-radius: 50%;
     background-color: #f5f4f7;
     border: 1px solid #cacaca;
   }
+`;
+
+export const DropdownItem = styled.div`
+  width: fit-content;
+  height: fit-content;
+  position: absolute;
+  top: 40px;
+  left: -8px;
+  cursor: initial;
+
+  & > div:first-child {
+    width: 8px;
+    height: 8px;
+    position: absolute;
+    top: -4px;
+    right: -28px;
+    border-left: 1px solid #e8e8e8;
+    border-top: 1px solid #e8e8e8;
+    background-color: white;
+    z-index: 1;
+    transform: rotate(45deg);
+  }
+  & > div:last-child {
+    border: 1px solid #e8e8e8;
+    background-color: white;
+    width: 280px;
+    height: 100px;
+    position: absolute;
+    right: -54px;
+    border-radius: 4px;
+    padding: 16px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+  }
+`;
+
+export const DropdownProfile = styled.div`
+  display: flex;
+
+  & > ${Profile} {
+    cursor: initial;
+
+    & > div:first-child {
+      width: 40px;
+      height: 40px;
+    }
+  }
+  & > div:last-child {
+    margin-left: 16px;
+    font-size: 14px;
+  }
+`;
+
+export const Logout = styled.div`
+  width: fit-content;
+  cursor: pointer;
+  color: #5455dd;
+  font-size: 12px;
 `;
 
 export const LoginText = styled.div`

@@ -23,10 +23,20 @@ export type LoginUserReq = {
 };
 export type LoginUserRes = { user: IUser; token: string };
 
+// 유저 인증
 export type LoadUserReq = {
   token: string | null;
 };
-export type LoadUserRes = { user: IUser };
+export type LoadUserRes = { 
+  id: string;
+  name: string;
+  email: string;
+};
+
+// 로그아웃
+export type LogoutUserReq = {
+  token: string | null;
+};
 
 // 휴대폰 인증
 export type PAReq = { name: string; phoneNum: string };

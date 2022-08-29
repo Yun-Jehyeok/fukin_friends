@@ -7,6 +7,7 @@ import type {
   LoadUserRes,
   LoginUserReq,
   LoginUserRes,
+  LogoutUserReq,
   PAReq,
   PARes,
   RegisterUserReq,
@@ -67,7 +68,7 @@ function* watchLoginUser() {
   yield takeLatest(userActions.loginUserRequest, loginUserApi);
 }
 
-// 로그인
+// 유저 인증
 function* loadUserApi(action: PayloadAction<LoadUserReq>) {
   try {
     const { data }: AxiosResponse<LoadUserRes> = yield call(
@@ -88,6 +89,26 @@ function* loadUserApi(action: PayloadAction<LoadUserReq>) {
 
 function* watchloadUser() {
   yield takeLatest(userActions.loadUserRequest, loadUserApi);
+}
+
+// 로그아웃
+function* logoutApi(action: PayloadAction<LogoutUserReq>) {
+  try {
+    if(action.payload) {
+      localStorage.removeItem('token');
+
+      yield put(userActions.logoutSuccess());
+    } else {
+      yield put(userActions.logoutFailure());
+    }
+
+  } catch (e: any) {
+    yield put(userActions.logoutFailure());
+  }
+}
+
+function* watchLogout() {
+  yield takeLatest(userActions.logoutRequest, logoutApi);
 }
 
 // 휴대폰 인증
@@ -114,5 +135,6 @@ export default function* userSaga() {
     fork(watchLoginUser),
     fork(watchPA),
     fork(watchloadUser),
+    fork(watchLogout)
   ]);
 }
