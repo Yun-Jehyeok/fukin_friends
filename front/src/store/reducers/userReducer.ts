@@ -12,6 +12,8 @@ import type {
   PAResFail,
   RegisterUserReq,
   RegisterUserRes,
+  SearchUserReq,
+  SearchUserRes,
 } from '../types/user';
 import type { ResponseFailure } from '../types';
 import { IUser } from '../types/user';
@@ -25,6 +27,7 @@ export type UserStateType = {
   PASuccess: boolean; // PA : Phone Authentication
   PANum?: string;
   hasGroup: boolean;
+  searchedUser: IUser[];
 };
 
 const initialState: UserStateType = {
@@ -36,6 +39,7 @@ const initialState: UserStateType = {
   PASuccess: false,
   PANum: '',
   hasGroup: false,
+  searchedUser: []
 };
 
 const userSlice = createSlice({
@@ -128,6 +132,20 @@ const userSlice = createSlice({
       state.authLoading = false;
       state.PASuccess = false;
       state.errMsg = '인증번호를 확인해주세요.';
+    },
+
+    // 유저 검색
+    userSearchRequest(state, action: PayloadAction<SearchUserReq>) {
+      state.userLoading = true;
+      state.searchedUser = [];
+    },
+    userSearchSuccess(state, action: PayloadAction<SearchUserRes>) {
+      state.userLoading = false;
+      state.searchedUser = action.payload.users
+    },
+    userSearchFailure(state) {
+      state.userLoading = false;
+      state.searchedUser = [];
     },
   },
 });

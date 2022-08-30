@@ -7,6 +7,8 @@ import type {
   PARes,
   RegisterUserReq,
   RegisterUserRes,
+  SearchUserReq,
+  SearchUserRes,
 } from '../types/user';
 
 import axios from 'axios';
@@ -27,4 +29,8 @@ export const loadUser = async (token: LoadUserReq) => {
 
 export const sendPhoneAuth = async (paData: PAReq) => {
   return await axios.post<PARes>('/api/auth/phone', { paData });
+};
+
+export const searchUser = async (user: SearchUserReq) => {
+  return await axios.get<SearchUserRes>(`/api/user/search/${user}`);
 };

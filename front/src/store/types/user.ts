@@ -38,6 +38,14 @@ export type LogoutUserReq = {
   token: string | null;
 };
 
+// 유저 검색
+export type SearchUserReq = {
+  name: string;
+};
+export type SearchUserRes = { 
+  users: IUser[];
+};
+
 // 휴대폰 인증
 export type PAReq = { name: string; phoneNum: string };
 export type PARes = { success: boolean; num?: string };

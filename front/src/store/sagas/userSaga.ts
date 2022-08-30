@@ -12,12 +12,15 @@ import type {
   PARes,
   RegisterUserReq,
   RegisterUserRes,
+  SearchUserReq,
+  SearchUserRes,
 } from '../types/user';
 
 import {
   loadUser,
   loginUser,
   registerUser,
+  searchUser,
   sendPhoneAuth,
 } from '../api/userApi';
 import { userActions } from '../reducers/userReducer';
@@ -91,6 +94,26 @@ function* watchloadUser() {
   yield takeLatest(userActions.loadUserRequest, loadUserApi);
 }
 
+// 유저 검색
+function* searchUserApi(action: PayloadAction<SearchUserReq>) {
+  try {
+    const { data }: AxiosResponse<SearchUserRes> = yield call(
+      searchUser,
+      action.payload,
+    );
+
+    yield put(userActions.userSearchSuccess(data));
+  } catch (e: any) {
+    yield put(
+      userActions.userSearchFailure(),
+    );
+  }
+}
+
+function* watchSearchUser() {
+  yield takeLatest(userActions.userSearchRequest, searchUserApi);
+}
+
 // 로그아웃
 function* logoutApi(action: PayloadAction<LogoutUserReq>) {
   try {
@@ -135,6 +158,7 @@ export default function* userSaga() {
     fork(watchLoginUser),
     fork(watchPA),
     fork(watchloadUser),
-    fork(watchLogout)
+    fork(watchLogout),
+    fork(watchSearchUser)
   ]);
 }

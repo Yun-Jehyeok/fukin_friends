@@ -105,4 +105,28 @@ router.put('/password', (req, res) => {
   });
 });
 
+// 유저 검색
+router.get('/search/:searchTerm', async (req, res) => {
+  try {
+    const users = await User.find({
+      name: {
+        $regex: req.params.searchTerm,
+        $options: 'i',
+      },
+    });
+
+    let result = users.map(item => {
+      return {
+        id: item._id,
+        name: item.name,
+        email: item.email
+      }
+    })
+
+    res.send({ users: result });
+  } catch (e) {
+    next(e);
+  }
+});
+
 module.exports = router;
