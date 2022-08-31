@@ -1,5 +1,10 @@
 import styled from 'styled-components';
 
+interface IDropdownList {
+  groupLength: number;
+  isOpen: boolean;
+}
+
 export const Wrap = styled.div`
   width: 100%;
   height: 56px;
@@ -11,24 +16,118 @@ export const Wrap = styled.div`
 
 export const HeaderContainer = styled.div`
   width: 100%;
-  height: 32px;
-  margin-top: 12px;
-  padding: 0 24px;
+  height: 100%;
+  padding-right: 24px;
   display: flex;
   justify-content: space-between;
 `;
 
 export const Logo = styled.div`
   flex-grow: 1;
-  height: 100%;
+  height: 32px;
   line-height: 28px;
   font-size: 24px;
   font-weight: bold;
+  margin-top: 12px;
+  padding-left: 24px;
+`;
+
+export const GroupDropdownContainer = styled.div`
+  width: fit-content;
+  height: 100%;
+  display: flex;
+`;
+
+export const GroupDropdownTrigger = styled.div`
+  width: 216px;
+  height: 56px;
+  display: flex;
+  justify-content: space-between;
+  padding-left: 24px;
+  cursor: pointer;
+  line-height: 52px;
+  z-index: 1;
+  background-color: white;
+  border-bottom: 1px solid #e8e8e8;
+
+  &:hover {
+    background-color: #fcfcfc;
+    border-bottom: 1px solid #e8e8e8;
+  }
+
+  & > div:first-child {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  & > div:last-child {
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    position: relative;
+    top: 22px;
+    right: 24px;
+  }
+`;
+
+export const DropdownLeftArr = styled.div`
+  width: 8px;
+  height: 8px;
+  border-left: 1px solid #B2B2B2;
+  border-top: 1px solid #B2B2B2;
+  transform: rotate(-45deg);
+`;
+export const DropdownRightArr = styled.div`
+  width: 8px;
+  height: 8px;
+  border-right: 1px solid #B2B2B2;
+  border-bottom: 1px solid #B2B2B2;
+  transform: rotate(-45deg);
+`;
+
+export const GroupDropdownList = styled.div<IDropdownList>`
+  height: 100%;
+  width: fit-content;
+  max-width: 600px;
+  display: flex;
+  position: relative;
+  left: ${(props) => props.isOpen ? '0' : `-${140 * props.groupLength + 64}px`};
+  transition: left 0.5s ease-out;
+  padding: 0 24px 0 12px;
+`;
+
+export const GroupDropdownItem = styled.div`
+  width: fit-content;
+  height: 100%;
+  margin-right: 12px;
+
+  & > div {
+    width: 140px;
+    height: 40px;
+    margin-top: 8px;
+    padding: 0 12px;
+    background-color: #5455dd;
+    color: white;
+    font-size: 14px;
+    line-height: 40px;
+    text-align: center;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 4px;
+
+    &:hover {
+      background-color: #3D3EBE;
+    }
+  }
+`;
+
+export const HeaderRightSection = styled.div`
+  display: flex;
 `;
 
 export const SearchInput = styled.input`
   width: 480px;
-  height: 100%;
+  height: 32px;
+  margin-top: 12px;
   border: 1px solid #e8e8e8;
   border-radius: 4px;
   padding: 0 16px;
@@ -48,6 +147,7 @@ export const Profile = styled.div`
   width: fit-content;
   height: 32px;
   cursor: pointer;
+  margin-top: 12px;
 
   & > div:first-child {
     width: 32px;
@@ -66,7 +166,7 @@ export const DropdownItem = styled.div`
   width: fit-content;
   height: fit-content;
   position: absolute;
-  top: 40px;
+  top: 56px;
   left: -8px;
   cursor: initial;
 
@@ -102,6 +202,7 @@ export const DropdownProfile = styled.div`
 
   & > ${Profile} {
     cursor: initial;
+    margin-top: 0;
 
     & > div:first-child {
       width: 40px;
@@ -135,6 +236,7 @@ export const Logout = styled.div`
 export const LoginText = styled.div`
   height: 100%;
   line-height: 32px;
+  margin-top: 12px;
 
   & > a {
     font-size: 14px;

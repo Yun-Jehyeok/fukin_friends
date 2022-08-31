@@ -4,12 +4,13 @@ import type { AnyAction, CombinedState } from '@reduxjs/toolkit';
 
 import postReducer, { PostStateType } from './postReducer';
 
-import { postActions } from './postReducer';
 import userReducer, { UserStateType } from './userReducer';
+import groupReducer, { GroupStateType } from './groupReducer';
 
 type ReducerState = {
   post: PostStateType;
   user: UserStateType;
+  group: GroupStateType;
 };
 
 const rootReducer = (
@@ -27,6 +28,7 @@ const rootReducer = (
       return combineReducers({
         post: postReducer,
         user: userReducer,
+        group: groupReducer
       })(state, action);
   }
 };

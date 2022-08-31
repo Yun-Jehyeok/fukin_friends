@@ -5,5 +5,3 @@ export const axiosInstance = axios.create({
   withCredentials: true,
   timeout: 10000,
 });
-
-export { apiLoadPosts } from './postApi';

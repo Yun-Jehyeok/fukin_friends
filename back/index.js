@@ -40,6 +40,7 @@ app.use('/api/auth', require('./routes/api/auth'));
 app.use('/api/post', require('./routes/api/post'));
 app.use('/api/comment', require('./routes/api/comment'));
 app.use('/api/search', require('./routes/api/search'));
+app.use('/api/group', require('./routes/api/group'));
 
 app.listen(PORT, () => {
   console.log(`Server started on ${PORT} port`);

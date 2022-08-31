@@ -91,7 +91,7 @@ const userSlice = createSlice({
       state.userLoading = true;
       state.errMsg = null;
     },
-    loadUserSuccess(state, action: PayloadAction<LoadUserRes>) {   
+    loadUserSuccess(state, action: PayloadAction<LoadUserRes>) {      
       state.userLoading = false;
       state.user = action.payload;
       state.token = localStorage.getItem("token");

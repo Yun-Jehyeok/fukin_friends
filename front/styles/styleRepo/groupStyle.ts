@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import styled from 'styled-components';
 
 interface ISlideContainer {
@@ -57,6 +58,50 @@ export const GroupInput = styled.input`
     width: 100%;
     height: 48px;
     padding-left: 16px;
+`;
+
+export const SelectedMemberList = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 16px;
+    margin-top: 32px;
+
+    & > div {
+      width: fit-content;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0 12px;
+    }
+`;
+
+export const SelectedItem = styled.div`
+    width: 50px;
+    height: fit-content;
+    cursor: pointer;
+    position: relative;
+
+    & > div:first-child {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid gray;
+      background-color: #e8e8e8;
+      margin-left: 5px;
+      margin-bottom: 8px;
+    }
+    & > div:nth-child(2) {
+      font-size: 13px;
+      font-weight: bold;
+      text-align: center;
+    }
+    & > span {
+      width: 16px !important;
+      height: 16px !important;
+      position: absolute !important;
+      top: 0;
+      right: 0;
+    }
 `;
 
 export const MemberList = styled.div`

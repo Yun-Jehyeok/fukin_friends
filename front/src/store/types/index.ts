@@ -15,5 +15,3 @@ export type ResponseFailure = {
   status: { ok: boolean };
   data: { msg: string };
 };
-
-export type { LoadPostsBody, LoadPostsResponse } from './post';

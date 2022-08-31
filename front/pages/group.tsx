@@ -1,22 +1,31 @@
 import { useAppDispatch } from "hooks/reduxHooks";
 import { useStringInput } from "hooks/useInput";
 import { NextPage } from "next";
-import { useEffect, useState } from "react";
+import Image from "next/image";
+import React, { useCallback, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "src/configureStore";
 import { userActions } from "src/store/reducers/userReducer";
-import { SlideContainer, SlideItem, GroupButton, GroupContainer, GroupFormTitle, GroupInput, GroupTitle, GroupWrap, GroupInfo, GroupErrMsg, GroupButtonContainer, MemberList, MemberItem, MemberImg, MemberName, SelectMember, NoSearchResult } from "styles/styleRepo/groupStyle";
+import { SlideContainer, SlideItem, GroupButton, GroupContainer, GroupFormTitle, GroupInput, GroupTitle, GroupWrap, GroupInfo, GroupErrMsg, GroupButtonContainer, MemberList, MemberItem, MemberImg, MemberName, SelectMember, NoSearchResult, SelectedMemberList, SelectedItem } from "styles/styleRepo/groupStyle";
+
+import deleteImg from 'public/img/delete.png';
+import { groupActions } from "src/store/reducers/groupReducer";
+
+interface ISelectedMember {
+    id: string | undefined;
+    name: string | undefined;
+}
 
 const CreateGroup: NextPage = () => {
     const [slideIdx, setSlideIdx] = useState('0');
     const [errMsg, setErrMsg] = useState('');
     const [group, setGroup] = useState('');
     const [showMemberList, setShowMemberList] = useState(false);
+    const [selectedMember, setSelectedMember] = useState<ISelectedMember[]>([]);
 
-    const { searchedUser } = useSelector((state: RootState) => state.user);
+    const { user, searchedUser } = useSelector((state: RootState) => state.user);
 
     const groupName = useStringInput('');
-
     const dispatch = useAppDispatch();
 
     const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -26,13 +35,36 @@ const CreateGroup: NextPage = () => {
         
         if(value) {
             setShowMemberList(true);
-            dispatch(userActions.userSearchRequest(value))
+            dispatch(userActions.userSearchRequest(value));
         } else {
             setShowMemberList(false);
         }
 
         setGroup(value);
     };
+
+    const handleSelectMember = (e: React.MouseEvent<HTMLElement>) => {
+        let member: ISelectedMember = {
+            id: e.currentTarget.dataset.key,
+            name: e.currentTarget.dataset.name
+        }
+
+        let hasMember = false;
+        selectedMember.map(item => {
+            if(item.id === member.id) {
+                hasMember = true;
+            }
+        })
+
+        if(!hasMember) {
+            setSelectedMember([...selectedMember, member]);
+        }
+    }
+
+    const deleteMember = (e: React.MouseEvent<HTMLElement>) => {
+        let selected = selectedMember.filter(item => item.id !== e.currentTarget.dataset.id);
+        setSelectedMember(selected);
+    }
 
     const handleNext = () => {
         if(groupName.value) {
@@ -47,9 +79,25 @@ const CreateGroup: NextPage = () => {
         setShowMemberList(false);
     }
 
-    const confirmHandler = () => {
-        window.location.href = "/";
-    }
+    const confirmHandler = useCallback((e: React.MouseEvent<HTMLElement>) => {
+        e.preventDefault();
+
+        let memberList: string[] = [];
+
+        selectedMember.map(item => {
+            if(item) {
+                memberList.push(item.id || "");
+            }
+        });
+
+        let group = {
+            userId: user.id,
+            title: groupName.value,
+            member: memberList
+        }
+
+        dispatch(groupActions.createGroupRequest({ group }))
+    }, [dispatch, user, selectedMember])
 
     return (
         <GroupContainer>
@@ -72,6 +120,21 @@ const CreateGroup: NextPage = () => {
                 <SlideItem>
                     <GroupWrap>
                         <GroupFormTitle>그룹원을 추가해주세요</GroupFormTitle>
+                        {selectedMember && selectedMember.length > 0 ? 
+                            <SelectedMemberList>
+                                <div>
+                                    {selectedMember.map(item => {
+                                        return (
+                                            <SelectedItem key={item.id}>
+                                                <div data-id={item.id} onClick={deleteMember}></div>
+                                                <div>{item.name}</div>
+                                                <Image src={deleteImg}></Image>
+                                            </SelectedItem>
+                                        )
+                                    })}
+                                </div>
+                            </SelectedMemberList>
+                        : ""}
                         <GroupInput placeholder="그룹원을 검색하세요" onChange={onChange} />
                         {
                             showMemberList ? 
@@ -80,7 +143,12 @@ const CreateGroup: NextPage = () => {
                                         {searchedUser && searchedUser.length > 0 ? 
                                             searchedUser.map(item => {
                                                 return (
-                                                    <MemberItem key={item.id}>
+                                                    <MemberItem 
+                                                        key={item.id} 
+                                                        data-key={item.id} 
+                                                        data-name={item.name} 
+                                                        onClick={handleSelectMember}
+                                                    >
                                                         <div>
                                                             <MemberImg></MemberImg>
                                                             <MemberName>{item.name}</MemberName>
