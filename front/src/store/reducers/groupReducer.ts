@@ -39,6 +39,7 @@ const groupSlice = createSlice({
     },
     loadGroupsFailure(state, action: PayloadAction<LoadGroupsRes>) {
       state.isLoading = false;
+      state.groups = [];
     },
 
     // 그룹 생성

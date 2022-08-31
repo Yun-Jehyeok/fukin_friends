@@ -38,6 +38,8 @@ const Header: NextPage = () => {
   useEffect(() => {
     if(token) {
       dispatch(groupActions.loadGroupsRequest({ userId: user.id }));
+    } else {
+      dispatch(groupActions.loadGroupsRequest({ userId: '' }));
     }
   }, [dispatch, token, user])
 

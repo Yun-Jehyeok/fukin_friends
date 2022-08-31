@@ -83,7 +83,7 @@ const Login: NextPage = () => {
               <LoginButton>로그인</LoginButton>
             </form>
             <OtherSection>
-              <Link href="#">비밀번호를 잊어버리셨나요?</Link>
+              <Link href="/pwinquiry">비밀번호를 잊어버리셨나요?</Link>
               <div>
                 회원이 아니신가요?&nbsp;<Link href="/register">회원가입</Link>
               </div>
