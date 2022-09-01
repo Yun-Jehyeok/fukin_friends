@@ -8,16 +8,11 @@ import TermsOfService from 'components/Auth/TermsOfService/TermsOfService';
 import { RootState } from 'src/configureStore';
 import { useSelector } from 'react-redux';
 import {
-  RegisterContainer,
   RegisterForm,
-  RegisterLabel,
-  RegisterInput,
-  RegisterTitle,
-  RegisterButton,
-  InputErrMsg,
   RegisterAuthContainer,
   RegisterAuthBtn,
 } from 'styles/styleRepo/registerStyle';
+import { AuthButton, AuthContainer, AuthInput, AuthInputErrMsg, AuthLabel, AuthLabelSpan, AuthTitle } from 'styles/styleRepo/authFormStyle';
 
 const Register: NextPage = () => {
   const name = useStringInput('');
@@ -148,33 +143,33 @@ const Register: NextPage = () => {
     <div>
       {!isTOSSuccess ? <TermsOfService checkTOS={onCheckTOS} />
         : (
-          <RegisterContainer>
+          <AuthContainer>
             <RegisterForm>
               <div>
                 <div>
-                  <RegisterTitle>
+                  <AuthTitle>
                     <Link href="/">SIGN UP</Link>
-                  </RegisterTitle>
+                  </AuthTitle>
                   <form onSubmit={handleSubmit}>
-                    <RegisterLabel>이름</RegisterLabel>
-                    <RegisterInput type="text" name="name" required {...name} placeholder="이름을 입력하세요" />
+                    <AuthLabel>이름</AuthLabel>
+                    <AuthInput type="text" name="name" required {...name} placeholder="이름을 입력하세요" />
                     {isNameBlank ? (
-                      <InputErrMsg>* 이름은 필수값입니다.</InputErrMsg>
+                      <AuthInputErrMsg>* 이름은 필수값입니다.</AuthInputErrMsg>
                     ) : (
                       ''
                     )}
-                    <RegisterLabel>이메일</RegisterLabel>
-                    <RegisterInput type="email" name="email" required {...email} placeholder="이메일을 입력하세요" />
+                    <AuthLabel>이메일</AuthLabel>
+                    <AuthInput type="email" name="email" required {...email} placeholder="이메일을 입력하세요" />
                     {isEmailBlank ? (
-                      <InputErrMsg>* 이메일은 필수값입니다.</InputErrMsg>
+                      <AuthInputErrMsg>* 이메일은 필수값입니다.</AuthInputErrMsg>
                     ) : (
                       ''
                     )}
-                    <RegisterLabel>
+                    <AuthLabel>
                       비밀번호
-                      <span>(비밀번호는 8자 이상, 문자와 숫자 조합)</span>
-                    </RegisterLabel>
-                    <RegisterInput
+                      <AuthLabelSpan>(비밀번호는 8자 이상, 문자와 숫자 조합)</AuthLabelSpan>
+                    </AuthLabel>
+                    <AuthInput
                       type="password"
                       name="password"
                       required
@@ -182,22 +177,22 @@ const Register: NextPage = () => {
                       {...password}
                     />
                     {isPasswordBlank ? (
-                      <InputErrMsg>* 비밀번호는 필수값입니다.</InputErrMsg>
+                      <AuthInputErrMsg>* 비밀번호는 필수값입니다.</AuthInputErrMsg>
                     ) : (
                       ''
                     )}
-                    <RegisterLabel>비밀번호 확인</RegisterLabel>
-                    <RegisterInput
+                    <AuthLabel>비밀번호 확인</AuthLabel>
+                    <AuthInput
                       type="password"
                       name="passwordCheck"
                       required
                       placeholder="비밀번호 확인을 입력하세요"
                       {...passwordCheck}
                     />
-                    <RegisterLabel>휴대폰 인증</RegisterLabel>
+                    <AuthLabel>휴대폰 인증</AuthLabel>
                     <RegisterAuthContainer>
                       <div>
-                        <RegisterInput
+                        <AuthInput
                           type="text"
                           name="phone"
                           required
@@ -214,7 +209,7 @@ const Register: NextPage = () => {
                     
                     <RegisterAuthContainer>
                       <div>
-                        <RegisterInput
+                        <AuthInput
                           type="text"
                           name="authNum"
                           required
@@ -227,18 +222,18 @@ const Register: NextPage = () => {
                       </div>
                     </RegisterAuthContainer>
                     {isPasswordCheckErr ? (
-                      <InputErrMsg>
+                      <AuthInputErrMsg>
                         * 비밀번호 확인란은 비밀번호와 같아야 합니다.
-                      </InputErrMsg>
+                      </AuthInputErrMsg>
                     ) : (
                       ''
                     )}
-                    <RegisterButton>회원가입</RegisterButton>
+                    <AuthButton>회원가입</AuthButton>
                   </form>
                 </div>
               </div>
             </RegisterForm>
-          </RegisterContainer>
+          </AuthContainer>
         )
     }
     </div>

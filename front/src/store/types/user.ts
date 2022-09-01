@@ -23,6 +23,13 @@ export type LoginUserReq = {
 };
 export type LoginUserRes = { user: IUser; token: string };
 
+// 비밀번호 변경
+export type ChangePWReq = {
+  userId: string | string[] | undefined;
+  password: string;
+};
+export type ChangePWRes = { user: IUser; token: string };
+
 // 유저 인증
 export type LoadUserReq = {
   token: string | null;
@@ -50,3 +57,11 @@ export type SearchUserRes = {
 export type PAReq = { name: string; phoneNum: string };
 export type PARes = { success: boolean; num?: string };
 export type PAResFail = { success: boolean };
+
+// 이메일 보내기
+export type SendEmailReq = {
+  email: string;
+};
+export type SendEmailRes = { 
+  isSuccess: boolean;
+};

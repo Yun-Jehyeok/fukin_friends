@@ -4,17 +4,6 @@ interface IAuthBtn {
   sendPASuccess: boolean;
 }
 
-export const RegisterContainer = styled.div`
-  width: 100%;
-  min-height: 100vh;
-  overflow-x: hidden;
-  overflow-y: auto;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  background-color: #F4F9FC;
-`;
-
 export const RegisterForm = styled.div`
   width: 530px;
   border-radius: 16px;
@@ -26,59 +15,6 @@ export const RegisterForm = styled.div`
     display: flex;
     justify-content: center;
     flex-direction: column;
-  }
-`;
-
-export const RegisterTitle = styled.div`
-  font-size: 48px;
-  color: #5455dd;
-  font-weight: bold;
-  margin-bottom: 32px;
-  text-align: center;
-`;
-
-export const RegisterLabel = styled.div`
-  margin-bottom: 8px;
-  font-size: 14px;
-  color: black;
-  font-weight: bold;
-
-  & > span {
-    font-size: 12px;
-    color: gray;
-    margin-left: 4px;
-  }
-`;
-
-export const RegisterInput = styled.input.attrs({ autoComplete: 'off' })`
-  width: 100%;
-  height: 48px;
-  margin-bottom: 16px;
-  padding-left: 12px;
-  outline: none;
-  border: 1px solid black;
-  font-size: 16px;
-`;
-
-export const InputErrMsg = styled.div`
-  font-size: 12px;
-  color: red;
-  margin-bottom: 16px;
-  margin-top: -8px;
-`;
-
-export const RegisterButton = styled.button`
-  width: 100%;
-  height: 56px;
-  color: white;
-  background-color: #5455dd;
-  text-align: center;
-  border: none;
-  cursor: pointer;
-  font-size: 18px;
-
-  &:hover {
-    background-color: #3D3EBE;
   }
 `;
 

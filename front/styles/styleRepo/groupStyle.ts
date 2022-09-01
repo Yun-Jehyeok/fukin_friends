@@ -1,20 +1,8 @@
-import Image from 'next/image';
 import styled from 'styled-components';
 
 interface ISlideContainer {
   slideIdx: string;
 }
-
-export const GroupContainer = styled.div`
-  width: 100%;
-  height: 100vh;
-  overflow-x: hidden;
-  overflow-y: auto;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  background-color: #F4F9FC;
-`;
 
 export const GroupWrap = styled.div`
   width: 480px;

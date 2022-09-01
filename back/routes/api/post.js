@@ -249,7 +249,6 @@ router.post('/:id/update', async (req, res, next) => {
     const categoryFindResult = await Category.findOne({
       categoryName: category,
     });
-    console.log('아이디', req.params.id);
     const update_post = await Post.findByIdAndUpdate(
       req.params.id,
       {

@@ -76,14 +76,12 @@ router.post('/register', (req, res) => {
 
 // Change User Password / PUT
 router.put('/password', (req, res) => {
-  const { email, password } = req.body;
+  const { userId, password } = req.body.user;
 
   if (!password)
     return res.status(400).json({ msg: '비밀번호를 입력해주세요.' });
 
-  User.findOne({ email }).then((user) => {
-    if (!user) return res.status(400).json({ msg: '이메일을 확인해주세요.' });
-
+  User.findOne({ _id: userId }).then((user) => {
     bcrypt.genSalt(10, (err, salt) => {
       bcrypt.hash(password, salt, async (err, hash) => {
         if (err) return res.status(400).json({ err });
@@ -95,7 +93,23 @@ router.put('/password', (req, res) => {
             { new: true },
           );
 
-          return res.status(200).json({ msg: '비밀번호 변경에 성공했습니다.' });
+          jwt.sign(
+            { id: user.id },
+            JWT_SECRET,
+            { expiresIn: 3600 },
+            (err, token) => {
+              if (err) return res.status(400).json({ err });
+
+              res.json({
+                token,
+                user: {
+                  id: user.id,
+                  name: user.name,
+                  email: user.email,
+                },
+              });
+            },
+          );
         } catch (e) {
           console.log(e);
           res.json(e);

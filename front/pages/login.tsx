@@ -7,18 +7,13 @@ import { useAppDispatch } from 'hooks/reduxHooks';
 import { useSelector } from 'react-redux';
 import { RootState } from 'src/configureStore';
 import {
-  LoginContainer,
   LoginForm,
-  LoginLabel,
-  LoginInput,
-  LoginTitle,
-  LoginButton,
   OtherSection,
   GoogleBtn,
   Divider,
   SocialLoginContainer,
-  InputErrMsg,
 } from 'styles/styleRepo/loginStyle';
+import { AuthButton, AuthContainer, AuthInput, AuthInputErrMsg, AuthLabel, AuthTitle } from 'styles/styleRepo/authFormStyle';
 
 const Login: NextPage = () => {
   const email = useStringInput('');
@@ -55,32 +50,32 @@ const Login: NextPage = () => {
   );
 
   return (
-    <LoginContainer>
+    <AuthContainer>
       <LoginForm>
         <div>
           <div>
-            <LoginTitle>
+            <AuthTitle>
               <Link href="/">SIGN IN</Link>
-            </LoginTitle>
+            </AuthTitle>
             <SocialLoginContainer>
               <Divider>소셜 로그인</Divider>
               <GoogleBtn></GoogleBtn>
             </SocialLoginContainer>
             <Divider>이메일 로그인</Divider>
             <form onSubmit={handleSubmit}>
-              <LoginLabel>이메일</LoginLabel>
-              <LoginInput type="email" name="email" placeholder="이메일을 입력하세요" required {...email} />
-              {errMsg && errMsg.includes('이메일') ? <InputErrMsg>{errMsg}</InputErrMsg> : ''}
-              <LoginLabel>비밀번호</LoginLabel>
-              <LoginInput
+              <AuthLabel>이메일</AuthLabel>
+              <AuthInput type="email" name="email" placeholder="이메일을 입력하세요" required {...email} />
+              {errMsg && errMsg.includes('이메일') ? <AuthInputErrMsg>{errMsg}</AuthInputErrMsg> : ''}
+              <AuthLabel>비밀번호</AuthLabel>
+              <AuthInput
                 type="password"
                 name="password"
                 required
                 placeholder="비밀번호를 입력하세요"
                 {...password}
               />
-              {errMsg && errMsg.includes('비밀번호') ? <InputErrMsg>{errMsg}</InputErrMsg> : ''}
-              <LoginButton>로그인</LoginButton>
+              {errMsg && errMsg.includes('비밀번호') ? <AuthInputErrMsg>{errMsg}</AuthInputErrMsg> : ''}
+              <AuthButton>로그인</AuthButton>
             </form>
             <OtherSection>
               <Link href="/pwinquiry">비밀번호를 잊어버리셨나요?</Link>
@@ -91,7 +86,7 @@ const Login: NextPage = () => {
           </div>
         </div>
       </LoginForm>
-    </LoginContainer>
+    </AuthContainer>
   );
 };
 

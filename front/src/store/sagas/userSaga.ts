@@ -3,6 +3,8 @@ import { all, call, fork, put, takeLatest } from 'redux-saga/effects';
 import type { AxiosResponse } from 'axios';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import type {
+  ChangePWReq,
+  ChangePWRes,
   LoadUserReq,
   LoadUserRes,
   LoginUserReq,
@@ -14,13 +16,17 @@ import type {
   RegisterUserRes,
   SearchUserReq,
   SearchUserRes,
+  SendEmailReq,
+  SendEmailRes,
 } from '../types/user';
 
 import {
+  changePWUser,
   loadUser,
   loginUser,
   registerUser,
   searchUser,
+  sendEmail,
   sendPhoneAuth,
 } from '../api/userApi';
 import { userActions } from '../reducers/userReducer';
@@ -69,6 +75,29 @@ function* loginUserApi(action: PayloadAction<LoginUserReq>) {
 
 function* watchLoginUser() {
   yield takeLatest(userActions.loginUserRequest, loginUserApi);
+}
+
+// 비밀번호 변경
+function* changePWApi(action: PayloadAction<ChangePWReq>) {
+  try {
+    const { data }: AxiosResponse<ChangePWRes> = yield call(
+      changePWUser,
+      action.payload,
+    );
+
+    yield put(userActions.changePWSuccess(data));
+  } catch (e: any) {
+    const msg =
+      e?.name === 'AxiosError' ? e.response.data.msg : '서버에러입니다.';
+
+    yield put(
+      userActions.changePWFailure({ status: { ok: false }, data: { msg } }),
+    );
+  }
+}
+
+function* watchChangePW() {
+  yield takeLatest(userActions.changePWRequest, changePWApi);
 }
 
 // 유저 인증
@@ -152,13 +181,33 @@ function* watchPA() {
   yield takeLatest(userActions.userPARequest, paApi);
 }
 
+// 이메일 보내기
+function* sendEmailApi(action: PayloadAction<SendEmailReq>) {
+  try {
+    const { data }: AxiosResponse<SendEmailRes> = yield call(
+      sendEmail,
+      action.payload,
+    );
+
+    yield put(userActions.sendEmailSuccess(data));
+  } catch (e: any) {
+    yield put(userActions.sendEmailFailure({ isSuccess: false }));
+  }
+}
+
+function* watchSendEmail() {
+  yield takeLatest(userActions.sendEmailRequest, sendEmailApi);
+}
+
 export default function* userSaga() {
   yield all([
     fork(watchRegisterUser),
     fork(watchLoginUser),
+    fork(watchChangePW),
     fork(watchPA),
     fork(watchloadUser),
     fork(watchLogout),
-    fork(watchSearchUser)
+    fork(watchSearchUser),
+    fork(watchSendEmail)
   ]);
 }

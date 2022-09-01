@@ -2,6 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import type { PayloadAction } from '@reduxjs/toolkit';
 import type {
+  ChangePWReq,
+  ChangePWRes,
   LoadUserReq,
   LoadUserRes,
   LoginUserReq,
@@ -14,17 +16,18 @@ import type {
   RegisterUserRes,
   SearchUserReq,
   SearchUserRes,
+  SendEmailReq,
+  SendEmailRes,
 } from '../types/user';
 import type { ResponseFailure } from '../types';
 import { IUser } from '../types/user';
 
 export type UserStateType = {
   user: IUser;
-  userLoading: boolean;
+  isLoading: boolean;
   errMsg: null | string;
   token: null | string;
-  authLoading: boolean;
-  PASuccess: boolean; // PA : Phone Authentication
+  isSuccess: boolean; // PA : Phone Authentication
   PANum?: string;
   hasGroup: boolean;
   searchedUser: IUser[];
@@ -32,11 +35,10 @@ export type UserStateType = {
 
 const initialState: UserStateType = {
   user: { id: '', name: '', email: '' },
-  userLoading: false,
-  authLoading: false,
+  isLoading: false,
   errMsg: null,
   token: null,
-  PASuccess: false,
+  isSuccess: false,
   PANum: '',
   hasGroup: false,
   searchedUser: []
@@ -48,104 +50,142 @@ const userSlice = createSlice({
   reducers: {
     // 회원가입
     registerUserRequest(state, action: PayloadAction<RegisterUserReq>) {
-      state.userLoading = true;
+      state.isLoading = true;
       state.errMsg = null;
     },
     registerUserSuccess(state, action: PayloadAction<RegisterUserRes>) {
       window.location.href = '/group';
       localStorage.setItem('token', action.payload.token);
 
-      state.userLoading = false;
+      state.isLoading = false;
       state.user = action.payload.user;
       state.token = action.payload.token;
     },
     registerUserFailure(state, action: PayloadAction<ResponseFailure>) {
       localStorage.removeItem('token');
 
-      state.userLoading = false;
+      state.isLoading = false;
       state.errMsg = action.payload.data.msg;
     },
 
     // 로그인
     loginUserRequest(state, action: PayloadAction<LoginUserReq>) {
-      state.userLoading = true;
+      state.isLoading = true;
       state.errMsg = null;
     },
     loginUserSuccess(state, action: PayloadAction<LoginUserRes>) {
       window.location.href = '/';
       localStorage.setItem('token', action.payload.token);
 
-      state.userLoading = false;
+      state.isLoading = false;
       state.user = action.payload.user;
       state.token = action.payload.token;
     },
     loginUserFailure(state, action: PayloadAction<ResponseFailure>) {
       localStorage.removeItem('token');
 
-      state.userLoading = false;
+      state.isLoading = false;
       state.errMsg = action.payload.data.msg;
     },
 
+    // 비밀번호 변경
+    changePWRequest(state, action: PayloadAction<ChangePWReq>) {
+      state.isLoading = true;
+      state.errMsg = null;
+    },
+    changePWSuccess(state, action: PayloadAction<ChangePWRes>) {      
+      let confirm = window.confirm('비밀번호가 변경되었습니다.');
+
+      if(confirm) {
+        window.location.href = '/';
+      }
+      
+      localStorage.setItem('token', action.payload.token);
+
+      state.isLoading = false;
+      state.user = action.payload.user;
+      state.token = action.payload.token;
+    },
+    changePWFailure(state, action: PayloadAction<ResponseFailure>) {
+      localStorage.removeItem('token');
+
+      state.isLoading = false;
+      state.errMsg = action.payload.data.msg;
+    },
+    
     // 유저 인증
     loadUserRequest(state, action: PayloadAction<LoadUserReq>) {
-      state.userLoading = true;
+      state.isLoading = true;
       state.errMsg = null;
     },
     loadUserSuccess(state, action: PayloadAction<LoadUserRes>) {      
-      state.userLoading = false;
+      state.isLoading = false;
       state.user = action.payload;
       state.token = localStorage.getItem("token");
     },
     loadUserFailure(state, action: PayloadAction<ResponseFailure>) {
-      state.userLoading = false;
+      state.isLoading = false;
       state.errMsg = action.payload.data.msg;
     },
 
     // 로그아웃
     logoutRequest(state, action: PayloadAction<LogoutUserReq>) {
-      state.userLoading = true;
-      state.authLoading = true;
+      state.isLoading = true;
+      state.isLoading = true;
     },
     logoutSuccess(state) {
       state.user = { id: '', name: '', email: '' };
-      state.userLoading = false;
-      state.authLoading = false;
+      state.isLoading = false;
+      state.isLoading = false;
       state.errMsg = null;
       state.token = null;
     },
     logoutFailure(state) {
-      state.userLoading = false;
-      state.authLoading = false;
+      state.isLoading = false;
+      state.isLoading = false;
     },
 
     // 휴대폰 인증
     userPARequest(state, action: PayloadAction<PAReq>) {
-      state.authLoading = true;
+      state.isLoading = true;
       state.errMsg = null;
     },
     userPASuccess(state, action: PayloadAction<PARes>) {
-      state.authLoading = false;
-      state.PASuccess = true;
+      state.isLoading = false;
+      state.isSuccess = true;
       state.PANum = action.payload.num;
     },
     userPAFailure(state, action: PayloadAction<PAResFail>) {
-      state.authLoading = false;
-      state.PASuccess = false;
+      state.isLoading = false;
+      state.isSuccess = false;
       state.errMsg = '인증번호를 확인해주세요.';
     },
 
     // 유저 검색
     userSearchRequest(state, action: PayloadAction<SearchUserReq>) {
-      state.userLoading = true;
+      state.isLoading = true;
       state.searchedUser = [];
     },
     userSearchSuccess(state, action: PayloadAction<SearchUserRes>) {
-      state.userLoading = false;
+      state.isLoading = false;
       state.searchedUser = action.payload.users
     },
     userSearchFailure(state) {
-      state.userLoading = false;
+      state.isLoading = false;
       state.searchedUser = [];
+    },
+
+    // 이메일 보내기
+    sendEmailRequest(state, action: PayloadAction<SendEmailReq>) {
+      state.isLoading = true;
+    },
+    sendEmailSuccess(state, action: PayloadAction<SendEmailRes>) {      
+      state.isLoading = false;
+      state.isSuccess = action.payload.isSuccess;
+    },
+    sendEmailFailure(state, action: PayloadAction<SendEmailRes>) {
+      state.isLoading = false;
+      state.isSuccess = action.payload.isSuccess;
     },
   },
 });

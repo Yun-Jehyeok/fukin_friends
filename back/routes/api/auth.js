@@ -6,7 +6,9 @@ const request = require('request');
 const { auth } = require('../../middleware/auth');
 const config = require('../../config/index');
 
-const { JWT_SECRET } = config;
+const nodemailer = require('nodemailer');
+
+const { JWT_SECRET, NODEMAILER_USER, NODEMAILER_PASS } = config;
 const { User } = require('../../models/user');
 const { Post } = require('../../models/post');
 
@@ -133,22 +135,41 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
-// Check Email / POST
-router.post('/password/email', (req, res) => {
-  const { email } = req.body;
+// email 인증
+router.post('/email', async (req, res) => {
+  const { email } = req.body.user;
 
-  User.findOne({ email }).then((user) => {
-    if (!user) return res.status(400).json({ msg: '이메일을 확인해주세요.' });
+  User.findOne({ email }).then(async (user) => {
+    if(!user) return res.status(400).json({ isSuccess: false });
 
-    if (user.login_way === 'google')
-      return res
-        .status(401)
-        .json({ msg: '구글 계정은 비밀번호를 변경할 수 업습니다.' });
+    let transporter = nodemailer.createTransport({
+      service: 'gmail',
+      host: 'smtp.gmlail.com',
+      port: 587,
+      secure: false,
+      auth: {
+        user: NODEMAILER_USER,
+        pass: NODEMAILER_PASS,
+      },
+    });
 
-    return res
-      .status(200)
-      .json({ success: true, msg: '이메일이 인증되었습니다.' });
-  });
+    let mailOptions = {
+      from: NODEMAILER_USER,
+      to: email,
+      subject: '[FUKIN FRIENDS] 비밀번호 변경 링크입니다.',
+      html: `<div>아래 링크를 클릭해 비밀번호를 변경해주세요.</div><br/><a href="http://localhost:3000/pw/change/${user._id}">인증하기</a>`,
+    }
+
+    transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        console.log(error);
+        return res.status(400).json({ isSuccess: false })
+      }
+
+      res.send({ isSuccess: true });
+      transporter.close();
+    });
+  })
 });
 
 // Check Phone / POST

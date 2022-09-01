@@ -10,6 +10,7 @@ import { SlideContainer, SlideItem, GroupButton, GroupContainer, GroupFormTitle,
 
 import deleteImg from 'public/img/delete.png';
 import { groupActions } from "src/store/reducers/groupReducer";
+import { AuthContainer } from "styles/styleRepo/authFormStyle";
 
 interface ISelectedMember {
     id: string | undefined;
@@ -100,7 +101,7 @@ const CreateGroup: NextPage = () => {
     }, [dispatch, user, selectedMember])
 
     return (
-        <GroupContainer>
+        <AuthContainer>
             {
                 slideIdx === '0' ? 
                     <GroupTitle>FUKIN FRIENDS<br/>세팅을 시작합니다</GroupTitle> :
@@ -175,7 +176,7 @@ const CreateGroup: NextPage = () => {
                     </GroupWrap>
                 </SlideItem>
             </SlideContainer>
-        </GroupContainer>
+        </AuthContainer>
     )
 }
 

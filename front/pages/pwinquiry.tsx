@@ -1,13 +1,15 @@
 import type { NextPage } from 'next';
 import { useCallback } from 'react';
 import { useAppDispatch } from 'hooks/reduxHooks';
-import { PwInquiryButton, PwInquiryContainer, PwInquiryForm, PwInquiryInput, PwInquiryLabel, PwInquiryTitle } from 'styles/styleRepo/pwInquiry';
+import { PwInquiryForm, PwInquiryLabel } from 'styles/styleRepo/pwInquiry';
 import { useStringInput } from 'hooks/useInput';
 import Link from 'next/link';
+import { userActions } from 'src/store/reducers/userReducer';
+import { AuthButton, AuthContainer, AuthInput, AuthTitle } from 'styles/styleRepo/authFormStyle';
 
 const PwInquiry: NextPage = () => {
-    const email = useStringInput('');
-
+  const email = useStringInput('');
+  
   const dispatch = useAppDispatch();
 
   const handleSubmit = useCallback(
@@ -15,26 +17,25 @@ const PwInquiry: NextPage = () => {
       e.preventDefault();
       
       if(email.value) {
-        // dispatch(sendEmail...);
-        console.log("send Email...");
+        dispatch(userActions.sendEmailRequest({ email: email.value }))
       }
     },
     [dispatch, email]
   );
 
   return (
-    <PwInquiryContainer>
+    <AuthContainer>
         <PwInquiryForm>
-            <PwInquiryTitle>
+            <AuthTitle>
                 <Link href="/">비밀번호 찾기</Link>
-            </PwInquiryTitle>
+            </AuthTitle>
             <form onSubmit={handleSubmit}>
                 <PwInquiryLabel>비밀번호를 찾을 이메일을 입력해주세요.</PwInquiryLabel>
-                <PwInquiryInput type="email" name="email" placeholder="이메일을 입력하세요" required {...email} />
-                <PwInquiryButton>전송</PwInquiryButton>
+                <AuthInput type="email" name="email" placeholder="이메일을 입력하세요" required {...email} />
+                <AuthButton>전송</AuthButton>
             </form>
         </PwInquiryForm>
-    </PwInquiryContainer>
+    </AuthContainer>
   );
 };
 

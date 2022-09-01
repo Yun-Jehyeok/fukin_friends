@@ -65,8 +65,6 @@ function* changeGroupApi(action: PayloadAction<ChangeGroupReq>) {
     // );
 
     const data = action.payload;
-
-    console.log("payload:::", action.payload);
     
     yield put(groupActions.changeGroupSuccess(data));
   } catch (e: any) {
