@@ -1,7 +1,6 @@
 const express = require('express');
 const { auth } = require('../../middleware/auth');
-const { Post } = require('../../models/post');
-const { Category } = require('../../models/category');
+const { Feed } = require('../../models/feed');
 const { User } = require('../../models/user');
 
 var fs = require('fs');
@@ -10,8 +9,6 @@ const router = express.Router();
 const moment = require('moment');
 const dotenv = require('dotenv');
 const multer = require('multer');
-
-const { isNullOrUndefined } = require('util');
 
 dotenv.config();
 
@@ -35,52 +32,52 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage }).single('file');
 var uploadfile = multer({ dest: 'uploadedFiles/' }).single('file');
 
-// Post All //
+// Feed All //
 router.get('/', async (req, res) => {
   try {
-    const postFindResult = await Post.find()
+    const feedFindResult = await Feed.find()
       .populate({
         path: 'creator',
       })
       .limit(9)
       .sort({ date: -1 });
 
-    const result = { postFindResult };
+    const result = { feedFindResult };
 
     res.json(result);
   } catch (e) {
     console.log(e);
-    res.json({ msg: 'No Post' });
+    res.json({ msg: 'No feed' });
   }
 });
 
-// LOADING ALL POSTS / GET
+// LOADING ALL FEEDS / GET
 router.get('/skip/:skip', async (req, res) => {
   try {
-    const postCount = await Post.countDocuments();
-    const postFindResult = await Post.find()
+    const feedCount = await Feed.countDocuments();
+    const feedFindResult = await Feed.find()
       .skip(Number(req.params.skip))
       .limit(12)
       .sort({ date: -1 });
 
-    const result = { postFindResult, postCount };
+    const result = { feedFindResult, feedCount };
 
     res.json(result);
   } catch (e) {
     console.log(e);
-    res.json({ msg: 'No Post' });
+    res.json({ msg: 'No feed' });
   }
 });
 
-// Top Rate Posts
+// Top Rate Feeds
 router.get('/topRate', async (req, res) => {
   try {
-    const postResult = await Post.find().sort({ views: -1 });
+    const feedResult = await Feed.find().sort({ views: -1 });
 
-    res.json(postResult);
+    res.json(feedResult);
   } catch (e) {
     console.log(e);
-    res.json({ msg: 'No Post' });
+    res.json({ msg: 'No feed' });
   }
 });
 
@@ -110,16 +107,16 @@ router.post('/uploadfile', async (req, res) => {
   });
 });
 
-// Post Create //
+// Feed Create //
 router.post('/write', auth, async (req, res) => {
   try {
-    const { title, contents, category, previewImg, file, originalfileName } =
+    const { title, contents, previewImg, file, originalfileName } =
       req.body;
 
     if (!contents) return res.status(400).json({ msg: '내용을 입력해주세요.' });
 
     // 새로운 프로젝트 생성
-    const newPost = await Post.create({
+    const newFeed = await Feed.create({
       title,
       contents,
       previewImg: previewImg,
@@ -128,47 +125,8 @@ router.post('/write', auth, async (req, res) => {
       files: file,
       originalfileName,
     });
-
-    const categoryFindResult = await Category.findOne({
-      categoryName: category,
-    });
-
-    // 카테고리 만들면 실행
-    if (isNullOrUndefined(categoryFindResult)) {
-      const newCategory = await Category.create({
-        categoryName: category,
-      });
-      await Post.findByIdAndUpdate(newPost._id, {
-        $push: {
-          category: newCategory._id,
-        },
-      });
-      await Category.findByIdAndUpdate(newCategory._id, {
-        $push: {
-          posts: newPost._id, //mongoDB는 _id로 저장
-        },
-      });
-      await User.findByIdAndUpdate(req.user.id, {
-        $push: {
-          posts: newPost._id,
-        },
-      });
-    } else {
-      // 카테고리가 존재하면 실행
-      await Category.findByIdAndUpdate(categoryFindResult._id, {
-        $push: { posts: newPost._id },
-      });
-      await Post.findByIdAndUpdate(newPost._id, {
-        $push: { category: categoryFindResult._id },
-      });
-      await User.findByIdAndUpdate(req.user.id, {
-        $push: {
-          posts: newPost._id,
-        },
-      });
-    }
-
-    res.redirect(`/api/post/${newPost._id}`);
+    
+    res.redirect(`/api/post/${newFeed._id}`);
   } catch (e) {
     console.log(e);
   }
@@ -216,7 +174,6 @@ router.get('/:id', async (req, res, next) => {
   try {
     const post = await Post.findById(req.params.id)
       .populate('creator')
-      .populate({ path: 'category', select: 'categoryName' });
 
     post.save();
 
@@ -233,7 +190,6 @@ router.get('/:id/edit', async (req, res, next) => {
   try {
     const post = await Post.findById(req.params.id)
       .populate('creator')
-      .populate({ path: 'category', select: 'categoryName' });
 
     res.json(post);
   } catch (e) {
@@ -243,19 +199,15 @@ router.get('/:id/edit', async (req, res, next) => {
 
 // 수정 action
 router.post('/:id/update', async (req, res, next) => {
-  const { title, contents, Image, category } = req.body;
+  const { title, contents, Image } = req.body;
 
   try {
-    const categoryFindResult = await Category.findOne({
-      categoryName: category,
-    });
     const update_post = await Post.findByIdAndUpdate(
       req.params.id,
       {
         title,
         contents,
         previewImg: Image,
-        category: categoryFindResult._id,
         date: moment().format('MMMM DD, YYYY'),
       },
       { new: true },
@@ -270,44 +222,17 @@ router.post('/:id/update', async (req, res, next) => {
 router.delete('/:id/delete', auth, async (req, res) => {
   try {
     await Post.deleteMany({ _id: req.params.id });
-    const edit_category = await Category.findOneAndUpdate(
-      { posts: req.params.id },
-      { $pull: { posts: req.params.id } },
-      { new: true },
-    );
+
     await User.findByIdAndUpdate(req.user.id, {
       $pull: {
-        posts: req.params.id,
+        feeds: req.params.id,
       },
     });
-
-    if (edit_category.posts.length === 0) {
-      await Category.deleteMany({ _id: edit_category });
-    }
 
     return res.json({ success: true });
   } catch (e) {
     console.log(e);
     return res.json({ error: e });
-  }
-});
-
-// Find Category
-router.get('/category/:categoryName', async (req, res, next) => {
-  try {
-    const result = await Category.findOne(
-      {
-        categoryName: {
-          $regex: req.params.categoryName,
-          $options: 'i',
-        },
-      },
-      'posts',
-    ).populate({ path: 'posts' });
-
-    res.send(result);
-  } catch (e) {
-    next(e);
   }
 });
 

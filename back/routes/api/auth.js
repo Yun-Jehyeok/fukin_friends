@@ -10,7 +10,7 @@ const nodemailer = require('nodemailer');
 
 const { JWT_SECRET, NODEMAILER_USER, NODEMAILER_PASS } = config;
 const { User } = require('../../models/user');
-const { Post } = require('../../models/post');
+const { Feed } = require('../../models/feed');
 
 const router = express.Router();
 
@@ -126,7 +126,7 @@ router.post('/logout', (req, res) => {
 router.delete('/:id', async (req, res) => {
   try {
     await User.deleteOne({ _id: req.params.id });
-    await Post.deleteMany({ creator: req.params.id });
+    await Feed.deleteMany({ creator: req.params.id });
 
     return res.status(200).json({ success: true });
   } catch (e) {

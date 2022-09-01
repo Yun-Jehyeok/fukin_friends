@@ -1,5 +1,5 @@
 const express = require('express');
-const { Post } = require('../../models/post');
+const { Feed } = require('../../models/feed');
 const { User } = require('../../models/user');
 const { Comment } = require('../../models/comment');
 
@@ -14,7 +14,7 @@ dotenv.config();
 // VIEW COMMENT
 router.get('/:id', async (req, res) => {
   try {
-    const comment = await Post.findById(req.params.id).populate({
+    const comment = await Feed.findById(req.params.id).populate({
       path: 'comments',
     });
 
@@ -35,12 +35,12 @@ router.post('/:id', async (req, res) => {
     contents: req.body.contents,
     creator: req.body.userId,
     creatorName: req.body.userName,
-    post: req.body.id,
+    feed: req.body.id,
     date: moment().format('MMMM DD, YYYY'),
   });
 
   try {
-    await Post.findByIdAndUpdate(req.body.id, {
+    await Feed.findByIdAndUpdate(req.body.id, {
       $push: {
         comments: newComment._id,
       },
@@ -49,7 +49,7 @@ router.post('/:id', async (req, res) => {
     await User.findByIdAndUpdate(req.body.userId, {
       $push: {
         comments: {
-          post_id: req.body.id,
+          feed_id: req.body.id,
           comment_id: newComment._id,
         },
       },
@@ -70,7 +70,7 @@ router.delete('/:id', async (req, res) => {
       comments: { comment_id: req.params.id },
     },
   });
-  await Post.findOneAndUpdate(
+  await Feed.findOneAndUpdate(
     { comments: req.params.id },
     {
       $pull: { comments: req.params.id },

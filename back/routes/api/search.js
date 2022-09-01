@@ -1,11 +1,11 @@
 const express = require('express');
-const { Post } = require('../../models/post');
+const { Feed } = require('../../models/feed');
 
 const router = express.Router();
 
 router.get('/:searchTerm', async (req, res, next) => {
   try {
-    const result = await Post.find({
+    const result = await Feed.find({
       title: {
         $regex: req.params.searchTerm,
         $options: 'i',

@@ -24,23 +24,23 @@ const UserSchema = new mongoose.Schema({
     type: Date,
     default: moment().format('MMMM DD, YYYY'),
   },
-  posts: [
+  feeds: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'post',
+      ref: 'feed',
     },
   ],
   views: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'post',
+      ref: 'feed',
     },
   ],
   comments: [
     {
-      post_id: {
+      feed_id: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'post',
+        ref: 'feed',
       },
       comment_id: {
         type: mongoose.Schema.Types.ObjectId,

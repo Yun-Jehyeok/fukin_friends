@@ -1,19 +1,10 @@
 const mongoose = require('mongoose');
 const moment = require('moment');
 
-const PostSchema = new mongoose.Schema({
-  title: {
-    type: String,
-    required: true,
-    index: true,
-  },
+const FeedSchema = new mongoose.Schema({
   contents: {
     type: String,
     required: true,
-  },
-  category: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'category',
   },
   date: {
     type: String,
@@ -33,8 +24,12 @@ const PostSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  likes: {
+    type: Number,
+    default: 0,
+  }
 });
 
-const Post = mongoose.model('post', PostSchema);
+const Feed = mongoose.model('feed', FeedSchema);
 
-module.exports = { Post };
+module.exports = { Feed };

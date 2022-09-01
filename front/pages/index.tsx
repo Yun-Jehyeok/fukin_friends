@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import { Fragment, useState } from 'react';
 
-import { Body, AppContainer } from 'styles/styleRepo/style';
+import { Body, AppContainer, NeedLogin } from 'styles/styleRepo/style';
 
 import Header from 'components/Header/Header';
 import Navigation from 'components/Navigation/Navigation';
@@ -11,6 +11,8 @@ import Notice from 'components/View/Notice/Notice';
 import Album from 'components/View/Album/Album';
 import PlayList from 'components/View/PlayList/PlayList';
 import Feed from 'components/View/Feed/Feed';
+import { useSelector } from 'react-redux';
+import { RootState } from 'src/configureStore';
 
 const App: NextPage = () => {
   const [path, setPath] = useState<string>('Home');
@@ -27,16 +29,20 @@ const App: NextPage = () => {
     setPath(name);
   };
 
+  const { token } = useSelector((state: RootState) => state.user);
+
   return (
     <AppContainer>
       <Header />
       <Body>
         <Navigation handleChangeView={handleChangeView} />
-        {component.map((item) => {
-          if (item.name === path) {
-            return <Fragment key={item.id}>{item.comp}</Fragment>;
-          }
-        })}
+        {
+          token ? component.map((item) => {
+            if (item.name === path) {
+              return <Fragment key={item.id}>{item.comp}</Fragment>;
+            }
+          }) : <NeedLogin>로그인이 필요한 서비스입니다.</NeedLogin>
+        }
       </Body>
     </AppContainer>
   );
