@@ -10,7 +10,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { NextPage } from 'next';
 import { useState } from 'react';
-import { NavigationContainer, IconContainer, HoverBar, DivisionItem, NavItem } from './style';
+import { NavigationContainer, IconContainer, DivisionItem, NavItem } from './style';
 
 interface Item {
   id: string;
