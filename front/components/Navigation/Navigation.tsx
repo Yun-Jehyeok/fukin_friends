@@ -10,7 +10,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { NextPage } from 'next';
 import { useState } from 'react';
-import { NavigationContainer, IconContainer } from './style';
+import { NavigationContainer, IconContainer, HoverBar, DivisionItem, NavItem } from './style';
 
 interface Item {
   id: string;
@@ -22,9 +22,10 @@ interface Item {
 
 interface child {
   handleChangeView: (name: string) => void;
+  isOpen: boolean;
 }
 
-const Navigation: NextPage = ({ handleChangeView }: child) => {
+const Navigation: NextPage = ({ handleChangeView, isOpen }: child) => {
   const [itemList, setItemList] = useState<Item[]>([
     {
       id: '1',
@@ -90,14 +91,14 @@ const Navigation: NextPage = ({ handleChangeView }: child) => {
   };
 
   return (
-    <NavigationContainer>
+    <NavigationContainer isOpen={isOpen}>
       {itemList.map((item) =>
         item.class ? (
-          <div key={item.id} className={item.class}>
+          <DivisionItem key={item.id}>
             {item.name}
-          </div>
+          </DivisionItem>
         ) : (
-          <div
+          <NavItem
             key={item.id}
             data-name={item.name}
             data-clicked={item.clicked}
@@ -107,7 +108,7 @@ const Navigation: NextPage = ({ handleChangeView }: child) => {
               <FontAwesomeIcon icon={item.icon} />
             </IconContainer>
             <div>{item.name}</div>
-          </div>
+          </NavItem>
         ),
       )}
     </NavigationContainer>

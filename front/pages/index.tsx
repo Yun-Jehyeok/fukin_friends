@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import { Fragment, useState } from 'react';
 
-import { Body, AppContainer, NeedLogin } from 'styles/styleRepo/style';
+import { Body, AppContainer, NeedLogin, ContentWrap, Navbar } from 'styles/styleRepo/style';
 
 import Header from 'components/Header/Header';
 import Navigation from 'components/Navigation/Navigation';
@@ -16,6 +16,7 @@ import { RootState } from 'src/configureStore';
 
 const App: NextPage = () => {
   const [path, setPath] = useState<string>('Home');
+  const [isOpen, setIsOpen] = useState<boolean>(true);
   const [component, setComponent] = useState([
     { id: 1, name: 'Home', comp: <Home /> },
     { id: 2, name: 'Event', comp: <Event /> },
@@ -28,6 +29,9 @@ const App: NextPage = () => {
   const handleChangeView = (name: string) => {
     setPath(name);
   };
+  const handleNavigation = () => {
+    setIsOpen(!isOpen);
+  }
 
   const { token } = useSelector((state: RootState) => state.user);
 
@@ -35,14 +39,19 @@ const App: NextPage = () => {
     <AppContainer>
       <Header />
       <Body>
-        <Navigation handleChangeView={handleChangeView} />
-        {
-          token ? component.map((item) => {
-            if (item.name === path) {
-              return <Fragment key={item.id}>{item.comp}</Fragment>;
-            }
-          }) : <NeedLogin>로그인이 필요한 서비스입니다.</NeedLogin>
-        }
+        <Navigation handleChangeView={handleChangeView} isOpen={isOpen} />
+        <ContentWrap>
+          {
+            token ? component.map((item) => {
+              if (item.name === path) {
+                return <Fragment key={item.id}>{item.comp}</Fragment>;
+              }
+            }) : <NeedLogin>로그인이 필요한 서비스입니다.</NeedLogin>
+          }
+          <Navbar onClick={handleNavigation} isOpen={isOpen}>
+            <div></div>
+          </Navbar>
+        </ContentWrap>
       </Body>
     </AppContainer>
   );
