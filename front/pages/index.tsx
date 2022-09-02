@@ -23,7 +23,7 @@ const App: NextPage = () => {
     { id: 3, name: 'Notice', comp: <Notice /> },
     { id: 4, name: 'Album', comp: <Album /> },
     { id: 5, name: 'Play list', comp: <PlayList /> },
-    { id: 6, name: 'Feed', comp: <Feed /> },
+    { id: 6, name: 'Feed', comp: <Feed /> }
   ]);
 
   const handleChangeView = (name: string) => {
