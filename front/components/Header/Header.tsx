@@ -24,6 +24,7 @@ import {
   SearchInput,
   Wrap,
   GroupDropdownItem,
+  Navigation,
 } from './style';
 
 const Header: NextPage = () => {
@@ -68,27 +69,19 @@ const Header: NextPage = () => {
   return (
     <Wrap>
       <HeaderContainer>
-        {groups && groups.length > 0 ? (
-          <GroupDropdownContainer>
-            <GroupDropdownTrigger onClick={handleGroupDropdown}>
-              <div>{currentGroup}</div>
-              <div>
-                <DropdownLeftArr></DropdownLeftArr>
-                <DropdownRightArr></DropdownRightArr>
-              </div>
-            </GroupDropdownTrigger>
-            <GroupDropdownList groupLength={groups.length} isOpen={isOpen}>
-              {groups.map(item => (
-                <GroupDropdownItem key={item.id} data-title={item.title} onClick={changeGroup}>
-                  <div>{item.title}</div>
-                </GroupDropdownItem>
-              ))}
-            </GroupDropdownList>
-          </GroupDropdownContainer>
-        ) : <Logo>
-              <Link href="/">FUKIN FRIENDS</Link>
-            </Logo>
-        }
+        <Logo>
+          <Link href="/">
+            {groups && groups.length > 0 ? groups[0].title : 'FUKIN FRIENDS'}
+          </Link>
+        </Logo>
+        <Navigation>
+          <div>HOME</div>
+          <div>FEED</div>
+          <div>NOTICE</div>
+          <div>EVENT</div>
+          <div>ALBUM</div>
+          <div>PLAY LIST</div>
+        </Navigation>
         <HeaderRightSection>
           <SearchInput placeholder="Search" />
           {token ? (

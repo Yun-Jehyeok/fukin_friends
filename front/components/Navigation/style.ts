@@ -8,7 +8,8 @@ export const NavigationContainer = styled.div<INavContainer>`
   width: ${(props) => props.isOpen ? '240px' : '0px'};
   height: calc(100vh - 56px);
   border-right: 1px solid #e8e8e8;
-  padding: ${(props) => props.isOpen ? '16px' : '16px 0'};
+  padding: ${(props) => props.isOpen ? '12px' : '12px 0'};
+  padding-top: 24px;
   position: relative;
   overflow: hidden;
   transition: all 1s cubic-bezier(0.24, 0.77, 0.32, 0.95);
@@ -24,6 +25,7 @@ export const NavItem = styled.div`
   line-height: 40px;
   padding-left: 12px;
   cursor: pointer;
+  font-weight: 600;
 
   &:hover {
     color: #5455dd;
@@ -35,13 +37,13 @@ export const NavItem = styled.div`
     background-color: #eeeefc;
   }
 `;
+
 export const DivisionItem = styled.div`
-  font-size: 12px;
+  font-size: 13px;
   color: #cacaca;
   margin-bottom: 4px;
   margin-top: 24px;
   padding-left: 8px;
-  font-weight: bold;
 `;
 
 export const IconContainer = styled.div`

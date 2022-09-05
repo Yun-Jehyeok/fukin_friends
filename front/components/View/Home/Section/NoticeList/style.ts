@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const NoticeListContainer = styled.div`
   width: 100%;
-  margin-top: 12px;
+  margin-top: 24px;
 `;
 
 export const Title = styled.div`

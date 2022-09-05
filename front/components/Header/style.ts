@@ -7,8 +7,8 @@ interface IDropdownList {
 
 export const Wrap = styled.div`
   width: 100%;
-  height: 56px;
-  border-bottom: 1px solid #e8e8e8;
+  height: 64px;
+  border-bottom: 1px solid rgb(187 187 187);
   display: flex;
   justify-content: center;
   box-sizing: border-box;
@@ -16,20 +16,32 @@ export const Wrap = styled.div`
 
 export const HeaderContainer = styled.div`
   width: 100%;
+  max-width: 1320px;
   height: 100%;
-  padding-right: 24px;
   display: flex;
-  justify-content: space-between;
 `;
 
 export const Logo = styled.div`
-  flex-grow: 1;
-  height: 32px;
-  line-height: 28px;
+  width: 200px;
   font-size: 24px;
   font-weight: bold;
-  margin-top: 12px;
-  padding-left: 24px;
+  margin-right: 40px;
+`;
+
+export const Navigation = styled.div`
+  width: fit-content;
+  display: flex;
+
+  & > div {
+    margin-top: 12px;
+    height: fit-content;
+    line-height: 1;
+  }
+  & > div:not(:first-child) {
+    margin-left: 24px;
+    padding-left: 24px;
+    border-left: 1px solid #e8e8e8;
+  }
 `;
 
 export const GroupDropdownContainer = styled.div`
@@ -40,12 +52,12 @@ export const GroupDropdownContainer = styled.div`
 
 export const GroupDropdownTrigger = styled.div`
   width: 216px;
-  height: 56px;
+  height: 64px;
   display: flex;
   justify-content: space-between;
   padding-left: 24px;
   cursor: pointer;
-  line-height: 52px;
+  line-height: 64px;
   z-index: 1;
   background-color: white;
   border-bottom: 1px solid #e8e8e8;
@@ -125,7 +137,7 @@ export const HeaderRightSection = styled.div`
 `;
 
 export const SearchInput = styled.input`
-  width: 480px;
+  width: 240px;
   height: 32px;
   margin-top: 12px;
   border: 1px solid #e8e8e8;
@@ -166,7 +178,7 @@ export const DropdownItem = styled.div`
   width: fit-content;
   height: fit-content;
   position: absolute;
-  top: 56px;
+  top: 64px;
   left: -8px;
   cursor: initial;
 

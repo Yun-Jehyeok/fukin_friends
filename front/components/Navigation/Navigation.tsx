@@ -41,7 +41,7 @@ const Navigation: NextPage = ({ handleChangeView, isOpen }: child) => {
     },
     {
       id: '3',
-      name: 'EVENT',
+      name: 'Event',
       class: 'division',
     },
     {
@@ -58,7 +58,7 @@ const Navigation: NextPage = ({ handleChangeView, isOpen }: child) => {
     },
     {
       id: '6',
-      name: 'COLLECTIONS',
+      name: 'Collections',
       class: 'division',
     },
     {
