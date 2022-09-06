@@ -20,6 +20,7 @@ import {
 } from './style';
 
 const Header: NextPage = () => {
+  const [isScrollUp, setIsScrollUp] = useState(false);
   const [isShowDropdown, setIsShowDropdown] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 

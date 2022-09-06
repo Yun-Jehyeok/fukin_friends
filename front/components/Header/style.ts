@@ -4,13 +4,18 @@ export const Wrap = styled.div`
   width: 100%;
   height: fit-content;
   box-sizing: border-box;
+  position: sticky;
+  top: -44px;
+  z-index: 1;
+  box-shadow: 0 2px 5px rgb(0 0 0 / 8%);  
 
   & > div:last-child {
     width: 100%;
     display: flex;
     justify-content: center;
     height: fit-content;
-    margin: 19px 0;
+    padding: 19px 0;
+    background-color: white;
   }
 `;
 

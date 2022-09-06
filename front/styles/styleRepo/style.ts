@@ -7,6 +7,7 @@ interface INavbar {
 // App
 export const AppContainer = styled.div`
   width: 100%;
+  min-width: 1200px;
 `;
 
 export const Body = styled.div`

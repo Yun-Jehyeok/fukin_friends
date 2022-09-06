@@ -18,7 +18,7 @@ export const List = styled.div`
   display: flex;
   width: 100%;
   height: fit-content;
-  overflow-x: hidden;
+  overflow: hidden;
   display: flex;
   justify-content: center;
 `;
