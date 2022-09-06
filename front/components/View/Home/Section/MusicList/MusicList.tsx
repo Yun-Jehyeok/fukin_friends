@@ -54,7 +54,7 @@ let itemList = [
 const MusicList: NextPage = () => {
   return (
     <MusicListContainer>
-      <Title>최근에 들은</Title>
+      <Title>Recently Played</Title>
       <List>
         {itemList.map((item) => (
           <Item key={item.id}>

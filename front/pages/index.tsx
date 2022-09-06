@@ -13,6 +13,7 @@ import PlayList from 'components/View/PlayList/PlayList';
 import Feed from 'components/View/Feed/Feed';
 import { useSelector } from 'react-redux';
 import { RootState } from 'src/configureStore';
+import Footer from 'components/Footer/Footer';
 
 const App: NextPage = () => {
   const [path, setPath] = useState<string>('Home');
@@ -39,7 +40,6 @@ const App: NextPage = () => {
     <AppContainer>
       <Header />
       <Body>
-        <Navigation handleChangeView={handleChangeView} isOpen={isOpen} />
         <ContentWrap>
           {
             token ? component.map((item) => {
@@ -53,6 +53,7 @@ const App: NextPage = () => {
           </Navbar>
         </ContentWrap>
       </Body>
+      <Footer />
     </AppContainer>
   );
 };

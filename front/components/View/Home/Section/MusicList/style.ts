@@ -2,19 +2,25 @@ import styled from 'styled-components';
 
 export const MusicListContainer = styled.div`
   width: 100%;
-  margin-top: 48px;
+  margin-top: 160px;
 `;
 
 export const Title = styled.div`
-  font-size: 24px;
+  font-size: 40px;
+  color: #151875;
   font-weight: bold;
+  text-align: center;
+  font-family: 'Josefin Sans', sans-serif;
+  margin-bottom: 53px;
 `;
 
 export const List = styled.div`
-  width: 100%;
-  overflow-x: auto;
   display: flex;
-  margin-top: 18px;
+  width: 100%;
+  height: fit-content;
+  overflow-x: hidden;
+  display: flex;
+  justify-content: center;
 `;
 
 export const Item = styled.div`

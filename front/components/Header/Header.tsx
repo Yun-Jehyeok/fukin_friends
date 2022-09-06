@@ -7,24 +7,16 @@ import { RootState } from 'src/configureStore';
 import { groupActions } from 'src/store/reducers/groupReducer';
 import { userActions } from 'src/store/reducers/userReducer';
 import {
-  GroupDropdownContainer,
-  DropdownItem,
-  DropdownLeftArr,
-  GroupDropdownList,
-  DropdownProfile,
-  DropdownRightArr,
-  GroupDropdownTrigger,
   HeaderContainer,
-  HeaderRightSection,
-  LoginText,
   Logo,
-  Logout,
-  Profile,
-  ProfileContainer,
-  SearchInput,
   Wrap,
-  GroupDropdownItem,
   Navigation,
+  Search,
+  HeaderTop,
+  Email,
+  Phone,
+  Language,
+  Login,
 } from './style';
 
 const Header: NextPage = () => {
@@ -68,53 +60,54 @@ const Header: NextPage = () => {
 
   return (
     <Wrap>
-      <HeaderContainer>
-        <Logo>
-          <Link href="/">
-            {groups && groups.length > 0 ? groups[0].title : 'FUKIN FRIENDS'}
-          </Link>
-        </Logo>
-        <Navigation>
-          <div>HOME</div>
-          <div>FEED</div>
-          <div>NOTICE</div>
-          <div>EVENT</div>
-          <div>ALBUM</div>
-          <div>PLAY LIST</div>
-        </Navigation>
-        <HeaderRightSection>
-          <SearchInput placeholder="Search" />
-          {token ? (
-            <ProfileContainer>
-              <Profile onClick={showDropdown}>
-                <div></div>
-              </Profile>
-              {isShowDropdown ? 
-                <DropdownItem>
-                  <div></div>
-                  <div>
-                    <DropdownProfile>
-                      <Profile>
-                        <div></div>
-                      </Profile>
-                      <div>
-                        <div>{user.name}</div>
-                        <div>{user.email}</div>
-                      </div>
-                    </DropdownProfile>
-                    <Logout onClick={logoutHandler}>로그아웃</Logout>
-                  </div>
-                </DropdownItem>
-                : ""
-              }
-            </ProfileContainer>
-          ) : (
-            <LoginText>
-              <Link href="/login">로그인</Link>
-            </LoginText>
-          )}
-        </HeaderRightSection>
-      </HeaderContainer>
+      <HeaderTop>
+        <div>
+          <div>
+            <Email>
+              <div></div>
+              dbswpgur2@naver.com
+            </Email>
+            <Phone>
+              <div></div>
+              010-5629-4023
+            </Phone>
+          </div>
+          <div>
+            <Language>
+              English
+              <div></div>
+            </Language>
+            <Login>
+              <Link href="/login">Login</Link>
+              <div></div>
+            </Login>
+          </div>
+        </div>
+      </HeaderTop>
+      <div>
+        <HeaderContainer>
+          <div>
+            <Logo>
+              <Link href="/">
+                FUKIN FRIENDS
+                {/* {groups && groups.length > 0 ? groups[0].title : 'FUKIN FRIENDS'} */}
+              </Link>
+            </Logo>
+            <Navigation>
+              <div>Home</div>
+              <div>Feed</div>
+              <div>Notice</div>
+              <div>Event</div>
+              <div>Album</div>
+              <div>Play list</div>
+            </Navigation>
+          </div>
+          <Search>
+            <input />
+            <div></div>
+          </Search>
+        </HeaderContainer>
+      </div>
     </Wrap>
   );
 };

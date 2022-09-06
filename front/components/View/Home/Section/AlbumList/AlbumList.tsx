@@ -26,7 +26,7 @@ let itemList = [
 const AlbumList: NextPage = () => {
   return (
     <AlbumListContainer>
-      <Title>사진</Title>
+      <Title>Pictures</Title>
       <List>
         {itemList.map((item) => (
           <Item key={item.id}>
