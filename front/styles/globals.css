@@ -18,6 +18,10 @@ a {
 *::-webkit-scrollbar {
   width: 0;
 }
+.random-box {
+  position: absolute;
+  border: 1px solid black;
+}
 
 @media (prefers-color-scheme: dark) {
   html {

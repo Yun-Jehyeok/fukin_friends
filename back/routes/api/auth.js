@@ -35,7 +35,7 @@ router.post('/login', (req, res) => {
       jwt.sign(
         { id: user.id },
         JWT_SECRET,
-        { expiresIn: 3600 },
+        { expiresIn: 36000 },
         (err, token) => {
           if (err) return res.status(400).json({ err });
 
@@ -77,7 +77,7 @@ router.post('/google', (req, res) => {
               jwt.sign(
                 { id: user.id },
                 JWT_SECRET,
-                { expiresIn: 3600 },
+                { expiresIn: 36000 },
                 (err, token) => {
                   if (err) return res.status(400).json({ err });
 
@@ -98,7 +98,7 @@ router.post('/google', (req, res) => {
         jwt.sign(
           { id: user.id },
           JWT_SECRET,
-          { expiresIn: 3600 },
+          { expiresIn: 36000 },
           (err, token) => {
             if (err) return res.status(400).json({ err });
 
