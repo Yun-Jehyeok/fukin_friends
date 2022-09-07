@@ -10,7 +10,11 @@ interface child {
   checkTOS: (checkTerms: boolean) => void;
 }
 
-const TermsOfService: NextPage = ({ checkTOS }: child) => {
+interface PageTypeProps{
+    checkTOS: (checkTerms: boolean) => void;
+}
+
+const TermsOfService: NextPage<PageTypeProps> = ({ checkTOS }: child) => {
   const [firstCheck, setFirstCheck] = useState(false);
   const [secondCheck, setSecondCheck] = useState(false);
   const [errMsg, setErrMsg] = useState(false);

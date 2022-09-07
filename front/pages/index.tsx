@@ -4,7 +4,6 @@ import { Fragment, useState } from 'react';
 import { Body, AppContainer, NeedLogin, ContentWrap, Navbar } from 'styles/styleRepo/style';
 
 import Header from 'components/Header/Header';
-import Navigation from 'components/Navigation/Navigation';
 import Home from 'components/View/Home/Home';
 import Event from 'components/View/Event/Event';
 import Notice from 'components/View/Notice/Notice';

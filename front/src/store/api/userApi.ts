@@ -20,11 +20,11 @@ import axios from 'axios';
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_SERVER_URL;
 
 export const registerUser = async (user: RegisterUserReq) => {
-  return await axios.post<RegisterUserRes>('/api/user/register', { user });
+  return await axios.post<RegisterUserRes>('/api/user/register', { user: user.user });
 };
 
 export const loginUser = async (user: LoginUserReq) => {
-  return await axios.post<LoginUserRes>('/api/auth/login', { user });
+  return await axios.post<LoginUserRes>('/api/auth/login', { user: user.user });
 };
 
 export const changePWUser = async (user: ChangePWReq) => {
@@ -40,7 +40,7 @@ export const sendPhoneAuth = async (paData: PAReq) => {
 };
 
 export const searchUser = async (user: SearchUserReq) => {
-  return await axios.get<SearchUserRes>(`/api/user/search/${user}`);
+  return await axios.get<SearchUserRes>(`/api/user/search/${user.name}`);
 };
 
 export const sendEmail = async (user: SendEmailReq) => {

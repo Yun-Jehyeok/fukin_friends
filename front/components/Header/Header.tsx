@@ -1,7 +1,7 @@
 import { useAppDispatch } from 'hooks/reduxHooks';
 import { NextPage } from 'next';
 import Link from 'next/link';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from 'src/configureStore';
 import { groupActions } from 'src/store/reducers/groupReducer';
@@ -17,47 +17,17 @@ import {
   Phone,
   Language,
   Login,
+  Logout,
 } from './style';
 
 const Header: NextPage = () => {
-  const [isScrollUp, setIsScrollUp] = useState(false);
-  const [isShowDropdown, setIsShowDropdown] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
-
   const { token, user } = useSelector((state: RootState) => state.user);
-  const { groups, currentGroup } = useSelector((state: RootState) => state.group);
 
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    if(token) {
-      dispatch(groupActions.loadGroupsRequest({ userId: user.id }));
-    } else {
-      dispatch(groupActions.loadGroupsRequest({ userId: '' }));
-    }
-  }, [dispatch, token, user])
-
-  const handleGroupDropdown = () => {
-    setIsOpen(!isOpen);
-  }
-
-  const showDropdown = () => {
-    setIsShowDropdown(!isShowDropdown);
-  }
-
   const logoutHandler = useCallback(() => {
-    dispatch(userActions.logoutRequest(token));
+    dispatch(userActions.logoutRequest({ token }));
   }, [dispatch, token])
-
-  const changeGroup = useCallback((e: React.MouseEvent<HTMLElement>) => {
-    e.preventDefault();
-
-    let selected = e.currentTarget.dataset.title;
-
-    setIsOpen(false);
-
-    dispatch(groupActions.changeGroupRequest({ title: selected }));
-  }, [dispatch])
 
   return (
     <Wrap>
@@ -79,7 +49,7 @@ const Header: NextPage = () => {
               <div></div>
             </Language>
             <Login>
-              <Link href="/login">Login</Link>
+              {token ? <Logout onClick={logoutHandler}>Logout</Logout> : <Link href="/login">Login</Link>}
               <div></div>
             </Login>
           </div>
@@ -91,16 +61,14 @@ const Header: NextPage = () => {
             <Logo>
               <Link href="/">
                 FUKIN FRIENDS
-                {/* {groups && groups.length > 0 ? groups[0].title : 'FUKIN FRIENDS'} */}
               </Link>
             </Logo>
             <Navigation>
-              <div>Home</div>
-              <div>Feed</div>
-              <div>Notice</div>
-              <div>Event</div>
-              <div>Album</div>
-              <div>Play list</div>
+              <Link href="/feed"><div>Feed</div></Link>
+              <Link href="/notice"><div>Notice</div></Link>
+              <Link href="/event"><div>Event</div></Link>
+              <Link href="/album"><div>Album</div></Link>
+              <Link href="/playlist"><div>Play list</div></Link>
             </Navigation>
           </div>
           <Search>

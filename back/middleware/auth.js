@@ -4,7 +4,7 @@ const config = require('../config/index');
 const { JWT_SECRET } = config;
 
 const auth = (req, res, next) => {
-  const token = req.body.token;
+  const token = req.body.token.token;
 
   if (!token) {
     return res

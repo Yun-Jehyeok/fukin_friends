@@ -89,4 +89,8 @@ export const Divider = styled.div`
 export const GoogleBtn = styled(GoogleButton)`
   width: 100% !important;
   margin-bottom: 8px;
+
+  & > span {
+    color: white;
+  }
 `;

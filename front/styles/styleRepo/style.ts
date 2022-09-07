@@ -46,6 +46,7 @@ export const Navbar = styled.div<INavbar>`
 export const NeedLogin = styled.div`
   width: 100%;
   height: 100%;
+  min-height: 80vh;
   text-align: center;
   display: flex;
   justify-content: center;

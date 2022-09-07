@@ -246,7 +246,7 @@ router.post('/user', auth, async (req, res) => {
       name: user.name,
       email: user.email,
     };
-
+    
     res.json(userRes);
   } catch (e) {
     res.status(400).json({ msg: e.message });

@@ -102,6 +102,7 @@ function* watchChangePW() {
 
 // 유저 인증
 function* loadUserApi(action: PayloadAction<LoadUserReq>) {
+  console.log("here1:::", action.payload);
   try {
     const { data }: AxiosResponse<LoadUserRes> = yield call(
       loadUser,

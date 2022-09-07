@@ -20,7 +20,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
     let token: string | null = localStorage.getItem('token');
 
-    dispatch(userActions.loadUserRequest(token))
+    dispatch(userActions.loadUserRequest({ token }))
   }, [dispatch])
 
   return <Component {...pageProps} />;

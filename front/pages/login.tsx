@@ -43,7 +43,7 @@ const Login: NextPage = () => {
           password: password.value,
         };
 
-        dispatch(userActions.loginUserRequest(user));
+        dispatch(userActions.loginUserRequest({ user }));
       }
     },
     [dispatch, isEmailBlank, isPasswordBlank, email, password]

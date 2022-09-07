@@ -6,7 +6,7 @@ import React, { useCallback, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "src/configureStore";
 import { userActions } from "src/store/reducers/userReducer";
-import { SlideContainer, SlideItem, GroupButton, GroupContainer, GroupFormTitle, GroupInput, GroupTitle, GroupWrap, GroupInfo, GroupErrMsg, GroupButtonContainer, MemberList, MemberItem, MemberImg, MemberName, SelectMember, NoSearchResult, SelectedMemberList, SelectedItem } from "styles/styleRepo/groupStyle";
+import { SlideContainer, SlideItem, GroupButton, GroupFormTitle, GroupInput, GroupTitle, GroupWrap, GroupErrMsg, GroupButtonContainer, MemberList, MemberItem, MemberImg, MemberName, SelectMember, NoSearchResult, SelectedMemberList, SelectedItem } from "styles/styleRepo/groupStyle";
 
 import deleteImg from 'public/img/delete.png';
 import { groupActions } from "src/store/reducers/groupReducer";
@@ -36,7 +36,7 @@ const CreateGroup: NextPage = () => {
         
         if(value) {
             setShowMemberList(true);
-            dispatch(userActions.userSearchRequest(value));
+            dispatch(userActions.userSearchRequest({ name: value }));
         } else {
             setShowMemberList(false);
         }

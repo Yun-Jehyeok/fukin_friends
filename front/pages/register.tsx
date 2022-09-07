@@ -120,7 +120,7 @@ const Register: NextPage = () => {
             password: password.value,
           };
 
-          dispatch(userActions.registerUserRequest(user));
+          dispatch(userActions.registerUserRequest({ user }));
         } else {
           setIsPasswordCheckErr(true);
         }
