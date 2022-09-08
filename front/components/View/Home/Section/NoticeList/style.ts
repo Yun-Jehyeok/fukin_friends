@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+interface IList {
+  activeIdx: number;
+}
+
 export const NoticeListContainer = styled.div`
   width: 100%;
   margin-top: 200px;
@@ -39,13 +43,28 @@ export const Description = styled.div`
   }
 `;
 
-export const List = styled.div`
-  display: flex;
+export const ListContainer = styled.div`
   width: 100%;
-  height: 370px;
-  overflow-x: hidden;
+  height: fit-content;
   display: flex;
   justify-content: center;
+
+  & > div {
+    width: 100%;
+    max-width: 1192px;
+    overflow: hidden;
+  }
+`;
+
+export const List = styled.div<IList>`
+  display: flex;
+  width: fit-content ;
+  height: 384px;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  left: ${(props) => props.activeIdx === 0 ? 12 : -1188}px;
+  transition: left 0.8s cubic-bezier(0.24, 0.77, 0.32, 0.95);
 
   & > div {
     width: 270px;
@@ -55,6 +74,8 @@ export const List = styled.div`
     box-shadow: 0 0 12px rgb(0 0 0 / 10%);
     cursor: pointer;
     box-sizing: border-box;
+    position: relative;
+    top: 12px;
 
     &:hover {
       border: 1px solid #2F1AC4;
@@ -114,4 +135,34 @@ export const DSCDate = styled.div`
   font-size: 14px;
   color: #151875;
   margin-top: 8px;
+`;
+
+export const Pagination = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 48px;
+
+  & > div {
+    width: fit-content;
+    display: flex;
+  }
+`;
+
+export const PaginationItem = styled.div`
+  width: 16px;
+  height: 4px;
+  background-color: #FEBAD7;
+  border-radius: 10px;
+  margin-right: 6px;
+  cursor: pointer;
+
+  &[data-active=true] {
+    width: 24px;
+    background-color: #FB2E86;
+  }
+
+  &:last-child {
+    margin-right: 0;
+  }
 `;

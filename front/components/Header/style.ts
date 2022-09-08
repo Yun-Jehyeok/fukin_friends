@@ -139,6 +139,10 @@ export const Navigation = styled.div`
       color: #FB2E86;
     }
   }
+
+  & > div[data-active="true"] {
+    color: #FB2E86;
+  }
   & > div:not(:first-child) {
     margin-left: 35px;
   }

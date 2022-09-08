@@ -1,10 +1,10 @@
 import { useAppDispatch } from 'hooks/reduxHooks';
 import { NextPage } from 'next';
 import Link from 'next/link';
-import { useCallback, useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from 'src/configureStore';
-import { groupActions } from 'src/store/reducers/groupReducer';
 import { userActions } from 'src/store/reducers/userReducer';
 import {
   HeaderContainer,
@@ -21,7 +21,14 @@ import {
 } from './style';
 
 const Header: NextPage = () => {
-  const { token, user } = useSelector((state: RootState) => state.user);
+  const router = useRouter();
+  const [pathname, setPathname] = useState('');
+
+  useEffect(() => {
+    setPathname(router.pathname.slice(1))
+  }, [router])
+
+  const { token } = useSelector((state: RootState) => state.user);
 
   const dispatch = useAppDispatch();
 
@@ -64,11 +71,11 @@ const Header: NextPage = () => {
               </Link>
             </Logo>
             <Navigation>
-              <Link href="/feed"><div>Feed</div></Link>
-              <Link href="/notice"><div>Notice</div></Link>
-              <Link href="/event"><div>Event</div></Link>
-              <Link href="/album"><div>Album</div></Link>
-              <Link href="/playlist"><div>Play list</div></Link>
+              <Link href="/feed"><div data-active={pathname === 'feed'}>Feed</div></Link>
+              <Link href="/notice"><div data-active={pathname === 'notice'}>Notice</div></Link>
+              <Link href="/event"><div data-active={pathname === 'event'}>Event</div></Link>
+              <Link href="/album"><div data-active={pathname === 'album'}>Album</div></Link>
+              <Link href="/playlist"><div data-active={pathname === 'playlist'}>Play list</div></Link>
             </Navigation>
           </div>
           <Search>

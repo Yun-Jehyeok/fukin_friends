@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const MusicListContainer = styled.div`
   width: 100%;
-  margin-top: 160px;
+  margin-top: 112px;
 `;
 
 export const Title = styled.div`

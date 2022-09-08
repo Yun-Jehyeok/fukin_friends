@@ -1,77 +1,129 @@
 import { NextPage } from 'next';
-import { useState } from 'react';
-import { useEffect } from 'react';
 import { Container } from 'styles/styleRepo/global';
-import Calendar from './Section/Calendar/Calendar';
-import Schedule from './Section/Schedule/Schedule';
-import {
-  HeaderDate,
-  LeftArrow,
-  RightArrow,
-  Title,
-  CalendarBody,
-} from './style';
+import { CreateNotice, ImportantItem, ImportantNotice, NoticeBody, NoticeDate, NoticeDatePlace, NoticeHeader, NoticeHeaderDescription, NoticeHeaderTitle, NoticeItem, NoticeItemDescription, NoticeItemTitle, NoticeLeft, NoticePlace, NoticeRight, NoticeSearch, ReadMore } from './style';
+
+const noticeList = [
+  {
+    id: 0,
+    title: 'Mauris at orci non vulputate diam tincidunt nec.',
+    description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever",
+    date: '2022-08-12 6:00 PM',
+    place: 'Yeouinaru station'
+  },
+  {
+    id: 1,
+    title: 'Aenean vitae in aliquam ultrices lectus. Etiam.',
+    description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever",
+    date: '2022-08-12 6:00 PM',
+    place: 'Yeouinaru station'
+  },
+  {
+    id: 2,
+    title: 'Sit nam congue feugiat nisl, mauris amet nisi.',
+    description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever",
+    date: '2022-08-17 4:00 PM',
+    place: 'Hannam-dong Chicken'
+  },
+  {
+    id: 3,
+    title: 'Test length nam congue is right, maersx fes, faew. Etaewf.',
+    description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever",
+    date: '2022-08-12 6:00 PM',
+    place: 'Yeouinaru station'
+  },
+  {
+    id: 4,
+    title: 'Feasx feadt li suekz.',
+    description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever",
+    date: '2022-09-12 4:00 PM',
+    place: "Jongyun's house"
+  },
+  {
+    id: 5,
+    title: 'Lorem Ipsum is simply dummy text of the printing.',
+    description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever",
+    date: '2022-08-16 6:00 PM',
+    place: 'Hannam-dong Chicken'
+  },
+]
+
+const importantList = [
+  {
+    id: 0,
+    title: 'Mauris at orci non vulputate diam tincidunt nec.',
+    date: '2022-08-12 6:00 PM',
+    place: 'Yeouinaru station'
+  },
+  {
+    id: 1,
+    title: 'Aenean vitae in aliquam ultrices lectus. Etiam.',
+    date: '2022-08-12 6:00 PM',
+    place: 'Yeouinaru station'
+  },
+  {
+    id: 2,
+    title: 'Sit nam congue feugiat nisl, mauris amet nisi.',
+    date: '2022-08-17 4:00 PM',
+    place: 'Hannam-dong Chicken'
+  }
+]
 
 const Notice: NextPage = () => {
-  const [year, setYear] = useState('');
-  const [month, setMonth] = useState('');
-  const [date, setDate] = useState('');
-  const [calendarData, setCalendarData] = useState();
-
-  useEffect(() => {
-    let today = new Date();
-    let todayYear = String(today.getFullYear());
-    let todayMonth =
-      today.getMonth() + 1 > 9
-        ? String(today.getMonth() + 1)
-        : '0' + String(today.getMonth() + 1);
-    let todayDate =
-      today.getDate() > 9
-        ? String(today.getDate())
-        : '0' + String(today.getDate());
-
-    setYear(todayYear);
-    setMonth(todayMonth);
-    setDate(todayDate);
-
-    // 이전 달의 마지막 날 날짜 및 요일
-    let startDay = new Date(Number(year), Number(month) - 1, 0);
-    let prevDate = startDay.getDate();
-    let prevDay = startDay.getDay();
-
-    // 이번 달의 마지막날 날짜와 요일 구하기
-    let endDay = new Date(Number(year), Number(month), 0);
-    let nextDate = endDay.getDate();
-    let nextDay = endDay.getDay();
-  }, []);
-
-  const goPrev = () => {
-    console.log('go prev');
-  };
-  const goNext = () => {
-    console.log('go next');
-  };
+  const onSearch = (e: React.KeyboardEvent<HTMLElement>) => {
+    if(e.key === 'Enter') {
+      console.log("Enter...");
+    }
+  }
 
   return (
     <Container>
-      <Title>
-        <div>Notice</div>
+      <NoticeHeader>
         <div>
-          <LeftArrow onClick={goPrev}></LeftArrow>
-          <HeaderDate>
-            {year}-{month}
-          </HeaderDate>
-          <RightArrow onClick={goNext}></RightArrow>
+          <div>
+            <NoticeHeaderTitle>Notice Page</NoticeHeaderTitle>
+            <NoticeHeaderDescription>It's Just Notice Page</NoticeHeaderDescription>
+          </div>
+          <CreateNotice>Create Notice</CreateNotice>
         </div>
-      </Title>
-      <CalendarBody>
+      </NoticeHeader>
+      <NoticeBody>
         <div>
-          <Calendar />
+          <NoticeLeft>
+            {noticeList.map(item => (
+              <NoticeItem key={item.id}>
+                <NoticeItemTitle>{item.title}</NoticeItemTitle>
+                <NoticeDatePlace>
+                  <NoticeDate>
+                    <div></div>
+                    <div>{item.date}</div>
+                  </NoticeDate>
+                  <NoticePlace>{item.place}</NoticePlace>
+                </NoticeDatePlace>
+                <NoticeItemDescription>{item.description}</NoticeItemDescription>
+                <ReadMore>
+                  Read More
+                  <div></div>
+                </ReadMore>
+              </NoticeItem>
+            ))}
+          </NoticeLeft>
+          <NoticeRight>
+            <NoticeSearch>
+              <div>Search</div>
+              <input placeholder='Search For Notice' onKeyDown={onSearch} />
+            </NoticeSearch>
+            <ImportantNotice>
+              <div>Important Notice</div>
+              {importantList.map(item => (
+                <ImportantItem key={item.id}>
+                  <div>{item.title}</div>
+                  <div>{item.date}</div>
+                </ImportantItem>
+              ))}
+            </ImportantNotice>
+          </NoticeRight>
         </div>
-        <div>
-          <Schedule />
-        </div>
-      </CalendarBody>
+      </NoticeBody>
     </Container>
   );
 };
