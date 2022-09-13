@@ -1,4 +1,5 @@
 import { NextPage } from 'next';
+import Link from 'next/link';
 import { Container } from 'styles/styleRepo/global';
 import { CreateNotice, ImportantItem, ImportantNotice, NoticeBody, NoticeDate, NoticeDatePlace, NoticeHeader, NoticeHeaderDescription, NoticeHeaderTitle, NoticeItem, NoticeItemDescription, NoticeItemTitle, NoticeLeft, NoticePlace, NoticeRight, NoticeSearch, ReadMore } from './style';
 
@@ -83,7 +84,9 @@ const Notice: NextPage = () => {
             <NoticeHeaderTitle>Notice Page</NoticeHeaderTitle>
             <NoticeHeaderDescription>It's Just Notice Page</NoticeHeaderDescription>
           </div>
-          <CreateNotice>Create Notice</CreateNotice>
+          <CreateNotice>
+            <Link href="/notice/create">Create Notice</Link>
+          </CreateNotice>
         </div>
       </NoticeHeader>
       <NoticeBody>

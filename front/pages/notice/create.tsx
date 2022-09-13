@@ -5,9 +5,9 @@ import Header from 'components/Header/Header';
 import { useSelector } from 'react-redux';
 import { RootState } from 'src/configureStore';
 import Footer from 'components/Footer/Footer';
-import Notice from 'components/View/Notice/Notice';
+import NoticeCreate from 'components/View/Notice/Section/CreateNotice';
 
-const NoticePage: NextPage = () => {
+const CreateNotice: NextPage = () => {
   const { token } = useSelector((state: RootState) => state.user);
 
   return (
@@ -16,7 +16,7 @@ const NoticePage: NextPage = () => {
       <Body>
         <ContentWrap>
           {
-            token ? <Notice /> : <NeedLogin>로그인이 필요한 서비스입니다.</NeedLogin>
+            token ? <NoticeCreate /> : <NeedLogin>로그인이 필요한 서비스입니다.</NeedLogin>
           }
         </ContentWrap>
       </Body>
@@ -25,4 +25,4 @@ const NoticePage: NextPage = () => {
   );
 };
 
-export default NoticePage;
+export default CreateNotice;

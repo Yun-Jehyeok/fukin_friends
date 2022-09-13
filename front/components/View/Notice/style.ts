@@ -22,12 +22,15 @@ export const CreateNotice = styled.button`
   height: 50px;
   width: 200px;
   background-color: #FB2E86;
-  color: white;
   font-family: 'Josefin Sans', sans-serif;
   font-weight: bold;
   font-size: 17px;
   position: relative;
   top: 16px;
+
+  & a {
+    color: white;
+  }
 `
 
 export const NoticeHeaderTitle = styled.div`

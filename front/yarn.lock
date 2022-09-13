@@ -493,6 +493,34 @@
   dependencies:
     "defer-to-connect" "^1.0.1"
 
+"@toast-ui/editor-plugin-color-syntax@^3.1.0":
+  "integrity" "sha512-UVKfMBPV+3snSaJn9RUKGbxJbgi92D2t68ow8wAjGezvMp1ht4UVETrvomdTGr+RYhXSeH3JvSwN9nmQqw0qzA=="
+  "resolved" "https://registry.npmjs.org/@toast-ui/editor-plugin-color-syntax/-/editor-plugin-color-syntax-3.1.0.tgz"
+  "version" "3.1.0"
+  dependencies:
+    "tui-color-picker" "^2.2.6"
+
+"@toast-ui/editor@^3.2.0":
+  "integrity" "sha512-lEvbBSbvz5MvmTGHoDAYkco5B1os9C8B0IJmSj/iLmjSFQCtku1g4hFG4jKzTju9e+5wTosbDa3aYHAJAZK/QA=="
+  "resolved" "https://registry.npmjs.org/@toast-ui/editor/-/editor-3.2.0.tgz"
+  "version" "3.2.0"
+  dependencies:
+    "dompurify" "^2.3.3"
+    "prosemirror-commands" "^1.1.9"
+    "prosemirror-history" "^1.1.3"
+    "prosemirror-inputrules" "^1.1.3"
+    "prosemirror-keymap" "^1.1.4"
+    "prosemirror-model" "^1.14.1"
+    "prosemirror-state" "^1.3.4"
+    "prosemirror-view" "^1.18.7"
+
+"@toast-ui/react-editor@^3.2.0":
+  "integrity" "sha512-kUPKikE+qHte4/NarACyJHwM1FKsN6QZG2SMLWTlCIQfm3cQ8MCV4t6rassHnbq9R6sPQZm5H1RfsQpKwBMo9A=="
+  "resolved" "https://registry.npmjs.org/@toast-ui/react-editor/-/react-editor-3.2.0.tgz"
+  "version" "3.2.0"
+  dependencies:
+    "@toast-ui/editor" "^3.2.0"
+
 "@types/hoist-non-react-statics@*", "@types/hoist-non-react-statics@^3.3.0", "@types/hoist-non-react-statics@^3.3.1":
   "integrity" "sha512-iMIqiko6ooLrTh1joXodJK5X9xeEALT1kM5G3ZLhD3hszxBdIEd5C75U834D9mLcINgD4OyZf5uQXjkuYydWvA=="
   "resolved" "https://registry.npmjs.org/@types/hoist-non-react-statics/-/hoist-non-react-statics-3.3.1.tgz"
@@ -1219,6 +1247,11 @@
   "version" "4.0.4"
   dependencies:
     "ssr-window" "^4.0.0"
+
+"dompurify@^2.3.3":
+  "integrity" "sha512-Be9tbQMZds4a3C6xTmz68NlMfeONA//4dOavl/1rNw50E+/QO0KVpbcU0PcaW0nsQxurXls9ZocqFxk8R2mWEA=="
+  "resolved" "https://registry.npmjs.org/dompurify/-/dompurify-2.4.0.tgz"
+  "version" "2.4.0"
 
 "dotenv-defaults@^2.0.2":
   "integrity" "sha512-iOIzovWfsUHU91L5i8bJce3NYK5JXeAwH50Jh6+ARUdLiiGlYWfGw6UkzsYqaXZH/hjE/eCd/PlfM/qqyK0AMg=="
@@ -2448,6 +2481,11 @@
     "type-check" "^0.4.0"
     "word-wrap" "^1.2.3"
 
+"orderedmap@^2.0.0":
+  "integrity" "sha512-buf4PoAMlh45b8a8gsGy/X6w279TSqkyAS0C0wdTSJwFSU+ljQFJON5I8NfjLHoCXwpSROIo2wr0g33T+kQshQ=="
+  "resolved" "https://registry.npmjs.org/orderedmap/-/orderedmap-2.0.0.tgz"
+  "version" "2.0.0"
+
 "p-cancelable@^1.0.0":
   "integrity" "sha512-s73XxOZ4zpt1edZYZzvhqFa6uvQc1vwUa0K0BdtIZgQMAJj9IbebH+JkgKZc9h+B05PKHLOTl4ajG1BmNrVZlw=="
   "resolved" "https://registry.npmjs.org/p-cancelable/-/p-cancelable-1.1.0.tgz"
@@ -2663,6 +2701,71 @@
     "loose-envify" "^1.4.0"
     "object-assign" "^4.1.1"
     "react-is" "^16.13.1"
+
+"prosemirror-commands@^1.1.9":
+  "integrity" "sha512-XTporPgoECkOQACVw0JTe3RZGi+fls3/byqt+tXwGTkD7qLuB4KdVrJamDMJf4kfKga3uB8hZ+kUUyZ5oWpnfg=="
+  "resolved" "https://registry.npmjs.org/prosemirror-commands/-/prosemirror-commands-1.3.1.tgz"
+  "version" "1.3.1"
+  dependencies:
+    "prosemirror-model" "^1.0.0"
+    "prosemirror-state" "^1.0.0"
+    "prosemirror-transform" "^1.0.0"
+
+"prosemirror-history@^1.1.3":
+  "integrity" "sha512-qo/9Wn4B/Bq89/YD+eNWFbAytu6dmIM85EhID+fz9Jcl9+DfGEo8TTSrRhP15+fFEoaPqpHSxlvSzSEbmlxlUA=="
+  "resolved" "https://registry.npmjs.org/prosemirror-history/-/prosemirror-history-1.3.0.tgz"
+  "version" "1.3.0"
+  dependencies:
+    "prosemirror-state" "^1.2.2"
+    "prosemirror-transform" "^1.0.0"
+    "rope-sequence" "^1.3.0"
+
+"prosemirror-inputrules@^1.1.3":
+  "integrity" "sha512-eAW/M/NTSSzpCOxfR8Abw6OagdG0MiDAiWHQMQveIsZtoKVYzm0AflSPq/ymqJd56/Su1YPbwy9lM13wgHOFmQ=="
+  "resolved" "https://registry.npmjs.org/prosemirror-inputrules/-/prosemirror-inputrules-1.2.0.tgz"
+  "version" "1.2.0"
+  dependencies:
+    "prosemirror-state" "^1.0.0"
+    "prosemirror-transform" "^1.0.0"
+
+"prosemirror-keymap@^1.1.4":
+  "integrity" "sha512-TdSfu+YyLDd54ufN/ZeD1VtBRYpgZnTPnnbY+4R08DDgs84KrIPEPbJL8t1Lm2dkljFx6xeBE26YWH3aIzkPKg=="
+  "resolved" "https://registry.npmjs.org/prosemirror-keymap/-/prosemirror-keymap-1.2.0.tgz"
+  "version" "1.2.0"
+  dependencies:
+    "prosemirror-state" "^1.0.0"
+    "w3c-keyname" "^2.2.0"
+
+"prosemirror-model@^1.0.0", "prosemirror-model@^1.14.1", "prosemirror-model@^1.16.0":
+  "integrity" "sha512-IxSVBKAEMjD7s3n8cgtwMlxAXZrC7Mlag7zYsAKDndAqnDScvSmp/UdnRTV/B33lTCVU3CCm7dyAn/rVVD0mcw=="
+  "resolved" "https://registry.npmjs.org/prosemirror-model/-/prosemirror-model-1.18.1.tgz"
+  "version" "1.18.1"
+  dependencies:
+    "orderedmap" "^2.0.0"
+
+"prosemirror-state@^1.0.0", "prosemirror-state@^1.2.2", "prosemirror-state@^1.3.4":
+  "integrity" "sha512-U/LBDW2gNmVa07sz/D229XigSdDQ5CLFwVB1Vb32MJbAHHhWe/6pOc721faI17tqw4pZ49i1xfY/jEZ9tbIhPg=="
+  "resolved" "https://registry.npmjs.org/prosemirror-state/-/prosemirror-state-1.4.1.tgz"
+  "version" "1.4.1"
+  dependencies:
+    "prosemirror-model" "^1.0.0"
+    "prosemirror-transform" "^1.0.0"
+
+"prosemirror-transform@^1.0.0", "prosemirror-transform@^1.1.0":
+  "integrity" "sha512-O4T697Cqilw06Zvc3Wm+e237R6eZtJL/xGMliCi+Uo8VL6qHk6afz1qq0zNjT3eZMuYwnP8ZS0+YxX/tfcE9TQ=="
+  "resolved" "https://registry.npmjs.org/prosemirror-transform/-/prosemirror-transform-1.7.0.tgz"
+  "version" "1.7.0"
+  dependencies:
+    "prosemirror-model" "^1.0.0"
+
+"prosemirror-view@^1.18.7":
+  "integrity" "sha512-cmFK9osE7WAQptye6o/I5LjURZkSF4z3H7+LZmQtpJDZ9x4X/Z9v85oOeDvfRiX/J2rsaRYbEkWWbu3l9eBsdQ=="
+  "resolved" "https://registry.npmjs.org/prosemirror-view/-/prosemirror-view-1.28.0.tgz"
+  "version" "1.28.0"
+  dependencies:
+    "prosemirror-model" "^1.16.0"
+    "prosemirror-state" "^1.0.0"
+    "prosemirror-transform" "^1.1.0"
 
 "pump@^3.0.0":
   "integrity" "sha512-LwZy+p3SFs1Pytd/jYct4wpv49HiYCqd9Rlc5ZVdk0V+8Yzv6jR5Blk3TRmPL1ft69TxP0IMZGJ+WPFU2BFhww=="
@@ -3220,6 +3323,11 @@
   dependencies:
     "glob" "^7.1.3"
 
+"rope-sequence@^1.3.0":
+  "integrity" "sha512-85aZYCxweiD5J8yTEbw+E6A27zSnLPNDL0WfPdw3YYodq7WjnTKo0q4dtyQ2gz23iPT8Q9CUyJtAaUNcTxRf5Q=="
+  "resolved" "https://registry.npmjs.org/rope-sequence/-/rope-sequence-1.3.3.tgz"
+  "version" "1.3.3"
+
 "run-parallel@^1.1.9":
   "integrity" "sha512-5l4VyZR86LZ/lDxZTR6jqL8AFE2S0IFLMP26AbjsLVADxHdhB/c0GUsH+y39UfCi3dzz8OlQuPmnaJOMoDHQBA=="
   "resolved" "https://registry.npmjs.org/run-parallel/-/run-parallel-1.2.0.tgz"
@@ -3501,6 +3609,11 @@
   dependencies:
     "tslib" "^1.8.1"
 
+"tui-color-picker@^2.2.6":
+  "integrity" "sha512-q5sE9NQ5NR9lYpilYjcI7Sdv0KCogo+W8fZY+AYTj/HYg+9fscYy3UuJ6UQiV1bF+ARCLwFRWC8UcOt9kuUctQ=="
+  "resolved" "https://registry.npmjs.org/tui-color-picker/-/tui-color-picker-2.2.8.tgz"
+  "version" "2.2.8"
+
 "type-check@^0.4.0", "type-check@~0.4.0":
   "integrity" "sha512-XleUoc9uwGXqjWwXaUTZAmzMcFZ5858QA2vvx1Ur5xIcixXIP+8LnFDgRplU30us6teqdlskFfu+ae4K79Ooew=="
   "resolved" "https://registry.npmjs.org/type-check/-/type-check-0.4.0.tgz"
@@ -3570,6 +3683,11 @@
   "integrity" "sha512-l8lCEmLcLYZh4nbunNZvQCJc5pv7+RCwa8q/LdUx8u7lsWvPDKmpodJAJNwkAhJC//dFY48KuIEmjtd4RViDrA=="
   "resolved" "https://registry.npmjs.org/v8-compile-cache/-/v8-compile-cache-2.3.0.tgz"
   "version" "2.3.0"
+
+"w3c-keyname@^2.2.0":
+  "integrity" "sha512-f+fciywl1SJEniZHD6H+kUO8gOnwIr7f4ijKA6+ZvJFjeGi1r4PDLl53Ayud9O/rk64RqgoQine0feoeOU0kXg=="
+  "resolved" "https://registry.npmjs.org/w3c-keyname/-/w3c-keyname-2.2.6.tgz"
+  "version" "2.2.6"
 
 "webpack-sources@^1.1.0":
   "integrity" "sha512-lgTS3Xhv1lCOKo7SA5TjKXMjpSM4sBjNV5+q2bqesbSPs5FjGmU6jjtBSkX9b4qW87vDIsCIlUPOEhbZrMdjeQ=="

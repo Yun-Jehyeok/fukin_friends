@@ -58,6 +58,10 @@ export const EmailInput = styled.div`
         font-family: 'Roboto', sans-serif;
         font-size: 16px;
         cursor: pointer;
+
+        &:hover {
+            background-color: #f72182;
+        }
     }
 `;
 
