@@ -31,6 +31,9 @@ export const CreateNotice = styled.button`
   & a {
     color: white;
   }
+  &:hover {
+    background-color: #f72182;
+  }
 `
 
 export const NoticeHeaderTitle = styled.div`

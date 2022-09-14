@@ -4,10 +4,12 @@ import type { AnyAction, CombinedState } from '@reduxjs/toolkit';
 
 import userReducer, { UserStateType } from './userReducer';
 import groupReducer, { GroupStateType } from './groupReducer';
+import noticeReducer, { NoticeStateType } from './noticeReducer';
 
 type ReducerState = {
   user: UserStateType;
   group: GroupStateType;
+  notice: NoticeStateType
 };
 
 const rootReducer = (
@@ -24,7 +26,8 @@ const rootReducer = (
     default:
       return combineReducers({
         user: userReducer,
-        group: groupReducer
+        group: groupReducer,
+        notice: noticeReducer
       })(state, action);
   }
 };

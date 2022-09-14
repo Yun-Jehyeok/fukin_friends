@@ -18,6 +18,8 @@ const WysiwygEditor: NextPage = () => {
     const showContent = () => {
     	const editorIns = editorRef.current.getInstance();
         const content = editorIns.getMarkdown();
+
+        console.log(content);
     }
     
     return (
@@ -27,14 +29,14 @@ const WysiwygEditor: NextPage = () => {
             <TitleInput type='text' name='title' placeholder='제목을 입력해주세요.' {...title} />
         	<Editor
                 ref={editorRef} 
-                initialValue=''
+                initialValue=""
                 initialEditType='wysiwyg'
                 hideModeSwitch={true} 
                 height='500px' 
                 theme={''}
-                usageStatistics={false} 
-                toolbarItems={toolbarItems} 
-                plugins={[colorSyntax, ]} 
+                usageStatistics={false}
+                toolbarItems={toolbarItems}
+                plugins={[colorSyntax, ]}
             />
             <EditorButton onClick={showContent}>Write</EditorButton> 
         </div>
