@@ -1,3 +1,5 @@
+import { IGroup } from "./group";
+
 export interface IUser {
   id: string;
   name: string;
@@ -38,6 +40,7 @@ export type LoadUserRes = {
   id: string;
   name: string;
   email: string;
+  groups: IGroup[];
 };
 
 // 로그아웃

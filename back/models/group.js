@@ -10,6 +10,12 @@ const GroupSchema = new mongoose.Schema({
           type: mongoose.Schema.Types.ObjectId,
           ref: 'user',
         },
+    ],
+    notices: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'notice'
+        }
     ]
 });
 

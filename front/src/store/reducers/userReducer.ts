@@ -21,6 +21,7 @@ import type {
 } from '../types/user';
 import type { ResponseFailure } from '../types';
 import { IUser } from '../types/user';
+import { IGroup } from '../types/group';
 
 export type UserStateType = {
   user: IUser;
@@ -31,6 +32,7 @@ export type UserStateType = {
   PANum?: string;
   hasGroup: boolean;
   searchedUser: IUser[];
+  groups: IGroup[];
 };
 
 const initialState: UserStateType = {
@@ -41,7 +43,8 @@ const initialState: UserStateType = {
   isSuccess: false,
   PANum: '',
   hasGroup: false,
-  searchedUser: []
+  searchedUser: [],
+  groups: []
 };
 
 const userSlice = createSlice({
@@ -122,6 +125,7 @@ const userSlice = createSlice({
       state.isLoading = false;
       state.user = action.payload;
       state.token = localStorage.getItem("token");
+      state.groups = action.payload.groups;
     },
     loadUserFailure(state, action: PayloadAction<ResponseFailure>) {
       state.isLoading = false;
