@@ -1,62 +1,61 @@
 const express = require("express");
 const { User } = require("../../models/user");
-const { Notice } = require("../../models/notice");
+const { Event } = require("../../models/event");
 
 const router = express.Router();
 
-// Find All Notices / GET
+// Find All Events / GET
 router.get("/", async (req, res) => {
-  const notices = await Notice.find();
+  const events = await Event.find();
 
-  if (!notices)
+  if (!events)
     return res
       .status(400)
-      .json({ isSuccess: false, msg: "공지사항이 존재하지 않습니다." });
+      .json({ isSuccess: false, msg: "이벤트가 존재하지 않습니다." });
 
   res.status(200).json({
     isSuccess: true,
-    notices: notices,
+    events: events,
   });
 });
 
-// Get Notices with Pagination / GET
+// Get Events with Pagination / GET
 router.get("/skip/:skip", async (req, res) => {
   try {
-    const noticeCount = await Notice.countDocuments();
-    const noticeFindResult = await Notice.find()
+    const eventCount = await Event.countDocuments();
+    const eventFindResult = await Event.find()
       .skip(Number(req.params.skip))
       .limit(12)
       .sort({ date: -1 });
 
     res.status(200).json({
       isSuccess: true,
-      allNoticesCnt: noticeCount,
-      notices: noticeFindResult,
+      allEventsCnt: eventCount,
+      events: eventFindResult,
     });
   } catch (e) {
     res.status(400).json({ isSuccess: false, msg: e.message });
   }
 });
 
-// Create Notice / POST
+// Create Event / POST
 router.post("/create", (req, res) => {
-  const { userId, title, content, location, date } = req.body;
+  const { userId, title, content, date } = req.body;
 
   User.findOne({ _id: userId }).then((user) => {
     if (!user) return res.status(400).json({ isSuccess: false });
 
-    const newNotice = new Notice({
+    const newEvent = new Event({
       title,
       content,
-      location,
       date,
       creator: userId,
     });
 
-    newNotice.save().then(() => {
+    newEvent.save().then(() => {
       User.findByIdAndUpdate(userId, {
         $push: {
-          notices: newNotice._id,
+          events: newEvent._id,
         },
       })
         .then(() => {
@@ -69,30 +68,29 @@ router.post("/create", (req, res) => {
   });
 });
 
-// Get Notice Detail / GET
+// Get Event Detail / GET
 router.get("/:id", (req, res) => {
   const id = req.params.id;
 
-  Notice.findOne({ _id: id }).then((notice) => {
-    if (!notice)
+  Event.findOne({ _id: id }).then((event) => {
+    if (!event)
       return res
         .status(400)
-        .json({ isSuccess: false, msg: "해당 공지사항이 존재하지 않습니다." });
+        .json({ isSuccess: false, msg: "해당 이벤트가 존재하지 않습니다." });
 
-    res.status(200).json({ isSuccess: true, notice: notice });
+    res.status(200).json({ isSuccess: true, event });
   });
 });
 
-// Update Notice / PUT
+// Update Event / PUT
 router.put("/:id", (req, res) => {
   const id = req.params.id;
-  const { title, content, location, date } = req.body;
+  const { title, content, date } = req.body;
 
-  Notice.findByIdAndUpdate(id, {
+  Event.findByIdAndUpdate(id, {
     $push: {
       title,
       content,
-      location,
       date,
     },
   })
@@ -104,13 +102,13 @@ router.put("/:id", (req, res) => {
     });
 });
 
-// Delete Notice / DELETE
+// Delete Event / DELETE
 router.delete("/:id", async (req, res) => {
   const id = req.params.id;
 
   try {
-    await User.deleteOne({ notices: req.params.id });
-    await Notice.deleteOne({ _id: id });
+    await User.deleteOne({ events: req.params.id });
+    await Event.deleteOne({ _id: id });
 
     return res.status(200).json({ isSuccess: true });
   } catch (e) {
