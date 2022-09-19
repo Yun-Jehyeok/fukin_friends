@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const moment = require('moment');
+const mongoose = require("mongoose");
+const moment = require("moment");
 
 const EventSchema = new mongoose.Schema({
   title: {
@@ -12,21 +12,21 @@ const EventSchema = new mongoose.Schema({
   },
   date: {
     type: Date,
-    default: moment().format('MMMM DD, YYYY'),
+    default: moment().format("MMMM DD, YYYY"),
     required: true,
   },
   registerDate: {
     type: Date,
-    default: moment().format('MMMM DD, YYYY'),
+    default: moment().format("MMMM DD, YYYY"),
     required: true,
   },
   creator: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'user',
+    ref: "user",
     required: true,
-  }
+  },
 });
 
-const Event = mongoose.model('event', EventSchema);
+const Event = mongoose.model("event", EventSchema);
 
 module.exports = { Event };

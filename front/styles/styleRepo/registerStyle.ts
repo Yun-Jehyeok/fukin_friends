@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 interface IAuthBtn {
   sendPASuccess: boolean;
@@ -40,11 +40,11 @@ export const RegisterAuthBtn = styled.button<IAuthBtn>`
   background-color: #5455dd;
   text-align: center;
   border: none;
-  cursor: ${props => props.sendPASuccess ? "initial" : "pointer"};
-  pointer-events: ${props => props.sendPASuccess ? 'none' : ''};
+  cursor: ${(props) => (props.sendPASuccess ? "initial" : "pointer")};
+  pointer-events: ${(props) => (props.sendPASuccess ? "none" : "")};
   font-size: 16px;
 
   &:hover {
-    background-color: #3D3EBE;
+    background-color: #3d3ebe;
   }
 `;

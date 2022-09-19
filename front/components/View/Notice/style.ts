@@ -1,9 +1,9 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const NoticeHeader = styled.div`
   width: 100%;
   height: 286px;
-  background-color: #F6F5FF;
+  background-color: #f6f5ff;
   display: flex;
   justify-content: center;
 
@@ -21,8 +21,8 @@ export const CreateNotice = styled.button`
   border: none;
   height: 50px;
   width: 200px;
-  background-color: #FB2E86;
-  font-family: 'Josefin Sans', sans-serif;
+  background-color: #fb2e86;
+  font-family: "Josefin Sans", sans-serif;
   font-weight: bold;
   font-size: 17px;
   position: relative;
@@ -34,18 +34,18 @@ export const CreateNotice = styled.button`
   &:hover {
     background-color: #f72182;
   }
-`
+`;
 
 export const NoticeHeaderTitle = styled.div`
   font-size: 36px;
   font-weight: bold;
-  font-family: 'Josefin Sans', sans-serif;
+  font-family: "Josefin Sans", sans-serif;
   color: #101750;
 `;
 
 export const NoticeHeaderDescription = styled.div`
-  font-family: 'Josefin Sans', sans-serif;
-  color: #FB2E86;
+  font-family: "Josefin Sans", sans-serif;
+  color: #fb2e86;
   font-size: 16px;
   font-weight: 500;
   margin-top: 24px;
@@ -64,8 +64,12 @@ export const NoticeBody = styled.div`
   }
 `;
 
-export const NoticeLeft = styled.div`width: 870px;`;
-export const NoticeRight = styled.div`width: 270px;`;
+export const NoticeLeft = styled.div`
+  width: 870px;
+`;
+export const NoticeRight = styled.div`
+  width: 270px;
+`;
 
 export const NoticeItem = styled.div`
   width: 100%;
@@ -78,7 +82,7 @@ export const NoticeItem = styled.div`
 `;
 export const NoticeItemTitle = styled.div`
   font-size: 30px;
-  font-family: 'Josefin Sans', sans-serif;
+  font-family: "Josefin Sans", sans-serif;
   font-weight: bold;
   color: #151875;
 `;
@@ -87,10 +91,10 @@ export const NoticeDatePlace = styled.div`
   margin-top: 12px;
 `;
 export const NoticePlace = styled.div`
-  background-color: #FFE7F9;
+  background-color: #ffe7f9;
   color: #151875;
   font-size: 14px;
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   font-weight: 600;
   border-radius: 2px;
   padding: 4px 36px;
@@ -98,7 +102,7 @@ export const NoticePlace = styled.div`
 `;
 export const NoticeDate = styled.div`
   display: flex;
-  
+
   & > div:first-child {
     width: 16px;
     height: 16px;
@@ -111,23 +115,23 @@ export const NoticeDate = styled.div`
     margin-right: 8px;
   }
   & > div:last-child {
-    background-color: #FFECE2;
+    background-color: #ffece2;
     color: #151875;
     font-size: 14px;
-    font-family: 'Lato', sans-serif;
+    font-family: "Lato", sans-serif;
     font-weight: 600;
     border-radius: 2px;
     padding: 4px 36px;
   }
 `;
 export const NoticeItemDescription = styled.div`
-  font-family: 'Lato', sans-serif;
-  color: #8A8FB9;
+  font-family: "Lato", sans-serif;
+  color: #8a8fb9;
   font-size: 16px;
   margin-top: 24px;
 `;
 export const ReadMore = styled.div`
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   font-size: 18px;
   font-weight: 600;
   display: flex;
@@ -138,7 +142,7 @@ export const ReadMore = styled.div`
     width: 5px;
     height: 5px;
     border-radius: 50%;
-    background-color: #FB2E86;
+    background-color: #fb2e86;
     margin-left: 4px;
     position: relative;
     top: 9px;
@@ -149,7 +153,7 @@ export const NoticeSearch = styled.div`
   width: 100%;
 
   & > div {
-    font-family: 'Josefin Sans', sans-serif;
+    font-family: "Josefin Sans", sans-serif;
     color: #151875;
     font-weight: bold;
     font-size: 24px;
@@ -157,7 +161,7 @@ export const NoticeSearch = styled.div`
   & > input {
     width: 100%;
     height: 40px;
-    border: 1px solid #BDBDD8;
+    border: 1px solid #bdbdd8;
     outline: none;
     border-radius: 2px;
     padding: 0 40px 0 12px;
@@ -179,7 +183,7 @@ export const ImportantNotice = styled.div`
   margin-top: 80px;
 
   & > div:first-child {
-    font-family: 'Josefin Sans', sans-serif;
+    font-family: "Josefin Sans", sans-serif;
     color: #151875;
     font-weight: bold;
     font-size: 24px;
@@ -195,14 +199,14 @@ export const ImportantItem = styled.div`
   }
 
   & > div:first-child {
-    font-family: 'Josefin Sans', sans-serif;
+    font-family: "Josefin Sans", sans-serif;
     font-size: 14px;
-    color: #3F509E;
+    color: #3f509e;
   }
   & > div:last-child {
-    font-family: 'Lato', sans-serif;
+    font-family: "Lato", sans-serif;
     font-size: 11px;
-    color: #8A8FB9;
+    color: #8a8fb9;
     margin-top: 8px;
   }
 `;

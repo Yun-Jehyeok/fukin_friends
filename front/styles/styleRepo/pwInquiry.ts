@@ -1,12 +1,12 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const PwInquiryForm = styled.div`
   width: 530px;
   margin: 0 auto;
-  
+
   & > div {
     height: fit-content;
-    padding: - 48px;
+    padding: -48px;
     display: flex;
     justify-content: center;
     flex-direction: column;

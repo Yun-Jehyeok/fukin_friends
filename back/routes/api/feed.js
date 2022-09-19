@@ -1,43 +1,43 @@
-const express = require('express');
-const { auth } = require('../../middleware/auth');
-const { Feed } = require('../../models/feed');
-const { User } = require('../../models/user');
+const express = require("express");
+const { auth } = require("../../middleware/auth");
+const { Feed } = require("../../models/feed");
+const { User } = require("../../models/user");
 
-var fs = require('fs');
+var fs = require("fs");
 
 const router = express.Router();
-const moment = require('moment');
-const dotenv = require('dotenv');
-const multer = require('multer');
+const moment = require("moment");
+const dotenv = require("dotenv");
+const multer = require("multer");
 
 dotenv.config();
 
 // previewImg, imgIncontent upload //
 var storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'upload/');
+    cb(null, "upload/");
   },
   filename: (req, file, cb) => {
     cb(null, `${Date.now()}_${file.originalname}`);
   },
   fileFilter: (req, file, cb) => {
     const ext = path.extname(file.originalname);
-    if (ext !== '.jpg' || ext !== '.png' || ext !== '.jpeg') {
-      return cb(res.status(400).end('only jpg, png, jpeg are allowed'), false);
+    if (ext !== ".jpg" || ext !== ".png" || ext !== ".jpeg") {
+      return cb(res.status(400).end("only jpg, png, jpeg are allowed"), false);
     }
     cb(null, true);
   },
 });
 
-var upload = multer({ storage: storage }).single('file');
-var uploadfile = multer({ dest: 'uploadedFiles/' }).single('file');
+var upload = multer({ storage: storage }).single("file");
+var uploadfile = multer({ dest: "uploadedFiles/" }).single("file");
 
 // Feed All //
-router.get('/', async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const feedFindResult = await Feed.find()
       .populate({
-        path: 'creator',
+        path: "creator",
       })
       .limit(9)
       .sort({ date: -1 });
@@ -47,12 +47,12 @@ router.get('/', async (req, res) => {
     res.json(result);
   } catch (e) {
     console.log(e);
-    res.json({ msg: 'No feed' });
+    res.json({ msg: "No feed" });
   }
 });
 
 // LOADING ALL FEEDS / GET
-router.get('/skip/:skip', async (req, res) => {
+router.get("/skip/:skip", async (req, res) => {
   try {
     const feedCount = await Feed.countDocuments();
     const feedFindResult = await Feed.find()
@@ -65,24 +65,24 @@ router.get('/skip/:skip', async (req, res) => {
     res.json(result);
   } catch (e) {
     console.log(e);
-    res.json({ msg: 'No feed' });
+    res.json({ msg: "No feed" });
   }
 });
 
 // Top Rate Feeds
-router.get('/topRate', async (req, res) => {
+router.get("/topRate", async (req, res) => {
   try {
     const feedResult = await Feed.find().sort({ views: -1 });
 
     res.json(feedResult);
   } catch (e) {
     console.log(e);
-    res.json({ msg: 'No feed' });
+    res.json({ msg: "No feed" });
   }
 });
 
 // Upload Image //
-router.post('/uploadimage', (req, res) => {
+router.post("/uploadimage", (req, res) => {
   upload(req, res, (err) => {
     if (err) return res.json({ success: false, err });
 
@@ -95,7 +95,7 @@ router.post('/uploadimage', (req, res) => {
 });
 
 // Upload File //
-router.post('/uploadfile', async (req, res) => {
+router.post("/uploadfile", async (req, res) => {
   uploadfile(req, res, (err) => {
     if (err) return res.json({ success: false, err });
 
@@ -108,12 +108,11 @@ router.post('/uploadfile', async (req, res) => {
 });
 
 // Feed Create //
-router.post('/write', auth, async (req, res) => {
+router.post("/write", auth, async (req, res) => {
   try {
-    const { title, contents, previewImg, file, originalfileName } =
-      req.body;
+    const { title, contents, previewImg, file, originalfileName } = req.body;
 
-    if (!contents) return res.status(400).json({ msg: '내용을 입력해주세요.' });
+    if (!contents) return res.status(400).json({ msg: "내용을 입력해주세요." });
 
     // 새로운 프로젝트 생성
     const newFeed = await Feed.create({
@@ -121,11 +120,11 @@ router.post('/write', auth, async (req, res) => {
       contents,
       previewImg: previewImg,
       creator: req.user.id,
-      date: moment().format('MMMM DD, YYYY'),
+      date: moment().format("MMMM DD, YYYY"),
       files: file,
       originalfileName,
     });
-    
+
     res.redirect(`/api/post/${newFeed._id}`);
   } catch (e) {
     console.log(e);
@@ -133,7 +132,7 @@ router.post('/write', auth, async (req, res) => {
 });
 
 // Get file //
-router.get('/uploadedFiles/:originalFileName', async function (req, res) {
+router.get("/uploadedFiles/:originalFileName", async function (req, res) {
   if (err) return res.json({ success: false, err });
 
   var stream;
@@ -142,9 +141,9 @@ router.get('/uploadedFiles/:originalFileName', async function (req, res) {
     await function () {
       var filePath = path.join(
         __dirname,
-        '..',
-        'uploadedFiles',
-        this.serverFileName,
+        "..",
+        "uploadedFiles",
+        this.serverFileName
       );
       var fileExists = fs.existsSync(filePath);
       if (fileExists) {
@@ -159,8 +158,8 @@ router.get('/uploadedFiles/:originalFileName', async function (req, res) {
 
   if (stream) {
     res.writeHead(statusCode, {
-      'Content-Type': 'application/octet-stream',
-      'Content-Disposition': 'attachment; filename=' + file.originalFileName,
+      "Content-Type": "application/octet-stream",
+      "Content-Disposition": "attachment; filename=" + file.originalFileName,
     });
     stream.pipe(res);
   } else {
@@ -170,10 +169,9 @@ router.get('/uploadedFiles/:originalFileName', async function (req, res) {
 });
 
 // Post Detail //
-router.get('/:id', async (req, res, next) => {
+router.get("/:id", async (req, res, next) => {
   try {
-    const post = await Post.findById(req.params.id)
-      .populate('creator')
+    const post = await Post.findById(req.params.id).populate("creator");
 
     post.save();
 
@@ -186,10 +184,9 @@ router.get('/:id', async (req, res, next) => {
 
 // Post Update //
 // 수정 페이지
-router.get('/:id/edit', async (req, res, next) => {
+router.get("/:id/edit", async (req, res, next) => {
   try {
-    const post = await Post.findById(req.params.id)
-      .populate('creator')
+    const post = await Post.findById(req.params.id).populate("creator");
 
     res.json(post);
   } catch (e) {
@@ -198,7 +195,7 @@ router.get('/:id/edit', async (req, res, next) => {
 });
 
 // 수정 action
-router.post('/:id/update', async (req, res, next) => {
+router.post("/:id/update", async (req, res, next) => {
   const { title, contents, Image } = req.body;
 
   try {
@@ -208,9 +205,9 @@ router.post('/:id/update', async (req, res, next) => {
         title,
         contents,
         previewImg: Image,
-        date: moment().format('MMMM DD, YYYY'),
+        date: moment().format("MMMM DD, YYYY"),
       },
-      { new: true },
+      { new: true }
     );
     res.redirect(`/api/post/${update_post._id}`);
   } catch (e) {
@@ -219,7 +216,7 @@ router.post('/:id/update', async (req, res, next) => {
 });
 
 // Post Delete //
-router.delete('/:id/delete', auth, async (req, res) => {
+router.delete("/:id/delete", auth, async (req, res) => {
   try {
     await Post.deleteMany({ _id: req.params.id });
 
@@ -237,7 +234,7 @@ router.delete('/:id/delete', auth, async (req, res) => {
 });
 
 // 해당 유저가 작성한 게시글
-router.get('/user/:id', async (req, res) => {
+router.get("/user/:id", async (req, res) => {
   try {
     const post = await Post.find({
       creator: req.params.id,
@@ -250,7 +247,7 @@ router.get('/user/:id', async (req, res) => {
 });
 
 // Views Load //
-router.get('/:id/views', async (req, res) => {
+router.get("/:id/views", async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
     const result = post.views;
@@ -261,7 +258,7 @@ router.get('/:id/views', async (req, res) => {
   }
 });
 
-router.post('/:id/views', async (req, res) => {
+router.post("/:id/views", async (req, res) => {
   const userID = req.body.userID;
   try {
     const post = await Post.findById(req.params.id);

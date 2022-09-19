@@ -1,10 +1,10 @@
 import type {
   CreateGroupReq,
   CreateGroupRes,
-  LoadGroupsReq
-} from '../types/group';
+  LoadGroupsReq,
+} from "../types/group";
 
-import axios from 'axios';
+import axios from "axios";
 
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_SERVER_URL;
 
@@ -14,5 +14,5 @@ export const loadGroups = async (userId: LoadGroupsReq) => {
 };
 
 export const createGroup = async (group: CreateGroupReq) => {
-  return await axios.post<CreateGroupRes>('/api/group/create', { group });
+  return await axios.post<CreateGroupRes>("/api/group/create", { group });
 };

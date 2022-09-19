@@ -1,11 +1,11 @@
-import { useAppDispatch } from 'hooks/reduxHooks';
-import { NextPage } from 'next';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { useCallback, useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { RootState } from 'src/configureStore';
-import { userActions } from 'src/store/reducers/userReducer';
+import { useAppDispatch } from "hooks/reduxHooks";
+import { NextPage } from "next";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { useCallback, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "src/configureStore";
+import { userActions } from "src/store/reducers/userReducer";
 import {
   HeaderContainer,
   Logo,
@@ -18,15 +18,15 @@ import {
   Language,
   Login,
   Logout,
-} from './style';
+} from "./style";
 
 const Header: NextPage = () => {
   const router = useRouter();
-  const [pathname, setPathname] = useState('');
+  const [pathname, setPathname] = useState("");
 
   useEffect(() => {
-    setPathname(router.pathname.slice(1))
-  }, [router])
+    setPathname(router.pathname.slice(1));
+  }, [router]);
 
   const { token } = useSelector((state: RootState) => state.user);
 
@@ -34,7 +34,7 @@ const Header: NextPage = () => {
 
   const logoutHandler = useCallback(() => {
     dispatch(userActions.logoutRequest({ token }));
-  }, [dispatch, token])
+  }, [dispatch, token]);
 
   return (
     <Wrap>
@@ -56,7 +56,11 @@ const Header: NextPage = () => {
               <div></div>
             </Language>
             <Login>
-              {token ? <Logout onClick={logoutHandler}>Logout</Logout> : <Link href="/login">Login</Link>}
+              {token ? (
+                <Logout onClick={logoutHandler}>Logout</Logout>
+              ) : (
+                <Link href="/login">Login</Link>
+              )}
               <div></div>
             </Login>
           </div>
@@ -66,16 +70,24 @@ const Header: NextPage = () => {
         <HeaderContainer>
           <div>
             <Logo>
-              <Link href="/">
-                FUKIN FRIENDS
-              </Link>
+              <Link href="/">FUKIN FRIENDS</Link>
             </Logo>
             <Navigation>
-              <Link href="/feed"><div data-active={pathname === 'feed'}>Feed</div></Link>
-              <Link href="/notice"><div data-active={pathname === 'notice'}>Notice</div></Link>
-              <Link href="/event"><div data-active={pathname === 'event'}>Event</div></Link>
-              <Link href="/album"><div data-active={pathname === 'album'}>Album</div></Link>
-              <Link href="/playlist"><div data-active={pathname === 'playlist'}>Play list</div></Link>
+              <Link href="/feed">
+                <div data-active={pathname === "feed"}>Feed</div>
+              </Link>
+              <Link href="/notice">
+                <div data-active={pathname === "notice"}>Notice</div>
+              </Link>
+              <Link href="/event">
+                <div data-active={pathname === "event"}>Event</div>
+              </Link>
+              <Link href="/album">
+                <div data-active={pathname === "album"}>Album</div>
+              </Link>
+              <Link href="/playlist">
+                <div data-active={pathname === "playlist"}>Play list</div>
+              </Link>
             </Navigation>
           </div>
           <Search>

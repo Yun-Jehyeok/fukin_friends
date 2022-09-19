@@ -1,20 +1,20 @@
-import { HYDRATE } from 'next-redux-wrapper';
-import { combineReducers } from '@reduxjs/toolkit';
-import type { AnyAction, CombinedState } from '@reduxjs/toolkit';
+import { HYDRATE } from "next-redux-wrapper";
+import { combineReducers } from "@reduxjs/toolkit";
+import type { AnyAction, CombinedState } from "@reduxjs/toolkit";
 
-import userReducer, { UserStateType } from './userReducer';
-import groupReducer, { GroupStateType } from './groupReducer';
-import noticeReducer, { NoticeStateType } from './noticeReducer';
+import userReducer, { UserStateType } from "./userReducer";
+import groupReducer, { GroupStateType } from "./groupReducer";
+import noticeReducer, { NoticeStateType } from "./noticeReducer";
 
 type ReducerState = {
   user: UserStateType;
   group: GroupStateType;
-  notice: NoticeStateType
+  notice: NoticeStateType;
 };
 
 const rootReducer = (
   state: any,
-  action: AnyAction,
+  action: AnyAction
 ): CombinedState<ReducerState> => {
   switch (action.type) {
     case HYDRATE:
@@ -27,7 +27,7 @@ const rootReducer = (
       return combineReducers({
         user: userReducer,
         group: groupReducer,
-        notice: noticeReducer
+        notice: noticeReducer,
       })(state, action);
   }
 };

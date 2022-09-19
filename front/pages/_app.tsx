@@ -1,10 +1,10 @@
-import 'styles/globals.css';
-import type { AppProps } from 'next/app';
-import wrapper from 'src/configureStore';
+import "styles/globals.css";
+import type { AppProps } from "next/app";
+import wrapper from "src/configureStore";
 // import { GetServerSideProps } from 'next';
-import { userActions } from 'src/store/reducers/userReducer';
-import { useAppDispatch } from 'hooks/reduxHooks';
-import { useEffect } from 'react';
+import { userActions } from "src/store/reducers/userReducer";
+import { useAppDispatch } from "hooks/reduxHooks";
+import { useEffect } from "react";
 
 // export const getServerSideProps: GetServerSideProps =
 //   wrapper.getServerSideProps((store) => async ({ req, res, ...etc }) => {
@@ -18,10 +18,10 @@ function MyApp({ Component, pageProps }: AppProps) {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    let token: string | null = localStorage.getItem('token');
+    let token: string | null = localStorage.getItem("token");
 
-    dispatch(userActions.loadUserRequest({ token }))
-  }, [dispatch])
+    dispatch(userActions.loadUserRequest({ token }));
+  }, [dispatch]);
 
   return <Component {...pageProps} />;
 }

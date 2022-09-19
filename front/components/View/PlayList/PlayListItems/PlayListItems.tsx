@@ -1,5 +1,5 @@
-import { NextPage } from 'next';
-import Image from 'next/image';
+import { NextPage } from "next";
+import Image from "next/image";
 import {
   Item,
   ItemAuthor,
@@ -7,21 +7,21 @@ import {
   ItemDescription,
   ItemTitle,
   Title,
-} from './style';
+} from "./style";
 
-import back1 from 'public/img/back1.jpg';
+import back1 from "public/img/back1.jpg";
 
 const itemList = [
   {
     id: 1,
-    title: '여행가서 듣기 좋은 음악 모음',
-    author: '윤제혁',
+    title: "여행가서 듣기 좋은 음악 모음",
+    author: "윤제혁",
     imgSrc: back1,
   },
   {
     id: 2,
-    title: '드라이브할 때 듣기 좋은 음악 모음',
-    author: '정종윤',
+    title: "드라이브할 때 듣기 좋은 음악 모음",
+    author: "정종윤",
     imgSrc: back1,
   },
 ];

@@ -1,7 +1,7 @@
-import { all, call, fork, put, takeLatest } from 'redux-saga/effects';
+import { all, call, fork, put, takeLatest } from "redux-saga/effects";
 
-import type { AxiosResponse } from 'axios';
-import type { PayloadAction } from '@reduxjs/toolkit';
+import type { AxiosResponse } from "axios";
+import type { PayloadAction } from "@reduxjs/toolkit";
 import type {
   ChangePWReq,
   ChangePWRes,
@@ -18,7 +18,7 @@ import type {
   SearchUserRes,
   SendEmailReq,
   SendEmailRes,
-} from '../types/user';
+} from "../types/user";
 
 import {
   changePWUser,
@@ -28,24 +28,24 @@ import {
   searchUser,
   sendEmail,
   sendPhoneAuth,
-} from '../api/userApi';
-import { userActions } from '../reducers/userReducer';
+} from "../api/userApi";
+import { userActions } from "../reducers/userReducer";
 
 // 회원가입
 function* registerUserApi(action: PayloadAction<RegisterUserReq>) {
   try {
     const { data }: AxiosResponse<RegisterUserRes> = yield call(
       registerUser,
-      action.payload,
+      action.payload
     );
 
     yield put(userActions.registerUserSuccess(data));
   } catch (e: any) {
     const msg =
-      e?.name === 'AxiosError' ? e.response.data.msg : '서버에러입니다.';
+      e?.name === "AxiosError" ? e.response.data.msg : "서버에러입니다.";
 
     yield put(
-      userActions.registerUserFailure({ status: { ok: false }, data: { msg } }),
+      userActions.registerUserFailure({ status: { ok: false }, data: { msg } })
     );
   }
 }
@@ -59,16 +59,16 @@ function* loginUserApi(action: PayloadAction<LoginUserReq>) {
   try {
     const { data }: AxiosResponse<LoginUserRes> = yield call(
       loginUser,
-      action.payload,
+      action.payload
     );
 
     yield put(userActions.loginUserSuccess(data));
   } catch (e: any) {
     const msg =
-      e?.name === 'AxiosError' ? e.response.data.msg : '서버에러입니다.';
+      e?.name === "AxiosError" ? e.response.data.msg : "서버에러입니다.";
 
     yield put(
-      userActions.loginUserFailure({ status: { ok: false }, data: { msg } }),
+      userActions.loginUserFailure({ status: { ok: false }, data: { msg } })
     );
   }
 }
@@ -82,16 +82,16 @@ function* changePWApi(action: PayloadAction<ChangePWReq>) {
   try {
     const { data }: AxiosResponse<ChangePWRes> = yield call(
       changePWUser,
-      action.payload,
+      action.payload
     );
 
     yield put(userActions.changePWSuccess(data));
   } catch (e: any) {
     const msg =
-      e?.name === 'AxiosError' ? e.response.data.msg : '서버에러입니다.';
+      e?.name === "AxiosError" ? e.response.data.msg : "서버에러입니다.";
 
     yield put(
-      userActions.changePWFailure({ status: { ok: false }, data: { msg } }),
+      userActions.changePWFailure({ status: { ok: false }, data: { msg } })
     );
   }
 }
@@ -105,16 +105,16 @@ function* loadUserApi(action: PayloadAction<LoadUserReq>) {
   try {
     const { data }: AxiosResponse<LoadUserRes> = yield call(
       loadUser,
-      action.payload,
+      action.payload
     );
 
     yield put(userActions.loadUserSuccess(data));
   } catch (e: any) {
     const msg =
-      e?.name === 'AxiosError' ? e.response.data.msg : '서버에러입니다.';
+      e?.name === "AxiosError" ? e.response.data.msg : "서버에러입니다.";
 
     yield put(
-      userActions.loadUserFailure({ status: { ok: false }, data: { msg } }),
+      userActions.loadUserFailure({ status: { ok: false }, data: { msg } })
     );
   }
 }
@@ -128,14 +128,12 @@ function* searchUserApi(action: PayloadAction<SearchUserReq>) {
   try {
     const { data }: AxiosResponse<SearchUserRes> = yield call(
       searchUser,
-      action.payload,
+      action.payload
     );
 
     yield put(userActions.userSearchSuccess(data));
   } catch (e: any) {
-    yield put(
-      userActions.userSearchFailure(),
-    );
+    yield put(userActions.userSearchFailure());
   }
 }
 
@@ -146,14 +144,13 @@ function* watchSearchUser() {
 // 로그아웃
 function* logoutApi(action: PayloadAction<LogoutUserReq>) {
   try {
-    if(action.payload) {
-      localStorage.removeItem('token');
+    if (action.payload) {
+      localStorage.removeItem("token");
 
       yield put(userActions.logoutSuccess());
     } else {
       yield put(userActions.logoutFailure());
     }
-
   } catch (e: any) {
     yield put(userActions.logoutFailure());
   }
@@ -168,7 +165,7 @@ function* paApi(action: PayloadAction<PAReq>) {
   try {
     const { data }: AxiosResponse<PARes> = yield call(
       sendPhoneAuth,
-      action.payload,
+      action.payload
     );
 
     yield put(userActions.userPASuccess(data));
@@ -186,7 +183,7 @@ function* sendEmailApi(action: PayloadAction<SendEmailReq>) {
   try {
     const { data }: AxiosResponse<SendEmailRes> = yield call(
       sendEmail,
-      action.payload,
+      action.payload
     );
 
     yield put(userActions.sendEmailSuccess(data));
@@ -208,6 +205,6 @@ export default function* userSaga() {
     fork(watchloadUser),
     fork(watchLogout),
     fork(watchSearchUser),
-    fork(watchSendEmail)
+    fork(watchSendEmail),
   ]);
 }

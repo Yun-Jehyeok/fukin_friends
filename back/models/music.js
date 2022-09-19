@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const MusicSchema = new mongoose.Schema({
   title: {
@@ -13,10 +13,10 @@ const MusicSchema = new mongoose.Schema({
     type: String,
   },
   img: {
-    type: String
-  }
+    type: String,
+  },
 });
 
-const Music = mongoose.model('music', MusicSchema);
+const Music = mongoose.model("music", MusicSchema);
 
 module.exports = { Music };

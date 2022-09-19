@@ -1,80 +1,104 @@
-import { NextPage } from 'next';
-import Link from 'next/link';
-import { Container } from 'styles/styleRepo/global';
-import { CreateNotice, ImportantItem, ImportantNotice, NoticeBody, NoticeDate, NoticeDatePlace, NoticeHeader, NoticeHeaderDescription, NoticeHeaderTitle, NoticeItem, NoticeItemDescription, NoticeItemTitle, NoticeLeft, NoticePlace, NoticeRight, NoticeSearch, ReadMore } from './style';
+import { NextPage } from "next";
+import Link from "next/link";
+import { Container } from "styles/styleRepo/global";
+import {
+  CreateNotice,
+  ImportantItem,
+  ImportantNotice,
+  NoticeBody,
+  NoticeDate,
+  NoticeDatePlace,
+  NoticeHeader,
+  NoticeHeaderDescription,
+  NoticeHeaderTitle,
+  NoticeItem,
+  NoticeItemDescription,
+  NoticeItemTitle,
+  NoticeLeft,
+  NoticePlace,
+  NoticeRight,
+  NoticeSearch,
+  ReadMore,
+} from "./style";
 
 const noticeList = [
   {
     id: 0,
-    title: 'Mauris at orci non vulputate diam tincidunt nec.',
-    description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever",
-    date: '2022-08-12 6:00 PM',
-    place: 'Yeouinaru station'
+    title: "Mauris at orci non vulputate diam tincidunt nec.",
+    description:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever",
+    date: "2022-08-12 6:00 PM",
+    place: "Yeouinaru station",
   },
   {
     id: 1,
-    title: 'Aenean vitae in aliquam ultrices lectus. Etiam.',
-    description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever",
-    date: '2022-08-12 6:00 PM',
-    place: 'Yeouinaru station'
+    title: "Aenean vitae in aliquam ultrices lectus. Etiam.",
+    description:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever",
+    date: "2022-08-12 6:00 PM",
+    place: "Yeouinaru station",
   },
   {
     id: 2,
-    title: 'Sit nam congue feugiat nisl, mauris amet nisi.',
-    description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever",
-    date: '2022-08-17 4:00 PM',
-    place: 'Hannam-dong Chicken'
+    title: "Sit nam congue feugiat nisl, mauris amet nisi.",
+    description:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever",
+    date: "2022-08-17 4:00 PM",
+    place: "Hannam-dong Chicken",
   },
   {
     id: 3,
-    title: 'Test length nam congue is right, maersx fes, faew. Etaewf.',
-    description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever",
-    date: '2022-08-12 6:00 PM',
-    place: 'Yeouinaru station'
+    title: "Test length nam congue is right, maersx fes, faew. Etaewf.",
+    description:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever",
+    date: "2022-08-12 6:00 PM",
+    place: "Yeouinaru station",
   },
   {
     id: 4,
-    title: 'Feasx feadt li suekz.',
-    description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever",
-    date: '2022-09-12 4:00 PM',
-    place: "Jongyun's house"
+    title: "Feasx feadt li suekz.",
+    description:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever",
+    date: "2022-09-12 4:00 PM",
+    place: "Jongyun's house",
   },
   {
     id: 5,
-    title: 'Lorem Ipsum is simply dummy text of the printing.',
-    description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever",
-    date: '2022-08-16 6:00 PM',
-    place: 'Hannam-dong Chicken'
+    title: "Lorem Ipsum is simply dummy text of the printing.",
+    description:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever",
+    date: "2022-08-16 6:00 PM",
+    place: "Hannam-dong Chicken",
   },
-]
+];
 
 const importantList = [
   {
     id: 0,
-    title: 'Mauris at orci non vulputate diam tincidunt nec.',
-    date: '2022-08-12 6:00 PM',
-    place: 'Yeouinaru station'
+    title: "Mauris at orci non vulputate diam tincidunt nec.",
+    date: "2022-08-12 6:00 PM",
+    place: "Yeouinaru station",
   },
   {
     id: 1,
-    title: 'Aenean vitae in aliquam ultrices lectus. Etiam.',
-    date: '2022-08-12 6:00 PM',
-    place: 'Yeouinaru station'
+    title: "Aenean vitae in aliquam ultrices lectus. Etiam.",
+    date: "2022-08-12 6:00 PM",
+    place: "Yeouinaru station",
   },
   {
     id: 2,
-    title: 'Sit nam congue feugiat nisl, mauris amet nisi.',
-    date: '2022-08-17 4:00 PM',
-    place: 'Hannam-dong Chicken'
-  }
-]
+    title: "Sit nam congue feugiat nisl, mauris amet nisi.",
+    date: "2022-08-17 4:00 PM",
+    place: "Hannam-dong Chicken",
+  },
+];
 
 const Notice: NextPage = () => {
   const onSearch = (e: React.KeyboardEvent<HTMLElement>) => {
-    if(e.key === 'Enter') {
+    if (e.key === "Enter") {
       console.log("Enter...");
     }
-  }
+  };
 
   return (
     <Container>
@@ -82,7 +106,9 @@ const Notice: NextPage = () => {
         <div>
           <div>
             <NoticeHeaderTitle>Notice Page</NoticeHeaderTitle>
-            <NoticeHeaderDescription>It's Just Notice Page</NoticeHeaderDescription>
+            <NoticeHeaderDescription>
+              It's Just Notice Page
+            </NoticeHeaderDescription>
           </div>
           <CreateNotice>
             <Link href="/notice/create">Create Notice</Link>
@@ -92,7 +118,7 @@ const Notice: NextPage = () => {
       <NoticeBody>
         <div>
           <NoticeLeft>
-            {noticeList.map(item => (
+            {noticeList.map((item) => (
               <NoticeItem key={item.id}>
                 <NoticeItemTitle>{item.title}</NoticeItemTitle>
                 <NoticeDatePlace>
@@ -102,7 +128,9 @@ const Notice: NextPage = () => {
                   </NoticeDate>
                   <NoticePlace>{item.place}</NoticePlace>
                 </NoticeDatePlace>
-                <NoticeItemDescription>{item.description}</NoticeItemDescription>
+                <NoticeItemDescription>
+                  {item.description}
+                </NoticeItemDescription>
                 <ReadMore>
                   Read More
                   <div></div>
@@ -113,11 +141,11 @@ const Notice: NextPage = () => {
           <NoticeRight>
             <NoticeSearch>
               <div>Search</div>
-              <input placeholder='Search For Notice' onKeyDown={onSearch} />
+              <input placeholder="Search For Notice" onKeyDown={onSearch} />
             </NoticeSearch>
             <ImportantNotice>
               <div>Important Notice</div>
-              {importantList.map(item => (
+              {importantList.map((item) => (
                 <ImportantItem key={item.id}>
                   <div>{item.title}</div>
                   <div>{item.date}</div>

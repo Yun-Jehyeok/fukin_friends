@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 interface IList {
   activeIdx: number;
@@ -14,20 +14,20 @@ export const Title = styled.div`
   color: #151875;
   font-weight: bold;
   text-align: center;
-  font-family: 'Josefin Sans', sans-serif;
+  font-family: "Josefin Sans", sans-serif;
   margin-bottom: 53px;
 `;
 
 export const ItemTitle = styled.div`
   width: 100%;
   height: 60%;
-  background-color: #F6F7FB;
+  background-color: #f6f7fb;
   display: flex;
   justify-content: center;
   flex-direction: column;
   text-align: center;
   font-size: 20px;
-  font-family: 'Josefin Sans', sans-serif;
+  font-family: "Josefin Sans", sans-serif;
 `;
 
 export const Description = styled.div`
@@ -58,12 +58,12 @@ export const ListContainer = styled.div`
 
 export const List = styled.div<IList>`
   display: flex;
-  width: fit-content ;
+  width: fit-content;
   height: 384px;
   display: flex;
   justify-content: center;
   position: relative;
-  left: ${(props) => props.activeIdx === 0 ? 12 : -1188}px;
+  left: ${(props) => (props.activeIdx === 0 ? 12 : -1188)}px;
   transition: left 0.8s cubic-bezier(0.24, 0.77, 0.32, 0.95);
 
   & > div {
@@ -78,10 +78,10 @@ export const List = styled.div<IList>`
     top: 12px;
 
     &:hover {
-      border: 1px solid #2F1AC4;
+      border: 1px solid #2f1ac4;
     }
     &:hover ${Description} {
-      background-color: #2F1AC4;
+      background-color: #2f1ac4;
 
       & * {
         color: white;
@@ -94,9 +94,9 @@ export const List = styled.div<IList>`
 `;
 
 export const DSCTitle = styled.div`
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   font-size: 18px;
-  color: #FB2E86;
+  color: #fb2e86;
   font-weight: bold;
 `;
 
@@ -124,14 +124,14 @@ export const Attendee = styled.div`
   }
 `;
 export const DSCPlace = styled.div`
-  font-family: 'Josefin Sans', sans-serif;
+  font-family: "Josefin Sans", sans-serif;
   font-size: 14px;
   color: #151875;
   margin-top: 12px;
 `;
 
 export const DSCDate = styled.div`
-  font-family: 'Josefin Sans', sans-serif;
+  font-family: "Josefin Sans", sans-serif;
   font-size: 14px;
   color: #151875;
   margin-top: 8px;
@@ -152,14 +152,14 @@ export const Pagination = styled.div`
 export const PaginationItem = styled.div`
   width: 16px;
   height: 4px;
-  background-color: #FEBAD7;
+  background-color: #febad7;
   border-radius: 10px;
   margin-right: 6px;
   cursor: pointer;
 
-  &[data-active=true] {
+  &[data-active="true"] {
     width: 24px;
-    background-color: #FB2E86;
+    background-color: #fb2e86;
   }
 
   &:last-child {

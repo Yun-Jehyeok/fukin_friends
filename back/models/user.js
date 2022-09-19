@@ -1,5 +1,5 @@
-const moment = require('moment');
-const mongoose = require('mongoose');
+const moment = require("moment");
+const mongoose = require("mongoose");
 
 const UserSchema = new mongoose.Schema({
   name: {
@@ -21,40 +21,40 @@ const UserSchema = new mongoose.Schema({
   },
   register_date: {
     type: Date,
-    default: moment().format('MMMM DD, YYYY'),
+    default: moment().format("MMMM DD, YYYY"),
   },
   feeds: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'feed',
+      ref: "feed",
     },
   ],
   notices: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'notice',
+      ref: "notice",
     },
   ],
   events: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'event',
+      ref: "event",
     },
   ],
   photos: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'photo',
+      ref: "photo",
     },
   ],
   playLists: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'playList',
+      ref: "playList",
     },
   ],
 });
 
-const User = mongoose.model('user', UserSchema);
+const User = mongoose.model("user", UserSchema);
 
 module.exports = { User };

@@ -9,11 +9,11 @@ export type LoadGroupsReq = {
   userId: string;
 };
 export type LoadGroupsRes = {
-    groups: IGroup[]
+  groups: IGroup[];
 };
 export type LoadGroupsFail = {
-   msg: string
-}
+  msg: string;
+};
 
 // 그룹 생성
 export type CreateGroupReq = {
@@ -24,21 +24,21 @@ export type CreateGroupReq = {
   };
 };
 export type CreateGroupRes = {
-    id: string,
-    title: string,
-    member: string[]
+  id: string;
+  title: string;
+  member: string[];
 };
 export type CreateGroupFail = {
-   msg: string
-}
+  msg: string;
+};
 
 // 그룹 변경
 export type ChangeGroupReq = {
   title: string | undefined;
 };
 export type ChangeGroupRes = {
-  title: string | undefined,
+  title: string | undefined;
 };
 export type ChangeGroupFail = {
-   msg: string
-}
+  msg: string;
+};

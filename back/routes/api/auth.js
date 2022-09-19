@@ -1,37 +1,47 @@
-const express = require('express');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const CryptoJS = require('crypto-js');
-const request = require('request');
-const { auth } = require('../../middleware/auth');
-const config = require('../../config/index');
+const express = require("express");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const CryptoJS = require("crypto-js");
+const request = require("request");
+const { auth } = require("../../middleware/auth");
+const config = require("../../config/index");
 
-const nodemailer = require('nodemailer');
+const nodemailer = require("nodemailer");
 
 const { JWT_SECRET, NODEMAILER_USER, NODEMAILER_PASS } = config;
-const { User } = require('../../models/user');
-const { Feed } = require('../../models/feed');
-const { Event } = require('../../models/event');
-const { Notice } = require('../../models/notice');
-const { Photo } = require('../../models/photo');
-const { PlayList } = require('../../models/playList');
+const { User } = require("../../models/user");
+const { Feed } = require("../../models/feed");
+const { Event } = require("../../models/event");
+const { Notice } = require("../../models/notice");
+const { Photo } = require("../../models/photo");
+const { PlayList } = require("../../models/playList");
 
 const router = express.Router();
 
 // LOGIN / POST
-router.post('/login', (req, res) => {
+router.post("/login", (req, res) => {
   const { email, password } = req.body;
 
-  if (!email) return res.status(400).json({ isSuccess: false, msg: '이메일을 작성해주세요.' });
+  if (!email)
+    return res
+      .status(400)
+      .json({ isSuccess: false, msg: "이메일을 작성해주세요." });
   else if (!password)
-    return res.status(400).json({ isSuccess: false, msg: '비밀번호를 작성해주세요.' });
+    return res
+      .status(400)
+      .json({ isSuccess: false, msg: "비밀번호를 작성해주세요." });
 
   User.findOne({ email }).then((user) => {
-    if (!user) return res.status(400).json({ isSuccess: false, msg: '이메일을 확인해주세요.' });
+    if (!user)
+      return res
+        .status(400)
+        .json({ isSuccess: false, msg: "이메일을 확인해주세요." });
 
     bcrypt.compare(password, user.password).then((isMatch) => {
       if (!isMatch)
-        return res.status(400).json({ isSuccess: false, msg: '비밀번호를 확인해주세요.' });
+        return res
+          .status(400)
+          .json({ isSuccess: false, msg: "비밀번호를 확인해주세요." });
 
       jwt.sign(
         { id: user.id },
@@ -49,14 +59,14 @@ router.post('/login', (req, res) => {
               email: user.email,
             },
           });
-        },
+        }
       );
     });
   });
 });
 
 // CLOSE ACCOUNT / DELETE
-router.delete('/:id', async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
     await User.deleteOne({ _id: req.params.id });
     await Feed.deleteMany({ creator: req.params.id });
@@ -72,15 +82,15 @@ router.delete('/:id', async (req, res) => {
 });
 
 // email 인증
-router.post('/email', async (req, res) => {
+router.post("/email", async (req, res) => {
   const { email } = req.body;
 
   User.findOne({ email }).then(async (user) => {
-    if(!user) return res.status(400).json({ isSuccess: false });
+    if (!user) return res.status(400).json({ isSuccess: false });
 
     let transporter = nodemailer.createTransport({
-      service: 'gmail',
-      host: 'smtp.gmlail.com',
+      service: "gmail",
+      host: "smtp.gmlail.com",
       port: 587,
       secure: false,
       auth: {
@@ -92,38 +102,38 @@ router.post('/email', async (req, res) => {
     let mailOptions = {
       from: NODEMAILER_USER,
       to: email,
-      subject: '[FUKIN FRIENDS] 비밀번호 변경 링크입니다.',
+      subject: "[FUKIN FRIENDS] 비밀번호 변경 링크입니다.",
       html: `<div>아래 링크를 클릭해 비밀번호를 변경해주세요.</div><br/><a href="http://localhost:3000/pw/change/${user._id}">인증하기</a>`,
-    }
+    };
 
     transporter.sendMail(mailOptions, function (error, info) {
       if (error) {
         console.log(error);
-        return res.status(400).json({ isSuccess: false })
+        return res.status(400).json({ isSuccess: false });
       }
 
       res.send({ isSuccess: true });
       transporter.close();
     });
-  })
+  });
 });
 
 // Send Phone Auth / POST
-router.post('/phone', (req, res) => {
-  let authNum = '';
+router.post("/phone", (req, res) => {
+  let authNum = "";
   for (let i = 0; i < 6; i++) {
     authNum += Math.floor(Math.random() * 10);
   }
 
-  let user_phone_number = '01056294023';
+  let user_phone_number = "01056294023";
 
   const date = Date.now().toString();
-  const uri = 'ncp:sms:kr:291519131115:fukinfriends'; //서비스 ID
-  const secretKey = 'Dljv9eXbcArxR9QomY5vk6rWIlmd9P6xFBH0rqKd';
-  const accessKey = '2zhD9dT9rnNJWgIYd6rs';
-  const method = 'POST';
-  const space = ' ';
-  const newLine = '\n';
+  const uri = "ncp:sms:kr:291519131115:fukinfriends"; //서비스 ID
+  const secretKey = "Dljv9eXbcArxR9QomY5vk6rWIlmd9P6xFBH0rqKd";
+  const accessKey = "2zhD9dT9rnNJWgIYd6rs";
+  const method = "POST";
+  const space = " ";
+  const newLine = "\n";
   const url = `https://sens.apigw.ntruss.com/sms/v2/services/${uri}/messages`;
   const url2 = `/sms/v2/services/${uri}/messages`;
   const hmac = CryptoJS.algo.HMAC.create(CryptoJS.algo.SHA256, secretKey);
@@ -145,14 +155,14 @@ router.post('/phone', (req, res) => {
       json: true,
       uri: url,
       headers: {
-        'Contenc-type': 'application/json; charset=utf-8',
-        'x-ncp-iam-access-key': accessKey,
-        'x-ncp-apigw-timestamp': date,
-        'x-ncp-apigw-signature-v2': signature,
+        "Contenc-type": "application/json; charset=utf-8",
+        "x-ncp-iam-access-key": accessKey,
+        "x-ncp-apigw-timestamp": date,
+        "x-ncp-apigw-signature-v2": signature,
       },
       body: {
-        type: 'SMS',
-        countryCode: '82',
+        type: "SMS",
+        countryCode: "82",
         from: req.body.paData.phoneNum,
         content: `인증번호 [${authNum}]를 입력해주세요.`,
         messages: [{ to: `${user_phone_number}` }],
@@ -164,26 +174,28 @@ router.post('/phone', (req, res) => {
       } else {
         res.json({ isSuccess: true, num: authNum });
       }
-    },
+    }
   );
 });
 
 // Authentication / POST
-router.post('/user', auth, async (req, res) => {
+router.post("/user", auth, async (req, res) => {
   try {
-    const user = await User.findById(req.user.id).select('-password').populate('groups');
+    const user = await User.findById(req.user.id)
+      .select("-password")
+      .populate("groups");
 
     if (!user) {
-      return res.status(400).json({ msg: '유저가 존재하지 않습니다.' });
+      return res.status(400).json({ msg: "유저가 존재하지 않습니다." });
     }
 
     const userRes = {
       id: user.id,
       name: user.name,
       email: user.email,
-      groups: user.groups
+      groups: user.groups,
     };
-        
+
     res.json(userRes);
   } catch (e) {
     res.status(400).json({ isSuccess: false, msg: e.message });

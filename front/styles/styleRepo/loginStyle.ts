@@ -1,10 +1,10 @@
-import GoogleButton from 'react-google-button';
-import styled from 'styled-components';
+import GoogleButton from "react-google-button";
+import styled from "styled-components";
 
 export const LoginForm = styled.div`
   width: 530px;
   margin: 0 auto;
-  
+
   & > div {
     height: 100%;
     padding: 48px;
@@ -34,7 +34,7 @@ export const LoginButton = styled.button`
   outline: none;
 
   &:hover {
-    background-color: #3D3EBE;
+    background-color: #3d3ebe;
   }
 `;
 
@@ -67,7 +67,7 @@ export const Divider = styled.div`
   position: relative;
 
   &::before {
-    content: '';
+    content: "";
     width: calc(50% - 60px);
     height: 1px;
     background-color: black;
@@ -76,7 +76,7 @@ export const Divider = styled.div`
     top: 50%;
   }
   &::after {
-    content: '';
+    content: "";
     width: calc(50% - 60px);
     height: 1px;
     background-color: black;

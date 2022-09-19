@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const AlbumListContainer = styled.div`
   width: 100%;
@@ -10,7 +10,7 @@ export const Title = styled.div`
   color: #151875;
   font-weight: bold;
   text-align: center;
-  font-family: 'Josefin Sans', sans-serif;
+  font-family: "Josefin Sans", sans-serif;
   margin-bottom: 53px;
 `;
 

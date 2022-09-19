@@ -1,53 +1,53 @@
-import { NextPage } from 'next';
-import { MusicListContainer, Description, Item, List, Title } from './style';
-import zico from 'public/img/zico.jpeg';
-import thinking from 'public/img/thinking.jpeg';
-import randombox from 'public/img/randombox.jpeg';
-import dontknow from 'public/img/dontknow.jpeg';
-import Image from 'next/image';
+import { NextPage } from "next";
+import { MusicListContainer, Description, Item, List, Title } from "./style";
+import zico from "public/img/zico.jpeg";
+import thinking from "public/img/thinking.jpeg";
+import randombox from "public/img/randombox.jpeg";
+import dontknow from "public/img/dontknow.jpeg";
+import Image from "next/image";
 
 let itemList = [
   {
     id: 1,
     img: zico,
-    title: '괴짜',
-    singer: 'Zico',
+    title: "괴짜",
+    singer: "Zico",
   },
   {
     id: 2,
     img: thinking,
-    title: '사람',
-    singer: 'Zico',
+    title: "사람",
+    singer: "Zico",
   },
   {
     id: 3,
     img: randombox,
-    title: '웬수',
-    singer: 'Zico',
+    title: "웬수",
+    singer: "Zico",
   },
   {
     id: 4,
     img: dontknow,
-    title: 'Veni Vidi Vici',
-    singer: 'Zico',
+    title: "Veni Vidi Vici",
+    singer: "Zico",
   },
   {
     id: 5,
     img: thinking,
-    title: '사람',
-    singer: 'Zico',
+    title: "사람",
+    singer: "Zico",
   },
   {
     id: 6,
     img: randombox,
-    title: '웬수',
-    singer: 'Zico',
+    title: "웬수",
+    singer: "Zico",
   },
   {
     id: 7,
     img: dontknow,
-    title: 'Veni Vidi Vici',
-    singer: 'Zico',
+    title: "Veni Vidi Vici",
+    singer: "Zico",
   },
 ];
 

@@ -1,43 +1,54 @@
-const express = require('express');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const { User } = require('../../models/user');
-const config = require('../../config/index');
+const express = require("express");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const { User } = require("../../models/user");
+const config = require("../../config/index");
 
 const { JWT_SECRET } = config;
 
 const router = express.Router();
 
 // Get All User / GET
-router.get('/', async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const users = await User.find();
 
     if (!users)
-      return res.status(400).json({ isSuccess: false, msg: '유저가 존재하지 않습니다.' });
+      return res
+        .status(400)
+        .json({ isSuccess: false, msg: "유저가 존재하지 않습니다." });
 
     res.status(200).json({
       isSuccess: true,
       users: users,
     });
   } catch (e) {
-    res.json({ isSuccess: false, msg: e.message })
+    res.json({ isSuccess: false, msg: e.message });
   }
 });
 
 // Register User / POST
-router.post('/register', (req, res) => {
+router.post("/register", (req, res) => {
   const { name, email, password } = req.body.user;
 
-  if (!name) return res.status(400).json({ isSuccess: false, msg: '이름을 작성해주세요.' });
+  if (!name)
+    return res
+      .status(400)
+      .json({ isSuccess: false, msg: "이름을 작성해주세요." });
   else if (!email)
-    return res.status(400).json({ isSuccess: false, msg: '이메일을 작성해주세요.' });
+    return res
+      .status(400)
+      .json({ isSuccess: false, msg: "이메일을 작성해주세요." });
   else if (!password)
-    return res.status(400).json({ isSuccess: false, msg: '비밀번호를 입력해주세요.' });
+    return res
+      .status(400)
+      .json({ isSuccess: false, msg: "비밀번호를 입력해주세요." });
 
   User.findOne({ email }).then((user) => {
     if (user)
-      return res.status(400).json({ isSuccess: false, msg: '이미 존재하는 이메일입니다.' });
+      return res
+        .status(400)
+        .json({ isSuccess: false, msg: "이미 존재하는 이메일입니다." });
 
     const newUser = new User({
       name,
@@ -67,7 +78,7 @@ router.post('/register', (req, res) => {
                   email: user.email,
                 },
               });
-            },
+            }
           );
         });
       });
@@ -76,11 +87,13 @@ router.post('/register', (req, res) => {
 });
 
 // Change User Password / PUT
-router.put('/password', (req, res) => {
+router.put("/password", (req, res) => {
   const { userId, password } = req.body;
 
   if (!password)
-    return res.status(400).json({ isSuccess: false, msg: '비밀번호를 입력해주세요.' });
+    return res
+      .status(400)
+      .json({ isSuccess: false, msg: "비밀번호를 입력해주세요." });
 
   User.findOne({ _id: userId }).then((user) => {
     bcrypt.genSalt(10, (err, salt) => {
@@ -91,7 +104,7 @@ router.put('/password', (req, res) => {
           await User.findByIdAndUpdate(
             user.id,
             { password: hash },
-            { new: true },
+            { new: true }
           );
 
           jwt.sign(
@@ -99,7 +112,8 @@ router.put('/password', (req, res) => {
             JWT_SECRET,
             { expiresIn: 36000 },
             (err, token) => {
-              if (err) return res.status(400).json({ isSuccess: false, msg: err });
+              if (err)
+                return res.status(400).json({ isSuccess: false, msg: err });
 
               res.json({
                 isSuccess: true,
@@ -110,7 +124,7 @@ router.put('/password', (req, res) => {
                   email: user.email,
                 },
               });
-            },
+            }
           );
         } catch (e) {
           res.json({ isSuccess: false, msg: e.message });
@@ -121,22 +135,22 @@ router.put('/password', (req, res) => {
 });
 
 // 유저 검색
-router.get('/search/:searchTerm', async (req, res) => {
+router.get("/search/:searchTerm", async (req, res) => {
   try {
     const users = await User.find({
       name: {
         $regex: req.params.searchTerm,
-        $options: 'i',
+        $options: "i",
       },
     });
 
-    let result = users.map(item => {
+    let result = users.map((item) => {
       return {
         id: item._id,
         name: item.name,
-        email: item.email
-      }
-    })
+        email: item.email,
+      };
+    });
 
     res.send({ isSuccess: true, users: result });
   } catch (e) {

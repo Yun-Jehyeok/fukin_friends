@@ -1,5 +1,5 @@
-const jwt = require('jsonwebtoken');
-const config = require('../config/index');
+const jwt = require("jsonwebtoken");
+const config = require("../config/index");
 
 const { JWT_SECRET } = config;
 
@@ -9,7 +9,7 @@ const auth = (req, res, next) => {
   if (!token) {
     return res
       .status(401)
-      .json({ msg: '토큰이 존재하지 않아 인증이 거부되었습니다.' });
+      .json({ msg: "토큰이 존재하지 않아 인증이 거부되었습니다." });
   }
 
   try {

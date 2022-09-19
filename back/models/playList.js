@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const PlayListSchema = new mongoose.Schema({
   title: {
@@ -7,19 +7,17 @@ const PlayListSchema = new mongoose.Schema({
   },
   creator: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'user',
+    ref: "user",
   },
-  tags: [
-    { type: String }
-  ],
+  tags: [{ type: String }],
   musics: [
     {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'music'
-    }
-  ]
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "music",
+    },
+  ],
 });
 
-const PlayList = mongoose.model('playList', PlayListSchema);
+const PlayList = mongoose.model("playList", PlayListSchema);
 
 module.exports = { PlayList };

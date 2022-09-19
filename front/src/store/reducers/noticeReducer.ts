@@ -1,14 +1,14 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
-import type { PayloadAction } from '@reduxjs/toolkit';
+import type { PayloadAction } from "@reduxjs/toolkit";
 import type {
-    CreateNoticeReq,
-    CreateNoticeRes,
-    LoadAllNoticeReq,
-    LoadAllNoticeRes
-} from '../types/notice';
-import type { ResponseFailure } from '../types';
-import { INotice } from '../types/notice';
+  CreateNoticeReq,
+  CreateNoticeRes,
+  LoadAllNoticeReq,
+  LoadAllNoticeRes,
+} from "../types/notice";
+import type { ResponseFailure } from "../types";
+import { INotice } from "../types/notice";
 
 export type NoticeStateType = {
   notices: INotice[];
@@ -25,7 +25,7 @@ const initialState: NoticeStateType = {
 };
 
 const noticeSlice = createSlice({
-  name: 'notice',
+  name: "notice",
   initialState,
   reducers: {
     // 전체 공지사항 로딩
@@ -48,14 +48,14 @@ const noticeSlice = createSlice({
       state.errMsg = null;
     },
     createNoticeSuccess(state, action: PayloadAction<CreateNoticeRes>) {
-      window.location.href = '/notice';
+      window.location.href = "/notice";
 
       state.isLoading = false;
     },
     createNoticeFailure(state, action: PayloadAction<ResponseFailure>) {
       state.isLoading = false;
       state.errMsg = action.payload.data.msg;
-    }
+    },
   },
 });
 

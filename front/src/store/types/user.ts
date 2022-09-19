@@ -36,7 +36,7 @@ export type ChangePWRes = { user: IUser; token: string };
 export type LoadUserReq = {
   token: string | null;
 };
-export type LoadUserRes = { 
+export type LoadUserRes = {
   id: string;
   name: string;
   email: string;
@@ -52,7 +52,7 @@ export type LogoutUserReq = {
 export type SearchUserReq = {
   name: string;
 };
-export type SearchUserRes = { 
+export type SearchUserRes = {
   users: IUser[];
 };
 
@@ -65,6 +65,6 @@ export type PAResFail = { success: boolean };
 export type SendEmailReq = {
   email: string;
 };
-export type SendEmailRes = { 
+export type SendEmailRes = {
   isSuccess: boolean;
 };

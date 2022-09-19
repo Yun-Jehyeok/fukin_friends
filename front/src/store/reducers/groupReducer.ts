@@ -1,6 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
-import type { PayloadAction } from '@reduxjs/toolkit';
+import type { PayloadAction } from "@reduxjs/toolkit";
 import type {
   ChangeGroupFail,
   ChangeGroupReq,
@@ -8,9 +8,9 @@ import type {
   CreateGroupReq,
   CreateGroupRes,
   LoadGroupsReq,
-  LoadGroupsRes
-} from '../types/group';
-import { IGroup } from '../types/group';
+  LoadGroupsRes,
+} from "../types/group";
+import { IGroup } from "../types/group";
 
 export type GroupStateType = {
   groups: IGroup[];
@@ -21,18 +21,18 @@ export type GroupStateType = {
 const initialState: GroupStateType = {
   groups: [],
   isLoading: false,
-  currentGroup: ''
+  currentGroup: "",
 };
 
 const groupSlice = createSlice({
-  name: 'group',
+  name: "group",
   initialState,
   reducers: {
     // 전체 그룹 로딩
     loadGroupsRequest(state, action: PayloadAction<LoadGroupsReq>) {
       state.isLoading = true;
     },
-    loadGroupsSuccess(state, action: PayloadAction<LoadGroupsRes>) {      
+    loadGroupsSuccess(state, action: PayloadAction<LoadGroupsRes>) {
       state.isLoading = false;
       state.groups = action.payload.groups;
       state.currentGroup = action.payload.groups[0].title;
@@ -67,7 +67,7 @@ const groupSlice = createSlice({
     },
     changeGroupFailure(state, action: PayloadAction<ChangeGroupFail>) {
       state.isLoading = false;
-    }
+    },
   },
 });
 

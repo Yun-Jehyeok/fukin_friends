@@ -1,27 +1,27 @@
 import styled from "styled-components";
 
 export const AuthContainer = styled.div`
-    width: 100%;
-    height: 100vh;
-    overflow-x: hidden;
-    overflow-y: auto;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    background-color: #F4F9FC;
+  width: 100%;
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  background-color: #f4f9fc;
 `;
 
 export const AuthWrap = styled.div`
-    width: 480px;
-    margin: 0 auto;
+  width: 480px;
+  margin: 0 auto;
 `;
 
 export const AuthTitle = styled.div`
-    font-weight: bold;
-    font-size: 48px;
-    text-align: center;
-    margin-bottom: 32px;
-    color: #5455dd;
+  font-weight: bold;
+  font-size: 48px;
+  text-align: center;
+  margin-bottom: 32px;
+  color: #5455dd;
 `;
 
 export const AuthLabel = styled.div`
@@ -32,26 +32,26 @@ export const AuthLabel = styled.div`
 `;
 
 export const AuthLabelSpan = styled.span`
-    font-size: 12px;
-    margin-left: 4px;
-    color: gray;
+  font-size: 12px;
+  margin-left: 4px;
+  color: gray;
 `;
 
-export const AuthInput = styled.input.attrs({ autoComplete: 'off' })`
-    width: 100%;
-    height: 48px;
-    margin-bottom: 16px;
-    outline: none;
-    padding-left: 12px;
-    border: 1px solid black;
-    font-size: 16px;
+export const AuthInput = styled.input.attrs({ autoComplete: "off" })`
+  width: 100%;
+  height: 48px;
+  margin-bottom: 16px;
+  outline: none;
+  padding-left: 12px;
+  border: 1px solid black;
+  font-size: 16px;
 `;
 
 export const AuthInputErrMsg = styled.div`
-    font-size: 12px;
-    color: red;
-    margin-bottom: 16px;
-    margin-top: -8px;
+  font-size: 12px;
+  color: red;
+  margin-bottom: 16px;
+  margin-top: -8px;
 `;
 
 export const AuthButton = styled.button`
@@ -67,6 +67,6 @@ export const AuthButton = styled.button`
   outline: none;
 
   &:hover {
-    background-color: #3D3EBE;
+    background-color: #3d3ebe;
   }
 `;
