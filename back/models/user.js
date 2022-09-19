@@ -15,10 +15,9 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  login_way: {
+  phone: {
     type: String,
-    required: true,
-    default: 'email',
+    required,
   },
   register_date: {
     type: Date,
@@ -30,30 +29,30 @@ const UserSchema = new mongoose.Schema({
       ref: 'feed',
     },
   ],
-  views: [
+  notices: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'feed',
+      ref: 'notice',
     },
   ],
-  comments: [
-    {
-      feed_id: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'feed',
-      },
-      comment_id: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'comment',
-      },
-    },
-  ],
-  groups: [
+  events: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'group'
-    }
-  ]
+      ref: 'event',
+    },
+  ],
+  photos: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'photo',
+    },
+  ],
+  playLists: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'playList',
+    },
+  ],
 });
 
 const User = mongoose.model('user', UserSchema);

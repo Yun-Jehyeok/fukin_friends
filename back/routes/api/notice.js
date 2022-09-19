@@ -1,57 +1,62 @@
 const express = require('express');
 const { User } = require('../../models/user');
-const { Group } = require('../../models/group');
 const { Notice } = require('../../models/notice');
 
 const router = express.Router();
 
-// Find All Notice / GET
-router.get('/:groupId', (req, res) => {
-  let groupId = req.params.groupId;
+// Find All Notices / GET
+router.get('/', async (req, res) => {
+  const notices = await Notice.find();
 
-  Group.findOne({ _id: groupId }).populate('notices').then((group) => {
-    console.log("groups:::", group);
-
-    if(group) {
-        res.json({ notices: group.notices });
-    } else {
-        res.json({ isSuccess: false });
-    }
-  })
+  if (!notices)
+    return res.status(400).json({ isSuccess: false, msg: '공지사항이 존재하지 않습니다.' });
+  
+  res.status(200).json({
+    isSuccess: true,
+    notices: notices,
+  });
 })
 
+// Get Notices with Pagination / GET
+router.get('/skip/:skip', async (req, res) => {
+  try {
+    const noticeCount = await Notice.countDocuments();
+    const noticeFindResult = await Notice.find()
+      .skip(Number(req.params.skip))
+      .limit(12)
+      .sort({ date: -1 });
+
+    res.json({ isSuccess: true, allNoticesCnt: noticeCount, notices: noticeFindResult });
+  } catch (e) {
+    res.json({ isSuccess: false, msg: e.message });
+  }
+});
+
 // Create Notice / POST
-router.post('/', (req, res) => {
-  const { userId, groupId, title, content } = req.body.notice;
+router.post('/create', (req, res) => {
+  const { userId, title, content, location, date } = req.body;
 
-  if (!title)
-    return res.status(400).json({ msg: '제목을 작성해주세요.' });
-
-    Group.findOne({ _id: groupId }).then((group) => {
-
-    })
-  User.findOne({ userId }).then((user) => {
+  User.findOne({ _id: userId }).then((user) => {
     if (!user)
-      return res.status(400).json({ msg: '유저를 찾을 수 없습니다.' });
+      return res.status(400).json({ isSuccess: false });
 
-    const newGroup = new Group({
+    const newNotice = new Notice({
         title,
-        member
+        content, 
+        location, 
+        date,
+        creator: userId
     })
     
-    newGroup.save().then((group) => {
+    newNotice.save().then(() => {
         User.findByIdAndUpdate(userId, {
             $push: {
-              groups: newGroup._id,
+              notices: newNotice._id,
             },
         }).then(() => {
-            res.json({
-                id: group.id,
-                title: group.title,
-                member: group.member
-            })
+            res.json({ isSuccess: true })
         }).catch(e => {
-            res.status(400).json({ msg: e });
+            res.status(400).json({ isSuccess: false });
         });
     })
   });

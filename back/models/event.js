@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
 const moment = require('moment');
 
-const FeedSchema = new mongoose.Schema({
+const EventSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true,
   },
-  contents: {
+  content: {
     type: String,
     required: true,
   },
@@ -15,22 +15,18 @@ const FeedSchema = new mongoose.Schema({
     default: moment().format('MMMM DD, YYYY'),
     required: true,
   },
+  registerDate: {
+    type: Date,
+    default: moment().format('MMMM DD, YYYY'),
+    required: true,
+  },
   creator: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'user',
     required: true,
-  },
-  previewImg: {
-    type: String
-  },
-  images: [
-    { type: String }
-  ],
-  tags: [
-    { type: String }
-  ]
+  }
 });
 
-const Feed = mongoose.model('feed', FeedSchema);
+const Event = mongoose.model('event', EventSchema);
 
-module.exports = { Feed };
+module.exports = { Event };
