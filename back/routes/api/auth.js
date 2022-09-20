@@ -181,9 +181,7 @@ router.post("/phone", (req, res) => {
 // Authentication / POST
 router.post("/user", auth, async (req, res) => {
   try {
-    const user = await User.findById(req.user.id)
-      .select("-password")
-      .populate("groups");
+    const user = await User.findById(req.user.id).select("-password");
 
     if (!user) {
       return res.status(400).json({ msg: "유저가 존재하지 않습니다." });
@@ -193,7 +191,6 @@ router.post("/user", auth, async (req, res) => {
       id: user.id,
       name: user.name,
       email: user.email,
-      groups: user.groups,
     };
 
     res.json(userRes);

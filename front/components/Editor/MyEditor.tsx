@@ -19,7 +19,7 @@ import { useAppDispatch } from "hooks/reduxHooks";
 import { noticeActions } from "src/store/reducers/noticeReducer";
 
 const WysiwygEditor: NextPage = () => {
-  const { user, groups } = useSelector((state: RootState) => state.user);
+  const { user } = useSelector((state: RootState) => state.user);
 
   const dispatch = useAppDispatch();
 
@@ -45,14 +45,13 @@ const WysiwygEditor: NextPage = () => {
 
       const notice = {
         userId: user.id,
-        groupId: groups[0].id,
         title: title.value,
         content: content,
       };
 
       dispatch(noticeActions.createNoticeRequest(notice));
     },
-    [user, groups, dispatch]
+    [user, dispatch]
   );
 
   return (

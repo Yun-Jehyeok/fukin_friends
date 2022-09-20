@@ -1,4 +1,4 @@
-const dotenv = require('dotenv');
+const dotenv = require("dotenv");
 
 dotenv.config();
 
@@ -7,5 +7,5 @@ module.exports = {
   PORT: process.env.PORT,
   JWT_SECRET: process.env.JWT_SECRET,
   NODEMAILER_USER: process.env.NODEMAILER_USER,
-  NODEMAILER_PASS: process.env.NODEMAILER_PASS
+  NODEMAILER_PASS: process.env.NODEMAILER_PASS,
 };

@@ -15,7 +15,7 @@ import {
 } from "styles/styleRepo/authFormStyle";
 import { PwInquiryForm } from "styles/styleRepo/pwInquiry";
 
-const CreateGroup: NextPage = () => {
+const ChangePassword: NextPage = () => {
   const router = useRouter();
   const { userId } = router.query;
 
@@ -107,4 +107,4 @@ const CreateGroup: NextPage = () => {
   );
 };
 
-export default CreateGroup;
+export default ChangePassword;
