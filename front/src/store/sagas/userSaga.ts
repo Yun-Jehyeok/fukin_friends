@@ -45,7 +45,10 @@ function* registerUserApi(action: PayloadAction<RegisterUserReq>) {
       e?.name === "AxiosError" ? e.response.data.msg : "서버에러입니다.";
 
     yield put(
-      userActions.registerUserFailure({ status: { ok: false }, data: { msg } })
+      userActions.registerUserFailure({
+        isSuccess: false,
+        msg: "서버에러입니다.",
+      })
     );
   }
 }
@@ -68,7 +71,7 @@ function* loginUserApi(action: PayloadAction<LoginUserReq>) {
       e?.name === "AxiosError" ? e.response.data.msg : "서버에러입니다.";
 
     yield put(
-      userActions.loginUserFailure({ status: { ok: false }, data: { msg } })
+      userActions.loginUserFailure({ isSuccess: false, msg: "서버에러입니다." })
     );
   }
 }
@@ -91,7 +94,7 @@ function* changePWApi(action: PayloadAction<ChangePWReq>) {
       e?.name === "AxiosError" ? e.response.data.msg : "서버에러입니다.";
 
     yield put(
-      userActions.changePWFailure({ status: { ok: false }, data: { msg } })
+      userActions.changePWFailure({ isSuccess: false, msg: "서버에러입니다." })
     );
   }
 }
@@ -114,7 +117,7 @@ function* loadUserApi(action: PayloadAction<LoadUserReq>) {
       e?.name === "AxiosError" ? e.response.data.msg : "서버에러입니다.";
 
     yield put(
-      userActions.loadUserFailure({ status: { ok: false }, data: { msg } })
+      userActions.loadUserFailure({ isSuccess: false, msg: "서버에러입니다." })
     );
   }
 }
@@ -170,7 +173,9 @@ function* paApi(action: PayloadAction<PAReq>) {
 
     yield put(userActions.userPASuccess(data));
   } catch (e: any) {
-    yield put(userActions.userPAFailure({ success: false }));
+    yield put(
+      userActions.userPAFailure({ isSuccess: false, msg: "서버에러입니다." })
+    );
   }
 }
 
@@ -188,7 +193,9 @@ function* sendEmailApi(action: PayloadAction<SendEmailReq>) {
 
     yield put(userActions.sendEmailSuccess(data));
   } catch (e: any) {
-    yield put(userActions.sendEmailFailure({ isSuccess: false }));
+    yield put(
+      userActions.sendEmailFailure({ isSuccess: false, msg: "서버에러입니다." })
+    );
   }
 }
 

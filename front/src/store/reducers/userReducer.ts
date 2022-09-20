@@ -11,7 +11,6 @@ import type {
   LogoutUserReq,
   PAReq,
   PARes,
-  PAResFail,
   RegisterUserReq,
   RegisterUserRes,
   SearchUserReq,
@@ -27,8 +26,8 @@ export type UserStateType = {
   isLoading: boolean;
   errMsg: null | string;
   token: null | string;
-  isSuccess: boolean; // PA : Phone Authentication
-  PANum?: string;
+  isSuccess: boolean;
+  PANum?: string; // PA : Phone Authentication
   searchedUser: IUser[];
 };
 
@@ -62,7 +61,7 @@ const userSlice = createSlice({
       localStorage.removeItem("token");
 
       state.isLoading = false;
-      state.errMsg = action.payload.data.msg;
+      state.errMsg = action.payload.msg;
     },
 
     // 로그인
@@ -82,7 +81,7 @@ const userSlice = createSlice({
       localStorage.removeItem("token");
 
       state.isLoading = false;
-      state.errMsg = action.payload.data.msg;
+      state.errMsg = action.payload.msg;
     },
 
     // 비밀번호 변경
@@ -107,7 +106,7 @@ const userSlice = createSlice({
       localStorage.removeItem("token");
 
       state.isLoading = false;
-      state.errMsg = action.payload.data.msg;
+      state.errMsg = action.payload.msg;
     },
 
     // 유저 인증
@@ -117,12 +116,12 @@ const userSlice = createSlice({
     },
     loadUserSuccess(state, action: PayloadAction<LoadUserRes>) {
       state.isLoading = false;
-      state.user = action.payload;
+      state.user = action.payload.user;
       state.token = localStorage.getItem("token");
     },
     loadUserFailure(state, action: PayloadAction<ResponseFailure>) {
       state.isLoading = false;
-      state.errMsg = action.payload.data.msg;
+      state.errMsg = action.payload.msg;
     },
 
     // 로그아웃
@@ -152,7 +151,7 @@ const userSlice = createSlice({
       state.isSuccess = true;
       state.PANum = action.payload.num;
     },
-    userPAFailure(state, action: PayloadAction<PAResFail>) {
+    userPAFailure(state, action: PayloadAction<ResponseFailure>) {
       state.isLoading = false;
       state.isSuccess = false;
       state.errMsg = "인증번호를 확인해주세요.";
@@ -180,7 +179,7 @@ const userSlice = createSlice({
       state.isLoading = false;
       state.isSuccess = action.payload.isSuccess;
     },
-    sendEmailFailure(state, action: PayloadAction<SendEmailRes>) {
+    sendEmailFailure(state, action: PayloadAction<ResponseFailure>) {
       state.isLoading = false;
       state.isSuccess = action.payload.isSuccess;
     },

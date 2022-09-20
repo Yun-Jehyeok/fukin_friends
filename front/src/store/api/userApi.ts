@@ -21,12 +21,12 @@ axios.defaults.baseURL = process.env.NEXT_PUBLIC_SERVER_URL;
 
 export const registerUser = async (user: RegisterUserReq) => {
   return await axios.post<RegisterUserRes>("/api/user/register", {
-    user: user.user,
+    user: user,
   });
 };
 
 export const loginUser = async (user: LoginUserReq) => {
-  return await axios.post<LoginUserRes>("/api/auth/login", { user: user.user });
+  return await axios.post<LoginUserRes>("/api/auth/login", { user: user });
 };
 
 export const changePWUser = async (user: ChangePWReq) => {

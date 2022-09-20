@@ -46,7 +46,7 @@ const WysiwygEditor: NextPage = () => {
       const notice = {
         userId: user.id,
         title: title.value,
-        content: content,
+        content,
       };
 
       dispatch(noticeActions.createNoticeRequest(notice));

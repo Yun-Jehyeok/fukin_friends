@@ -17,7 +17,7 @@ const UserSchema = new mongoose.Schema({
   },
   phone: {
     type: String,
-    required,
+    required: true,
   },
   register_date: {
     type: Date,
