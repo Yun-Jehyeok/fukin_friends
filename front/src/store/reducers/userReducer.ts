@@ -52,6 +52,7 @@ const userSlice = createSlice({
     },
     registerUserSuccess(state, action: PayloadAction<RegisterUserRes>) {
       localStorage.setItem("token", action.payload.token);
+      window.location.href = "/";
 
       state.isLoading = false;
       state.user = action.payload.user;
@@ -176,6 +177,9 @@ const userSlice = createSlice({
       state.isLoading = true;
     },
     sendEmailSuccess(state, action: PayloadAction<SendEmailRes>) {
+      alert("이메일이 성공적으로 발송되었습니다.");
+      console.log("here");
+
       state.isLoading = false;
       state.isSuccess = action.payload.isSuccess;
     },

@@ -9,6 +9,7 @@ export type RegisterUserReq = {
   name: string;
   email: string;
   password: string;
+  phone: string;
 };
 export type RegisterUserRes = {
   isSuccess: boolean;

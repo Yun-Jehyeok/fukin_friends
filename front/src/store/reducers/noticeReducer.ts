@@ -39,7 +39,7 @@ const noticeSlice = createSlice({
     },
     loadAllNoticeFailure(state, action: PayloadAction<ResponseFailure>) {
       state.isLoading = false;
-      state.errMsg = action.payload.data.msg;
+      state.errMsg = action.payload.msg;
     },
 
     // 공지사항 생성
@@ -54,7 +54,7 @@ const noticeSlice = createSlice({
     },
     createNoticeFailure(state, action: PayloadAction<ResponseFailure>) {
       state.isLoading = false;
-      state.errMsg = action.payload.data.msg;
+      state.errMsg = action.payload.msg;
     },
   },
 });

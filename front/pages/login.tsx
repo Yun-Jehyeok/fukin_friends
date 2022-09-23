@@ -45,12 +45,12 @@ const Login: NextPage = () => {
       }
 
       if (!isEmailBlank && !isPasswordBlank) {
-        const user = {
-          email: email.value,
-          password: password.value,
-        };
-
-        dispatch(userActions.loginUserRequest({ user }));
+        dispatch(
+          userActions.loginUserRequest({
+            email: email.value,
+            password: password.value,
+          })
+        );
       }
     },
     [dispatch, isEmailBlank, isPasswordBlank, email, password]

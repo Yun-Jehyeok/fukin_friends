@@ -29,7 +29,7 @@ router.get("/", async (req, res) => {
 
 // Register User / POST
 router.post("/register", (req, res) => {
-  const { name, email, password } = req.body.user;
+  const { name, email, password, phone } = req.body;
 
   if (!name)
     return res
@@ -54,6 +54,7 @@ router.post("/register", (req, res) => {
       name,
       email,
       password,
+      phone,
     });
 
     bcrypt.genSalt(10, (err, salt) => {

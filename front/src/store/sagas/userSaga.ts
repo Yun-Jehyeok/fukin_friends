@@ -41,9 +41,6 @@ function* registerUserApi(action: PayloadAction<RegisterUserReq>) {
 
     yield put(userActions.registerUserSuccess(data));
   } catch (e: any) {
-    const msg =
-      e?.name === "AxiosError" ? e.response.data.msg : "서버에러입니다.";
-
     yield put(
       userActions.registerUserFailure({
         isSuccess: false,
@@ -67,9 +64,6 @@ function* loginUserApi(action: PayloadAction<LoginUserReq>) {
 
     yield put(userActions.loginUserSuccess(data));
   } catch (e: any) {
-    const msg =
-      e?.name === "AxiosError" ? e.response.data.msg : "서버에러입니다.";
-
     yield put(
       userActions.loginUserFailure({ isSuccess: false, msg: "서버에러입니다." })
     );
@@ -90,9 +84,6 @@ function* changePWApi(action: PayloadAction<ChangePWReq>) {
 
     yield put(userActions.changePWSuccess(data));
   } catch (e: any) {
-    const msg =
-      e?.name === "AxiosError" ? e.response.data.msg : "서버에러입니다.";
-
     yield put(
       userActions.changePWFailure({ isSuccess: false, msg: "서버에러입니다." })
     );
@@ -113,9 +104,6 @@ function* loadUserApi(action: PayloadAction<LoadUserReq>) {
 
     yield put(userActions.loadUserSuccess(data));
   } catch (e: any) {
-    const msg =
-      e?.name === "AxiosError" ? e.response.data.msg : "서버에러입니다.";
-
     yield put(
       userActions.loadUserFailure({ isSuccess: false, msg: "서버에러입니다." })
     );

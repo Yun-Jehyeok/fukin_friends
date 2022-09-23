@@ -47,12 +47,12 @@ const ChangePassword: NextPage = () => {
         if (password.value === passwordCheck.value) {
           setIsPasswordCheckErr(false);
 
-          let user = {
-            userId,
-            password: password.value,
-          };
-
-          dispatch(userActions.changePWRequest(user));
+          dispatch(
+            userActions.changePWRequest({
+              userId,
+              password: password.value,
+            })
+          );
         } else {
           setIsPasswordCheckErr(true);
           setPasswordCheckErrMsg(
@@ -61,7 +61,7 @@ const ChangePassword: NextPage = () => {
         }
       }
     },
-    [dispatch, password, passwordCheck]
+    [dispatch, userId, password, passwordCheck]
   );
 
   return (

@@ -22,13 +22,10 @@ function* loadAllNoticeApi(action: PayloadAction<LoadAllNoticeReq>) {
 
     yield put(noticeActions.loadAllNoticeSuccess(data));
   } catch (e: any) {
-    const msg =
-      e?.name === "AxiosError" ? e.response.data.msg : "서버에러입니다.";
-
     yield put(
       noticeActions.loadAllNoticeFailure({
-        status: { ok: false },
-        data: { msg },
+        isSuccess: false,
+        msg: e.message,
       })
     );
   }
@@ -48,13 +45,10 @@ function* createNoticeApi(action: PayloadAction<CreateNoticeReq>) {
 
     yield put(noticeActions.createNoticeSuccess(data));
   } catch (e: any) {
-    const msg =
-      e?.name === "AxiosError" ? e.response.data.msg : "서버에러입니다.";
-
     yield put(
       noticeActions.createNoticeFailure({
-        status: { ok: false },
-        data: { msg },
+        isSuccess: false,
+        msg: e.message,
       })
     );
   }

@@ -82,9 +82,7 @@ const Register: NextPage = () => {
         }
       }, 1000);
 
-      dispatch(
-        userActions.userPARequest({ name: name.value, phoneNum: phone.value })
-      );
+      dispatch(userActions.userPARequest({ phoneNum: phone.value }));
     },
     [dispatch, name, phone]
   );
@@ -127,13 +125,14 @@ const Register: NextPage = () => {
         if (password.value === passwordCheck.value) {
           setIsPasswordCheckErr(false);
 
-          const user = {
-            name: name.value,
-            email: email.value,
-            password: password.value,
-          };
-
-          dispatch(userActions.registerUserRequest({ user }));
+          dispatch(
+            userActions.registerUserRequest({
+              name: name.value,
+              email: email.value,
+              password: password.value,
+              phone: phone.value,
+            })
+          );
         } else {
           setIsPasswordCheckErr(true);
         }
