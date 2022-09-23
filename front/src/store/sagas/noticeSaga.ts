@@ -5,7 +5,6 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import type {
   CreateNoticeReq,
   CreateNoticeRes,
-  LoadAllNoticeReq,
   LoadAllNoticeRes,
 } from "../types/notice";
 
@@ -13,12 +12,9 @@ import { createNotice, loadAllNotice } from "../api/noticeApi";
 import { noticeActions } from "../reducers/noticeReducer";
 
 // 전체 공지사항 로딩
-function* loadAllNoticeApi(action: PayloadAction<LoadAllNoticeReq>) {
+function* loadAllNoticeApi() {
   try {
-    const { data }: AxiosResponse<LoadAllNoticeRes> = yield call(
-      loadAllNotice,
-      action.payload
-    );
+    const { data }: AxiosResponse<LoadAllNoticeRes> = yield call(loadAllNotice);
 
     yield put(noticeActions.loadAllNoticeSuccess(data));
   } catch (e: any) {

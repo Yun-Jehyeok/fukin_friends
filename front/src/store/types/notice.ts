@@ -15,5 +15,7 @@ export type CreateNoticeReq = {
   userId: string;
   title: string;
   content: string;
+  location: string;
+  date: Date;
 };
 export type CreateNoticeRes = { isSuccess: boolean };

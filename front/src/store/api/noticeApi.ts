@@ -13,5 +13,5 @@ export const loadAllNotice = async () => {
 };
 
 export const createNotice = async (notice: CreateNoticeReq) => {
-  return await axios.post<CreateNoticeRes>("/api/notice", { notice: notice });
+  return await axios.post<CreateNoticeRes>("/api/notice", notice);
 };

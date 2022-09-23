@@ -4,12 +4,16 @@ import "tui-color-picker/dist/tui-color-picker.css";
 import "@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css";
 import { Editor } from "@toast-ui/react-editor";
 import colorSyntax from "@toast-ui/editor-plugin-color-syntax";
-import { useCallback, useRef } from "react";
+import { useCallback, useRef, useState } from "react";
 import { NextPage } from "next";
 import {
   CreateNoticeDesc,
   CreateNoticeTitle,
+  DateInput,
   EditorButton,
+  LocationInput,
+  LocationModal,
+  LocDateCont,
   TitleInput,
 } from "./style";
 import { useStringInput } from "hooks/useInput";
@@ -17,13 +21,18 @@ import { useSelector } from "react-redux";
 import { RootState } from "src/configureStore";
 import { useAppDispatch } from "hooks/reduxHooks";
 import { noticeActions } from "src/store/reducers/noticeReducer";
+import DaumPostcode from "react-daum-postcode";
 
 const WysiwygEditor: NextPage = () => {
+  const [locationData, setLocationData] = useState("위치를 입력해주세요.");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const { user } = useSelector((state: RootState) => state.user);
 
   const dispatch = useAppDispatch();
 
   const title = useStringInput("");
+  const date = useStringInput("");
 
   const editorRef = useRef(null);
   const toolbarItems = [
@@ -36,6 +45,11 @@ const WysiwygEditor: NextPage = () => {
     ["scrollSync"],
   ];
 
+  const selectAddress = (data: any) => {
+    setIsModalOpen(false);
+    setLocationData(data.address);
+  };
+
   const onSubmit = useCallback(
     (e: React.MouseEvent<HTMLElement>) => {
       e.preventDefault();
@@ -43,15 +57,15 @@ const WysiwygEditor: NextPage = () => {
       const editorIns = editorRef.current.getInstance();
       const content = editorIns.getMarkdown();
 
-      const notice = {
-        userId: user.id,
-        title: title.value,
-        content,
-      };
-
-      dispatch(noticeActions.createNoticeRequest(notice));
+      // dispatch(
+      //   noticeActions.createNoticeRequest({
+      //     userId: user.id,
+      //     title: title.value,
+      //     content,
+      //   })
+      // );
     },
-    [user, dispatch]
+    [user, title, dispatch]
   );
 
   return (
@@ -64,6 +78,18 @@ const WysiwygEditor: NextPage = () => {
         placeholder="제목을 입력해주세요."
         {...title}
       />
+
+      <LocDateCont>
+        <LocationInput
+          onClick={() => {
+            setIsModalOpen(true);
+          }}
+        >
+          {locationData}
+        </LocationInput>
+        <DateInput type="date" {...date} />
+      </LocDateCont>
+
       <Editor
         ref={editorRef}
         initialValue=""
@@ -76,6 +102,14 @@ const WysiwygEditor: NextPage = () => {
         plugins={[colorSyntax]}
       />
       <EditorButton onClick={onSubmit}>Write</EditorButton>
+
+      <LocationModal isOpen={isModalOpen}>
+        <DaumPostcode
+          onComplete={selectAddress}
+          autoClose={true}
+          defaultQuery=""
+        />
+      </LocationModal>
     </div>
   );
 };

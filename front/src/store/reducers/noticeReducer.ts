@@ -4,7 +4,6 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import type {
   CreateNoticeReq,
   CreateNoticeRes,
-  LoadAllNoticeReq,
   LoadAllNoticeRes,
 } from "../types/notice";
 import type { ResponseFailure } from "../types";
@@ -29,7 +28,7 @@ const noticeSlice = createSlice({
   initialState,
   reducers: {
     // 전체 공지사항 로딩
-    loadAllNoticeRequest(state, action: PayloadAction<LoadAllNoticeReq>) {
+    loadAllNoticeRequest(state) {
       state.isLoading = true;
       state.errMsg = null;
     },
