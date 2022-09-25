@@ -16,6 +16,6 @@ export type CreateNoticeReq = {
   title: string;
   content: string;
   location: string;
-  date: Date;
+  date: string;
 };
 export type CreateNoticeRes = { isSuccess: boolean };

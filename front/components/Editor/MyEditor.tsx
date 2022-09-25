@@ -14,6 +14,7 @@ import {
   LocationInput,
   LocationModal,
   LocDateCont,
+  ModalCloseBtn,
   TitleInput,
 } from "./style";
 import { useStringInput } from "hooks/useInput";
@@ -57,15 +58,18 @@ const WysiwygEditor: NextPage = () => {
       const editorIns = editorRef.current.getInstance();
       const content = editorIns.getMarkdown();
 
-      // dispatch(
-      //   noticeActions.createNoticeRequest({
-      //     userId: user.id,
-      //     title: title.value,
-      //     content,
-      //   })
-      // );
+      console.log("user:::", user);
+      dispatch(
+        noticeActions.createNoticeRequest({
+          userId: user.id,
+          title: title.value,
+          content,
+          location: locationData,
+          date: date.value,
+        })
+      );
     },
-    [user, title, dispatch]
+    [user, title, date, locationData, dispatch]
   );
 
   return (
@@ -104,6 +108,13 @@ const WysiwygEditor: NextPage = () => {
       <EditorButton onClick={onSubmit}>Write</EditorButton>
 
       <LocationModal isOpen={isModalOpen}>
+        <ModalCloseBtn
+          onClick={() => {
+            setIsModalOpen(false);
+          }}
+        >
+          <div>X</div>
+        </ModalCloseBtn>
         <DaumPostcode
           onComplete={selectAddress}
           autoClose={true}

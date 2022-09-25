@@ -97,3 +97,16 @@ export const EditorButton = styled.button`
     background-color: #f72182;
   }
 `;
+
+export const ModalCloseBtn = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+
+  & > div {
+    color: white;
+    cursor: pointer;
+    font-size: 20px;
+    margin-bottom: 8px;
+  }
+`;
