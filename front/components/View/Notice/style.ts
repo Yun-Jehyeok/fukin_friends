@@ -9,7 +9,7 @@ export const NoticeHeader = styled.div`
 
   & > div {
     width: 1177px;
-    margin-top: 80px;
+    margin-top: 90px;
     display: flex;
     justify-content: space-between;
   }
