@@ -22,7 +22,14 @@ import Header from "components/Header/Header";
 import Footer from "components/Footer/Footer";
 import {
   CommentContainer,
+  CommentContent,
+  CommentContents,
+  CommentCreator,
+  CommentDate,
   CommentInput,
+  CommentPaginationBtn,
+  CommentPaginationContainer,
+  CommentSubmitBtn,
   LikeBtn,
   NoticeDetailItem,
 } from "styles/styleRepo/noticeDetailStyle";
@@ -55,6 +62,30 @@ const importantList = [
     title: "Sit nam congue feugiat nisl, mauris amet nisi.",
     date: "2022-08-17 4:00 PM",
     place: "Hannam-dong Chicken",
+  },
+];
+
+const comments = [
+  {
+    id: 0,
+    creator: "Yun Jehyeok",
+    content:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever. Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    date: "2022-08-12 6:00 PM",
+  },
+  {
+    id: 1,
+    creator: "Jung Jongyun",
+    content:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever. Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    date: "2022-08-17 4:00 PM",
+  },
+  {
+    id: 2,
+    creator: "Yun Yejin",
+    content:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever. Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    date: "2022-08-17 4:00 PM",
   },
 ];
 
@@ -191,16 +222,40 @@ const Notice: NextPage = () => {
                       <br />
                     </NoticeItemDescription>
                   </NoticeDetailItem>
-                  <LikeBtn
-                    isLiked={isLiked}
-                    onClick={() => setIsLiked(!isLiked)}
-                  ></LikeBtn>
+                  <LikeBtn isLiked={isLiked}>
+                    <div onClick={() => setIsLiked(!isLiked)}></div>
+                  </LikeBtn>
                   <CommentContainer>
                     <div>Comment</div>
                     <CommentInput
                       maxLength={200}
                       placeholder="Write your comment"
                     />
+                    <CommentSubmitBtn>Submit</CommentSubmitBtn>
+                    <CommentContents>
+                      {Array.isArray(comments)
+                        ? comments.length > 0
+                          ? comments.map((comment) => (
+                              <div key={comment.id}>
+                                <CommentCreator>
+                                  {comment.creator}
+                                </CommentCreator>
+                                <CommentContent>
+                                  {comment.content}
+                                </CommentContent>
+                                <CommentDate>{comment.date}</CommentDate>
+                              </div>
+                            ))
+                          : ""
+                        : ""}
+                    </CommentContents>
+                    <CommentPaginationContainer>
+                      <div>
+                        <CommentPaginationBtn>1</CommentPaginationBtn>
+                        <CommentPaginationBtn>2</CommentPaginationBtn>
+                        <CommentPaginationBtn>3</CommentPaginationBtn>
+                      </div>
+                    </CommentPaginationContainer>
                   </CommentContainer>
                 </NoticeLeft>
                 <NoticeRight>

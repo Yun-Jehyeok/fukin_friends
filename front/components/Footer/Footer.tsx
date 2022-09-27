@@ -26,7 +26,7 @@ const Footer: NextPage = () => {
       </FtTop>
       <FtBottom>
         <div>
-          <CopyRight>&copy;&nbsp;FUKINFRIENDS - All Rights Reserved</CopyRight>
+          <CopyRight>&copy;&nbsp;FUKINFRIENDS - No Rights Reserved</CopyRight>
           <SNSContainer>
             <Facebook></Facebook>
             <Instagram></Instagram>

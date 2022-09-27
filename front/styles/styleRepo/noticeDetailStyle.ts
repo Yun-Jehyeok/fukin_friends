@@ -14,27 +14,34 @@ export const NoticeDetailItem = styled(NoticeItem)`
 `;
 
 export const LikeBtn = styled.div<ILikeBtn>`
-  width: 16px;
-  height: 16px;
-  background: ${(props) => (props.isLiked ? "#ea2027" : "black")};
-  position: relative;
-  transform: rotate(45deg);
-  cursor: pointer;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: -40px;
 
-  &::before,
-  &::after {
-    content: "";
+  & > div {
     width: 16px;
     height: 16px;
-    position: absolute;
-    border-radius: 50%;
     background: ${(props) => (props.isLiked ? "#ea2027" : "black")};
-  }
-  &::before {
-    left: -50%;
-  }
-  &::after {
-    top: -50%;
+    position: relative;
+    transform: rotate(45deg);
+    cursor: pointer;
+
+    &::before,
+    &::after {
+      content: "";
+      width: 16px;
+      height: 16px;
+      position: absolute;
+      border-radius: 50%;
+      background: ${(props) => (props.isLiked ? "#ea2027" : "black")};
+    }
+    &::before {
+      left: -50%;
+    }
+    &::after {
+      top: -50%;
+    }
   }
 `;
 
@@ -63,5 +70,81 @@ export const CommentInput = styled.textarea`
 
   &::placeholder {
     font-family: "Lato", sans-serif;
+  }
+`;
+
+export const CommentContents = styled.div`
+  width: 100%;
+  height: fit-content;
+  margin-top: 48px;
+
+  & > div {
+    margin-bottom: 36px;
+  }
+`;
+
+export const CommentSubmitBtn = styled.button`
+  width: 100%;
+  height: 40px;
+  background-color: #fb2e86;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  color: white;
+  font-family: "Roboto", sans-serif;
+
+  &:hover {
+    background-color: #f72182;
+  }
+`;
+
+export const CommentCreator = styled.div`
+  font-size: 18px;
+  color: #151875;
+  font-family: "Josefin Sans", sans-serif;
+  font-weight: bold;
+  margin-bottom: 8px;
+`;
+export const CommentContent = styled.div`
+  font-size: 16px;
+  color: #3f509e;
+  font-family: "Lato", sans-serif;
+  margin-bottom: 8px;
+`;
+export const CommentDate = styled.div`
+  font-size: 14px;
+  color: #8a8fb9;
+  font-family: "Lato", sans-serif;
+`;
+
+export const CommentPaginationContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  & > div {
+    width: fit-content;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 8px;
+  }
+`;
+
+export const CommentPaginationBtn = styled.div`
+  width: 24px;
+  height: 24px;
+  text-align: center;
+  line-height: 24px;
+  border-radius: 50%;
+  background-color: white;
+  color: #151875;
+  font-family: "Josefin Sans", sans-serif;
+  cursor: pointer;
+
+  &:first-child {
+    color: #fb2e86;
+  }
+  &:hover {
+    background-color: #eeeffb;
   }
 `;
