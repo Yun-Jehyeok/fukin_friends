@@ -1,5 +1,7 @@
+import { useStringInput } from "hooks/useInput";
 import { NextPage } from "next";
 import Link from "next/link";
+import { useCallback } from "react";
 import { Container } from "styles/styleRepo/global";
 import {
   CreateNotice,
@@ -15,6 +17,8 @@ import {
   NoticeItemDescription,
   NoticeItemTitle,
   NoticeLeft,
+  NoticePaginationBtn,
+  NoticePaginationContainer,
   NoticePlace,
   NoticeRight,
   NoticeSearch,
@@ -94,11 +98,16 @@ const importantList = [
 ];
 
 const Notice: NextPage = () => {
-  const onSearch = (e: React.KeyboardEvent<HTMLElement>) => {
-    if (e.key === "Enter") {
-      console.log("Enter...");
-    }
-  };
+  const noticeSearchTerm = useStringInput("");
+
+  const onSearch = useCallback(
+    (e: React.KeyboardEvent<HTMLElement>) => {
+      if (e.key === "Enter") {
+        console.log("Enter...", noticeSearchTerm.value);
+      }
+    },
+    [noticeSearchTerm]
+  );
 
   return (
     <Container>
@@ -120,28 +129,45 @@ const Notice: NextPage = () => {
           <NoticeLeft>
             {noticeList.map((item) => (
               <NoticeItem key={item.id}>
-                <NoticeItemTitle>{item.title}</NoticeItemTitle>
-                <NoticeDatePlace>
-                  <NoticeDate>
-                    <div></div>
-                    <div>{item.date}</div>
-                  </NoticeDate>
-                  <NoticePlace>{item.place}</NoticePlace>
-                </NoticeDatePlace>
-                <NoticeItemDescription>
-                  {item.description}
-                </NoticeItemDescription>
-                <ReadMore>
-                  Read More
-                  <div></div>
-                </ReadMore>
+                <Link href={`/notice/detail/${item.id}`}>
+                  <a>
+                    <NoticeItemTitle>{item.title}</NoticeItemTitle>
+                    <NoticeDatePlace>
+                      <NoticeDate>
+                        <div></div>
+                        <div>{item.date}</div>
+                      </NoticeDate>
+                      <NoticePlace>{item.place}</NoticePlace>
+                    </NoticeDatePlace>
+                    <NoticeItemDescription>
+                      {item.description}
+                    </NoticeItemDescription>
+                    <ReadMore>
+                      Read More
+                      <div></div>
+                    </ReadMore>
+                  </a>
+                </Link>
               </NoticeItem>
             ))}
+            <NoticePaginationContainer>
+              <div>
+                <NoticePaginationBtn>1</NoticePaginationBtn>
+                <NoticePaginationBtn>2</NoticePaginationBtn>
+                <NoticePaginationBtn>3</NoticePaginationBtn>
+                <NoticePaginationBtn>4</NoticePaginationBtn>
+                <NoticePaginationBtn>5</NoticePaginationBtn>
+              </div>
+            </NoticePaginationContainer>
           </NoticeLeft>
           <NoticeRight>
             <NoticeSearch>
               <div>Search</div>
-              <input placeholder="Search For Notice" onKeyDown={onSearch} />
+              <input
+                placeholder="Search For Notice"
+                onKeyDown={onSearch}
+                {...noticeSearchTerm}
+              />
             </NoticeSearch>
             <ImportantNotice>
               <div>Important Notice</div>

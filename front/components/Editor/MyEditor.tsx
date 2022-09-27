@@ -35,7 +35,7 @@ const WysiwygEditor: NextPage = () => {
   const title = useStringInput("");
   const date = useStringInput("");
 
-  const editorRef = useRef(null);
+  const editorRef = useRef<Editor>(null);
   const toolbarItems = [
     ["heading", "bold", "italic", "strike"],
     ["hr"],
@@ -55,8 +55,7 @@ const WysiwygEditor: NextPage = () => {
     (e: React.MouseEvent<HTMLElement>) => {
       e.preventDefault();
 
-      const editorIns = editorRef.current.getInstance();
-      const content = editorIns.getMarkdown();
+      const content = editorRef.current?.getInstance().getMarkdown() || "";
 
       console.log("user:::", user);
       dispatch(
@@ -96,7 +95,7 @@ const WysiwygEditor: NextPage = () => {
 
       <Editor
         ref={editorRef}
-        initialValue=""
+        initialValue=" "
         initialEditType="wysiwyg"
         hideModeSwitch={true}
         height="500px"

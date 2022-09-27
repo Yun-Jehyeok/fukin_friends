@@ -71,20 +71,20 @@ export const NoticeRight = styled.div`
   width: 270px;
 `;
 
-export const NoticeItem = styled.div`
-  width: 100%;
-  margin-bottom: 80px;
-  cursor: pointer;
-
-  &:hover > div:first-child {
-    text-decoration: underline;
-  }
-`;
 export const NoticeItemTitle = styled.div`
   font-size: 30px;
   font-family: "Josefin Sans", sans-serif;
   font-weight: bold;
   color: #151875;
+`;
+export const NoticeItem = styled.div`
+  width: 100%;
+  margin-bottom: 80px;
+  cursor: pointer;
+
+  &:hover ${NoticeItemTitle} {
+    text-decoration: underline;
+  }
 `;
 export const NoticeDatePlace = styled.div`
   display: flex;
@@ -173,7 +173,7 @@ export const NoticeSearch = styled.div`
 
     &::placeholder {
       color: #151875;
-      opacity: 0.1;
+      opacity: 0.2;
     }
   }
 `;
@@ -208,5 +208,38 @@ export const ImportantItem = styled.div`
     font-size: 11px;
     color: #8a8fb9;
     margin-top: 8px;
+  }
+`;
+
+export const NoticePaginationContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  & > div {
+    width: fit-content;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 8px;
+  }
+`;
+
+export const NoticePaginationBtn = styled.div`
+  width: 36px;
+  height: 36px;
+  text-align: center;
+  line-height: 36px;
+  border-radius: 50%;
+  background-color: white;
+  color: #151875;
+  font-family: "Josefin Sans", sans-serif;
+  cursor: pointer;
+  font-size: 18px;
+
+  &:first-child {
+    color: #fb2e86;
+  }
+  &:hover {
+    background-color: #eeeffb;
   }
 `;
