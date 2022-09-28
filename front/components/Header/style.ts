@@ -120,6 +120,10 @@ export const Logo = styled.div`
   font-weight: bold;
   font-family: "Josefin Sans", sans-serif;
   padding-top: 5px;
+
+  & > a {
+    color: #0d0e43;
+  }
 `;
 
 export const Navigation = styled.div`

@@ -74,19 +74,19 @@ const Header: NextPage = () => {
             </Logo>
             <Navigation>
               <Link href="/feed">
-                <div data-active={pathname === "feed"}>Feed</div>
+                <div data-active={pathname.includes("feed")}>Feed</div>
               </Link>
               <Link href="/notice">
-                <div data-active={pathname === "notice"}>Notice</div>
+                <div data-active={pathname.includes("notice")}>Notice</div>
               </Link>
               <Link href="/event">
-                <div data-active={pathname === "event"}>Event</div>
+                <div data-active={pathname.includes("event")}>Event</div>
               </Link>
               <Link href="/album">
-                <div data-active={pathname === "album"}>Album</div>
+                <div data-active={pathname.includes("album")}>Album</div>
               </Link>
               <Link href="/playlist">
-                <div data-active={pathname === "playlist"}>Play list</div>
+                <div data-active={pathname.includes("playlist")}>Play list</div>
               </Link>
             </Navigation>
           </div>

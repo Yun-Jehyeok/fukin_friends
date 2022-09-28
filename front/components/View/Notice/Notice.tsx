@@ -19,6 +19,8 @@ import {
   NoticeLeft,
   NoticePaginationBtn,
   NoticePaginationContainer,
+  NoticePaginationLArr,
+  NoticePaginationRArr,
   NoticePlace,
   NoticeRight,
   NoticeSearch,
@@ -152,11 +154,13 @@ const Notice: NextPage = () => {
             ))}
             <NoticePaginationContainer>
               <div>
-                <NoticePaginationBtn>1</NoticePaginationBtn>
+                <NoticePaginationLArr></NoticePaginationLArr>
+                <NoticePaginationBtn className="active">1</NoticePaginationBtn>
                 <NoticePaginationBtn>2</NoticePaginationBtn>
                 <NoticePaginationBtn>3</NoticePaginationBtn>
                 <NoticePaginationBtn>4</NoticePaginationBtn>
                 <NoticePaginationBtn>5</NoticePaginationBtn>
+                <NoticePaginationRArr></NoticePaginationRArr>
               </div>
             </NoticePaginationContainer>
           </NoticeLeft>

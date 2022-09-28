@@ -21,19 +21,23 @@ import { Body, AppContainer, ContentWrap } from "styles/styleRepo/style";
 import Header from "components/Header/Header";
 import Footer from "components/Footer/Footer";
 import {
+  CommentBtn,
   CommentContainer,
   CommentContent,
   CommentContents,
   CommentCreator,
   CommentDate,
+  CommentEditInput,
+  CommentEditModeBtn,
+  CommentHeader,
   CommentInput,
   CommentPaginationBtn,
   CommentPaginationContainer,
   CommentSubmitBtn,
-  LikeBtn,
   NoticeDetailItem,
 } from "styles/styleRepo/noticeDetailStyle";
 import { useState } from "react";
+import { useStringInput } from "hooks/useInput";
 
 const noticeDetail = {
   id: 0,
@@ -90,12 +94,22 @@ const comments = [
 ];
 
 const Notice: NextPage = () => {
-  const [isLiked, setIsLiked] = useState(false);
+  const [isCommentEditMode, setIsCommentEditMode] = useState(false);
+  const [editCommentIdx, setEditCommentIdx] = useState(-1);
 
   const onSearch = (e: React.KeyboardEvent<HTMLElement>) => {
     if (e.key === "Enter") {
       console.log("Enter...");
     }
+  };
+
+  const onSetCommentEditMode = (id: number) => {
+    setEditCommentIdx(id);
+    setIsCommentEditMode(true);
+  };
+  const onSetCommentEditModeCancel = () => {
+    setEditCommentIdx(-1);
+    setIsCommentEditMode(false);
   };
 
   return (
@@ -222,9 +236,6 @@ const Notice: NextPage = () => {
                       <br />
                     </NoticeItemDescription>
                   </NoticeDetailItem>
-                  <LikeBtn isLiked={isLiked}>
-                    <div onClick={() => setIsLiked(!isLiked)}></div>
-                  </LikeBtn>
                   <CommentContainer>
                     <div>Comment</div>
                     <CommentInput
@@ -237,13 +248,49 @@ const Notice: NextPage = () => {
                         ? comments.length > 0
                           ? comments.map((comment) => (
                               <div key={comment.id}>
-                                <CommentCreator>
-                                  {comment.creator}
-                                </CommentCreator>
-                                <CommentContent>
-                                  {comment.content}
-                                </CommentContent>
-                                <CommentDate>{comment.date}</CommentDate>
+                                <CommentHeader>
+                                  <CommentCreator>
+                                    {comment.creator}
+                                  </CommentCreator>
+                                  {comment.id === 0 ? (
+                                    <CommentBtn>
+                                      {isCommentEditMode &&
+                                      comment.id === editCommentIdx ? (
+                                        ""
+                                      ) : (
+                                        <div
+                                          onClick={() =>
+                                            onSetCommentEditMode(comment.id)
+                                          }
+                                        >
+                                          Edit
+                                        </div>
+                                      )}
+                                      <div>Delete</div>
+                                    </CommentBtn>
+                                  ) : (
+                                    ""
+                                  )}
+                                </CommentHeader>
+                                {isCommentEditMode &&
+                                comment.id === editCommentIdx ? (
+                                  <div>
+                                    <CommentEditInput value={comment.content} />
+                                    <CommentEditModeBtn>
+                                      <div onClick={onSetCommentEditModeCancel}>
+                                        Cancel
+                                      </div>
+                                      <div>Edit</div>
+                                    </CommentEditModeBtn>
+                                  </div>
+                                ) : (
+                                  <div>
+                                    <CommentContent>
+                                      {comment.content}
+                                    </CommentContent>
+                                    <CommentDate>{comment.date}</CommentDate>
+                                  </div>
+                                )}
                               </div>
                             ))
                           : ""

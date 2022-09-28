@@ -6,6 +6,8 @@ import { userActions } from "src/store/reducers/userReducer";
 import { useAppDispatch } from "hooks/reduxHooks";
 import { useEffect } from "react";
 
+import "antd/dist/antd.css";
+
 // export const getServerSideProps: GetServerSideProps =
 //   wrapper.getServerSideProps((store) => async ({ req, res, ...etc }) => {
 //     await store.dispatch(

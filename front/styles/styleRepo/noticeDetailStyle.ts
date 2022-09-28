@@ -13,37 +13,37 @@ export const NoticeDetailItem = styled(NoticeItem)`
   }
 `;
 
-export const LikeBtn = styled.div<ILikeBtn>`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  margin-top: -40px;
+// export const LikeBtn = styled.div<ILikeBtn>`
+//   width: 100%;
+//   display: flex;
+//   justify-content: center;
+//   margin-top: -40px;
 
-  & > div {
-    width: 16px;
-    height: 16px;
-    background: ${(props) => (props.isLiked ? "#ea2027" : "black")};
-    position: relative;
-    transform: rotate(45deg);
-    cursor: pointer;
+//   & > div {
+//     width: 16px;
+//     height: 16px;
+//     background: ${(props) => (props.isLiked ? "#ea2027" : "black")};
+//     position: relative;
+//     transform: rotate(45deg);
+//     cursor: pointer;
 
-    &::before,
-    &::after {
-      content: "";
-      width: 16px;
-      height: 16px;
-      position: absolute;
-      border-radius: 50%;
-      background: ${(props) => (props.isLiked ? "#ea2027" : "black")};
-    }
-    &::before {
-      left: -50%;
-    }
-    &::after {
-      top: -50%;
-    }
-  }
-`;
+//     &::before,
+//     &::after {
+//       content: "";
+//       width: 16px;
+//       height: 16px;
+//       position: absolute;
+//       border-radius: 50%;
+//       background: ${(props) => (props.isLiked ? "#ea2027" : "black")};
+//     }
+//     &::before {
+//       left: -50%;
+//     }
+//     &::after {
+//       top: -50%;
+//     }
+//   }
+// `;
 
 export const CommentContainer = styled.div`
   width: 100%;
@@ -98,6 +98,11 @@ export const CommentSubmitBtn = styled.button`
   }
 `;
 
+export const CommentHeader = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+`;
 export const CommentCreator = styled.div`
   font-size: 18px;
   color: #151875;
@@ -105,12 +110,58 @@ export const CommentCreator = styled.div`
   font-weight: bold;
   margin-bottom: 8px;
 `;
+export const CommentBtn = styled.div`
+  display: flex;
+
+  & > div {
+    font-size: 14px;
+    font-family: "Lato", sans-serif;
+    color: gray;
+    margin-left: 8px;
+    cursor: pointer;
+  }
+`;
+
+export const CommentEditInput = styled.textarea`
+  width: 100%;
+  height: 80px;
+  border: 1px solid #8a8fb9;
+  padding: 12px;
+  outline: none;
+  font-family: "Lato", sans-serif;
+  resize: none;
+  border-radius: 3px;
+
+  &::placeholder {
+    font-family: "Lato", sans-serif;
+  }
+`;
+
+export const CommentEditModeBtn = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 8px;
+
+  & > div {
+    font-size: 14px;
+    font-family: "Lato", sans-serif;
+    color: gray;
+    margin-left: 8px;
+    cursor: pointer;
+
+    &:hover {
+      color: #fb2e86;
+    }
+  }
+`;
+
 export const CommentContent = styled.div`
   font-size: 16px;
   color: #3f509e;
   font-family: "Lato", sans-serif;
   margin-bottom: 8px;
 `;
+
 export const CommentDate = styled.div`
   font-size: 14px;
   color: #8a8fb9;

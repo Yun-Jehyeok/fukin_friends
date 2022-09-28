@@ -239,7 +239,35 @@ export const NoticePaginationBtn = styled.div`
   &:first-child {
     color: #fb2e86;
   }
+  &.active {
+    color: #fb2e86;
+  }
   &:hover {
     background-color: #eeeffb;
   }
+`;
+
+export const NoticePaginationLArr = styled.div`
+  width: 8px;
+  height: 8px;
+  border: 1px solid #151875;
+  transform: rotate(45deg);
+  border-top: none;
+  border-right: none;
+  position: relative;
+  top: 12px;
+  cursor: pointer;
+  margin-right: 12px;
+`;
+export const NoticePaginationRArr = styled.div`
+  width: 8px;
+  height: 8px;
+  border: 1px solid #151875;
+  transform: rotate(45deg);
+  border-bottom: none;
+  border-left: none;
+  position: relative;
+  top: 12px;
+  cursor: pointer;
+  margin-left: 12px;
 `;
