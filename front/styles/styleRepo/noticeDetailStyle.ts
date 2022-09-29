@@ -103,6 +103,7 @@ export const CommentHeader = styled.div`
   display: flex;
   justify-content: space-between;
 `;
+
 export const CommentCreator = styled.div`
   font-size: 18px;
   color: #151875;
@@ -110,6 +111,7 @@ export const CommentCreator = styled.div`
   font-weight: bold;
   margin-bottom: 8px;
 `;
+
 export const CommentBtn = styled.div`
   display: flex;
 
