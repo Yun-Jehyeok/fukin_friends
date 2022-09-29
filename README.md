@@ -13,3 +13,5 @@
 1. Front - React, Next.js, Typescript, Styled-components, Redux
 2. Back - Node, Express
 3. DB - MongoDB
+
+## 22-09-30 부로 일시 중단합니다.
