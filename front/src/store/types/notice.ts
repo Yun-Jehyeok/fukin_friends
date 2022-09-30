@@ -23,3 +23,16 @@ export type CreateNoticeReq = {
   date: string;
 };
 export type CreateNoticeRes = { isSuccess: boolean };
+
+// 공지사항 상세
+export type LoadNoticeReq = {
+  noticeId: string;
+};
+export type LoadNoticeSuccessRes = {
+  notice: INotice;
+  isSuccess: boolean;
+};
+export type LoadNoticeFailureRes = {
+  isSuccess: boolean;
+  msg: string;
+};

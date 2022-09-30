@@ -6,9 +6,11 @@ import type {
   CreateNoticeReq,
   CreateNoticeRes,
   LoadAllNoticeRes,
+  LoadNoticeReq,
+  LoadNoticeSuccessRes,
 } from "../types/notice";
 
-import { createNotice, loadAllNotice } from "../api/noticeApi";
+import { createNotice, loadAllNotice, loadNotice } from "../api/noticeApi";
 import { noticeActions } from "../reducers/noticeReducer";
 
 // 전체 공지사항 로딩
@@ -54,6 +56,33 @@ function* watchcreateNotice() {
   yield takeLatest(noticeActions.createNoticeRequest, createNoticeApi);
 }
 
+// 공지사항 상세
+function* loadNoticeApi(action: PayloadAction<LoadNoticeReq>) {
+  try {
+    const { data }: AxiosResponse<LoadNoticeSuccessRes> = yield call(
+      loadNotice,
+      action.payload
+    );
+
+    yield put(noticeActions.loadNoticeSuccess(data));
+  } catch (e: any) {
+    yield put(
+      noticeActions.loadNoticeFailure({
+        isSuccess: false,
+        msg: e.message,
+      })
+    );
+  }
+}
+
+function* watchloadNotice() {
+  yield takeLatest(noticeActions.loadNoticeRequest, loadNoticeApi);
+}
+
 export default function* noticeSaga() {
-  yield all([fork(watchloadAllNotice), fork(watchcreateNotice)]);
+  yield all([
+    fork(watchloadAllNotice),
+    fork(watchcreateNotice),
+    fork(watchloadNotice),
+  ]);
 }

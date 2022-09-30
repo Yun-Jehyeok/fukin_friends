@@ -36,17 +36,12 @@ import {
   CommentSubmitBtn,
   NoticeDetailItem,
 } from "styles/styleRepo/noticeDetailStyle";
-import { useState } from "react";
-import { useStringInput } from "hooks/useInput";
-
-const noticeDetail = {
-  id: 0,
-  title: "Out of time - The Weekend",
-  description:
-    "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever",
-  date: "2022-08-12 6:00 PM",
-  place: "Yeouinaru station",
-};
+import { useEffect, useState } from "react";
+import { useAppDispatch } from "hooks/reduxHooks";
+import { noticeActions } from "src/store/reducers/noticeReducer";
+import { useRouter } from "next/router";
+import { RootState } from "src/configureStore";
+import { useSelector } from "react-redux";
 
 const importantList = [
   {
@@ -97,6 +92,18 @@ const Notice: NextPage = () => {
   const [isCommentEditMode, setIsCommentEditMode] = useState(false);
   const [editCommentIdx, setEditCommentIdx] = useState(-1);
 
+  const { notice } = useSelector((state: RootState) => state.notice);
+
+  const router = useRouter();
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    let noticeId = router.query.noticeId || "";
+
+    dispatch(noticeActions.loadNoticeRequest(noticeId));
+  }, [dispatch, router]);
+
   const onSearch = (e: React.KeyboardEvent<HTMLElement>) => {
     if (e.key === "Enter") {
       console.log("Enter...");
@@ -131,109 +138,17 @@ const Notice: NextPage = () => {
             <NoticeBody>
               <div>
                 <NoticeLeft>
-                  <NoticeDetailItem key={noticeDetail.id}>
-                    <NoticeItemTitle>{noticeDetail.title}</NoticeItemTitle>
+                  <NoticeDetailItem key={notice._id}>
+                    <NoticeItemTitle>{notice.title}</NoticeItemTitle>
                     <NoticeDatePlace>
                       <NoticeDate>
                         <div></div>
-                        <div>{noticeDetail.date}</div>
+                        <div>{notice.date}</div>
                       </NoticeDate>
-                      <NoticePlace>{noticeDetail.place}</NoticePlace>
+                      <NoticePlace>{notice.location}</NoticePlace>
                     </NoticeDatePlace>
                     <NoticeItemDescription>
-                      The last few months, I&apos;ve been working on me, baby
-                      <br />
-                      There&apos;s so much trauma in my life
-                      <br />
-                      I&apos;ve been so cold to the ones who loved me, baby
-                      <br />
-                      I look back now and I realize
-                      <br />
-                      <br />
-                      I remember when I held you
-                      <br />
-                      You begged me with your drowning eyes to stay
-                      <br />
-                      I regret I didn&apos;t tell you
-                      <br />
-                      Now I can&apos;t keep you from loving him, you made up
-                      your mind
-                      <br />
-                      <br />
-                      Say I love you girl, but I&apos;m out of time
-                      <br />
-                      Say I&apos;m there for you, but I&apos;m out of time
-                      <br />
-                      Say that I&apos;ll care for you, but I&apos;m out of time
-                      <br />
-                      Said I&apos;m too late to make you mine, out of time
-                      <br />
-                      <br />
-                      If he mess up just a little, baby, you know my line
-                      <br />
-                      If you don&apos;t trust him a little, then come right
-                      back, girl, come right back
-                      <br />
-                      Gimme one chance, just a little, baby, I&apos;ll treat you
-                      right
-                      <br />
-                      And I&apos;ll love you like I should&apos;ve loved you all
-                      the time
-                      <br />
-                      <br />
-                      And I remember when I held you (held you, baby)
-                      <br />
-                      You begged me with your drowning eyes to stay (never
-                      again, baby)
-                      <br />
-                      And I regret I didn&apos;t tell you
-                      <br />
-                      Now I can&apos;t keep you from loving him, you made up
-                      your mind (uh)
-                      <br />
-                      <br />
-                      Say I love you, girl, but I&apos;m out of time
-                      <br />
-                      Say I&apos;m there for you, but I&apos;m out of time (no)
-                      <br />
-                      Say that I&apos;ll care for you, but I&apos;m out of time
-                      (hey)
-                      <br />
-                      Said, I&apos;m too late to make you mine, out of time (ah)
-                      <br />
-                      <br />
-                      Ooh-ooh-ooh, singing (out of time)
-                      <br />
-                      Said, I had you to myself, but I&apos;m (out of time)
-                      <br />
-                      Say that I&apos;ll care for you, but I&apos;m out of time
-                      <br />
-                      But I&apos;m too late to make you mine, out of time (uh)
-                      <br />
-                      Out of time, out of time
-                      <br />
-                      <br />
-                      Don&apos;t you dare touch that dial
-                      <br />
-                      Because like the song says, you are out of time
-                      <br />
-                      You&apos;re almost there, but don&apos;t panic
-                      <br />
-                      There&apos;s still more music to come before you&apos;re
-                      completely engulfed
-                      <br />
-                      In the blissful embrace of that little light you see in
-                      the distance
-                      <br />
-                      Soon you&apos;ll be healed, forgiven, and refreshed, free
-                      from all trauma, pain, guilt, and shame
-                      <br />
-                      You may even forget your own name, but before you dwell in
-                      that house forever
-                      <br />
-                      Here&apos;s 30 minutes of easy listening to some slow
-                      tracks, on 103.5 Dawn FM
-                      <br />
+                      {notice.content}
                     </NoticeItemDescription>
                   </NoticeDetailItem>
                   <CommentContainer>

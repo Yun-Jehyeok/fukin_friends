@@ -2,6 +2,8 @@ import type {
   CreateNoticeReq,
   CreateNoticeRes,
   LoadAllNoticeRes,
+  LoadNoticeReq,
+  LoadNoticeSuccessRes,
 } from "../types/notice";
 
 import axios from "axios";
@@ -14,4 +16,8 @@ export const loadAllNotice = async () => {
 
 export const createNotice = async (notice: CreateNoticeReq) => {
   return await axios.post<CreateNoticeRes>("/api/notice", notice);
+};
+
+export const loadNotice = async (noticeId: LoadNoticeReq) => {
+  return await axios.get<LoadNoticeSuccessRes>(`/api/notice/${noticeId}`);
 };

@@ -5,6 +5,9 @@ import type {
   CreateNoticeReq,
   CreateNoticeRes,
   LoadAllNoticeRes,
+  LoadNoticeFailureRes,
+  LoadNoticeReq,
+  LoadNoticeSuccessRes,
 } from "../types/notice";
 import type { ResponseFailure } from "../types";
 import { INotice } from "../types/notice";
@@ -14,6 +17,7 @@ export type NoticeStateType = {
   isLoading: boolean;
   errMsg: null | string;
   isSuccess: boolean;
+  notice: INotice;
 };
 
 const initialState: NoticeStateType = {
@@ -21,6 +25,15 @@ const initialState: NoticeStateType = {
   isLoading: false,
   errMsg: null,
   isSuccess: false,
+  notice: {
+    _id: "",
+    title: "",
+    content: "",
+    date: "",
+    registerDate: "",
+    creator: "",
+    location: "",
+  },
 };
 
 const noticeSlice = createSlice({
@@ -52,6 +65,21 @@ const noticeSlice = createSlice({
       state.isLoading = false;
     },
     createNoticeFailure(state, action: PayloadAction<ResponseFailure>) {
+      state.isLoading = false;
+      state.errMsg = action.payload.msg;
+    },
+
+    // 공지사항 상세
+    loadNoticeRequest(state, action: PayloadAction<LoadNoticeReq>) {
+      state.isLoading = true;
+      state.errMsg = null;
+    },
+    loadNoticeSuccess(state, action: PayloadAction<LoadNoticeSuccessRes>) {
+      console.log("actionPayload:::", action.payload);
+      state.notice = action.payload.notice;
+      state.isLoading = false;
+    },
+    loadNoticeFailure(state, action: PayloadAction<LoadNoticeFailureRes>) {
       state.isLoading = false;
       state.errMsg = action.payload.msg;
     },

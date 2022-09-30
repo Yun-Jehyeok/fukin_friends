@@ -63,10 +63,6 @@ const Notice: NextPage = () => {
     dispatch(noticeActions.loadAllNoticeRequest());
   }, [dispatch]);
 
-  useEffect(() => {
-    console.log("notices:::", notices);
-  }, [notices]);
-
   const onSearch = useCallback(
     (e: React.KeyboardEvent<HTMLElement>) => {
       if (e.key === "Enter") {
