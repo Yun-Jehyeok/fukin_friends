@@ -103,7 +103,15 @@ const Notice: NextPage = () => {
                       <NoticePlace>{item.location}</NoticePlace>
                     </NoticeDatePlace>
                     <NoticeItemDescription>
-                      {item.content}
+                      {item.content.length > 200
+                        ? item.content
+                            .slice(0, 200)
+                            .replace(/<\/?("[^"]*"|'[^']*'|[^>])*(>|$)/gi, "") +
+                          "..."
+                        : item.content.replace(
+                            /<\/?("[^"]*"|'[^']*'|[^>])*(>|$)/gi,
+                            ""
+                          )}
                     </NoticeItemDescription>
                     <ReadMore>
                       Read More

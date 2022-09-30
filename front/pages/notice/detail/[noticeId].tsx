@@ -148,7 +148,10 @@ const Notice: NextPage = () => {
                       <NoticePlace>{notice.location}</NoticePlace>
                     </NoticeDatePlace>
                     <NoticeItemDescription>
-                      {notice.content}
+                      {notice.content.replace(
+                        /<\/?("[^"]*"|'[^']*'|[^>])*(>|$)/gi,
+                        ""
+                      )}
                     </NoticeItemDescription>
                   </NoticeDetailItem>
                   <CommentContainer>

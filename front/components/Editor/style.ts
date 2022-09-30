@@ -45,10 +45,9 @@ export const LocDateCont = styled.div`
   }
 `;
 
-export const LocationInput = styled.div`
+export const LocationInput = styled.input`
   width: calc(80% - 4px);
   height: 100%;
-  cursor: pointer;
   font-size: 13px;
   display: flex;
   justify-content: center;

@@ -25,15 +25,13 @@ import { noticeActions } from "src/store/reducers/noticeReducer";
 import DaumPostcode from "react-daum-postcode";
 
 const WysiwygEditor: NextPage = () => {
-  const [locationData, setLocationData] = useState("위치를 입력해주세요.");
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
   const { user } = useSelector((state: RootState) => state.user);
 
   const dispatch = useAppDispatch();
 
   const title = useStringInput("");
   const date = useStringInput("");
+  const location = useStringInput("");
 
   const editorRef = useRef<Editor>(null);
   const toolbarItems = [
@@ -46,11 +44,6 @@ const WysiwygEditor: NextPage = () => {
     ["scrollSync"],
   ];
 
-  const selectAddress = (data: any) => {
-    setIsModalOpen(false);
-    setLocationData(data.address);
-  };
-
   const onSubmit = useCallback(
     (e: React.MouseEvent<HTMLElement>) => {
       e.preventDefault();
@@ -62,12 +55,12 @@ const WysiwygEditor: NextPage = () => {
           userId: user.id,
           title: title.value,
           content,
-          location: locationData,
+          location: location.value,
           date: date.value,
         })
       );
     },
-    [user, title, date, locationData, dispatch]
+    [user, title, date, location, dispatch]
   );
 
   return (
@@ -82,13 +75,7 @@ const WysiwygEditor: NextPage = () => {
       />
 
       <LocDateCont>
-        <LocationInput
-          onClick={() => {
-            setIsModalOpen(true);
-          }}
-        >
-          {locationData}
-        </LocationInput>
+        <LocationInput placeholder="위치를 입력해주세요." {...location} />
         <DateInput type="date" {...date} />
       </LocDateCont>
 
@@ -104,21 +91,6 @@ const WysiwygEditor: NextPage = () => {
         plugins={[colorSyntax]}
       />
       <EditorButton onClick={onSubmit}>Write</EditorButton>
-
-      <LocationModal isOpen={isModalOpen}>
-        <ModalCloseBtn
-          onClick={() => {
-            setIsModalOpen(false);
-          }}
-        >
-          <div>X</div>
-        </ModalCloseBtn>
-        <DaumPostcode
-          onComplete={selectAddress}
-          autoClose={true}
-          defaultQuery=""
-        />
-      </LocationModal>
     </div>
   );
 };
