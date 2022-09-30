@@ -81,6 +81,8 @@ const userSlice = createSlice({
     loginUserFailure(state, action: PayloadAction<ResponseFailure>) {
       localStorage.removeItem("token");
 
+      console.log(action.payload.msg);
+
       state.isLoading = false;
       state.errMsg = action.payload.msg;
     },

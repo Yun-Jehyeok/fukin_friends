@@ -34,9 +34,11 @@ import {
   CommentPaginationBtn,
   CommentPaginationContainer,
   CommentSubmitBtn,
+  NoticeControllerBtn,
+  NoticeControllerBtnContainer,
   NoticeDetailItem,
 } from "styles/styleRepo/noticeDetailStyle";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useAppDispatch } from "hooks/reduxHooks";
 import { noticeActions } from "src/store/reducers/noticeReducer";
 import { useRouter } from "next/router";
@@ -93,6 +95,7 @@ const Notice: NextPage = () => {
   const [editCommentIdx, setEditCommentIdx] = useState(-1);
 
   const { notice } = useSelector((state: RootState) => state.notice);
+  const { user } = useSelector((state: RootState) => state.user);
 
   const router = useRouter();
 
@@ -118,6 +121,17 @@ const Notice: NextPage = () => {
     setEditCommentIdx(-1);
     setIsCommentEditMode(false);
   };
+
+  const onDeleteNotice = useCallback(
+    (e: React.MouseEvent<HTMLElement>) => {
+      e.preventDefault();
+
+      let noticeId = router.query.noticeId || "";
+
+      dispatch(noticeActions.deleteNoticeRequest(noticeId));
+    },
+    [dispatch, router]
+  );
 
   return (
     <AppContainer>
@@ -153,6 +167,18 @@ const Notice: NextPage = () => {
                         ""
                       )}
                     </NoticeItemDescription>
+                    {user.id === notice.creator ? (
+                      <NoticeControllerBtnContainer>
+                        <div>
+                          <NoticeControllerBtn>Edit</NoticeControllerBtn>
+                          <NoticeControllerBtn onClick={onDeleteNotice}>
+                            Delete
+                          </NoticeControllerBtn>
+                        </div>
+                      </NoticeControllerBtnContainer>
+                    ) : (
+                      ""
+                    )}
                   </NoticeDetailItem>
                   <CommentContainer>
                     <div>Comment</div>

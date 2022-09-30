@@ -5,12 +5,19 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import type {
   CreateNoticeReq,
   CreateNoticeRes,
+  DeleteNoticeReq,
+  DeleteNoticeRes,
   LoadAllNoticeRes,
   LoadNoticeReq,
   LoadNoticeSuccessRes,
 } from "../types/notice";
 
-import { createNotice, loadAllNotice, loadNotice } from "../api/noticeApi";
+import {
+  createNotice,
+  deleteNotice,
+  loadAllNotice,
+  loadNotice,
+} from "../api/noticeApi";
 import { noticeActions } from "../reducers/noticeReducer";
 
 // 전체 공지사항 로딩
@@ -79,10 +86,33 @@ function* watchloadNotice() {
   yield takeLatest(noticeActions.loadNoticeRequest, loadNoticeApi);
 }
 
+// 공지사항 삭제
+function* deleteNoticeApi(action: PayloadAction<DeleteNoticeReq>) {
+  try {
+    const { data }: AxiosResponse<DeleteNoticeRes> = yield call(
+      deleteNotice,
+      action.payload
+    );
+
+    yield put(noticeActions.deleteNoticeSuccess(data));
+  } catch (e: any) {
+    yield put(
+      noticeActions.deleteNoticeFailure({
+        isSuccess: false,
+      })
+    );
+  }
+}
+
+function* watchdeleteNotice() {
+  yield takeLatest(noticeActions.deleteNoticeRequest, deleteNoticeApi);
+}
+
 export default function* noticeSaga() {
   yield all([
     fork(watchloadAllNotice),
     fork(watchcreateNotice),
     fork(watchloadNotice),
+    fork(watchdeleteNotice),
   ]);
 }

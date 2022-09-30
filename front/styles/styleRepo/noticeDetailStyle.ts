@@ -45,6 +45,24 @@ export const NoticeDetailItem = styled(NoticeItem)`
 //   }
 // `;
 
+export const NoticeControllerBtnContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 36px;
+
+  & > div {
+    display: flex;
+  }
+`;
+export const NoticeControllerBtn = styled.div`
+  cursor: pointer;
+  margin-left: 8px;
+  font-family: "Lato", sans-serif;
+  font-size: 14px;
+  color: #808080;
+`;
+
 export const CommentContainer = styled.div`
   width: 100%;
   height: fit-content;

@@ -1,6 +1,8 @@
 import type {
   CreateNoticeReq,
   CreateNoticeRes,
+  DeleteNoticeReq,
+  DeleteNoticeRes,
   LoadAllNoticeRes,
   LoadNoticeReq,
   LoadNoticeSuccessRes,
@@ -20,4 +22,8 @@ export const createNotice = async (notice: CreateNoticeReq) => {
 
 export const loadNotice = async (noticeId: LoadNoticeReq) => {
   return await axios.get<LoadNoticeSuccessRes>(`/api/notice/${noticeId}`);
+};
+
+export const deleteNotice = async (noticeId: DeleteNoticeReq) => {
+  return await axios.delete<DeleteNoticeRes>(`/api/notice/${noticeId}`);
 };

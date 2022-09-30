@@ -4,6 +4,8 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import type {
   CreateNoticeReq,
   CreateNoticeRes,
+  DeleteNoticeReq,
+  DeleteNoticeRes,
   LoadAllNoticeRes,
   LoadNoticeFailureRes,
   LoadNoticeReq,
@@ -75,13 +77,35 @@ const noticeSlice = createSlice({
       state.errMsg = null;
     },
     loadNoticeSuccess(state, action: PayloadAction<LoadNoticeSuccessRes>) {
-      console.log("actionPayload:::", action.payload);
       state.notice = action.payload.notice;
       state.isLoading = false;
     },
     loadNoticeFailure(state, action: PayloadAction<LoadNoticeFailureRes>) {
       state.isLoading = false;
       state.errMsg = action.payload.msg;
+    },
+
+    // 공지사항 삭제
+    deleteNoticeRequest(state, action: PayloadAction<DeleteNoticeReq>) {
+      state.isLoading = true;
+      state.errMsg = null;
+    },
+    deleteNoticeSuccess(state, action: PayloadAction<DeleteNoticeRes>) {
+      window.location.href = "/notice";
+
+      state.notice = {
+        _id: "",
+        title: "",
+        content: "",
+        date: "",
+        registerDate: "",
+        creator: "",
+        location: "",
+      };
+      state.isLoading = false;
+    },
+    deleteNoticeFailure(state, action: PayloadAction<DeleteNoticeRes>) {
+      state.isLoading = false;
     },
   },
 });

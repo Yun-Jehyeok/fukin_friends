@@ -36,3 +36,9 @@ export type LoadNoticeFailureRes = {
   isSuccess: boolean;
   msg: string;
 };
+
+// 공지사항 삭제
+export type DeleteNoticeReq = {
+  noticeId: string;
+};
+export type DeleteNoticeRes = { isSuccess: boolean };

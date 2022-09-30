@@ -109,7 +109,7 @@ router.delete("/:id", async (req, res) => {
   const id = req.params.id;
 
   try {
-    await User.deleteOne({ notices: req.params.id });
+    // 유저 내부 공지사항 삭제도 해야됨
     await Notice.deleteOne({ _id: id });
 
     return res.status(200).json({ isSuccess: true });
