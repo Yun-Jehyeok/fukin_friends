@@ -57,7 +57,6 @@ const WysiwygEditor: NextPage = () => {
 
       const content = editorRef.current?.getInstance().getMarkdown() || "";
 
-      console.log("user:::", user);
       dispatch(
         noticeActions.createNoticeRequest({
           userId: user.id,

@@ -1,7 +1,11 @@
 export interface INotice {
-  id: string;
+  _id: string;
   title: string;
   content: string;
+  date: string;
+  registerDate: string;
+  creator: string;
+  location: string;
 }
 
 // 전체 공지사항

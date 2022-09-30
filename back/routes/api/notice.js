@@ -39,7 +39,7 @@ router.get("/skip/:skip", async (req, res) => {
 });
 
 // Create Notice / POST
-router.post("/create", (req, res) => {
+router.post("/", (req, res) => {
   const { userId, title, content, location, date } = req.body;
 
   User.findOne({ _id: userId }).then((user) => {

@@ -193,7 +193,7 @@ router.post("/user", auth, async (req, res) => {
       email: user.email,
     };
 
-    res.json(userRes);
+    res.json({ isSuccess: true, user: userRes });
   } catch (e) {
     res.status(400).json({ isSuccess: false, msg: e.message });
   }

@@ -1,7 +1,11 @@
+import { useAppDispatch } from "hooks/reduxHooks";
 import { useStringInput } from "hooks/useInput";
 import { NextPage } from "next";
 import Link from "next/link";
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "src/configureStore";
+import { noticeActions } from "src/store/reducers/noticeReducer";
 import { Container } from "styles/styleRepo/global";
 import {
   CreateNotice,
@@ -27,57 +31,6 @@ import {
   ReadMore,
 } from "./style";
 
-const noticeList = [
-  {
-    id: 0,
-    title: "Mauris at orci non vulputate diam tincidunt nec.",
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever",
-    date: "2022-08-12 6:00 PM",
-    place: "Yeouinaru station",
-  },
-  {
-    id: 1,
-    title: "Aenean vitae in aliquam ultrices lectus. Etiam.",
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever",
-    date: "2022-08-12 6:00 PM",
-    place: "Yeouinaru station",
-  },
-  {
-    id: 2,
-    title: "Sit nam congue feugiat nisl, mauris amet nisi.",
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever",
-    date: "2022-08-17 4:00 PM",
-    place: "Hannam-dong Chicken",
-  },
-  {
-    id: 3,
-    title: "Test length nam congue is right, maersx fes, faew. Etaewf.",
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever",
-    date: "2022-08-12 6:00 PM",
-    place: "Yeouinaru station",
-  },
-  {
-    id: 4,
-    title: "Feasx feadt li suekz.",
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever",
-    date: "2022-09-12 4:00 PM",
-    place: "Jongyun's house",
-  },
-  {
-    id: 5,
-    title: "Lorem Ipsum is simply dummy text of the printing.",
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever",
-    date: "2022-08-16 6:00 PM",
-    place: "Hannam-dong Chicken",
-  },
-];
-
 const importantList = [
   {
     id: 0,
@@ -101,6 +54,18 @@ const importantList = [
 
 const Notice: NextPage = () => {
   const noticeSearchTerm = useStringInput("");
+
+  const { notices } = useSelector((state: RootState) => state.notice);
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(noticeActions.loadAllNoticeRequest());
+  }, [dispatch]);
+
+  useEffect(() => {
+    console.log("notices:::", notices);
+  }, [notices]);
 
   const onSearch = useCallback(
     (e: React.KeyboardEvent<HTMLElement>) => {
@@ -129,9 +94,9 @@ const Notice: NextPage = () => {
       <NoticeBody>
         <div>
           <NoticeLeft>
-            {noticeList.map((item) => (
-              <NoticeItem key={item.id}>
-                <Link href={`/notice/detail/${item.id}`}>
+            {notices.map((item) => (
+              <NoticeItem key={item._id}>
+                <Link href={`/notice/detail/${item._id}`}>
                   <a>
                     <NoticeItemTitle>{item.title}</NoticeItemTitle>
                     <NoticeDatePlace>
@@ -139,10 +104,10 @@ const Notice: NextPage = () => {
                         <div></div>
                         <div>{item.date}</div>
                       </NoticeDate>
-                      <NoticePlace>{item.place}</NoticePlace>
+                      <NoticePlace>{item.location}</NoticePlace>
                     </NoticeDatePlace>
                     <NoticeItemDescription>
-                      {item.description}
+                      {item.content}
                     </NoticeItemDescription>
                     <ReadMore>
                       Read More
