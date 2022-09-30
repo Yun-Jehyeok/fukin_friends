@@ -6,7 +6,7 @@ interface ILikeBtn {
 }
 
 export const NoticeDetailItem = styled(NoticeItem)`
-  cursor: initial;
+  cursor: initial !important;
 
   &:hover > div:first-child {
     text-decoration: none;

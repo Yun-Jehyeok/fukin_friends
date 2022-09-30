@@ -44,6 +44,7 @@ import { noticeActions } from "src/store/reducers/noticeReducer";
 import { useRouter } from "next/router";
 import { RootState } from "src/configureStore";
 import { useSelector } from "react-redux";
+import { Viewer } from "@toast-ui/react-editor";
 
 const importantList = [
   {
@@ -162,10 +163,7 @@ const Notice: NextPage = () => {
                       <NoticePlace>{notice.location}</NoticePlace>
                     </NoticeDatePlace>
                     <NoticeItemDescription>
-                      {notice.content.replace(
-                        /<\/?("[^"]*"|'[^']*'|[^>])*(>|$)/gi,
-                        ""
-                      )}
+                      <Viewer initialValue={notice.content} />
                     </NoticeItemDescription>
                     {user.id === notice.creator ? (
                       <NoticeControllerBtnContainer>
