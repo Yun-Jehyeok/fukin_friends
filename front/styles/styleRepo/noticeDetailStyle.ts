@@ -61,6 +61,10 @@ export const NoticeControllerBtn = styled.div`
   font-family: "Lato", sans-serif;
   font-size: 14px;
   color: #808080;
+
+  & a {
+    color: #808080;
+  }
 `;
 
 export const CommentContainer = styled.div`

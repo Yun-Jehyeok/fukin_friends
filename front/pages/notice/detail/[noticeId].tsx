@@ -45,6 +45,7 @@ import { useRouter } from "next/router";
 import { RootState } from "src/configureStore";
 import { useSelector } from "react-redux";
 import { Viewer } from "@toast-ui/react-editor";
+import Link from "next/link";
 
 const importantList = [
   {
@@ -127,9 +128,13 @@ const Notice: NextPage = () => {
     (e: React.MouseEvent<HTMLElement>) => {
       e.preventDefault();
 
-      let noticeId = router.query.noticeId || "";
+      let deleteConfirm = window.confirm("해당 공지사항을 삭제하시겠습니까?");
 
-      dispatch(noticeActions.deleteNoticeRequest(noticeId));
+      if (deleteConfirm) {
+        let noticeId = router.query.noticeId || "";
+
+        dispatch(noticeActions.deleteNoticeRequest(noticeId));
+      }
     },
     [dispatch, router]
   );
@@ -168,7 +173,11 @@ const Notice: NextPage = () => {
                     {user.id === notice.creator ? (
                       <NoticeControllerBtnContainer>
                         <div>
-                          <NoticeControllerBtn>Edit</NoticeControllerBtn>
+                          <NoticeControllerBtn>
+                            <Link href={`/notice/update/${notice._id}`}>
+                              Edit
+                            </Link>
+                          </NoticeControllerBtn>
                           <NoticeControllerBtn onClick={onDeleteNotice}>
                             Delete
                           </NoticeControllerBtn>

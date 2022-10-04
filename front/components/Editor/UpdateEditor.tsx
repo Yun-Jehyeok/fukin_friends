@@ -62,7 +62,7 @@ const WysiwygEditor: NextPage = () => {
 
   return (
     <div>
-      <CreateNoticeTitle>Create Notice</CreateNoticeTitle>
+      <CreateNoticeTitle>Updating Notice</CreateNoticeTitle>
       <CreateNoticeDesc>Please notice detail bellow.</CreateNoticeDesc>
       <TitleInput
         type="text"
@@ -87,7 +87,7 @@ const WysiwygEditor: NextPage = () => {
         toolbarItems={toolbarItems}
         plugins={[colorSyntax]}
       />
-      <EditorButton onClick={onSubmit}>Write</EditorButton>
+      <EditorButton onClick={onSubmit}>Edit</EditorButton>
     </div>
   );
 };

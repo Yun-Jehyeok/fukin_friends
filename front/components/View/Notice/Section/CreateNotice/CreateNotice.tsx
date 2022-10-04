@@ -5,10 +5,10 @@ import {
   NoticeHeader,
   NoticeHeaderDescription,
   NoticeHeaderTitle,
-} from "../style";
+} from "../../style";
 import { EditorContainer } from "./style";
 
-const NoSsrWysiwyg = dynamic(() => import("../../../Editor/MyEditor"), {
+const NoSsrWysiwyg = dynamic(() => import("components/Editor/MyEditor"), {
   ssr: false,
 });
 
