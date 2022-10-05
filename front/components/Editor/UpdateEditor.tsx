@@ -20,15 +20,17 @@ import { useSelector } from "react-redux";
 import { RootState } from "src/configureStore";
 import { useAppDispatch } from "hooks/reduxHooks";
 import { noticeActions } from "src/store/reducers/noticeReducer";
+import { useRouter } from "next/router";
 
 const WysiwygEditor: NextPage = () => {
   const { user } = useSelector((state: RootState) => state.user);
+  const { notice } = useSelector((state: RootState) => state.notice);
 
   const dispatch = useAppDispatch();
 
-  const title = useStringInput("");
-  const date = useStringInput("");
-  const location = useStringInput("");
+  const title = useStringInput(notice.title);
+  const date = useStringInput(notice.date);
+  const location = useStringInput(notice.location);
 
   const editorRef = useRef<Editor>(null);
   const toolbarItems = [
@@ -41,15 +43,19 @@ const WysiwygEditor: NextPage = () => {
     ["scrollSync"],
   ];
 
+  const router = useRouter();
+
   const onSubmit = useCallback(
     (e: React.MouseEvent<HTMLElement>) => {
       e.preventDefault();
 
+      let noticeId = router.query.noticeId as string;
+
       const content = editorRef.current?.getInstance().getMarkdown() || "";
 
       dispatch(
-        noticeActions.createNoticeRequest({
-          userId: user.id,
+        noticeActions.updateNoticeRequest({
+          id: noticeId,
           title: title.value,
           content,
           location: location.value,
@@ -57,7 +63,7 @@ const WysiwygEditor: NextPage = () => {
         })
       );
     },
-    [user, title, date, location, dispatch]
+    [router, title, date, location, dispatch]
   );
 
   return (
@@ -78,7 +84,7 @@ const WysiwygEditor: NextPage = () => {
 
       <Editor
         ref={editorRef}
-        initialValue=" "
+        initialValue={notice.content}
         initialEditType="wysiwyg"
         hideModeSwitch={true}
         height="500px"

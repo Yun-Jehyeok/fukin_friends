@@ -86,15 +86,13 @@ router.get("/:id", (req, res) => {
 // Update Notice / PUT
 router.put("/:id", (req, res) => {
   const id = req.params.id;
-  const { title, content, location, date } = req.body;
+  const { title, content, location, date } = req.body.notice;
 
   Notice.findByIdAndUpdate(id, {
-    $push: {
-      title,
-      content,
-      location,
-      date,
-    },
+    title,
+    content,
+    location,
+    date,
   })
     .then(() => {
       res.status(200).json({ isSuccess: true });

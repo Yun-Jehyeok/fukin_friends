@@ -10,6 +10,8 @@ import type {
   LoadNoticeFailureRes,
   LoadNoticeReq,
   LoadNoticeSuccessRes,
+  UpdateNoticeReq,
+  UpdateNoticeRes,
 } from "../types/notice";
 import type { ResponseFailure } from "../types";
 import { INotice } from "../types/notice";
@@ -83,6 +85,18 @@ const noticeSlice = createSlice({
     loadNoticeFailure(state, action: PayloadAction<LoadNoticeFailureRes>) {
       state.isLoading = false;
       state.errMsg = action.payload.msg;
+    },
+
+    // 공지사항 수정
+    updateNoticeRequest(state, action: PayloadAction<UpdateNoticeReq>) {
+      state.isLoading = true;
+      state.errMsg = null;
+    },
+    updateNoticeSuccess(state, action: PayloadAction<UpdateNoticeRes>) {
+      state.isLoading = false;
+    },
+    updateNoticeFailure(state, action: PayloadAction<UpdateNoticeRes>) {
+      state.isLoading = false;
     },
 
     // 공지사항 삭제

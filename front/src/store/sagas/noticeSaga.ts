@@ -10,6 +10,8 @@ import type {
   LoadAllNoticeRes,
   LoadNoticeReq,
   LoadNoticeSuccessRes,
+  UpdateNoticeReq,
+  UpdateNoticeRes,
 } from "../types/notice";
 
 import {
@@ -17,6 +19,7 @@ import {
   deleteNotice,
   loadAllNotice,
   loadNotice,
+  updateNotice,
 } from "../api/noticeApi";
 import { noticeActions } from "../reducers/noticeReducer";
 
@@ -86,6 +89,28 @@ function* watchloadNotice() {
   yield takeLatest(noticeActions.loadNoticeRequest, loadNoticeApi);
 }
 
+// 공지사항 수정
+function* updateNoticeApi(action: PayloadAction<UpdateNoticeReq>) {
+  try {
+    const { data }: AxiosResponse<UpdateNoticeRes> = yield call(
+      updateNotice,
+      action.payload
+    );
+
+    yield put(noticeActions.updateNoticeSuccess(data));
+  } catch (e: any) {
+    yield put(
+      noticeActions.updateNoticeFailure({
+        isSuccess: false,
+      })
+    );
+  }
+}
+
+function* watchupdateNotice() {
+  yield takeLatest(noticeActions.updateNoticeRequest, updateNoticeApi);
+}
+
 // 공지사항 삭제
 function* deleteNoticeApi(action: PayloadAction<DeleteNoticeReq>) {
   try {
@@ -113,6 +138,7 @@ export default function* noticeSaga() {
     fork(watchloadAllNotice),
     fork(watchcreateNotice),
     fork(watchloadNotice),
+    fork(watchupdateNotice),
     fork(watchdeleteNotice),
   ]);
 }

@@ -6,6 +6,8 @@ import type {
   LoadAllNoticeRes,
   LoadNoticeReq,
   LoadNoticeSuccessRes,
+  UpdateNoticeReq,
+  UpdateNoticeRes,
 } from "../types/notice";
 
 import axios from "axios";
@@ -22,6 +24,12 @@ export const createNotice = async (notice: CreateNoticeReq) => {
 
 export const loadNotice = async (noticeId: LoadNoticeReq) => {
   return await axios.get<LoadNoticeSuccessRes>(`/api/notice/${noticeId}`);
+};
+
+export const updateNotice = async (notice: UpdateNoticeReq) => {
+  return await axios.put<UpdateNoticeRes>(`/api/notice/${notice.id}`, {
+    notice,
+  });
 };
 
 export const deleteNotice = async (noticeId: DeleteNoticeReq) => {

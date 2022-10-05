@@ -31,22 +31,17 @@ router.post("/login", (req, res) => {
       .status(400)
       .json({ isSuccess: false, msg: "비밀번호를 작성해주세요." });
 
-  console.log("here1...");
-
   User.findOne({ email }).then((user) => {
     if (!user)
       return res
         .status(400)
         .json({ isSuccess: false, msg: "이메일을 확인해주세요." });
-    console.log("here2...");
 
     bcrypt.compare(password, user.password).then((isMatch) => {
       if (!isMatch)
         return res
           .status(400)
           .json({ isSuccess: false, msg: "비밀번호를 확인해주세요." });
-
-      console.log("here...");
 
       jwt.sign(
         { id: user.id },

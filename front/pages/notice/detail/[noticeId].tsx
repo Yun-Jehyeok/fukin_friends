@@ -104,7 +104,7 @@ const Notice: NextPage = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    let noticeId = router.query.noticeId || "";
+    let noticeId = router.query.noticeId as string;
 
     dispatch(noticeActions.loadNoticeRequest(noticeId));
   }, [dispatch, router]);
@@ -131,7 +131,7 @@ const Notice: NextPage = () => {
       let deleteConfirm = window.confirm("해당 공지사항을 삭제하시겠습니까?");
 
       if (deleteConfirm) {
-        let noticeId = router.query.noticeId || "";
+        let noticeId = router.query.noticeId as string;
 
         dispatch(noticeActions.deleteNoticeRequest(noticeId));
       }

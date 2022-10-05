@@ -37,6 +37,16 @@ export type LoadNoticeFailureRes = {
   msg: string;
 };
 
+// 공지사항 수정
+export type UpdateNoticeReq = {
+  id: string;
+  title: string;
+  content: string;
+  location: string;
+  date: string;
+};
+export type UpdateNoticeRes = { isSuccess: boolean };
+
 // 공지사항 삭제
 export type DeleteNoticeReq = {
   noticeId: string;
