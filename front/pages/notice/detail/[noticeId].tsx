@@ -106,7 +106,7 @@ const Notice: NextPage = () => {
   useEffect(() => {
     let noticeId = router.query.noticeId as string;
 
-    dispatch(noticeActions.loadNoticeRequest(noticeId));
+    dispatch(noticeActions.loadNoticeRequest({ noticeId }));
   }, [dispatch, router]);
 
   const onSearch = (e: React.KeyboardEvent<HTMLElement>) => {
@@ -133,7 +133,7 @@ const Notice: NextPage = () => {
       if (deleteConfirm) {
         let noticeId = router.query.noticeId as string;
 
-        dispatch(noticeActions.deleteNoticeRequest(noticeId));
+        dispatch(noticeActions.deleteNoticeRequest({ noticeId }));
       }
     },
     [dispatch, router]

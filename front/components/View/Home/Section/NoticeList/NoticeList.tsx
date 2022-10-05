@@ -175,7 +175,7 @@ const NoticeList: NextPage = () => {
   const [activeIdx, setActiveIdx] = useState(0);
 
   const onClickPagination = (e: React.MouseEvent<HTMLElement>) => {
-    setActiveIdx(parseInt(e.currentTarget.dataset.key));
+    setActiveIdx(parseInt(e.currentTarget.dataset.key as string));
   };
 
   const paginationUI = () => {

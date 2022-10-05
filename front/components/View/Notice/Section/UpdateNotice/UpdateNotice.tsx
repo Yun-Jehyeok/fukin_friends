@@ -20,7 +20,7 @@ const NoticeCreate: NextPage = () => {
           <div>
             <NoticeHeaderTitle>Updating Notice Page</NoticeHeaderTitle>
             <NoticeHeaderDescription>
-              It's Just Updating Notice Page
+              It&apos;s Just Updating Notice Page
             </NoticeHeaderDescription>
           </div>
         </div>

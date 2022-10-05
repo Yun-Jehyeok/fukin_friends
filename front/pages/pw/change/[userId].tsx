@@ -47,9 +47,11 @@ const ChangePassword: NextPage = () => {
         if (password.value === passwordCheck.value) {
           setIsPasswordCheckErr(false);
 
+          let id = userId as string;
+
           dispatch(
             userActions.changePWRequest({
-              userId,
+              userId: id,
               password: password.value,
             })
           );
