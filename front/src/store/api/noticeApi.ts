@@ -23,7 +23,9 @@ export const createNotice = async (notice: CreateNoticeReq) => {
 };
 
 export const loadNotice = async (noticeId: LoadNoticeReq) => {
-  return await axios.get<LoadNoticeSuccessRes>(`/api/notice/${noticeId}`);
+  return await axios.get<LoadNoticeSuccessRes>(
+    `/api/notice/${noticeId.noticeId}`
+  );
 };
 
 export const updateNotice = async (notice: UpdateNoticeReq) => {
