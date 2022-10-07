@@ -5,58 +5,75 @@ export interface IUser {
 }
 
 // 회원가입
-export type RegisterUserReq = {
+export interface RegisterUserReq {
   name: string;
   email: string;
   password: string;
   phone: string;
-};
-export type RegisterUserRes = {
+}
+export interface RegisterUserRes {
   isSuccess: boolean;
   user: IUser;
   token: string;
-};
+}
 
 // 로그인
-export type LoginUserReq = {
+export interface LoginUserReq {
   email: string;
   password: string;
-};
-export type LoginUserRes = { isSuccess: boolean; user: IUser; token: string };
-
-// 비밀번호 변경
-export type ChangePWReq = {
-  userId: string;
-  password: string;
-};
-export type ChangePWRes = { isSuccess: boolean; user: IUser; token: string };
-
-// 유저 인증
-export type LoadUserReq = {
-  token: string | null;
-};
-export type LoadUserRes = {
+}
+export interface LoginUserRes {
   isSuccess: boolean;
   user: IUser;
-};
+  token: string;
+}
+
+// 비밀번호 변경
+export interface ChangePWReq {
+  userId: string;
+  password: string;
+}
+export interface ChangePWRes {
+  isSuccess: boolean;
+  user: IUser;
+  token: string;
+}
+
+// 유저 인증
+export interface LoadUserReq {
+  token: string | null;
+}
+export interface LoadUserRes {
+  isSuccess: boolean;
+  user: IUser;
+}
 
 // 로그아웃
-export type LogoutUserReq = {
+export interface LogoutUserReq {
   token: string;
-};
+}
 
 // 유저 검색
-export type SearchUserReq = {
+export interface SearchUserReq {
   name: string;
-};
-export type SearchUserRes = {
+}
+export interface SearchUserRes {
   users: IUser[];
-};
+}
 
 // 휴대폰 인증
-export type PAReq = { phoneNum: string };
-export type PARes = { isSuccess: boolean; num: string };
+export interface PAReq {
+  phoneNum: string;
+}
+export interface PARes {
+  isSuccess: boolean;
+  num: string;
+}
 
 // 이메일 보내기
-export type SendEmailReq = { email: string };
-export type SendEmailRes = { isSuccess: boolean };
+export interface SendEmailReq {
+  email: string;
+}
+export interface SendEmailRes {
+  isSuccess: boolean;
+}

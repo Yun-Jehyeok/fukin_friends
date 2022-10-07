@@ -21,7 +21,7 @@ import type {
 import type { ResponseFailure } from "../types";
 import { IUser } from "../types/user";
 
-export type UserStateType = {
+export interface UserStateType {
   user: IUser;
   isLoading: boolean;
   errMsg: null | string;
@@ -29,7 +29,7 @@ export type UserStateType = {
   isSuccess: boolean;
   PANum?: string; // PA : Phone Authentication
   searchedUser: IUser[];
-};
+}
 
 const initialState: UserStateType = {
   user: { id: "", name: "", email: "" },

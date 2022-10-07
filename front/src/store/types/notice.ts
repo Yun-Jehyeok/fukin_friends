@@ -9,46 +9,52 @@ export interface INotice {
 }
 
 // 전체 공지사항
-export type LoadAllNoticeRes = {
+export interface LoadAllNoticeRes {
   notices: INotice[];
   isSuccess: boolean;
-};
+}
 
 // 공지 생성
-export type CreateNoticeReq = {
+export interface CreateNoticeReq {
   userId: string;
   title: string;
   content: string;
   location: string;
   date: string;
-};
-export type CreateNoticeRes = { isSuccess: boolean };
+}
+export interface CreateNoticeRes {
+  isSuccess: boolean;
+}
 
 // 공지사항 상세
-export type LoadNoticeReq = {
+export interface LoadNoticeReq {
   noticeId: string;
-};
-export type LoadNoticeSuccessRes = {
+}
+export interface LoadNoticeSuccessRes {
   notice: INotice;
   isSuccess: boolean;
-};
-export type LoadNoticeFailureRes = {
+}
+export interface LoadNoticeFailureRes {
   isSuccess: boolean;
   msg: string;
-};
+}
 
 // 공지사항 수정
-export type UpdateNoticeReq = {
+export interface UpdateNoticeReq {
   id: string;
   title: string;
   content: string;
   location: string;
   date: string;
-};
-export type UpdateNoticeRes = { isSuccess: boolean };
+}
+export interface UpdateNoticeRes {
+  isSuccess: boolean;
+}
 
 // 공지사항 삭제
-export type DeleteNoticeReq = {
+export interface DeleteNoticeReq {
   noticeId: string;
-};
-export type DeleteNoticeRes = { isSuccess: boolean };
+}
+export interface DeleteNoticeRes {
+  isSuccess: boolean;
+}

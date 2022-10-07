@@ -103,7 +103,7 @@ export const Logout = styled.div`
   margin-top: 0 !important;
 `;
 
-export const HeaderContainer = styled.div`
+export const HeaderCont = styled.div`
   width: 1177px;
   height: 40px;
   line-height: 40px;

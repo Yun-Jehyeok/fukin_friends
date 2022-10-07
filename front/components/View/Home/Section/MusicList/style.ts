@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const MusicListContainer = styled.div`
+export const MusicListCont = styled.div`
   width: 100%;
   margin-top: 112px;
 `;

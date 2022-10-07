@@ -2,7 +2,7 @@ import { NextPage } from "next";
 import { useEffect, useState } from "react";
 import {
   Attendees,
-  NoticeListContainer,
+  NoticeListCont,
   ItemTitle,
   List,
   Title,
@@ -11,7 +11,7 @@ import {
   DSCPlace,
   DSCDate,
   Attendee,
-  ListContainer,
+  ListCont,
   Pagination,
   PaginationItem,
 } from "./style";
@@ -201,9 +201,9 @@ const NoticeList: NextPage = () => {
   };
 
   return (
-    <NoticeListContainer>
+    <NoticeListCont>
       <Title>Notice</Title>
-      <ListContainer>
+      <ListCont>
         <div>
           <List activeIdx={activeIdx}>
             {sampleData.map((item) => (
@@ -231,11 +231,11 @@ const NoticeList: NextPage = () => {
             ))}
           </List>
         </div>
-      </ListContainer>
+      </ListCont>
       <Pagination>
         <div>{paginationUI()}</div>
       </Pagination>
-    </NoticeListContainer>
+    </NoticeListCont>
   );
 };
 

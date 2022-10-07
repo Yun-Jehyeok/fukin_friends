@@ -7,13 +7,13 @@ import colorSyntax from "@toast-ui/editor-plugin-color-syntax";
 import { useCallback, useRef } from "react";
 import { NextPage } from "next";
 import {
-  CreateNoticeDesc,
-  CreateNoticeTitle,
-  DateInput,
-  EditorButton,
-  LocationInput,
+  EditorDesc,
+  EditorTitle,
+  DateInp,
+  EditorBtn,
+  LocationInp,
   LocDateCont,
-  TitleInput,
+  TitleInp,
 } from "./style";
 import { useStringInput } from "hooks/useInput";
 import { useSelector } from "react-redux";
@@ -22,9 +22,9 @@ import { useAppDispatch } from "hooks/reduxHooks";
 import { noticeActions } from "src/store/reducers/noticeReducer";
 import { useRouter } from "next/router";
 
-type EditorType = {
+interface EditorType {
   pageName: string;
-};
+}
 
 const WysiwygEditor: NextPage<EditorType> = ({ pageName }) => {
   const { user } = useSelector((state: RootState) => state.user);
@@ -88,16 +88,14 @@ const WysiwygEditor: NextPage<EditorType> = ({ pageName }) => {
 
   return (
     <div>
-      <CreateNoticeTitle>
-        {setData("Create Notice", "Updating Notice")}
-      </CreateNoticeTitle>
-      <CreateNoticeDesc>
+      <EditorTitle>{setData("Create Notice", "Updating Notice")}</EditorTitle>
+      <EditorDesc>
         {setData(
           "Please notice detail bellow.",
           "Please notice detail bellow."
         )}
-      </CreateNoticeDesc>
-      <TitleInput
+      </EditorDesc>
+      <TitleInp
         type="text"
         name="title"
         placeholder="제목을 입력해주세요."
@@ -105,8 +103,8 @@ const WysiwygEditor: NextPage<EditorType> = ({ pageName }) => {
       />
 
       <LocDateCont>
-        <LocationInput placeholder="위치를 입력해주세요." {...location} />
-        <DateInput type="date" {...date} />
+        <LocationInp placeholder="위치를 입력해주세요." {...location} />
+        <DateInp type="date" {...date} />
       </LocDateCont>
 
       <Editor
@@ -120,7 +118,7 @@ const WysiwygEditor: NextPage<EditorType> = ({ pageName }) => {
         toolbarItems={toolbarItems}
         plugins={[colorSyntax]}
       />
-      <EditorButton onClick={onSubmit}>{setData("Write", "Edit")}</EditorButton>
+      <EditorBtn onClick={onSubmit}>{setData("Write", "Edit")}</EditorBtn>
     </div>
   );
 };

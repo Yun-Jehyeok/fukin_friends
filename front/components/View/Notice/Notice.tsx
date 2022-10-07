@@ -6,7 +6,7 @@ import { useCallback, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "src/configureStore";
 import { noticeActions } from "src/store/reducers/noticeReducer";
-import { Container } from "styles/styleRepo/global";
+import { Cont } from "styles/styleRepo/global";
 import {
   CreateNotice,
   ImportantItem,
@@ -22,7 +22,7 @@ import {
   NoticeItemTitle,
   NoticeLeft,
   NoticePaginationBtn,
-  NoticePaginationContainer,
+  NoticePaginationCont,
   NoticePaginationLArr,
   NoticePaginationRArr,
   NoticePlace,
@@ -73,7 +73,7 @@ const Notice: NextPage = () => {
   );
 
   return (
-    <Container>
+    <Cont>
       <NoticeHeader>
         <div>
           <div>
@@ -121,7 +121,7 @@ const Notice: NextPage = () => {
                 </Link>
               </NoticeItem>
             ))}
-            <NoticePaginationContainer>
+            <NoticePaginationCont>
               <div>
                 <NoticePaginationLArr></NoticePaginationLArr>
                 <NoticePaginationBtn className="active">1</NoticePaginationBtn>
@@ -131,7 +131,7 @@ const Notice: NextPage = () => {
                 <NoticePaginationBtn>5</NoticePaginationBtn>
                 <NoticePaginationRArr></NoticePaginationRArr>
               </div>
-            </NoticePaginationContainer>
+            </NoticePaginationCont>
           </NoticeLeft>
           <NoticeRight>
             <NoticeSearch>
@@ -154,7 +154,7 @@ const Notice: NextPage = () => {
           </NoticeRight>
         </div>
       </NoticeBody>
-    </Container>
+    </Cont>
   );
 };
 

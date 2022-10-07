@@ -1,5 +1,5 @@
 import { NextPage } from "next";
-import { Container } from "styles/styleRepo/global";
+import { Cont } from "styles/styleRepo/global";
 import {
   ImportantItem,
   ImportantNotice,
@@ -16,26 +16,26 @@ import {
   NoticeRight,
   NoticeSearch,
 } from "components/View/Notice/style";
-import { Body, AppContainer, ContentWrap } from "styles/styleRepo/style";
+import { Body, AppCont, ContentWrap } from "styles/styleRepo/style";
 
 import Header from "components/Header/Header";
 import Footer from "components/Footer/Footer";
 import {
   CommentBtn,
-  CommentContainer,
+  CommentCont,
   CommentContent,
   CommentContents,
   CommentCreator,
   CommentDate,
-  CommentEditInput,
+  CommentEditInp,
   CommentEditModeBtn,
   CommentHeader,
-  CommentInput,
+  CommentInp,
   CommentPaginationBtn,
-  CommentPaginationContainer,
+  CommentPaginationCont,
   CommentSubmitBtn,
   NoticeControllerBtn,
-  NoticeControllerBtnContainer,
+  NoticeControllerBtnCont,
   NoticeDetailItem,
 } from "styles/styleRepo/noticeStyle";
 import { useCallback, useEffect, useState } from "react";
@@ -140,11 +140,11 @@ const Notice: NextPage = () => {
   );
 
   return (
-    <AppContainer>
+    <AppCont>
       <Header />
       <Body>
         <ContentWrap>
-          <Container>
+          <Cont>
             <NoticeHeader>
               <div>
                 <div>
@@ -171,7 +171,7 @@ const Notice: NextPage = () => {
                       <Viewer initialValue={notice.content} />
                     </NoticeItemDescription>
                     {user.id === notice.creator ? (
-                      <NoticeControllerBtnContainer>
+                      <NoticeControllerBtnCont>
                         <div>
                           <NoticeControllerBtn>
                             <Link href={`/notice/update/${notice._id}`}>
@@ -182,14 +182,14 @@ const Notice: NextPage = () => {
                             Delete
                           </NoticeControllerBtn>
                         </div>
-                      </NoticeControllerBtnContainer>
+                      </NoticeControllerBtnCont>
                     ) : (
                       ""
                     )}
                   </NoticeDetailItem>
-                  <CommentContainer>
+                  <CommentCont>
                     <div>Comment</div>
-                    <CommentInput
+                    <CommentInp
                       maxLength={200}
                       placeholder="Write your comment"
                     />
@@ -226,7 +226,7 @@ const Notice: NextPage = () => {
                                 {isCommentEditMode &&
                                 comment.id === editCommentIdx ? (
                                   <div>
-                                    <CommentEditInput value={comment.content} />
+                                    <CommentEditInp value={comment.content} />
                                     <CommentEditModeBtn>
                                       <div onClick={onSetCommentEditModeCancel}>
                                         Cancel
@@ -247,14 +247,14 @@ const Notice: NextPage = () => {
                           : ""
                         : ""}
                     </CommentContents>
-                    <CommentPaginationContainer>
+                    <CommentPaginationCont>
                       <div>
                         <CommentPaginationBtn>1</CommentPaginationBtn>
                         <CommentPaginationBtn>2</CommentPaginationBtn>
                         <CommentPaginationBtn>3</CommentPaginationBtn>
                       </div>
-                    </CommentPaginationContainer>
-                  </CommentContainer>
+                    </CommentPaginationCont>
+                  </CommentCont>
                 </NoticeLeft>
                 <NoticeRight>
                   <NoticeSearch>
@@ -276,11 +276,11 @@ const Notice: NextPage = () => {
                 </NoticeRight>
               </div>
             </NoticeBody>
-          </Container>
+          </Cont>
         </ContentWrap>
       </Body>
       <Footer />
-    </AppContainer>
+    </AppCont>
   );
 };
 

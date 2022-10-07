@@ -1,11 +1,11 @@
 import { NextPage } from "next";
-import { Container } from "styles/styleRepo/global";
+import { Cont } from "styles/styleRepo/global";
 import Image from "next/image";
 
 import NoticeList from "./Section/NoticeList/NoticeList";
 import MusicList from "./Section/MusicList/MusicList";
 import AlbumList from "./Section/AlbumList/AlbumList";
-import { HomeTopImgContainer, ItemBox } from "./style";
+import { HomeTopImgCont, ItemBox } from "./style";
 
 import friend1 from "public/img/friend1.jpg";
 import friend2 from "public/img/friend2.jpg";
@@ -27,8 +27,8 @@ const items = [
 
 const Home: NextPage = () => {
   return (
-    <Container>
-      <HomeTopImgContainer className="top">
+    <Cont>
+      <HomeTopImgCont className="top">
         {items.map((item) => (
           <ItemBox key={item.id}>
             <div>
@@ -40,11 +40,11 @@ const Home: NextPage = () => {
             </div>
           </ItemBox>
         ))}
-      </HomeTopImgContainer>
+      </HomeTopImgCont>
       <NoticeList />
       <MusicList />
       <AlbumList />
-    </Container>
+    </Cont>
   );
 };
 

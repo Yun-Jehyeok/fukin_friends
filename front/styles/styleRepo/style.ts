@@ -5,7 +5,7 @@ interface INavbar {
 }
 
 // App
-export const AppContainer = styled.div`
+export const AppCont = styled.div`
   width: 100%;
   min-width: 1200px;
 `;

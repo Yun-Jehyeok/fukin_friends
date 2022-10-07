@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const HomeTopImgContainer = styled.div`
+export const HomeTopImgCont = styled.div`
   width: 100%;
   height: 764px;
   background-color: #f2f0ff;

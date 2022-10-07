@@ -5,10 +5,10 @@ import type { AnyAction, CombinedState } from "@reduxjs/toolkit";
 import userReducer, { UserStateType } from "./userReducer";
 import noticeReducer, { NoticeStateType } from "./noticeReducer";
 
-type ReducerState = {
+interface ReducerState {
   user: UserStateType;
   notice: NoticeStateType;
-};
+}
 
 const rootReducer = (
   state: any,

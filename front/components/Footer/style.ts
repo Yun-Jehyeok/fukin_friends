@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const FtContainer = styled.div`
+export const FtCont = styled.div`
   width: 100%;
   margin-top: 200px;
 `;
@@ -28,7 +28,7 @@ export const FtLogo = styled.div`
   top: 7px;
 `;
 
-export const EmailInput = styled.div`
+export const EmailInp = styled.div`
   width: 377px;
   height: 44px;
   border-radius: 3px;
@@ -86,7 +86,7 @@ export const CopyRight = styled.div`
   font-family: "Lato", sans-serif;
 `;
 
-export const SNSContainer = styled.div`
+export const SNSCont = styled.div`
   display: flex;
   height: 20px;
   margin-top: 16.5px;

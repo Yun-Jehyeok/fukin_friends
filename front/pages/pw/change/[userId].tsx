@@ -5,12 +5,12 @@ import { useRouter } from "next/router";
 import React, { useCallback, useState } from "react";
 import { userActions } from "src/store/reducers/userReducer";
 import {
-  AuthButton,
-  AuthContainer,
-  AuthInput,
-  AuthInputErrMsg,
-  AuthLabel,
-  AuthLabelSpan,
+  AuthBtn,
+  AuthCont,
+  AuthInp,
+  AuthInpErrMsg,
+  AuthLab,
+  AuthLabSpan,
   AuthTitle,
 } from "styles/styleRepo/authFormStyle";
 import { PwInquiryForm } from "styles/styleRepo/pwInquiry";
@@ -67,45 +67,43 @@ const ChangePassword: NextPage = () => {
   );
 
   return (
-    <AuthContainer>
+    <AuthCont>
       <AuthTitle>비밀번호 변경</AuthTitle>
       <PwInquiryForm>
         <div>
           <form onSubmit={changePassword}>
-            <AuthLabel>
+            <AuthLab>
               비밀번호
-              <AuthLabelSpan>
-                (비밀번호는 8자 이상, 문자와 숫자 조합)
-              </AuthLabelSpan>
-            </AuthLabel>
-            <AuthInput
+              <AuthLabSpan>(비밀번호는 8자 이상, 문자와 숫자 조합)</AuthLabSpan>
+            </AuthLab>
+            <AuthInp
               type="password"
               name="password"
               placeholder="비밀번호를 입력하세요"
               {...password}
             />
             {isPasswordBlank ? (
-              <AuthInputErrMsg>{passwordErrMsg}</AuthInputErrMsg>
+              <AuthInpErrMsg>{passwordErrMsg}</AuthInpErrMsg>
             ) : (
               ""
             )}
-            <AuthLabel>비밀번호 확인</AuthLabel>
-            <AuthInput
+            <AuthLab>비밀번호 확인</AuthLab>
+            <AuthInp
               type="password"
               name="passwordCheck"
               placeholder="비밀번호 확인을 입력하세요"
               {...passwordCheck}
             />
             {isPasswordCheckErr ? (
-              <AuthInputErrMsg>{passwordCheckErrMsg}</AuthInputErrMsg>
+              <AuthInpErrMsg>{passwordCheckErrMsg}</AuthInpErrMsg>
             ) : (
               ""
             )}
-            <AuthButton>변경</AuthButton>
+            <AuthBtn>변경</AuthBtn>
           </form>
         </div>
       </PwInquiryForm>
-    </AuthContainer>
+    </AuthCont>
   );
 };
 

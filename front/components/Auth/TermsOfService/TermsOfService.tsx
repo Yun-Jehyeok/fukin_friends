@@ -1,13 +1,13 @@
 import type { NextPage } from "next";
 import Image from "next/image";
 import {
-  ErrMsg,
   TOSBox,
-  TOSButton,
-  TOSButtonContainer,
-  TOSContainer,
-  TOSLabel,
-  TOSLastLabel,
+  TOSBtn,
+  TOSBtnCont,
+  TOSCont,
+  TOSErr,
+  TOSLab,
+  TOSLastLab,
   TOSLogo,
   TOSWrap,
 } from "./style";
@@ -53,13 +53,13 @@ const TermsOfService: NextPage<PageTypeProps> = ({ checkTOS }: child) => {
   };
 
   return (
-    <TOSContainer>
+    <TOSCont>
       <TOSWrap>
         <TOSLogo>
           <Link href="/">FUKIN FRIENDS</Link>
         </TOSLogo>
         <div>
-          <TOSLabel>
+          <TOSLab>
             <span onClick={onClickFirstTOS}>
               <Image
                 src={firstCheck ? check : noCheck}
@@ -69,7 +69,7 @@ const TermsOfService: NextPage<PageTypeProps> = ({ checkTOS }: child) => {
               />
             </span>
             FUKIN FRIEND 이용 약관 동의 <span>(필수)</span>
-          </TOSLabel>
+          </TOSLab>
           <TOSBox>
             1. 목적 : 지원자 개인 식별, 지원의사 확인, 입사전형의 진행, 고지사항
             전달, 입사 지원자와의 원활한 의사소통, 지원이력 확인 및 면접
@@ -83,7 +83,7 @@ const TermsOfService: NextPage<PageTypeProps> = ({ checkTOS }: child) => {
           </TOSBox>
         </div>
         <div>
-          <TOSLabel>
+          <TOSLab>
             <span onClick={onClickSecondTOS}>
               <Image
                 src={secondCheck ? check : noCheck}
@@ -93,7 +93,7 @@ const TermsOfService: NextPage<PageTypeProps> = ({ checkTOS }: child) => {
               />
             </span>
             개인정보 수집 및 이용 동의 <span>(필수)</span>
-          </TOSLabel>
+          </TOSLab>
           <TOSBox>
             1. 목적 : 지원자 개인 식별, 지원의사 확인, 입사전형의 진행, 고지사항
             전달, 입사 지원자와의 원활한 의사소통, 지원이력 확인 및 면접
@@ -106,24 +106,24 @@ const TermsOfService: NextPage<PageTypeProps> = ({ checkTOS }: child) => {
             3. 보유기간 : 회원 탈퇴 시까지 보유
           </TOSBox>
         </div>
-        <TOSLastLabel>
+        <TOSLastLab>
           * 위 개인정보 수집에 대한 동의를 거부할 권리가 있으며,{" "}
           <span>FUKIN FRIENDS 이용이 제한될 수 있습니다.</span>
           <br />
-        </TOSLastLabel>
+        </TOSLastLab>
         {errMsg ? (
-          <ErrMsg>
+          <TOSErr>
             FUKIN FRIENDS 이용약관과 개인정보 수집 및 이용 모두 동의해주세요.
-          </ErrMsg>
+          </TOSErr>
         ) : (
           ""
         )}
-        <TOSButtonContainer>
-          <TOSButton onClick={cancel}>취소</TOSButton>
-          <TOSButton onClick={handleCheckTerms}>확인</TOSButton>
-        </TOSButtonContainer>
+        <TOSBtnCont>
+          <TOSBtn onClick={cancel}>취소</TOSBtn>
+          <TOSBtn onClick={handleCheckTerms}>확인</TOSBtn>
+        </TOSBtnCont>
       </TOSWrap>
-    </TOSContainer>
+    </TOSCont>
   );
 };
 

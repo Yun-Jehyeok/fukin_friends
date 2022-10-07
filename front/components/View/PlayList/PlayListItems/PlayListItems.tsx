@@ -3,7 +3,7 @@ import Image from "next/image";
 import {
   Item,
   ItemAuthor,
-  ItemContainer,
+  ItemCont,
   ItemDescription,
   ItemTitle,
   Title,
@@ -30,7 +30,7 @@ const PlayListItems: NextPage = () => {
   return (
     <div>
       <Title>플레이리스트</Title>
-      <ItemContainer>
+      <ItemCont>
         {itemList.map((item) => (
           <Item key={item.id}>
             <Image
@@ -45,7 +45,7 @@ const PlayListItems: NextPage = () => {
             </ItemDescription>
           </Item>
         ))}
-      </ItemContainer>
+      </ItemCont>
     </div>
   );
 };

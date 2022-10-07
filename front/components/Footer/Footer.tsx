@@ -1,40 +1,40 @@
 import { NextPage } from "next";
 import {
   CopyRight,
-  EmailInput,
+  EmailInp,
   Facebook,
   FtBottom,
-  FtContainer,
+  FtCont,
   FtLogo,
   FtTop,
   Instagram,
-  SNSContainer,
+  SNSCont,
   Twitter,
 } from "./style";
 
 const Footer: NextPage = () => {
   return (
-    <FtContainer>
+    <FtCont>
       <FtTop>
         <div>
           <FtLogo>FUKIN FRIENDS</FtLogo>
-          <EmailInput>
+          <EmailInp>
             <input placeholder="Enter Email Address" />
             <button>Send</button>
-          </EmailInput>
+          </EmailInp>
         </div>
       </FtTop>
       <FtBottom>
         <div>
           <CopyRight>&copy;&nbsp;FUKINFRIENDS - No Rights Reserved</CopyRight>
-          <SNSContainer>
+          <SNSCont>
             <Facebook></Facebook>
             <Instagram></Instagram>
             <Twitter></Twitter>
-          </SNSContainer>
+          </SNSCont>
         </div>
       </FtBottom>
-    </FtContainer>
+    </FtCont>
   );
 };
 

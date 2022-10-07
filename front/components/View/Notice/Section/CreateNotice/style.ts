@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const EditorContainer = styled.div`
+export const EditorCont = styled.div`
   width: 100%;
   height: fit-content;
   margin-top: 120px;

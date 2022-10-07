@@ -11,14 +11,14 @@ import {
   OtherSection,
   GoogleBtn,
   Divider,
-  SocialLoginContainer,
+  SocialLoginCont,
 } from "styles/styleRepo/loginStyle";
 import {
-  AuthButton,
-  AuthContainer,
-  AuthInput,
-  AuthInputErrMsg,
-  AuthLabel,
+  AuthBtn,
+  AuthCont,
+  AuthInp,
+  AuthInpErrMsg,
+  AuthLab,
   AuthTitle,
 } from "styles/styleRepo/authFormStyle";
 
@@ -57,21 +57,21 @@ const Login: NextPage = () => {
   );
 
   return (
-    <AuthContainer>
+    <AuthCont>
       <LoginForm>
         <div>
           <div>
             <AuthTitle>
               <Link href="/">SIGN IN</Link>
             </AuthTitle>
-            <SocialLoginContainer>
+            <SocialLoginCont>
               <Divider>소셜 로그인</Divider>
               <GoogleBtn></GoogleBtn>
-            </SocialLoginContainer>
+            </SocialLoginCont>
             <Divider>이메일 로그인</Divider>
             <form onSubmit={handleSubmit}>
-              <AuthLabel>이메일</AuthLabel>
-              <AuthInput
+              <AuthLab>이메일</AuthLab>
+              <AuthInp
                 type="email"
                 name="email"
                 placeholder="이메일을 입력하세요"
@@ -79,12 +79,12 @@ const Login: NextPage = () => {
                 {...email}
               />
               {errMsg && errMsg.includes("이메일") ? (
-                <AuthInputErrMsg>{errMsg}</AuthInputErrMsg>
+                <AuthInpErrMsg>{errMsg}</AuthInpErrMsg>
               ) : (
                 ""
               )}
-              <AuthLabel>비밀번호</AuthLabel>
-              <AuthInput
+              <AuthLab>비밀번호</AuthLab>
+              <AuthInp
                 type="password"
                 name="password"
                 required
@@ -92,11 +92,11 @@ const Login: NextPage = () => {
                 {...password}
               />
               {errMsg && errMsg.includes("비밀번호") ? (
-                <AuthInputErrMsg>{errMsg}</AuthInputErrMsg>
+                <AuthInpErrMsg>{errMsg}</AuthInpErrMsg>
               ) : (
                 ""
               )}
-              <AuthButton>로그인</AuthButton>
+              <AuthBtn>로그인</AuthBtn>
             </form>
             <OtherSection>
               <Link href="/pwinquiry">비밀번호를 잊어버리셨나요?</Link>
@@ -107,7 +107,7 @@ const Login: NextPage = () => {
           </div>
         </div>
       </LoginForm>
-    </AuthContainer>
+    </AuthCont>
   );
 };
 

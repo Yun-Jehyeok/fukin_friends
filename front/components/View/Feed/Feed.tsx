@@ -1,8 +1,8 @@
 import { NextPage } from "next";
-import { Container } from "styles/styleRepo/global";
+import { Cont } from "styles/styleRepo/global";
 
 const Feed: NextPage = () => {
-  return <Container>Feed</Container>;
+  return <Cont>Feed</Cont>;
 };
 
 export default Feed;

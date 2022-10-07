@@ -211,7 +211,7 @@ export const ImportantItem = styled.div`
   }
 `;
 
-export const NoticePaginationContainer = styled.div`
+export const NoticePaginationCont = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;

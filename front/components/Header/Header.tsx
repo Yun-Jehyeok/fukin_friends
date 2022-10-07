@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "src/configureStore";
 import { userActions } from "src/store/reducers/userReducer";
 import {
-  HeaderContainer,
+  HeaderCont,
   Logo,
   Wrap,
   Navigation,
@@ -69,7 +69,7 @@ const Header: NextPage = () => {
         </div>
       </HeaderTop>
       <div>
-        <HeaderContainer>
+        <HeaderCont>
           <div>
             <Logo>
               <Link href="/">FUKIN FRIENDS</Link>
@@ -96,7 +96,7 @@ const Header: NextPage = () => {
             <input />
             <div></div>
           </Search>
-        </HeaderContainer>
+        </HeaderCont>
       </div>
     </Wrap>
   );

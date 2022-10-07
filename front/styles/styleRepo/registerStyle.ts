@@ -18,7 +18,7 @@ export const RegisterForm = styled.div`
   }
 `;
 
-export const RegisterAuthContainer = styled.div`
+export const RegisterAuthCont = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;

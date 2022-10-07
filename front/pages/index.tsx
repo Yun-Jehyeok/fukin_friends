@@ -1,10 +1,5 @@
 import type { NextPage } from "next";
-import {
-  Body,
-  AppContainer,
-  NeedLogin,
-  ContentWrap,
-} from "styles/styleRepo/style";
+import { Body, AppCont, NeedLogin, ContentWrap } from "styles/styleRepo/style";
 
 import Header from "components/Header/Header";
 import Home from "components/View/Home/Home";
@@ -16,7 +11,7 @@ const App: NextPage = () => {
   const { token } = useSelector((state: RootState) => state.user);
 
   return (
-    <AppContainer>
+    <AppCont>
       <Header />
       <Body>
         <ContentWrap>
@@ -28,7 +23,7 @@ const App: NextPage = () => {
         </ContentWrap>
       </Body>
       <Footer />
-    </AppContainer>
+    </AppCont>
   );
 };
 

@@ -13,7 +13,7 @@ export const PwInquiryForm = styled.div`
   }
 `;
 
-export const PwInquiryLabel = styled.div`
+export const PwInquiryLab = styled.div`
   margin-bottom: 16px;
   font-size: 14px;
   color: gray;

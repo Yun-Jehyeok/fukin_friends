@@ -14,14 +14,14 @@ export const LoginForm = styled.div`
   }
 `;
 
-export const InputErrMsg = styled.div`
+export const InpErrMsg = styled.div`
   font-size: 12px;
   color: red;
   margin-bottom: 16px;
   margin-top: -8px;
 `;
 
-export const LoginButton = styled.button`
+export const LoginBtn = styled.button`
   width: 100%;
   height: 56px;
   line-height: 56px;
@@ -54,7 +54,7 @@ export const OtherSection = styled.div`
   }
 `;
 
-export const SocialLoginContainer = styled.div`
+export const SocialLoginCont = styled.div`
   width: 100%;
   margin-bottom: 32px;
 `;

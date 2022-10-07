@@ -1,11 +1,11 @@
 import { NextPage } from "next";
-import { Container } from "styles/styleRepo/global";
+import { Cont } from "styles/styleRepo/global";
 import {
   NoticeHeader,
   NoticeHeaderDescription,
   NoticeHeaderTitle,
 } from "../../style";
-import { EditorContainer } from "../CreateNotice/style";
+import { EditorCont } from "../CreateNotice/style";
 import dynamic from "next/dynamic";
 
 const NoSsrWysiwyg = dynamic(() => import("components/Editor/MyEditor"), {
@@ -14,7 +14,7 @@ const NoSsrWysiwyg = dynamic(() => import("components/Editor/MyEditor"), {
 
 const NoticeCreate: NextPage = () => {
   return (
-    <Container>
+    <Cont>
       <NoticeHeader>
         <div>
           <div>
@@ -25,10 +25,10 @@ const NoticeCreate: NextPage = () => {
           </div>
         </div>
       </NoticeHeader>
-      <EditorContainer>
+      <EditorCont>
         <NoSsrWysiwyg pageName="update" />
-      </EditorContainer>
-    </Container>
+      </EditorCont>
+    </Cont>
   );
 };
 

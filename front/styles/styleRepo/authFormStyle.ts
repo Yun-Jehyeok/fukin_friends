@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const AuthContainer = styled.div`
+export const AuthCont = styled.div`
   width: 100%;
   height: 100vh;
   overflow-x: hidden;
@@ -24,20 +24,20 @@ export const AuthTitle = styled.div`
   color: #5455dd;
 `;
 
-export const AuthLabel = styled.div`
+export const AuthLab = styled.div`
   margin-bottom: 8px;
   font-size: 14px;
   color: black;
   font-weight: bold;
 `;
 
-export const AuthLabelSpan = styled.span`
+export const AuthLabSpan = styled.span`
   font-size: 12px;
   margin-left: 4px;
   color: gray;
 `;
 
-export const AuthInput = styled.input.attrs({ autoComplete: "off" })`
+export const AuthInp = styled.input.attrs({ autoComplete: "off" })`
   width: 100%;
   height: 48px;
   margin-bottom: 16px;
@@ -47,14 +47,14 @@ export const AuthInput = styled.input.attrs({ autoComplete: "off" })`
   font-size: 16px;
 `;
 
-export const AuthInputErrMsg = styled.div`
+export const AuthInpErrMsg = styled.div`
   font-size: 12px;
   color: red;
   margin-bottom: 16px;
   margin-top: -8px;
 `;
 
-export const AuthButton = styled.button`
+export const AuthBtn = styled.button`
   width: 100%;
   height: 56px;
   line-height: 56px;

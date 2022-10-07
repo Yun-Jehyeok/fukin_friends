@@ -46,7 +46,7 @@ export const NoticeDetailItem = styled(NoticeItem)`
 //   }
 // `;
 
-export const NoticeControllerBtnContainer = styled.div`
+export const NoticeControllerBtnCont = styled.div`
   width: 100%;
   display: flex;
   justify-content: flex-end;
@@ -68,7 +68,7 @@ export const NoticeControllerBtn = styled.div`
   }
 `;
 
-export const CommentContainer = styled.div`
+export const CommentCont = styled.div`
   width: 100%;
   height: fit-content;
   margin-top: 64px;
@@ -82,7 +82,7 @@ export const CommentContainer = styled.div`
   }
 `;
 
-export const CommentInput = styled.textarea`
+export const CommentInp = styled.textarea`
   width: 100%;
   height: 64px;
   border: 1px solid #8a8fb9;
@@ -147,7 +147,7 @@ export const CommentBtn = styled.div`
   }
 `;
 
-export const CommentEditInput = styled.textarea`
+export const CommentEditInp = styled.textarea`
   width: 100%;
   height: 80px;
   border: 1px solid #8a8fb9;
@@ -193,7 +193,7 @@ export const CommentDate = styled.div`
   font-family: "Lato", sans-serif;
 `;
 
-export const CommentPaginationContainer = styled.div`
+export const CommentPaginationCont = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;

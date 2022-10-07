@@ -16,13 +16,13 @@ import type {
 import type { ResponseFailure } from "../types";
 import { INotice } from "../types/notice";
 
-export type NoticeStateType = {
+export interface NoticeStateType {
   notices: INotice[];
   isLoading: boolean;
   errMsg: null | string;
   isSuccess: boolean;
   notice: INotice;
-};
+}
 
 const initialState: NoticeStateType = {
   notices: [],

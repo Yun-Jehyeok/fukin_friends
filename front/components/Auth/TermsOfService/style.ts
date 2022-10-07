@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const TOSContainer = styled.div`
+export const TOSCont = styled.div`
   width: 100%;
   min-width: 1320px;
   height: 100%;
@@ -25,7 +25,7 @@ export const TOSLogo = styled.div`
   margin-bottom: 48px;
 `;
 
-export const TOSLabel = styled.div`
+export const TOSLab = styled.div`
   color: black;
   font-size: 18px;
   font-weight: bold;
@@ -60,7 +60,7 @@ export const TOSBox = styled.div`
   line-height: 20px;
 `;
 
-export const TOSLastLabel = styled.div`
+export const TOSLastLab = styled.div`
   font-size: 14px;
   color: #282828;
   margin-bottom: 16px;
@@ -70,13 +70,13 @@ export const TOSLastLabel = styled.div`
   }
 `;
 
-export const TOSButtonContainer = styled.div`
+export const TOSBtnCont = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
 `;
 
-export const TOSButton = styled.button`
+export const TOSBtn = styled.button`
   width: calc(50% - 8px);
   height: 56px;
   color: white;
@@ -101,7 +101,7 @@ export const TOSButton = styled.button`
   }
 `;
 
-export const ErrMsg = styled.div`
+export const TOSErr = styled.div`
   width: 100%;
   height: 24px;
   font-size: 14px;

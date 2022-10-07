@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const AlbumListContainer = styled.div`
+export const AlbumListCont = styled.div`
   width: 100%;
   margin-top: 160px;
 `;

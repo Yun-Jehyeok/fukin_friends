@@ -7,7 +7,7 @@ export const Title = styled.div`
   margin-bottom: 18px;
 `;
 
-export const ItemContainer = styled.div`
+export const ItemCont = styled.div`
   width: 100%;
   display: flex;
 `;

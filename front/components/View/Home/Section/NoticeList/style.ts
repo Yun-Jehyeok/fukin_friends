@@ -4,7 +4,7 @@ interface IList {
   activeIdx: number;
 }
 
-export const NoticeListContainer = styled.div`
+export const NoticeListCont = styled.div`
   width: 100%;
   margin-top: 200px;
 `;
@@ -43,7 +43,7 @@ export const Description = styled.div`
   }
 `;
 
-export const ListContainer = styled.div`
+export const ListCont = styled.div`
   width: 100%;
   height: fit-content;
   display: flex;

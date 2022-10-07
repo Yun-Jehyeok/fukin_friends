@@ -4,7 +4,7 @@ interface IModal {
   isOpen: boolean;
 }
 
-export const CreateNoticeTitle = styled.div`
+export const EditorTitle = styled.div`
   font-family: "Josefin Sans", sans-serif;
   font-size: 32px;
   font-weight: bold;
@@ -12,7 +12,7 @@ export const CreateNoticeTitle = styled.div`
   margin-bottom: 16px;
 `;
 
-export const CreateNoticeDesc = styled.div`
+export const EditorDesc = styled.div`
   color: #9096b2;
   font-size: 17px;
   font-family: "Lato", sans-serif;
@@ -20,7 +20,7 @@ export const CreateNoticeDesc = styled.div`
   text-align: center;
 `;
 
-export const TitleInput = styled.input`
+export const TitleInp = styled.input`
   width: 100%;
   height: 48px;
   padding: 0 12px;
@@ -45,7 +45,7 @@ export const LocDateCont = styled.div`
   }
 `;
 
-export const LocationInput = styled.input`
+export const LocationInp = styled.input`
   width: calc(80% - 4px);
   height: 100%;
   font-size: 13px;
@@ -54,7 +54,7 @@ export const LocationInput = styled.input`
   flex-direction: column;
   color: #757575;
 `;
-export const DateInput = styled.input`
+export const DateInp = styled.input`
   width: calc(20% - 4px);
   height: 100%:
 `;
@@ -78,7 +78,7 @@ export const LocationModal = styled.div<IModal>`
   }
 `;
 
-export const EditorButton = styled.button`
+export const EditorBtn = styled.button`
   width: 100%;
   height: 48px;
   border: none;
