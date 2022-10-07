@@ -8,7 +8,7 @@ import {
 import { EditorContainer } from "../CreateNotice/style";
 import dynamic from "next/dynamic";
 
-const NoSsrWysiwyg = dynamic(() => import("components/Editor/UpdateEditor"), {
+const NoSsrWysiwyg = dynamic(() => import("components/Editor/MyEditor"), {
   ssr: false,
 });
 
@@ -26,7 +26,7 @@ const NoticeCreate: NextPage = () => {
         </div>
       </NoticeHeader>
       <EditorContainer>
-        <NoSsrWysiwyg />
+        <NoSsrWysiwyg pageName="update" />
       </EditorContainer>
     </Container>
   );

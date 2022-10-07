@@ -37,7 +37,7 @@ import {
   NoticeControllerBtn,
   NoticeControllerBtnContainer,
   NoticeDetailItem,
-} from "styles/styleRepo/noticeDetailStyle";
+} from "styles/styleRepo/noticeStyle";
 import { useCallback, useEffect, useState } from "react";
 import { useAppDispatch } from "hooks/reduxHooks";
 import { noticeActions } from "src/store/reducers/noticeReducer";

@@ -5,6 +5,7 @@ interface ILikeBtn {
   isLiked: boolean;
 }
 
+// 상세 페이지
 export const NoticeDetailItem = styled(NoticeItem)`
   cursor: initial !important;
 

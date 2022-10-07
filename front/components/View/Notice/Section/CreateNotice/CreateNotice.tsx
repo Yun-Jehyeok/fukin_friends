@@ -26,7 +26,7 @@ const NoticeCreate: NextPage = () => {
         </div>
       </NoticeHeader>
       <EditorContainer>
-        <NoSsrWysiwyg />
+        <NoSsrWysiwyg pageName="create" />
       </EditorContainer>
     </Container>
   );

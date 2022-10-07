@@ -20,15 +20,28 @@ import { useSelector } from "react-redux";
 import { RootState } from "src/configureStore";
 import { useAppDispatch } from "hooks/reduxHooks";
 import { noticeActions } from "src/store/reducers/noticeReducer";
+import { useRouter } from "next/router";
 
-const WysiwygEditor: NextPage = () => {
+type EditorType = {
+  pageName: string;
+};
+
+const WysiwygEditor: NextPage<EditorType> = ({ pageName }) => {
   const { user } = useSelector((state: RootState) => state.user);
+  const { notice } = useSelector((state: RootState) => state.notice);
+
+  const setData = useCallback(
+    (a: any, b: any) => {
+      return pageName === "create" ? a : b;
+    },
+    [pageName]
+  );
 
   const dispatch = useAppDispatch();
 
-  const title = useStringInput("");
-  const date = useStringInput("");
-  const location = useStringInput("");
+  const title = useStringInput(setData("", notice.title));
+  const date = useStringInput(setData("", notice.date));
+  const location = useStringInput(setData("", notice.location));
 
   const editorRef = useRef<Editor>(null);
   const toolbarItems = [
@@ -41,29 +54,49 @@ const WysiwygEditor: NextPage = () => {
     ["scrollSync"],
   ];
 
+  const router = useRouter();
+
   const onSubmit = useCallback(
     (e: React.MouseEvent<HTMLElement>) => {
       e.preventDefault();
 
+      let noticeId = router.query.noticeId as string;
+
       const content = editorRef.current?.getInstance().getMarkdown() || "";
 
       dispatch(
-        noticeActions.createNoticeRequest({
-          userId: user.id,
-          title: title.value,
-          content,
-          location: location.value,
-          date: date.value,
-        })
+        setData(
+          noticeActions.createNoticeRequest({
+            userId: user.id,
+            title: title.value,
+            content,
+            location: location.value,
+            date: date.value,
+          }),
+          noticeActions.updateNoticeRequest({
+            id: noticeId,
+            title: title.value,
+            content,
+            location: location.value,
+            date: date.value,
+          })
+        )
       );
     },
-    [user, title, date, location, dispatch]
+    [setData, router, user, title, date, location, dispatch]
   );
 
   return (
     <div>
-      <CreateNoticeTitle>Create Notice</CreateNoticeTitle>
-      <CreateNoticeDesc>Please notice detail bellow.</CreateNoticeDesc>
+      <CreateNoticeTitle>
+        {setData("Create Notice", "Updating Notice")}
+      </CreateNoticeTitle>
+      <CreateNoticeDesc>
+        {setData(
+          "Please notice detail bellow.",
+          "Please notice detail bellow."
+        )}
+      </CreateNoticeDesc>
       <TitleInput
         type="text"
         name="title"
@@ -78,7 +111,7 @@ const WysiwygEditor: NextPage = () => {
 
       <Editor
         ref={editorRef}
-        initialValue=" "
+        initialValue={setData(" ", notice.content)}
         initialEditType="wysiwyg"
         hideModeSwitch={true}
         height="500px"
@@ -87,7 +120,7 @@ const WysiwygEditor: NextPage = () => {
         toolbarItems={toolbarItems}
         plugins={[colorSyntax]}
       />
-      <EditorButton onClick={onSubmit}>Write</EditorButton>
+      <EditorButton onClick={onSubmit}>{setData("Write", "Edit")}</EditorButton>
     </div>
   );
 };
