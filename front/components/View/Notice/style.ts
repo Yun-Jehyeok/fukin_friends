@@ -43,7 +43,7 @@ export const NoticeHeaderTitle = styled.div`
   color: #101750;
 `;
 
-export const NoticeHeaderDescription = styled.div`
+export const NoticeHeaderDesc = styled.div`
   font-family: "Josefin Sans", sans-serif;
   color: #fb2e86;
   font-size: 16px;
@@ -124,7 +124,7 @@ export const NoticeDate = styled.div`
     padding: 4px 36px;
   }
 `;
-export const NoticeItemDescription = styled.div`
+export const NoticeItemDesc = styled.div`
   font-family: "Lato", sans-serif;
   color: #8a8fb9;
   font-size: 16px;

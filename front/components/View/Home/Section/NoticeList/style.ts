@@ -30,7 +30,7 @@ export const ItemTitle = styled.div`
   font-family: "Josefin Sans", sans-serif;
 `;
 
-export const Description = styled.div`
+export const Desc = styled.div`
   width: 100%;
   height: 40%;
   text-align: center;
@@ -80,7 +80,7 @@ export const List = styled.div<IList>`
     &:hover {
       border: 1px solid #2f1ac4;
     }
-    &:hover ${Description} {
+    &:hover ${Desc} {
       background-color: #2f1ac4;
 
       & * {

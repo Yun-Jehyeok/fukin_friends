@@ -29,7 +29,7 @@ export const MuItem = styled.div`
   margin-right: 24px;
 `;
 
-export const MuDescription = styled.div`
+export const MuDesc = styled.div`
   width: 100%;
   margin-top: 8px;
 

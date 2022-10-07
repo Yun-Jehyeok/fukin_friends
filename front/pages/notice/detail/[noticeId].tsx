@@ -7,9 +7,9 @@ import {
   NoticeDate,
   NoticeDatePlace,
   NoticeHeader,
-  NoticeHeaderDescription,
+  NoticeHeaderDesc,
   NoticeHeaderTitle,
-  NoticeItemDescription,
+  NoticeItemDesc,
   NoticeItemTitle,
   NoticeLeft,
   NoticePlace,
@@ -149,9 +149,9 @@ const Notice: NextPage = () => {
               <div>
                 <div>
                   <NoticeHeaderTitle>Notice Detail Page</NoticeHeaderTitle>
-                  <NoticeHeaderDescription>
+                  <NoticeHeaderDesc>
                     It&apos;s Notice Detail Page
-                  </NoticeHeaderDescription>
+                  </NoticeHeaderDesc>
                 </div>
               </div>
             </NoticeHeader>
@@ -167,9 +167,9 @@ const Notice: NextPage = () => {
                       </NoticeDate>
                       <NoticePlace>{notice.location}</NoticePlace>
                     </NoticeDatePlace>
-                    <NoticeItemDescription>
+                    <NoticeItemDesc>
                       <Viewer initialValue={notice.content} />
-                    </NoticeItemDescription>
+                    </NoticeItemDesc>
                     {user.id === notice.creator ? (
                       <NoticeControllerBtnCont>
                         <div>

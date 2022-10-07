@@ -16,13 +16,13 @@ import friend6 from "public/img/friend6.jpg";
 import friend7 from "public/img/friend7.jpg";
 
 const items = [
-  { id: 0, src: friend1, title: "title", description: "description" },
-  { id: 1, src: friend2, title: "title", description: "description" },
-  { id: 2, src: friend3, title: "title", description: "description" },
-  { id: 3, src: friend4, title: "title", description: "description" },
-  { id: 4, src: friend5, title: "title", description: "description" },
-  { id: 5, src: friend6, title: "title", description: "description" },
-  { id: 6, src: friend7, title: "title", description: "description" },
+  { id: 0, src: friend1, title: "title", desc: "desc" },
+  { id: 1, src: friend2, title: "title", desc: "desc" },
+  { id: 2, src: friend3, title: "title", desc: "desc" },
+  { id: 3, src: friend4, title: "title", desc: "desc" },
+  { id: 4, src: friend5, title: "title", desc: "desc" },
+  { id: 5, src: friend6, title: "title", desc: "desc" },
+  { id: 6, src: friend7, title: "title", desc: "desc" },
 ];
 
 const Home: NextPage = () => {
@@ -36,7 +36,7 @@ const Home: NextPage = () => {
             </div>
             <div>
               <div>{item.title}</div>
-              <div>{item.description}</div>
+              <div>{item.desc}</div>
             </div>
           </ItemBox>
         ))}

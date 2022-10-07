@@ -15,10 +15,10 @@ import {
   NoticeDate,
   NoticeDatePlace,
   NoticeHeader,
-  NoticeHeaderDescription,
+  NoticeHeaderDesc,
   NoticeHeaderTitle,
   NoticeItem,
-  NoticeItemDescription,
+  NoticeItemDesc,
   NoticeItemTitle,
   NoticeLeft,
   NoticePaginationBtn,
@@ -78,9 +78,7 @@ const Notice: NextPage = () => {
         <div>
           <div>
             <NoticeHeaderTitle>Notice Page</NoticeHeaderTitle>
-            <NoticeHeaderDescription>
-              It&apos;s Just Notice Page
-            </NoticeHeaderDescription>
+            <NoticeHeaderDesc>It&apos;s Just Notice Page</NoticeHeaderDesc>
           </div>
           <CreateNotice>
             <Link href="/notice/create">Create Notice</Link>
@@ -102,7 +100,7 @@ const Notice: NextPage = () => {
                       </NoticeDate>
                       <NoticePlace>{item.location}</NoticePlace>
                     </NoticeDatePlace>
-                    <NoticeItemDescription>
+                    <NoticeItemDesc>
                       {item.content.length > 200
                         ? item.content
                             .slice(0, 200)
@@ -112,7 +110,7 @@ const Notice: NextPage = () => {
                             /<\/?("[^"]*"|'[^']*'|[^>])*(>|$)/gi,
                             ""
                           )}
-                    </NoticeItemDescription>
+                    </NoticeItemDesc>
                     <ReadMore>
                       Read More
                       <div></div>

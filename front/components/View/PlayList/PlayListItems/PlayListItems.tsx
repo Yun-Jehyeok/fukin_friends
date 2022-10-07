@@ -4,7 +4,7 @@ import {
   Item,
   ItemAuthor,
   ItemCont,
-  ItemDescription,
+  ItemDesc,
   ItemTitle,
   Title,
 } from "./style";
@@ -39,10 +39,10 @@ const PlayListItems: NextPage = () => {
               width={400}
               height={240}
             />
-            <ItemDescription>
+            <ItemDesc>
               <ItemTitle>{item.title}</ItemTitle>
               <ItemAuthor>{item.author}</ItemAuthor>
-            </ItemDescription>
+            </ItemDesc>
           </Item>
         ))}
       </ItemCont>

@@ -1,12 +1,12 @@
 import { NextPage } from "next";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   Attendees,
   NoticeListCont,
   ItemTitle,
   List,
   Title,
-  Description,
+  Desc,
   DSCTitle,
   DSCPlace,
   DSCDate,
@@ -209,7 +209,7 @@ const NoticeList: NextPage = () => {
             {sampleData.map((item) => (
               <div key={item.id}>
                 <ItemTitle>{item.title}</ItemTitle>
-                <Description>
+                <Desc>
                   <div>
                     <DSCTitle>{item.title}</DSCTitle>
                     <Attendees>
@@ -226,7 +226,7 @@ const NoticeList: NextPage = () => {
                     <DSCPlace>{item.place}</DSCPlace>
                     <DSCDate>{item.date}</DSCDate>
                   </div>
-                </Description>
+                </Desc>
               </div>
             ))}
           </List>

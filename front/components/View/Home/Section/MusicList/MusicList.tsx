@@ -1,5 +1,5 @@
 import { NextPage } from "next";
-import { MuListCont, MuDescription, MuItem, MuList, MuTitle } from "./style";
+import { MuListCont, MuDesc, MuItem, MuList, MuTitle } from "./style";
 import zico from "public/img/zico.jpeg";
 import thinking from "public/img/thinking.jpeg";
 import randombox from "public/img/randombox.jpeg";
@@ -59,10 +59,10 @@ const MusicList: NextPage = () => {
         {itemList.map((item) => (
           <MuItem key={item.id}>
             <Image src={item.img} alt={item.title} width={120} height={150} />
-            <MuDescription>
+            <MuDesc>
               <div>{item.title}</div>
               <div>{item.singer}</div>
-            </MuDescription>
+            </MuDesc>
           </MuItem>
         ))}
       </MuList>

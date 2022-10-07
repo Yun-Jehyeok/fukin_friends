@@ -24,7 +24,7 @@ export const Item = styled.div`
   }
 `;
 
-export const ItemDescription = styled.div`
+export const ItemDesc = styled.div`
   position: absolute;
   top: 0;
   left: 0;

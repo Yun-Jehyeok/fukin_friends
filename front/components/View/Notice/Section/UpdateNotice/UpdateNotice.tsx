@@ -1,10 +1,6 @@
 import { NextPage } from "next";
 import { Cont } from "styles/styleRepo/global";
-import {
-  NoticeHeader,
-  NoticeHeaderDescription,
-  NoticeHeaderTitle,
-} from "../../style";
+import { NoticeHeader, NoticeHeaderDesc, NoticeHeaderTitle } from "../../style";
 import { EditorCont } from "../CreateNotice/style";
 import dynamic from "next/dynamic";
 
@@ -19,9 +15,9 @@ const NoticeCreate: NextPage = () => {
         <div>
           <div>
             <NoticeHeaderTitle>Updating Notice Page</NoticeHeaderTitle>
-            <NoticeHeaderDescription>
+            <NoticeHeaderDesc>
               It&apos;s Just Updating Notice Page
-            </NoticeHeaderDescription>
+            </NoticeHeaderDesc>
           </div>
         </div>
       </NoticeHeader>
