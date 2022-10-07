@@ -25,33 +25,33 @@ router.post("/login", (req, res) => {
   if (!email)
     return res
       .status(400)
-      .json({ isSuccess: false, msg: "이메일을 작성해주세요." });
+      .json({ isSuc: false, msg: "이메일을 작성해주세요." });
   else if (!password)
     return res
       .status(400)
-      .json({ isSuccess: false, msg: "비밀번호를 작성해주세요." });
+      .json({ isSuc: false, msg: "비밀번호를 작성해주세요." });
 
   User.findOne({ email }).then((user) => {
     if (!user)
       return res
         .status(400)
-        .json({ isSuccess: false, msg: "이메일을 확인해주세요." });
+        .json({ isSuc: false, msg: "이메일을 확인해주세요." });
 
     bcrypt.compare(password, user.password).then((isMatch) => {
       if (!isMatch)
         return res
           .status(400)
-          .json({ isSuccess: false, msg: "비밀번호를 확인해주세요." });
+          .json({ isSuc: false, msg: "비밀번호를 확인해주세요." });
 
       jwt.sign(
         { id: user.id },
         JWT_SECRET,
         { expiresIn: 36000 },
         (err, token) => {
-          if (err) return res.status(400).json({ isSuccess: false, msg: err });
+          if (err) return res.status(400).json({ isSuc: false, msg: err });
 
           res.json({
-            isSuccess: true,
+            isSuc: true,
             token,
             user: {
               id: user.id,
@@ -75,9 +75,9 @@ router.delete("/:id", async (req, res) => {
     await Photo.deleteMany({ creator: req.params.id });
     await PlayList.deleteMany({ creator: req.params.id });
 
-    return res.status(200).json({ isSuccess: true });
+    return res.status(200).json({ isSuc: true });
   } catch (e) {
-    return res.status(400).json({ isSuccess: false });
+    return res.status(400).json({ isSuc: false });
   }
 });
 
@@ -86,7 +86,7 @@ router.post("/email", async (req, res) => {
   const { email } = req.body;
 
   User.findOne({ email }).then(async (user) => {
-    if (!user) return res.status(400).json({ isSuccess: false });
+    if (!user) return res.status(400).json({ isSuc: false });
 
     let transporter = nodemailer.createTransport({
       service: "gmail",
@@ -109,10 +109,10 @@ router.post("/email", async (req, res) => {
     transporter.sendMail(mailOptions, function (error, info) {
       if (error) {
         console.log(error);
-        return res.status(400).json({ isSuccess: false });
+        return res.status(400).json({ isSuc: false });
       }
 
-      res.send({ isSuccess: true });
+      res.send({ isSuc: true });
       transporter.close();
     });
   });
@@ -170,9 +170,9 @@ router.post("/phone", (req, res) => {
     },
     function (err) {
       if (err) {
-        res.json({ isSuccess: false });
+        res.json({ isSuc: false });
       } else {
-        res.json({ isSuccess: true, num: authNum });
+        res.json({ isSuc: true, num: authNum });
       }
     }
   );
@@ -193,9 +193,9 @@ router.post("/user", auth, async (req, res) => {
       email: user.email,
     };
 
-    res.json({ isSuccess: true, user: userRes });
+    res.json({ isSuc: true, user: userRes });
   } catch (e) {
-    res.status(400).json({ isSuccess: false, msg: e.message });
+    res.status(400).json({ isSuc: false, msg: e.message });
   }
 });
 

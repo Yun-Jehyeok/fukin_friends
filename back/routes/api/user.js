@@ -16,14 +16,14 @@ router.get("/", async (req, res) => {
     if (!users)
       return res
         .status(400)
-        .json({ isSuccess: false, msg: "유저가 존재하지 않습니다." });
+        .json({ isSuc: false, msg: "유저가 존재하지 않습니다." });
 
     res.status(200).json({
-      isSuccess: true,
+      isSuc: true,
       users: users,
     });
   } catch (e) {
-    res.json({ isSuccess: false, msg: e.message });
+    res.json({ isSuc: false, msg: e.message });
   }
 });
 
@@ -32,23 +32,21 @@ router.post("/register", (req, res) => {
   const { name, email, password, phone } = req.body;
 
   if (!name)
-    return res
-      .status(400)
-      .json({ isSuccess: false, msg: "이름을 작성해주세요." });
+    return res.status(400).json({ isSuc: false, msg: "이름을 작성해주세요." });
   else if (!email)
     return res
       .status(400)
-      .json({ isSuccess: false, msg: "이메일을 작성해주세요." });
+      .json({ isSuc: false, msg: "이메일을 작성해주세요." });
   else if (!password)
     return res
       .status(400)
-      .json({ isSuccess: false, msg: "비밀번호를 입력해주세요." });
+      .json({ isSuc: false, msg: "비밀번호를 입력해주세요." });
 
   User.findOne({ email }).then((user) => {
     if (user)
       return res
         .status(400)
-        .json({ isSuccess: false, msg: "이미 존재하는 이메일입니다." });
+        .json({ isSuc: false, msg: "이미 존재하는 이메일입니다." });
 
     const newUser = new User({
       name,
@@ -71,7 +69,7 @@ router.post("/register", (req, res) => {
               if (err) return res.status(400).json({ err });
 
               res.json({
-                isSuccess: true,
+                isSuc: true,
                 token,
                 user: {
                   id: user.id,
@@ -94,12 +92,12 @@ router.put("/password", (req, res) => {
   if (!password)
     return res
       .status(400)
-      .json({ isSuccess: false, msg: "비밀번호를 입력해주세요." });
+      .json({ isSuc: false, msg: "비밀번호를 입력해주세요." });
 
   User.findOne({ _id: userId }).then((user) => {
     bcrypt.genSalt(10, (err, salt) => {
       bcrypt.hash(password, salt, async (err, hash) => {
-        if (err) return res.status(400).json({ isSuccess: false, msg: err });
+        if (err) return res.status(400).json({ isSuc: false, msg: err });
 
         try {
           await User.findByIdAndUpdate(
@@ -113,11 +111,10 @@ router.put("/password", (req, res) => {
             JWT_SECRET,
             { expiresIn: 36000 },
             (err, token) => {
-              if (err)
-                return res.status(400).json({ isSuccess: false, msg: err });
+              if (err) return res.status(400).json({ isSuc: false, msg: err });
 
               res.json({
-                isSuccess: true,
+                isSuc: true,
                 token,
                 user: {
                   id: user.id,
@@ -128,7 +125,7 @@ router.put("/password", (req, res) => {
             }
           );
         } catch (e) {
-          res.json({ isSuccess: false, msg: e.message });
+          res.json({ isSuc: false, msg: e.message });
         }
       });
     });
@@ -153,9 +150,9 @@ router.get("/search/:searchTerm", async (req, res) => {
       };
     });
 
-    res.send({ isSuccess: true, users: result });
+    res.send({ isSuc: true, users: result });
   } catch (e) {
-    res.json({ isSuccess: false, msg: e.message });
+    res.json({ isSuc: false, msg: e.message });
   }
 });
 

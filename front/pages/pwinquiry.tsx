@@ -22,7 +22,7 @@ const PwInquiry: NextPage = () => {
       e.preventDefault();
 
       if (email.value) {
-        dispatch(userActions.sendEmailRequest({ email: email.value }));
+        dispatch(userActions.sendEmailReq({ email: email.value }));
       }
     },
     [dispatch, email]

@@ -7,20 +7,20 @@ import type {
   DeleteNoticeReq,
   DeleteNoticeRes,
   LoadAllNoticeRes,
-  LoadNoticeFailureRes,
+  LoadNoticeFailRes,
   LoadNoticeReq,
-  LoadNoticeSuccessRes,
+  LoadNoticeSucRes,
   UpdateNoticeReq,
   UpdateNoticeRes,
 } from "../types/notice";
-import type { ResponseFailure } from "../types";
+import type { ResponseFail } from "../types";
 import { INotice } from "../types/notice";
 
 export interface NoticeStateType {
   notices: INotice[];
   isLoading: boolean;
   errMsg: null | string;
-  isSuccess: boolean;
+  isSuc: boolean;
   notice: INotice;
 }
 
@@ -28,7 +28,7 @@ const initialState: NoticeStateType = {
   notices: [],
   isLoading: false,
   errMsg: null,
-  isSuccess: false,
+  isSuc: false,
   notice: {
     _id: "",
     title: "",
@@ -45,66 +45,66 @@ const noticeSlice = createSlice({
   initialState,
   reducers: {
     // 전체 공지사항 로딩
-    loadAllNoticeRequest(state) {
+    loadAllNoticeReq(state) {
       state.isLoading = true;
       state.errMsg = null;
     },
-    loadAllNoticeSuccess(state, action: PayloadAction<LoadAllNoticeRes>) {
+    loadAllNoticeSuc(state, action: PayloadAction<LoadAllNoticeRes>) {
       state.isLoading = false;
       state.notices = action.payload.notices;
     },
-    loadAllNoticeFailure(state, action: PayloadAction<ResponseFailure>) {
+    loadAllNoticeFail(state, action: PayloadAction<ResponseFail>) {
       state.isLoading = false;
       state.errMsg = action.payload.msg;
     },
 
     // 공지사항 생성
-    createNoticeRequest(state, action: PayloadAction<CreateNoticeReq>) {
+    createNoticeReq(state, action: PayloadAction<CreateNoticeReq>) {
       state.isLoading = true;
       state.errMsg = null;
     },
-    createNoticeSuccess(state, action: PayloadAction<CreateNoticeRes>) {
+    createNoticeSuc(state, action: PayloadAction<CreateNoticeRes>) {
       window.location.href = "/notice";
 
       state.isLoading = false;
     },
-    createNoticeFailure(state, action: PayloadAction<ResponseFailure>) {
+    createNoticeFail(state, action: PayloadAction<ResponseFail>) {
       state.isLoading = false;
       state.errMsg = action.payload.msg;
     },
 
     // 공지사항 상세
-    loadNoticeRequest(state, action: PayloadAction<LoadNoticeReq>) {
+    loadNoticeReq(state, action: PayloadAction<LoadNoticeReq>) {
       state.isLoading = true;
       state.errMsg = null;
     },
-    loadNoticeSuccess(state, action: PayloadAction<LoadNoticeSuccessRes>) {
+    loadNoticeSuc(state, action: PayloadAction<LoadNoticeSucRes>) {
       state.notice = action.payload.notice;
       state.isLoading = false;
     },
-    loadNoticeFailure(state, action: PayloadAction<LoadNoticeFailureRes>) {
+    loadNoticeFail(state, action: PayloadAction<LoadNoticeFailRes>) {
       state.isLoading = false;
       state.errMsg = action.payload.msg;
     },
 
     // 공지사항 수정
-    updateNoticeRequest(state, action: PayloadAction<UpdateNoticeReq>) {
+    updateNoticeReq(state, action: PayloadAction<UpdateNoticeReq>) {
       state.isLoading = true;
       state.errMsg = null;
     },
-    updateNoticeSuccess(state, action: PayloadAction<UpdateNoticeRes>) {
+    updateNoticeSuc(state, action: PayloadAction<UpdateNoticeRes>) {
       state.isLoading = false;
     },
-    updateNoticeFailure(state, action: PayloadAction<UpdateNoticeRes>) {
+    updateNoticeFail(state, action: PayloadAction<UpdateNoticeRes>) {
       state.isLoading = false;
     },
 
     // 공지사항 삭제
-    deleteNoticeRequest(state, action: PayloadAction<DeleteNoticeReq>) {
+    deleteNoticeReq(state, action: PayloadAction<DeleteNoticeReq>) {
       state.isLoading = true;
       state.errMsg = null;
     },
-    deleteNoticeSuccess(state, action: PayloadAction<DeleteNoticeRes>) {
+    deleteNoticeSuc(state, action: PayloadAction<DeleteNoticeRes>) {
       window.location.href = "/notice";
 
       state.notice = {
@@ -118,7 +118,7 @@ const noticeSlice = createSlice({
       };
       state.isLoading = false;
     },
-    deleteNoticeFailure(state, action: PayloadAction<DeleteNoticeRes>) {
+    deleteNoticeFail(state, action: PayloadAction<DeleteNoticeRes>) {
       state.isLoading = false;
     },
   },

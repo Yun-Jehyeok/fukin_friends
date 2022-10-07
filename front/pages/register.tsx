@@ -82,7 +82,7 @@ const Register: NextPage = () => {
         }
       }, 1000);
 
-      dispatch(userActions.userPARequest({ phoneNum: phone.value }));
+      dispatch(userActions.userPAReq({ phoneNum: phone.value }));
     },
     [dispatch, name, phone]
   );
@@ -126,7 +126,7 @@ const Register: NextPage = () => {
           setIsPasswordCheckErr(false);
 
           dispatch(
-            userActions.registerUserRequest({
+            userActions.registerUserReq({
               name: name.value,
               email: email.value,
               password: password.value,

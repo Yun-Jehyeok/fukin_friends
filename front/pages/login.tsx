@@ -46,7 +46,7 @@ const Login: NextPage = () => {
 
       if (!isEmailBlank && !isPasswordBlank) {
         dispatch(
-          userActions.loginUserRequest({
+          userActions.loginUserReq({
             email: email.value,
             password: password.value,
           })

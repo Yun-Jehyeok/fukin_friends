@@ -11,10 +11,10 @@ router.get("/", async (req, res) => {
   if (!events)
     return res
       .status(400)
-      .json({ isSuccess: false, msg: "이벤트가 존재하지 않습니다." });
+      .json({ isSuc: false, msg: "이벤트가 존재하지 않습니다." });
 
   res.status(200).json({
-    isSuccess: true,
+    isSuc: true,
     events: events,
   });
 });
@@ -29,12 +29,12 @@ router.get("/skip/:skip", async (req, res) => {
       .sort({ date: -1 });
 
     res.status(200).json({
-      isSuccess: true,
+      isSuc: true,
       allEventsCnt: eventCount,
       events: eventFindResult,
     });
   } catch (e) {
-    res.status(400).json({ isSuccess: false, msg: e.message });
+    res.status(400).json({ isSuc: false, msg: e.message });
   }
 });
 
@@ -43,7 +43,7 @@ router.post("/create", (req, res) => {
   const { userId, title, content, date } = req.body;
 
   User.findOne({ _id: userId }).then((user) => {
-    if (!user) return res.status(400).json({ isSuccess: false });
+    if (!user) return res.status(400).json({ isSuc: false });
 
     const newEvent = new Event({
       title,
@@ -59,10 +59,10 @@ router.post("/create", (req, res) => {
         },
       })
         .then(() => {
-          res.status(200).json({ isSuccess: true });
+          res.status(200).json({ isSuc: true });
         })
         .catch((e) => {
-          res.status(400).json({ isSuccess: false });
+          res.status(400).json({ isSuc: false });
         });
     });
   });
@@ -76,9 +76,9 @@ router.get("/:id", (req, res) => {
     if (!event)
       return res
         .status(400)
-        .json({ isSuccess: false, msg: "해당 이벤트가 존재하지 않습니다." });
+        .json({ isSuc: false, msg: "해당 이벤트가 존재하지 않습니다." });
 
-    res.status(200).json({ isSuccess: true, event });
+    res.status(200).json({ isSuc: true, event });
   });
 });
 
@@ -95,10 +95,10 @@ router.put("/:id", (req, res) => {
     },
   })
     .then(() => {
-      res.status(200).json({ isSuccess: true });
+      res.status(200).json({ isSuc: true });
     })
     .catch((e) => {
-      res.status(400).json({ isSuccess: false });
+      res.status(400).json({ isSuc: false });
     });
 });
 
@@ -110,9 +110,9 @@ router.delete("/:id", async (req, res) => {
     await User.deleteOne({ events: req.params.id });
     await Event.deleteOne({ _id: id });
 
-    return res.status(200).json({ isSuccess: true });
+    return res.status(200).json({ isSuc: true });
   } catch (e) {
-    return res.status(400).json({ isSuccess: false });
+    return res.status(400).json({ isSuc: false });
   }
 });
 

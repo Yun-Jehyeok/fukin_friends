@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
-export const AlbumListCont = styled.div`
+export const AbListCont = styled.div`
   width: 100%;
   margin-top: 160px;
 `;
 
-export const Title = styled.div`
+export const AbTitle = styled.div`
   font-size: 40px;
   color: #151875;
   font-weight: bold;
@@ -14,7 +14,7 @@ export const Title = styled.div`
   margin-bottom: 53px;
 `;
 
-export const List = styled.div`
+export const AbList = styled.div`
   display: flex;
   width: 100%;
   height: fit-content;
@@ -23,7 +23,7 @@ export const List = styled.div`
   justify-content: center;
 `;
 
-export const Item = styled.div`
+export const AbItem = styled.div`
   width: 400px;
   height: 280px;
   margin-right: 24px;

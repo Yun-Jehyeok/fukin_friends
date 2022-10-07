@@ -50,7 +50,7 @@ const ChangePassword: NextPage = () => {
           let id = userId as string;
 
           dispatch(
-            userActions.changePWRequest({
+            userActions.changePWReq({
               userId: id,
               password: password.value,
             })

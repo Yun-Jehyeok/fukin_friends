@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
-export const MusicListCont = styled.div`
+export const MuListCont = styled.div`
   width: 100%;
   margin-top: 112px;
 `;
 
-export const Title = styled.div`
+export const MuTitle = styled.div`
   font-size: 40px;
   color: #151875;
   font-weight: bold;
@@ -14,7 +14,7 @@ export const Title = styled.div`
   margin-bottom: 53px;
 `;
 
-export const List = styled.div`
+export const MuList = styled.div`
   display: flex;
   width: 100%;
   height: fit-content;
@@ -23,13 +23,13 @@ export const List = styled.div`
   justify-content: center;
 `;
 
-export const Item = styled.div`
+export const MuItem = styled.div`
   width: 120px;
   height: fit-content;
   margin-right: 24px;
 `;
 
-export const Description = styled.div`
+export const MuDescription = styled.div`
   width: 100%;
   margin-top: 8px;
 

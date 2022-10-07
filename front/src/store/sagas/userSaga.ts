@@ -39,11 +39,11 @@ function* registerUserApi(action: PayloadAction<RegisterUserReq>) {
       action.payload
     );
 
-    yield put(userActions.registerUserSuccess(data));
+    yield put(userActions.registerUserSuc(data));
   } catch (e: any) {
     yield put(
-      userActions.registerUserFailure({
-        isSuccess: false,
+      userActions.registerUserFail({
+        isSuc: false,
         msg: "서버에러입니다.",
       })
     );
@@ -51,7 +51,7 @@ function* registerUserApi(action: PayloadAction<RegisterUserReq>) {
 }
 
 function* watchRegisterUser() {
-  yield takeLatest(userActions.registerUserRequest, registerUserApi);
+  yield takeLatest(userActions.registerUserReq, registerUserApi);
 }
 
 // 로그인
@@ -62,16 +62,16 @@ function* loginUserApi(action: PayloadAction<LoginUserReq>) {
       action.payload
     );
 
-    yield put(userActions.loginUserSuccess(data));
+    yield put(userActions.loginUserSuc(data));
   } catch (e: any) {
     yield put(
-      userActions.loginUserFailure({ isSuccess: false, msg: "서버에러입니다." })
+      userActions.loginUserFail({ isSuc: false, msg: "서버에러입니다." })
     );
   }
 }
 
 function* watchLoginUser() {
-  yield takeLatest(userActions.loginUserRequest, loginUserApi);
+  yield takeLatest(userActions.loginUserReq, loginUserApi);
 }
 
 // 비밀번호 변경
@@ -82,16 +82,16 @@ function* changePWApi(action: PayloadAction<ChangePWReq>) {
       action.payload
     );
 
-    yield put(userActions.changePWSuccess(data));
+    yield put(userActions.changePWSuc(data));
   } catch (e: any) {
     yield put(
-      userActions.changePWFailure({ isSuccess: false, msg: "서버에러입니다." })
+      userActions.changePWFail({ isSuc: false, msg: "서버에러입니다." })
     );
   }
 }
 
 function* watchChangePW() {
-  yield takeLatest(userActions.changePWRequest, changePWApi);
+  yield takeLatest(userActions.changePWReq, changePWApi);
 }
 
 // 유저 인증
@@ -102,16 +102,16 @@ function* loadUserApi(action: PayloadAction<LoadUserReq>) {
       action.payload
     );
 
-    yield put(userActions.loadUserSuccess(data));
+    yield put(userActions.loadUserSuc(data));
   } catch (e: any) {
     yield put(
-      userActions.loadUserFailure({ isSuccess: false, msg: "서버에러입니다." })
+      userActions.loadUserFail({ isSuc: false, msg: "서버에러입니다." })
     );
   }
 }
 
 function* watchloadUser() {
-  yield takeLatest(userActions.loadUserRequest, loadUserApi);
+  yield takeLatest(userActions.loadUserReq, loadUserApi);
 }
 
 // 유저 검색
@@ -122,14 +122,14 @@ function* searchUserApi(action: PayloadAction<SearchUserReq>) {
       action.payload
     );
 
-    yield put(userActions.userSearchSuccess(data));
+    yield put(userActions.userSearchSuc(data));
   } catch (e: any) {
-    yield put(userActions.userSearchFailure());
+    yield put(userActions.userSearchFail());
   }
 }
 
 function* watchSearchUser() {
-  yield takeLatest(userActions.userSearchRequest, searchUserApi);
+  yield takeLatest(userActions.userSearchReq, searchUserApi);
 }
 
 // 로그아웃
@@ -138,17 +138,17 @@ function* logoutApi(action: PayloadAction<LogoutUserReq>) {
     if (action.payload) {
       localStorage.removeItem("token");
 
-      yield put(userActions.logoutSuccess());
+      yield put(userActions.logoutSuc());
     } else {
-      yield put(userActions.logoutFailure());
+      yield put(userActions.logoutFail());
     }
   } catch (e: any) {
-    yield put(userActions.logoutFailure());
+    yield put(userActions.logoutFail());
   }
 }
 
 function* watchLogout() {
-  yield takeLatest(userActions.logoutRequest, logoutApi);
+  yield takeLatest(userActions.logoutReq, logoutApi);
 }
 
 // 휴대폰 인증
@@ -159,16 +159,14 @@ function* paApi(action: PayloadAction<PAReq>) {
       action.payload
     );
 
-    yield put(userActions.userPASuccess(data));
+    yield put(userActions.userPASuc(data));
   } catch (e: any) {
-    yield put(
-      userActions.userPAFailure({ isSuccess: false, msg: "서버에러입니다." })
-    );
+    yield put(userActions.userPAFail({ isSuc: false, msg: "서버에러입니다." }));
   }
 }
 
 function* watchPA() {
-  yield takeLatest(userActions.userPARequest, paApi);
+  yield takeLatest(userActions.userPAReq, paApi);
 }
 
 // 이메일 보내기
@@ -179,16 +177,16 @@ function* sendEmailApi(action: PayloadAction<SendEmailReq>) {
       action.payload
     );
 
-    yield put(userActions.sendEmailSuccess(data));
+    yield put(userActions.sendEmailSuc(data));
   } catch (e: any) {
     yield put(
-      userActions.sendEmailFailure({ isSuccess: false, msg: "서버에러입니다." })
+      userActions.sendEmailFail({ isSuc: false, msg: "서버에러입니다." })
     );
   }
 }
 
 function* watchSendEmail() {
-  yield takeLatest(userActions.sendEmailRequest, sendEmailApi);
+  yield takeLatest(userActions.sendEmailReq, sendEmailApi);
 }
 
 export default function* userSaga() {

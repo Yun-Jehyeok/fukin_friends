@@ -35,7 +35,7 @@ const Header: NextPage = () => {
   const logoutHandler = useCallback(() => {
     let tokenData = token as string;
 
-    dispatch(userActions.logoutRequest({ token: tokenData }));
+    dispatch(userActions.logoutReq({ token: tokenData }));
   }, [dispatch, token]);
 
   return (

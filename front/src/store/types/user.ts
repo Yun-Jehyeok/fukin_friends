@@ -12,7 +12,7 @@ export interface RegisterUserReq {
   phone: string;
 }
 export interface RegisterUserRes {
-  isSuccess: boolean;
+  isSuc: boolean;
   user: IUser;
   token: string;
 }
@@ -23,7 +23,7 @@ export interface LoginUserReq {
   password: string;
 }
 export interface LoginUserRes {
-  isSuccess: boolean;
+  isSuc: boolean;
   user: IUser;
   token: string;
 }
@@ -34,7 +34,7 @@ export interface ChangePWReq {
   password: string;
 }
 export interface ChangePWRes {
-  isSuccess: boolean;
+  isSuc: boolean;
   user: IUser;
   token: string;
 }
@@ -44,7 +44,7 @@ export interface LoadUserReq {
   token: string | null;
 }
 export interface LoadUserRes {
-  isSuccess: boolean;
+  isSuc: boolean;
   user: IUser;
 }
 
@@ -66,7 +66,7 @@ export interface PAReq {
   phoneNum: string;
 }
 export interface PARes {
-  isSuccess: boolean;
+  isSuc: boolean;
   num: string;
 }
 
@@ -75,5 +75,5 @@ export interface SendEmailReq {
   email: string;
 }
 export interface SendEmailRes {
-  isSuccess: boolean;
+  isSuc: boolean;
 }

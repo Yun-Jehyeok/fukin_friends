@@ -1,4 +1,4 @@
-export interface ResponseFailure {
-  isSuccess: boolean;
+export interface ResponseFail {
+  isSuc: boolean;
   msg: string;
 }

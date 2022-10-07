@@ -11,7 +11,7 @@ export interface INotice {
 // 전체 공지사항
 export interface LoadAllNoticeRes {
   notices: INotice[];
-  isSuccess: boolean;
+  isSuc: boolean;
 }
 
 // 공지 생성
@@ -23,19 +23,19 @@ export interface CreateNoticeReq {
   date: string;
 }
 export interface CreateNoticeRes {
-  isSuccess: boolean;
+  isSuc: boolean;
 }
 
 // 공지사항 상세
 export interface LoadNoticeReq {
   noticeId: string;
 }
-export interface LoadNoticeSuccessRes {
+export interface LoadNoticeSucRes {
   notice: INotice;
-  isSuccess: boolean;
+  isSuc: boolean;
 }
-export interface LoadNoticeFailureRes {
-  isSuccess: boolean;
+export interface LoadNoticeFailRes {
+  isSuc: boolean;
   msg: string;
 }
 
@@ -48,7 +48,7 @@ export interface UpdateNoticeReq {
   date: string;
 }
 export interface UpdateNoticeRes {
-  isSuccess: boolean;
+  isSuc: boolean;
 }
 
 // 공지사항 삭제
@@ -56,5 +56,5 @@ export interface DeleteNoticeReq {
   noticeId: string;
 }
 export interface DeleteNoticeRes {
-  isSuccess: boolean;
+  isSuc: boolean;
 }

@@ -11,10 +11,10 @@ router.get("/", async (req, res) => {
   if (!notices)
     return res
       .status(400)
-      .json({ isSuccess: false, msg: "공지사항이 존재하지 않습니다." });
+      .json({ isSuc: false, msg: "공지사항이 존재하지 않습니다." });
 
   res.status(200).json({
-    isSuccess: true,
+    isSuc: true,
     notices: notices,
   });
 });
@@ -29,12 +29,12 @@ router.get("/skip/:skip", async (req, res) => {
       .sort({ date: -1 });
 
     res.status(200).json({
-      isSuccess: true,
+      isSuc: true,
       allNoticesCnt: noticeCount,
       notices: noticeFindResult,
     });
   } catch (e) {
-    res.status(400).json({ isSuccess: false, msg: e.message });
+    res.status(400).json({ isSuc: false, msg: e.message });
   }
 });
 
@@ -43,7 +43,7 @@ router.post("/", (req, res) => {
   const { userId, title, content, location, date } = req.body;
 
   User.findOne({ _id: userId }).then((user) => {
-    if (!user) return res.status(400).json({ isSuccess: false });
+    if (!user) return res.status(400).json({ isSuc: false });
 
     const newNotice = new Notice({
       title,
@@ -60,10 +60,10 @@ router.post("/", (req, res) => {
         },
       })
         .then(() => {
-          res.status(200).json({ isSuccess: true });
+          res.status(200).json({ isSuc: true });
         })
         .catch((e) => {
-          res.status(400).json({ isSuccess: false });
+          res.status(400).json({ isSuc: false });
         });
     });
   });
@@ -77,9 +77,9 @@ router.get("/:id", (req, res) => {
     if (!notice)
       return res
         .status(400)
-        .json({ isSuccess: false, msg: "해당 공지사항이 존재하지 않습니다." });
+        .json({ isSuc: false, msg: "해당 공지사항이 존재하지 않습니다." });
 
-    res.status(200).json({ isSuccess: true, notice: notice });
+    res.status(200).json({ isSuc: true, notice: notice });
   });
 });
 
@@ -95,10 +95,10 @@ router.put("/:id", (req, res) => {
     date,
   })
     .then(() => {
-      res.status(200).json({ isSuccess: true });
+      res.status(200).json({ isSuc: true });
     })
     .catch((e) => {
-      res.status(400).json({ isSuccess: false });
+      res.status(400).json({ isSuc: false });
     });
 });
 
@@ -110,9 +110,9 @@ router.delete("/:id", async (req, res) => {
     // 유저 내부 공지사항 삭제도 해야됨
     await Notice.deleteOne({ _id: id });
 
-    return res.status(200).json({ isSuccess: true });
+    return res.status(200).json({ isSuc: true });
   } catch (e) {
-    return res.status(400).json({ isSuccess: false });
+    return res.status(400).json({ isSuc: false });
   }
 });
 

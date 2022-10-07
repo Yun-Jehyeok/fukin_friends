@@ -66,14 +66,14 @@ const WysiwygEditor: NextPage<EditorType> = ({ pageName }) => {
 
       dispatch(
         setData(
-          noticeActions.createNoticeRequest({
+          noticeActions.createNoticeReq({
             userId: user.id,
             title: title.value,
             content,
             location: location.value,
             date: date.value,
           }),
-          noticeActions.updateNoticeRequest({
+          noticeActions.updateNoticeReq({
             id: noticeId,
             title: title.value,
             content,

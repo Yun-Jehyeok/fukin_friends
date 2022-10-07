@@ -9,7 +9,7 @@ import type {
   DeleteNoticeRes,
   LoadAllNoticeRes,
   LoadNoticeReq,
-  LoadNoticeSuccessRes,
+  LoadNoticeSucRes,
   UpdateNoticeReq,
   UpdateNoticeRes,
 } from "../types/notice";
@@ -28,11 +28,11 @@ function* loadAllNoticeApi() {
   try {
     const { data }: AxiosResponse<LoadAllNoticeRes> = yield call(loadAllNotice);
 
-    yield put(noticeActions.loadAllNoticeSuccess(data));
+    yield put(noticeActions.loadAllNoticeSuc(data));
   } catch (e: any) {
     yield put(
-      noticeActions.loadAllNoticeFailure({
-        isSuccess: false,
+      noticeActions.loadAllNoticeFail({
+        isSuc: false,
         msg: e.message,
       })
     );
@@ -40,7 +40,7 @@ function* loadAllNoticeApi() {
 }
 
 function* watchloadAllNotice() {
-  yield takeLatest(noticeActions.loadAllNoticeRequest, loadAllNoticeApi);
+  yield takeLatest(noticeActions.loadAllNoticeReq, loadAllNoticeApi);
 }
 
 // 공지사항 작성
@@ -51,11 +51,11 @@ function* createNoticeApi(action: PayloadAction<CreateNoticeReq>) {
       action.payload
     );
 
-    yield put(noticeActions.createNoticeSuccess(data));
+    yield put(noticeActions.createNoticeSuc(data));
   } catch (e: any) {
     yield put(
-      noticeActions.createNoticeFailure({
-        isSuccess: false,
+      noticeActions.createNoticeFail({
+        isSuc: false,
         msg: e.message,
       })
     );
@@ -63,22 +63,22 @@ function* createNoticeApi(action: PayloadAction<CreateNoticeReq>) {
 }
 
 function* watchcreateNotice() {
-  yield takeLatest(noticeActions.createNoticeRequest, createNoticeApi);
+  yield takeLatest(noticeActions.createNoticeReq, createNoticeApi);
 }
 
 // 공지사항 상세
 function* loadNoticeApi(action: PayloadAction<LoadNoticeReq>) {
   try {
-    const { data }: AxiosResponse<LoadNoticeSuccessRes> = yield call(
+    const { data }: AxiosResponse<LoadNoticeSucRes> = yield call(
       loadNotice,
       action.payload
     );
 
-    yield put(noticeActions.loadNoticeSuccess(data));
+    yield put(noticeActions.loadNoticeSuc(data));
   } catch (e: any) {
     yield put(
-      noticeActions.loadNoticeFailure({
-        isSuccess: false,
+      noticeActions.loadNoticeFail({
+        isSuc: false,
         msg: e.message,
       })
     );
@@ -86,7 +86,7 @@ function* loadNoticeApi(action: PayloadAction<LoadNoticeReq>) {
 }
 
 function* watchloadNotice() {
-  yield takeLatest(noticeActions.loadNoticeRequest, loadNoticeApi);
+  yield takeLatest(noticeActions.loadNoticeReq, loadNoticeApi);
 }
 
 // 공지사항 수정
@@ -97,18 +97,18 @@ function* updateNoticeApi(action: PayloadAction<UpdateNoticeReq>) {
       action.payload
     );
 
-    yield put(noticeActions.updateNoticeSuccess(data));
+    yield put(noticeActions.updateNoticeSuc(data));
   } catch (e: any) {
     yield put(
-      noticeActions.updateNoticeFailure({
-        isSuccess: false,
+      noticeActions.updateNoticeFail({
+        isSuc: false,
       })
     );
   }
 }
 
 function* watchupdateNotice() {
-  yield takeLatest(noticeActions.updateNoticeRequest, updateNoticeApi);
+  yield takeLatest(noticeActions.updateNoticeReq, updateNoticeApi);
 }
 
 // 공지사항 삭제
@@ -119,18 +119,18 @@ function* deleteNoticeApi(action: PayloadAction<DeleteNoticeReq>) {
       action.payload
     );
 
-    yield put(noticeActions.deleteNoticeSuccess(data));
+    yield put(noticeActions.deleteNoticeSuc(data));
   } catch (e: any) {
     yield put(
-      noticeActions.deleteNoticeFailure({
-        isSuccess: false,
+      noticeActions.deleteNoticeFail({
+        isSuc: false,
       })
     );
   }
 }
 
 function* watchdeleteNotice() {
-  yield takeLatest(noticeActions.deleteNoticeRequest, deleteNoticeApi);
+  yield takeLatest(noticeActions.deleteNoticeReq, deleteNoticeApi);
 }
 
 export default function* noticeSaga() {
