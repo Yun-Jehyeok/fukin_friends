@@ -60,7 +60,7 @@ const Notice: NextPage = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(noticeActions.loadAllNoticeRequest());
+    dispatch(noticeActions.loadAllNoticeReq());
   }, [dispatch]);
 
   const onSearch = useCallback(
