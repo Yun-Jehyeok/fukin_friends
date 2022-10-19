@@ -1,7 +1,11 @@
+import { useAppDispatch } from "hooks/reduxHooks";
 import { NextPage } from "next";
-import { useState } from "react";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "src/configureStore";
+import { noticeActions } from "src/store/reducers/noticeReducer";
 import {
-  Attendees,
   NoticeListCont,
   ItemTitle,
   List,
@@ -10,169 +14,20 @@ import {
   DSCTitle,
   DSCPlace,
   DSCDate,
-  Attendee,
   ListCont,
   Pagination,
   PaginationItem,
 } from "./style";
 
-let sampleData = [
-  {
-    id: "1",
-    title: "Drunk Day",
-    date: "2022-08-12 6:00 PM",
-    place: "Yeouinaru station",
-    attendees: [
-      {
-        id: 1,
-        src: "https://placeimg.com/16/16/people",
-      },
-      {
-        id: 2,
-        src: "https://placeimg.com/16/16/people",
-      },
-      {
-        id: 3,
-        src: "https://placeimg.com/16/16/people",
-      },
-    ],
-  },
-  {
-    id: "2",
-    title: "Drunk Day",
-    date: "2022-08-12 6:00 PM",
-    place: "Yeouinaru station",
-    attendees: [
-      {
-        id: 1,
-        src: "https://placeimg.com/16/16/people",
-      },
-      {
-        id: 2,
-        src: "https://placeimg.com/16/16/people",
-      },
-      {
-        id: 3,
-        src: "https://placeimg.com/16/16/people",
-      },
-    ],
-  },
-  {
-    id: "3",
-    title: "Congraturations",
-    date: "2022-08-16 6:00 PM",
-    place: "Hannam-dong Chicken",
-    attendees: [
-      {
-        id: 1,
-        src: "https://placeimg.com/16/16/people",
-      },
-      {
-        id: 2,
-        src: "https://placeimg.com/16/16/people",
-      },
-    ],
-  },
-  {
-    id: "4",
-    title: "Just Drunk",
-    date: "2022-09-12 4:00 PM",
-    place: "Jongyun's house",
-    attendees: [
-      {
-        id: 1,
-        src: "https://placeimg.com/16/16/people",
-      },
-      {
-        id: 2,
-        src: "https://placeimg.com/16/16/people",
-      },
-      {
-        id: 3,
-        src: "https://placeimg.com/16/16/people",
-      },
-    ],
-  },
-  {
-    id: "5",
-    title: "Just Drunk",
-    date: "2022-09-12 4:00 PM",
-    place: "Jongyun's house",
-    attendees: [
-      {
-        id: 1,
-        src: "https://placeimg.com/16/16/people",
-      },
-      {
-        id: 2,
-        src: "https://placeimg.com/16/16/people",
-      },
-      {
-        id: 3,
-        src: "https://placeimg.com/16/16/people",
-      },
-    ],
-  },
-  {
-    id: "6",
-    title: "Drunk Day",
-    date: "2022-08-12 6:00 PM",
-    place: "Yeouinaru station",
-    attendees: [
-      {
-        id: 1,
-        src: "https://placeimg.com/16/16/people",
-      },
-      {
-        id: 2,
-        src: "https://placeimg.com/16/16/people",
-      },
-      {
-        id: 3,
-        src: "https://placeimg.com/16/16/people",
-      },
-    ],
-  },
-  {
-    id: "7",
-    title: "Congraturations",
-    date: "2022-08-16 6:00 PM",
-    place: "Hannam-dong Chicken",
-    attendees: [
-      {
-        id: 1,
-        src: "https://placeimg.com/16/16/people",
-      },
-      {
-        id: 2,
-        src: "https://placeimg.com/16/16/people",
-      },
-    ],
-  },
-  {
-    id: "8",
-    title: "Just Drunk",
-    date: "2022-09-12 4:00 PM",
-    place: "Jongyun's house",
-    attendees: [
-      {
-        id: 1,
-        src: "https://placeimg.com/16/16/people",
-      },
-      {
-        id: 2,
-        src: "https://placeimg.com/16/16/people",
-      },
-      {
-        id: 3,
-        src: "https://placeimg.com/16/16/people",
-      },
-    ],
-  },
-];
-
 const NoticeList: NextPage = () => {
   const [activeIdx, setActiveIdx] = useState(0);
+  const { notices } = useSelector((state: RootState) => state.notice);
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(noticeActions.loadMainNoticeReq());
+  }, [dispatch]);
 
   const onClickPagination = (e: React.MouseEvent<HTMLElement>) => {
     setActiveIdx(parseInt(e.currentTarget.dataset.key as string));
@@ -180,9 +35,9 @@ const NoticeList: NextPage = () => {
 
   const paginationUI = () => {
     let itemLength =
-      sampleData.length % 4 === 0
-        ? Math.floor(sampleData.length / 4)
-        : Math.floor(sampleData.length / 4) + 1;
+      notices.length % 4 === 0
+        ? Math.floor(notices.length / 4)
+        : Math.floor(notices.length / 4) + 1;
 
     let returnArr = [];
 
@@ -206,29 +61,24 @@ const NoticeList: NextPage = () => {
       <ListCont>
         <div>
           <List activeIdx={activeIdx}>
-            {sampleData.map((item) => (
-              <div key={item.id}>
-                <ItemTitle>{item.title}</ItemTitle>
-                <Desc>
-                  <div>
-                    <DSCTitle>{item.title}</DSCTitle>
-                    <Attendees>
-                      <div>
-                        {item.attendees && item.attendees.length > 0
-                          ? item.attendees.map((item) => (
-                              <Attendee key={item.id}>
-                                <img src={item.src} />
-                              </Attendee>
-                            ))
-                          : ""}
-                      </div>
-                    </Attendees>
-                    <DSCPlace>{item.place}</DSCPlace>
-                    <DSCDate>{item.date}</DSCDate>
+            {Array.isArray(notices)
+              ? notices.map((item) => (
+                  <div key={item._id}>
+                    <Link href={`/notice/detail/${item._id}`}>
+                      <a>
+                        <ItemTitle>{item.title}</ItemTitle>
+                        <Desc>
+                          <div>
+                            <DSCTitle>{item.title}</DSCTitle>
+                            <DSCPlace>{item.location}</DSCPlace>
+                            <DSCDate>{item.date.slice(0, 10)}</DSCDate>
+                          </div>
+                        </Desc>
+                      </a>
+                    </Link>
                   </div>
-                </Desc>
-              </div>
-            ))}
+                ))
+              : ""}
           </List>
         </div>
       </ListCont>

@@ -1,53 +1,57 @@
 import { NextPage } from "next";
 import { MuListCont, MuDesc, MuItem, MuList, MuTitle } from "./style";
-import zico from "public/img/zico.jpeg";
-import thinking from "public/img/thinking.jpeg";
-import randombox from "public/img/randombox.jpeg";
-import dontknow from "public/img/dontknow.jpeg";
+import twelve_45 from "public/img/12_45.jpg";
+import youth from "public/img/youth.jpg";
+import memories from "public/img/memories.jpg";
+import ghostTown from "public/img/ghost_town.jpg";
+import outOfTime from "public/img/out_of_time.jpg";
+import OffMyFace from "public/img/off_my_face.jpg";
+import SamSmith from "public/img/not_the_only_one.jpg";
+
 import Image from "next/image";
 
 let itemList = [
   {
     id: 1,
-    img: zico,
-    title: "괴짜",
-    singer: "Zico",
+    img: twelve_45,
+    title: "12:45 (Stripped)",
+    singer: "Etham",
   },
   {
     id: 2,
-    img: thinking,
-    title: "사람",
-    singer: "Zico",
+    img: youth,
+    title: "YOUTH",
+    singer: "Troye Sivan",
   },
   {
     id: 3,
-    img: randombox,
-    title: "웬수",
-    singer: "Zico",
+    img: memories,
+    title: "Memories",
+    singer: "Maroon 5",
   },
   {
     id: 4,
-    img: dontknow,
-    title: "Veni Vidi Vici",
-    singer: "Zico",
+    img: ghostTown,
+    title: "GHOST TOWN",
+    singer: "Benson Boone",
   },
   {
     id: 5,
-    img: thinking,
-    title: "사람",
-    singer: "Zico",
+    img: outOfTime,
+    title: "Out of Time",
+    singer: "The Weekend",
   },
   {
     id: 6,
-    img: randombox,
-    title: "웬수",
-    singer: "Zico",
+    img: OffMyFace,
+    title: "Off My Face",
+    singer: "Justin Bieber",
   },
   {
     id: 7,
-    img: dontknow,
-    title: "Veni Vidi Vici",
-    singer: "Zico",
+    img: SamSmith,
+    title: "I'm not the only one",
+    singer: "Sam Smith",
   },
 ];
 
@@ -58,7 +62,7 @@ const MusicList: NextPage = () => {
       <MuList>
         {itemList.map((item) => (
           <MuItem key={item.id}>
-            <Image src={item.img} alt={item.title} width={120} height={150} />
+            <Image src={item.img} alt={item.title} width={147} height={160} />
             <MuDesc>
               <div>{item.title}</div>
               <div>{item.singer}</div>

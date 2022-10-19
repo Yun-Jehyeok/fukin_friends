@@ -14,6 +14,12 @@ export interface LoadAllNoticeRes {
   isSuc: boolean;
 }
 
+// 메인페이지 공지사항
+export interface LoadMainNoticesRes {
+  notices: INotice[];
+  isSuc: boolean;
+}
+
 // 공지 생성
 export interface CreateNoticeReq {
   userId: string;

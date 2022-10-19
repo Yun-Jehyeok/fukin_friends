@@ -4,8 +4,9 @@ import type {
   DeleteNoticeReq,
   DeleteNoticeRes,
   LoadAllNoticeRes,
+  LoadMainNoticesRes,
   LoadNoticeReq,
-  LoadNoticeSuccessRes,
+  LoadNoticeSucRes,
   UpdateNoticeReq,
   UpdateNoticeRes,
 } from "../types/notice";
@@ -18,14 +19,16 @@ export const loadAllNotice = async () => {
   return await axios.get<LoadAllNoticeRes>(`/api/notice`);
 };
 
+export const loadMainNotices = async () => {
+  return await axios.get<LoadMainNoticesRes>(`/api/notice/main`);
+};
+
 export const createNotice = async (notice: CreateNoticeReq) => {
   return await axios.post<CreateNoticeRes>("/api/notice", notice);
 };
 
 export const loadNotice = async (noticeId: LoadNoticeReq) => {
-  return await axios.get<LoadNoticeSuccessRes>(
-    `/api/notice/${noticeId.noticeId}`
-  );
+  return await axios.get<LoadNoticeSucRes>(`/api/notice/${noticeId.noticeId}`);
 };
 
 export const updateNotice = async (notice: UpdateNoticeReq) => {

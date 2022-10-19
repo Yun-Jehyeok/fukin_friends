@@ -28,6 +28,7 @@ export const ItemTitle = styled.div`
   text-align: center;
   font-size: 20px;
   font-family: "Josefin Sans", sans-serif;
+  padding: 0 12px;
 `;
 
 export const Desc = styled.div`
@@ -37,6 +38,7 @@ export const Desc = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
+  padding: 0 12px;
 
   & > div {
     height: fit-content;
@@ -100,29 +102,6 @@ export const DSCTitle = styled.div`
   font-weight: bold;
 `;
 
-export const Attendees = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  margin-top: 16px;
-
-  & > div {
-    width: fit-content;
-    display: flex;
-  }
-`;
-export const Attendee = styled.div`
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-
-  &:not(:last-child) {
-    margin-right: 8px;
-  }
-  & > img {
-    border-radius: 50%;
-  }
-`;
 export const DSCPlace = styled.div`
   font-family: "Josefin Sans", sans-serif;
   font-size: 14px;

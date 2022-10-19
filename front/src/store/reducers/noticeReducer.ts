@@ -7,6 +7,7 @@ import type {
   DeleteNoticeReq,
   DeleteNoticeRes,
   LoadAllNoticeRes,
+  LoadMainNoticesRes,
   LoadNoticeFailRes,
   LoadNoticeReq,
   LoadNoticeSucRes,
@@ -54,6 +55,20 @@ const noticeSlice = createSlice({
       state.notices = action.payload.notices;
     },
     loadAllNoticeFail(state, action: PayloadAction<ResponseFail>) {
+      state.isLoading = false;
+      state.errMsg = action.payload.msg;
+    },
+
+    // 메인 공지사항 로딩
+    loadMainNoticeReq(state) {
+      state.isLoading = true;
+      state.errMsg = null;
+    },
+    loadMainNoticeSuc(state, action: PayloadAction<LoadMainNoticesRes>) {
+      state.isLoading = false;
+      state.notices = action.payload.notices;
+    },
+    loadMainNoticeFail(state, action: PayloadAction<ResponseFail>) {
       state.isLoading = false;
       state.errMsg = action.payload.msg;
     },

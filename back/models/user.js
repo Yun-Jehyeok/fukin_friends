@@ -53,6 +53,12 @@ const UserSchema = new mongoose.Schema({
       ref: "playList",
     },
   ],
+  comments: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "comment",
+    },
+  ],
 });
 
 const User = mongoose.model("user", UserSchema);

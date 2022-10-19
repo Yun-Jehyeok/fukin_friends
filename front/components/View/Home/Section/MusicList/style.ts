@@ -24,9 +24,13 @@ export const MuList = styled.div`
 `;
 
 export const MuItem = styled.div`
-  width: 120px;
+  width: 147px;
   height: fit-content;
   margin-right: 24px;
+
+  &:last-child {
+    margin-right: 0;
+  }
 `;
 
 export const MuDesc = styled.div`
@@ -35,6 +39,7 @@ export const MuDesc = styled.div`
 
   & > div {
     font-size: 14px;
+    text-align: center;
   }
   & > div:last-child {
     color: gray;

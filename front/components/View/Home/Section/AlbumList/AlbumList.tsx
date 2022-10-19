@@ -30,7 +30,7 @@ const AlbumList: NextPage = () => {
       <AbList>
         {itemList.map((item) => (
           <AbItem key={item.id}>
-            <Image src={item.img} alt={item.title} width={400} height={280} />
+            <Image src={item.img} alt={item.title} width={376} height={260} />
           </AbItem>
         ))}
       </AbList>

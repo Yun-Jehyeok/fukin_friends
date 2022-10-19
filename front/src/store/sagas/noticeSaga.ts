@@ -8,6 +8,7 @@ import type {
   DeleteNoticeReq,
   DeleteNoticeRes,
   LoadAllNoticeRes,
+  LoadMainNoticesRes,
   LoadNoticeReq,
   LoadNoticeSucRes,
   UpdateNoticeReq,
@@ -18,6 +19,7 @@ import {
   createNotice,
   deleteNotice,
   loadAllNotice,
+  loadMainNotices,
   loadNotice,
   updateNotice,
 } from "../api/noticeApi";
@@ -41,6 +43,28 @@ function* loadAllNoticeApi() {
 
 function* watchloadAllNotice() {
   yield takeLatest(noticeActions.loadAllNoticeReq, loadAllNoticeApi);
+}
+
+// 메인 공지사항 로딩
+function* loadMainNoticeApi() {
+  try {
+    const { data }: AxiosResponse<LoadMainNoticesRes> = yield call(
+      loadMainNotices
+    );
+
+    yield put(noticeActions.loadMainNoticeSuc(data));
+  } catch (e: any) {
+    yield put(
+      noticeActions.loadMainNoticeFail({
+        isSuc: false,
+        msg: e.message,
+      })
+    );
+  }
+}
+
+function* watchloadMainNotice() {
+  yield takeLatest(noticeActions.loadMainNoticeReq, loadMainNoticeApi);
 }
 
 // 공지사항 작성
@@ -136,6 +160,7 @@ function* watchdeleteNotice() {
 export default function* noticeSaga() {
   yield all([
     fork(watchloadAllNotice),
+    fork(watchloadMainNotice),
     fork(watchcreateNotice),
     fork(watchloadNotice),
     fork(watchupdateNotice),

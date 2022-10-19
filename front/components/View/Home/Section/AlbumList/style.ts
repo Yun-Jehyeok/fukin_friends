@@ -24,10 +24,13 @@ export const AbList = styled.div`
 `;
 
 export const AbItem = styled.div`
-  width: 400px;
+  width: calc(1129 / 3) px;
   height: 280px;
   margin-right: 24px;
 
+  &:last-child {
+    margin-right: 0;
+  }
   & img {
     border-radius: 16px;
   }

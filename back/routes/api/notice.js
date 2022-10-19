@@ -6,7 +6,22 @@ const router = express.Router();
 
 // Find All Notices / GET
 router.get("/", async (req, res) => {
-  const notices = await Notice.find();
+  const notices = await Notice.find().sort({ date: -1 });
+
+  if (!notices)
+    return res
+      .status(400)
+      .json({ isSuc: false, msg: "공지사항이 존재하지 않습니다." });
+
+  res.status(200).json({
+    isSuc: true,
+    notices: notices,
+  });
+});
+
+// Find only 8 notices for main page / GET
+router.get("/main", async (req, res) => {
+  const notices = await Notice.find().sort({ date: -1 }).limit(8);
 
   if (!notices)
     return res

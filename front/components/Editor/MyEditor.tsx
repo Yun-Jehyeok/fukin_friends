@@ -89,12 +89,7 @@ const WysiwygEditor: NextPage<EditorType> = ({ pageName }) => {
   return (
     <div>
       <EditorTitle>{setData("Create Notice", "Updating Notice")}</EditorTitle>
-      <EditorDesc>
-        {setData(
-          "Please notice detail bellow.",
-          "Please notice detail bellow."
-        )}
-      </EditorDesc>
+      <EditorDesc>Please notice detail bellow.</EditorDesc>
       <TitleInp
         type="text"
         name="title"
