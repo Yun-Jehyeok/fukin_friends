@@ -1,6 +1,7 @@
 const express = require("express");
 const { User } = require("../../models/user");
 const { Comment } = require("../../models/comment");
+const { Notice } = require("../../models/notice");
 
 const router = express.Router();
 
@@ -24,7 +25,7 @@ router.get("/:id", async (req, res) => {
 
 // Create Comment / POST
 router.post("/", (req, res) => {
-  const { path, userId, content } = req.body;
+  const { path, pathId, userId, content } = req.body;
 
   User.findOne({ _id: userId }).then((user) => {
     if (!user) return res.status(400).json({ isSuc: false });
@@ -50,7 +51,17 @@ router.post("/", (req, res) => {
         });
 
       if (path === "Notice") {
-        // Notice에 comment 저장
+        Notice.findByIdAndUpdate(pathId, {
+          $push: {
+            comments: newComment._id,
+          },
+        })
+          .then(() => {
+            res.status(200).json({ isSuc: true });
+          })
+          .catch((e) => {
+            res.status(400).json({ isSuc: false });
+          });
       }
     });
   });
