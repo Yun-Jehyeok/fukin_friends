@@ -1,15 +1,23 @@
 # Fukin Friends
 
-### 예전에 개발자가 되겠답시고 친구들한테 우리만을 위한 앨범을 만들어줄게!! 했었는데 안했어서..
+This is a project for my friends.
 
-### 이제 합니다!
+It developed with Next.js, TypeScript, Redux, Node.js, MongoDB.
 
-## 기능
+## Getting Started
 
-- 앨범, 피드, 음악, 공지사항, 이벤트
+First, clone the project.
 
-## Stack
+Second, install the dependencies of front & back
 
-1. Front - React, Next.js, Typescript, Styled-components, Redux
-2. Back - Node, Express
-3. DB - MongoDB
+```
+npm i
+```
+
+Last, run the project in back!!
+
+```
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
