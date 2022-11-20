@@ -44,6 +44,7 @@ const commentSlice = createSlice({
     loadAllCommentsFail(state, action: PayloadAction<LoadAllCommentsFailRes>) {
       state.isLoading = false;
       state.errMsg = action.payload.msg;
+      state.comments = [];
     },
 
     // 댓글 생성

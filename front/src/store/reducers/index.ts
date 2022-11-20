@@ -1,13 +1,15 @@
-import { HYDRATE } from "next-redux-wrapper";
-import { combineReducers } from "@reduxjs/toolkit";
 import type { AnyAction, CombinedState } from "@reduxjs/toolkit";
+import { combineReducers } from "@reduxjs/toolkit";
+import { HYDRATE } from "next-redux-wrapper";
 
-import userReducer, { UserStateType } from "./userReducer";
+import commentReducer, { CommentStateType } from "./commentReducer";
 import noticeReducer, { NoticeStateType } from "./noticeReducer";
+import userReducer, { UserStateType } from "./userReducer";
 
 interface ReducerState {
   user: UserStateType;
   notice: NoticeStateType;
+  comment: CommentStateType;
 }
 
 const rootReducer = (
@@ -25,6 +27,7 @@ const rootReducer = (
       return combineReducers({
         user: userReducer,
         notice: noticeReducer,
+        comment: commentReducer,
       })(state, action);
   }
 };

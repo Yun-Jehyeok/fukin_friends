@@ -1,5 +1,3 @@
-import { NextPage } from "next";
-import { Cont } from "styles/styleRepo/global";
 import {
   ImportantItem,
   ImportantNotice,
@@ -16,10 +14,22 @@ import {
   NoticeRight,
   NoticeSearch,
 } from "components/View/Notice/style";
-import { Body, AppCont, ContentWrap } from "styles/styleRepo/style";
+import { NextPage } from "next";
+import { Cont } from "styles/styleRepo/global";
+import { AppCont, Body, ContentWrap } from "styles/styleRepo/style";
 
-import Header from "components/Header/Header";
+import { Viewer } from "@toast-ui/react-editor";
 import Footer from "components/Footer/Footer";
+import Header from "components/Header/Header";
+import { useAppDispatch } from "hooks/reduxHooks";
+import { useStringInput } from "hooks/useInput";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import React, { useCallback, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "src/configureStore";
+import { commentActions } from "src/store/reducers/commentReducer";
+import { noticeActions } from "src/store/reducers/noticeReducer";
 import {
   CommentBtn,
   CommentCont,
@@ -38,14 +48,6 @@ import {
   NoticeControllerBtnCont,
   NoticeDetailItem,
 } from "styles/styleRepo/noticeStyle";
-import { useCallback, useEffect, useState } from "react";
-import { useAppDispatch } from "hooks/reduxHooks";
-import { noticeActions } from "src/store/reducers/noticeReducer";
-import { useRouter } from "next/router";
-import { RootState } from "src/configureStore";
-import { useSelector } from "react-redux";
-import { Viewer } from "@toast-ui/react-editor";
-import Link from "next/link";
 
 const importantList = [
   {
@@ -68,36 +70,15 @@ const importantList = [
   },
 ];
 
-const comments = [
-  {
-    id: 0,
-    creator: "Yun Jehyeok",
-    content:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever. Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-    date: "2022-08-12 6:00 PM",
-  },
-  {
-    id: 1,
-    creator: "Jung Jongyun",
-    content:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever. Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-    date: "2022-08-17 4:00 PM",
-  },
-  {
-    id: 2,
-    creator: "Yun Yejin",
-    content:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever. Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-    date: "2022-08-17 4:00 PM",
-  },
-];
-
 const Notice: NextPage = () => {
   const [isCommentEditMode, setIsCommentEditMode] = useState(false);
   const [editCommentIdx, setEditCommentIdx] = useState(-1);
 
   const { notice } = useSelector((state: RootState) => state.notice);
   const { user } = useSelector((state: RootState) => state.user);
+  const { comments } = useSelector((state: RootState) => state.comment);
+
+  const comment = useStringInput("");
 
   const router = useRouter();
 
@@ -107,6 +88,9 @@ const Notice: NextPage = () => {
     let noticeId = router.query.noticeId as string;
 
     dispatch(noticeActions.loadNoticeReq({ noticeId }));
+    dispatch(
+      commentActions.loadAllCommentsReq({ path: "notice", id: noticeId })
+    );
   }, [dispatch, router]);
 
   const onSearch = (e: React.KeyboardEvent<HTMLElement>) => {
@@ -135,6 +119,15 @@ const Notice: NextPage = () => {
 
         dispatch(noticeActions.deleteNoticeReq({ noticeId }));
       }
+    },
+    [dispatch, router]
+  );
+
+  const submitComment = useCallback(
+    (e: React.MouseEvent<HTMLElement>) => {
+      e.preventDefault();
+
+      console.log("comment:::", comment);
     },
     [dispatch, router]
   );
@@ -190,28 +183,31 @@ const Notice: NextPage = () => {
                   <CommentCont>
                     <div>Comment</div>
                     <CommentInp
+                      {...comment}
                       maxLength={200}
                       placeholder="Write your comment"
-                    />
-                    <CommentSubmitBtn>Submit</CommentSubmitBtn>
+                    ></CommentInp>
+                    <CommentSubmitBtn onClick={submitComment}>
+                      Submit
+                    </CommentSubmitBtn>
                     <CommentContents>
                       {Array.isArray(comments)
                         ? comments.length > 0
                           ? comments.map((comment) => (
-                              <div key={comment.id}>
+                              <div key={comment._id}>
                                 <CommentHeader>
                                   <CommentCreator>
                                     {comment.creator}
                                   </CommentCreator>
-                                  {comment.id === 0 ? (
+                                  {comment._id === 0 ? (
                                     <CommentBtn>
                                       {isCommentEditMode &&
-                                      comment.id === editCommentIdx ? (
+                                      comment._id === editCommentIdx ? (
                                         ""
                                       ) : (
                                         <div
                                           onClick={() =>
-                                            onSetCommentEditMode(comment.id)
+                                            onSetCommentEditMode(comment._id)
                                           }
                                         >
                                           Edit
@@ -224,7 +220,7 @@ const Notice: NextPage = () => {
                                   )}
                                 </CommentHeader>
                                 {isCommentEditMode &&
-                                comment.id === editCommentIdx ? (
+                                comment._id === editCommentIdx ? (
                                   <div>
                                     <CommentEditInp value={comment.content} />
                                     <CommentEditModeBtn>

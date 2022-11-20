@@ -1,7 +1,13 @@
 import { all, call, fork, put, takeLatest } from "redux-saga/effects";
 
-import type { AxiosResponse } from "axios";
 import type { PayloadAction } from "@reduxjs/toolkit";
+import type { AxiosResponse } from "axios";
+import {
+  createComment,
+  deleteComment,
+  loadAllComments,
+  updateComment,
+} from "../api/commentApi";
 import { commentActions } from "../reducers/commentReducer";
 import {
   CreateCommentReq,
@@ -13,12 +19,6 @@ import {
   UpdateCommentReq,
   UpdateCommentRes,
 } from "../types/comment";
-import {
-  createComment,
-  deleteComment,
-  loadAllComments,
-  updateComment,
-} from "../api/commentApi";
 
 // 전체 댓글 로딩
 function* loadAllCommentsApi(action: PayloadAction<LoadAllCommentsReq>) {
@@ -27,6 +27,8 @@ function* loadAllCommentsApi(action: PayloadAction<LoadAllCommentsReq>) {
       loadAllComments,
       action.payload
     );
+
+    console.log("here2:::", data);
 
     yield put(commentActions.loadAllCommentsSuc(data));
   } catch (e: any) {
