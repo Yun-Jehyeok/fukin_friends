@@ -13,7 +13,9 @@ import {
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_SERVER_URL;
 
 export const loadAllComments = async (comment: LoadAllCommentsReq) => {
-  return await axios.get<LoadAllCommentsSucRes>(`/api/comment/${comment.id}`);
+  return await axios.get<LoadAllCommentsSucRes>(
+    `/api/comment/path=${comment.path}&${comment.id}`
+  );
 };
 
 export const createComment = async (comment: CreateCommentReq) => {
@@ -26,6 +28,8 @@ export const updateComment = async (comment: UpdateCommentReq) => {
   });
 };
 
-export const deleteComment = async (commentId: DeleteCommentReq) => {
-  return await axios.delete<DeleteCommentRes>(`/api/comment/${commentId}`);
+export const deleteComment = async (comment: DeleteCommentReq) => {
+  return await axios.delete<DeleteCommentRes>(`/api/comment/${comment.id}`, {
+    data: comment,
+  });
 };

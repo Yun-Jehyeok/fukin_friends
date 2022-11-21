@@ -20,6 +20,10 @@ const CommentSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  pathId: {
+    type: String,
+    required: true,
+  },
 });
 
 const Comment = mongoose.model("comment", CommentSchema);

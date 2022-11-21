@@ -1,8 +1,13 @@
 export interface IComment {
   _id: string;
   contents: string;
-  creator: string;
+  creator: {
+    _id: string;
+    name: string;
+    email: string;
+  };
   path: string;
+  pathId: string;
   date: string;
 }
 
@@ -23,6 +28,7 @@ export interface LoadAllCommentsFailRes {
 // 댓글 생성
 export interface CreateCommentReq {
   path: string;
+  pathId: string;
   userId: string;
   content: string;
 }

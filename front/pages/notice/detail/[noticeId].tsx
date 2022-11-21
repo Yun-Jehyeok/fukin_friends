@@ -25,7 +25,7 @@ import { useAppDispatch } from "hooks/reduxHooks";
 import { useStringInput } from "hooks/useInput";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "src/configureStore";
 import { commentActions } from "src/store/reducers/commentReducer";
@@ -37,8 +37,6 @@ import {
   CommentContents,
   CommentCreator,
   CommentDate,
-  CommentEditInp,
-  CommentEditModeBtn,
   CommentHeader,
   CommentInp,
   CommentPaginationBtn,
@@ -71,9 +69,6 @@ const importantList = [
 ];
 
 const Notice: NextPage = () => {
-  const [isCommentEditMode, setIsCommentEditMode] = useState(false);
-  const [editCommentIdx, setEditCommentIdx] = useState(-1);
-
   const { notice } = useSelector((state: RootState) => state.notice);
   const { user } = useSelector((state: RootState) => state.user);
   const { comments } = useSelector((state: RootState) => state.comment);
@@ -99,15 +94,6 @@ const Notice: NextPage = () => {
     }
   };
 
-  const onSetCommentEditMode = (id: number) => {
-    setEditCommentIdx(id);
-    setIsCommentEditMode(true);
-  };
-  const onSetCommentEditModeCancel = () => {
-    setEditCommentIdx(-1);
-    setIsCommentEditMode(false);
-  };
-
   const onDeleteNotice = useCallback(
     (e: React.MouseEvent<HTMLElement>) => {
       e.preventDefault();
@@ -127,9 +113,39 @@ const Notice: NextPage = () => {
     (e: React.MouseEvent<HTMLElement>) => {
       e.preventDefault();
 
-      console.log("comment:::", comment);
+      let noticeId = router.query.noticeId as string;
+      let userId = user.id;
+
+      dispatch(
+        commentActions.createCommentReq({
+          path: "notice",
+          pathId: noticeId,
+          userId,
+          content: comment.value,
+        })
+      );
     },
-    [dispatch, router]
+    [dispatch, router, comment, user]
+  );
+
+  const deleteComment = useCallback(
+    (e: React.MouseEvent<HTMLElement>) => {
+      e.preventDefault();
+
+      let noticeId = router.query.noticeId as string;
+      let userId = user.id;
+      let commentId = e.currentTarget.dataset.id as string;
+
+      dispatch(
+        commentActions.deleteCommentReq({
+          id: commentId,
+          userId,
+          path: "notice",
+          pathId: noticeId,
+        })
+      );
+    },
+    [router, user, dispatch]
   );
 
   return (
@@ -197,47 +213,28 @@ const Notice: NextPage = () => {
                               <div key={comment._id}>
                                 <CommentHeader>
                                   <CommentCreator>
-                                    {comment.creator}
+                                    {comment.creator.name}
                                   </CommentCreator>
-                                  {comment._id === 0 ? (
+                                  {comment.creator._id === user.id ? (
                                     <CommentBtn>
-                                      {isCommentEditMode &&
-                                      comment._id === editCommentIdx ? (
-                                        ""
-                                      ) : (
-                                        <div
-                                          onClick={() =>
-                                            onSetCommentEditMode(comment._id)
-                                          }
-                                        >
-                                          Edit
-                                        </div>
-                                      )}
-                                      <div>Delete</div>
+                                      <div>Edit</div>
+                                      <div
+                                        data-id={comment._id}
+                                        onClick={deleteComment}
+                                      >
+                                        Delete
+                                      </div>
                                     </CommentBtn>
                                   ) : (
                                     ""
                                   )}
                                 </CommentHeader>
-                                {isCommentEditMode &&
-                                comment._id === editCommentIdx ? (
-                                  <div>
-                                    <CommentEditInp value={comment.content} />
-                                    <CommentEditModeBtn>
-                                      <div onClick={onSetCommentEditModeCancel}>
-                                        Cancel
-                                      </div>
-                                      <div>Edit</div>
-                                    </CommentEditModeBtn>
-                                  </div>
-                                ) : (
-                                  <div>
-                                    <CommentContent>
-                                      {comment.content}
-                                    </CommentContent>
-                                    <CommentDate>{comment.date}</CommentDate>
-                                  </div>
-                                )}
+                                <div>
+                                  <CommentContent>
+                                    {comment.contents}
+                                  </CommentContent>
+                                  <CommentDate>{comment.date}</CommentDate>
+                                </div>
                               </div>
                             ))
                           : ""

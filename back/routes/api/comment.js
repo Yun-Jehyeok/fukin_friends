@@ -6,21 +6,31 @@ const { Notice } = require("../../models/notice");
 const router = express.Router();
 
 // Get All Comments / GET
-router.get("/:id", async (req, res) => {
+router.get("/path=:path&:id", async (req, res) => {
   const id = req.params.id;
-  const path = req.body.path;
+  const path = req.params.path;
 
-  const comments = await Comment.find({ path: path, _id: id });
+  if (path === "notice") {
+    const comments = await Comment.find({ path: path, pathId: id }).populate(
+      "creator",
+      "_id name email"
+    );
 
-  if (!comments)
-    return res
-      .status(400)
-      .json({ isSuc: false, msg: "댓글이 존재하지 않습니다." });
+    if (!comments)
+      return res
+        .status(400)
+        .json({ isSuc: false, msg: "댓글이 존재하지 않습니다." });
 
-  res.status(200).json({
-    isSuc: true,
-    comments: comments,
-  });
+    res.status(200).json({
+      isSuc: true,
+      comments: comments,
+    });
+  } else {
+    res.status(400).json({
+      isSuc: false,
+      msg: "path가 정확하지 않습니다.",
+    });
+  }
 });
 
 // Create Comment / POST
@@ -31,10 +41,11 @@ router.post("/", (req, res) => {
     if (!user) return res.status(400).json({ isSuc: false });
 
     const newComment = new Comment({
-      content,
+      contents: content,
       date: new Date(),
       creator: userId,
       path,
+      pathId,
     });
 
     newComment.save().then(() => {
@@ -44,25 +55,23 @@ router.post("/", (req, res) => {
         },
       })
         .then(() => {
-          res.status(200).json({ isSuc: true });
+          if (path === "notice") {
+            Notice.findByIdAndUpdate(pathId, {
+              $push: {
+                comments: newComment._id,
+              },
+            })
+              .then(() => {
+                res.status(200).json({ isSuc: true });
+              })
+              .catch((e) => {
+                res.status(400).json({ isSuc: false });
+              });
+          }
         })
         .catch((e) => {
           res.status(400).json({ isSuc: false });
         });
-
-      if (path === "Notice") {
-        Notice.findByIdAndUpdate(pathId, {
-          $push: {
-            comments: newComment._id,
-          },
-        })
-          .then(() => {
-            res.status(200).json({ isSuc: true });
-          })
-          .catch((e) => {
-            res.status(400).json({ isSuc: false });
-          });
-      }
     });
   });
 });
@@ -86,14 +95,26 @@ router.put("/:id", (req, res) => {
 // Delete Notice / DELETE
 router.delete("/:id", async (req, res) => {
   const id = req.params.id;
-  const { userId, path, pathId } = req.body;
+  console.log("req.body:::", req.body);
+  const { path, pathId, userId } = req.body;
 
   try {
     await Comment.deleteOne({ _id: id });
-    // 유저의 댓글 삭제
 
-    if (path === "Notice") {
+    // 유저의 댓글 삭제
+    await User.findByIdAndUpdate(userId, {
+      $pull: {
+        comments: { id },
+      },
+    });
+
+    if (path === "notice") {
       // Notice 의 댓글 삭제
+      await Notice.findByIdAndUpdate(pathId, {
+        $pull: {
+          comments: { id },
+        },
+      });
     }
 
     return res.status(200).json({ isSuc: true });

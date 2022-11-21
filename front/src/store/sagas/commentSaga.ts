@@ -28,8 +28,6 @@ function* loadAllCommentsApi(action: PayloadAction<LoadAllCommentsReq>) {
       action.payload
     );
 
-    console.log("here2:::", data);
-
     yield put(commentActions.loadAllCommentsSuc(data));
   } catch (e: any) {
     yield put(
