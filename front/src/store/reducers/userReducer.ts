@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 import type { PayloadAction } from "@reduxjs/toolkit";
+import type { ResponseFail } from "../types";
 import type {
   ChangePWReq,
   ChangePWRes,
@@ -18,7 +19,6 @@ import type {
   SendEmailReq,
   SendEmailRes,
 } from "../types/user";
-import type { ResponseFail } from "../types";
 import { IUser } from "../types/user";
 
 export interface UserStateType {
@@ -80,8 +80,6 @@ const userSlice = createSlice({
     },
     loginUserFail(state, action: PayloadAction<ResponseFail>) {
       localStorage.removeItem("token");
-
-      console.log(action.payload.msg);
 
       state.isLoading = false;
       state.errMsg = action.payload.msg;

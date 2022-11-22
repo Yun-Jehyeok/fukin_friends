@@ -95,7 +95,6 @@ router.put("/:id", (req, res) => {
 // Delete Notice / DELETE
 router.delete("/:id", async (req, res) => {
   const id = req.params.id;
-  console.log("req.body:::", req.body);
   const { path, pathId, userId } = req.body;
 
   try {

@@ -1,12 +1,13 @@
 import { all, call, fork, put, takeLatest } from "redux-saga/effects";
 
-import type { AxiosResponse } from "axios";
 import type { PayloadAction } from "@reduxjs/toolkit";
+import type { AxiosResponse } from "axios";
 import type {
   CreateNoticeReq,
   CreateNoticeRes,
   DeleteNoticeReq,
   DeleteNoticeRes,
+  LoadAllNoticeReq,
   LoadAllNoticeRes,
   LoadMainNoticesRes,
   LoadNoticeReq,
@@ -26,9 +27,12 @@ import {
 import { noticeActions } from "../reducers/noticeReducer";
 
 // 전체 공지사항 로딩
-function* loadAllNoticeApi() {
+function* loadAllNoticeApi(action: PayloadAction<LoadAllNoticeReq>) {
   try {
-    const { data }: AxiosResponse<LoadAllNoticeRes> = yield call(loadAllNotice);
+    const { data }: AxiosResponse<LoadAllNoticeRes> = yield call(
+      loadAllNotice,
+      action.payload
+    );
 
     yield put(noticeActions.loadAllNoticeSuc(data));
   } catch (e: any) {

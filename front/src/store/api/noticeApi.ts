@@ -3,6 +3,7 @@ import type {
   CreateNoticeRes,
   DeleteNoticeReq,
   DeleteNoticeRes,
+  LoadAllNoticeReq,
   LoadAllNoticeRes,
   LoadMainNoticesRes,
   LoadNoticeReq,
@@ -15,8 +16,8 @@ import axios from "axios";
 
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_SERVER_URL;
 
-export const loadAllNotice = async () => {
-  return await axios.get<LoadAllNoticeRes>(`/api/notice`);
+export const loadAllNotice = async (page: LoadAllNoticeReq) => {
+  return await axios.get<LoadAllNoticeRes>(`/api/notice/${page.page}`);
 };
 
 export const loadMainNotices = async () => {

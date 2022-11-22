@@ -9,9 +9,13 @@ export interface INotice {
 }
 
 // 전체 공지사항
+export interface LoadAllNoticeReq {
+  page: number;
+}
 export interface LoadAllNoticeRes {
   notices: INotice[];
   isSuc: boolean;
+  allNoticesCnt: number;
 }
 
 // 메인페이지 공지사항

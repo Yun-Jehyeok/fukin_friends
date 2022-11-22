@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+interface IArrow {
+  active: boolean;
+}
+
 export const NoticeHeader = styled.div`
   width: 100%;
   height: 286px;
@@ -247,7 +251,7 @@ export const NoticePaginationBtn = styled.div`
   }
 `;
 
-export const NoticePaginationLArr = styled.div`
+export const NoticePaginationLArr = styled.div<IArrow>`
   width: 8px;
   height: 8px;
   border: 1px solid #151875;
@@ -258,8 +262,9 @@ export const NoticePaginationLArr = styled.div`
   top: 12px;
   cursor: pointer;
   margin-right: 12px;
+  pointer-events: ${(props) => (props.active ? "" : "none")};
 `;
-export const NoticePaginationRArr = styled.div`
+export const NoticePaginationRArr = styled.div<IArrow>`
   width: 8px;
   height: 8px;
   border: 1px solid #151875;
@@ -270,4 +275,5 @@ export const NoticePaginationRArr = styled.div`
   top: 12px;
   cursor: pointer;
   margin-left: 12px;
+  pointer-events: ${(props) => (props.active ? "" : "none")};
 `;

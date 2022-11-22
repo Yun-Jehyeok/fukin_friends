@@ -1,11 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 import type { PayloadAction } from "@reduxjs/toolkit";
+import type { ResponseFail } from "../types";
 import type {
   CreateNoticeReq,
   CreateNoticeRes,
   DeleteNoticeReq,
   DeleteNoticeRes,
+  LoadAllNoticeReq,
   LoadAllNoticeRes,
   LoadMainNoticesRes,
   LoadNoticeFailRes,
@@ -14,7 +16,6 @@ import type {
   UpdateNoticeReq,
   UpdateNoticeRes,
 } from "../types/notice";
-import type { ResponseFail } from "../types";
 import { INotice } from "../types/notice";
 
 export interface NoticeStateType {
@@ -23,6 +24,7 @@ export interface NoticeStateType {
   errMsg: null | string;
   isSuc: boolean;
   notice: INotice;
+  allNoticesCnt: number;
 }
 
 const initialState: NoticeStateType = {
@@ -30,6 +32,7 @@ const initialState: NoticeStateType = {
   isLoading: false,
   errMsg: null,
   isSuc: false,
+  allNoticesCnt: 0,
   notice: {
     _id: "",
     title: "",
@@ -46,13 +49,14 @@ const noticeSlice = createSlice({
   initialState,
   reducers: {
     // 전체 공지사항 로딩
-    loadAllNoticeReq(state) {
+    loadAllNoticeReq(state, action: PayloadAction<LoadAllNoticeReq>) {
       state.isLoading = true;
       state.errMsg = null;
     },
     loadAllNoticeSuc(state, action: PayloadAction<LoadAllNoticeRes>) {
       state.isLoading = false;
       state.notices = action.payload.notices;
+      state.allNoticesCnt = action.payload.allNoticesCnt;
     },
     loadAllNoticeFail(state, action: PayloadAction<ResponseFail>) {
       state.isLoading = false;

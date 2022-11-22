@@ -2,7 +2,7 @@ import { useAppDispatch } from "hooks/reduxHooks";
 import { useStringInput } from "hooks/useInput";
 import { NextPage } from "next";
 import Link from "next/link";
-import { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "src/configureStore";
 import { noticeActions } from "src/store/reducers/noticeReducer";
@@ -52,16 +52,150 @@ const importantList = [
   },
 ];
 
+interface IPages {
+  key: number;
+  cls: string;
+}
+
 const Notice: NextPage = () => {
   const noticeSearchTerm = useStringInput("");
 
-  const { notices } = useSelector((state: RootState) => state.notice);
+  // pagination -- S --
+  const [totalPage, setTotalPage] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageGroup, setPageGroup] = useState(1);
+  const [currentPageGroup, setCurrentPageGroup] = useState(1);
+  const [pages, setPages] = useState<IPages[]>();
+  const [larrActive, setLarrActive] = useState(false);
+  const [rarrActive, setRarrActive] = useState(false);
+  // pagination -- E --
+
+  const { notices, allNoticesCnt } = useSelector(
+    (state: RootState) => state.notice
+  );
 
   const dispatch = useAppDispatch();
 
+  const setAllPages = useCallback(() => {
+    let pageList = [];
+
+    for (
+      let i = 5 * (currentPageGroup - 1) + 1;
+      i <= 5 * currentPageGroup;
+      i++
+    ) {
+      if (i <= totalPage) {
+        pageList.push({ key: i, cls: i === currentPage ? "active" : "" });
+      } else {
+        break;
+      }
+    }
+
+    setPages(pageList);
+  }, [currentPageGroup, totalPage, currentPage, setPages]);
+
+  const setPagination = useCallback(
+    (cp: number, cpg: number) => {
+      setTotalPage(
+        allNoticesCnt % 8 === 0
+          ? Math.round(allNoticesCnt / 8)
+          : Math.round(allNoticesCnt / 8) + 1
+      );
+      setPageGroup(
+        totalPage % 5 === 0
+          ? Math.round(totalPage / 5)
+          : Math.round(totalPage / 5) + 1
+      );
+      setCurrentPage(cp);
+      setCurrentPageGroup(cpg);
+
+      setAllPages();
+
+      if (currentPageGroup === 1) setLarrActive(false);
+      else setLarrActive(true);
+
+      if (currentPageGroup < pageGroup) {
+        setRarrActive(true);
+      } else {
+        setRarrActive(false);
+      }
+    },
+    [
+      totalPage,
+      pageGroup,
+      allNoticesCnt,
+      currentPageGroup,
+      setTotalPage,
+      setPageGroup,
+      setCurrentPage,
+      setCurrentPageGroup,
+      setAllPages,
+      setLarrActive,
+      setRarrActive,
+    ]
+  );
+
   useEffect(() => {
-    dispatch(noticeActions.loadAllNoticeReq());
+    dispatch(noticeActions.loadAllNoticeReq({ page: 1 }));
   }, [dispatch]);
+
+  useEffect(() => {
+    setPagination(currentPage, currentPageGroup);
+  }, [currentPage, currentPageGroup, setPagination]);
+
+  const onChangePage = useCallback(
+    (page: number) => {
+      setCurrentPage(page);
+      dispatch(noticeActions.loadAllNoticeReq({ page: page }));
+      setPagination(page, currentPageGroup);
+    },
+    [dispatch, setPagination, currentPageGroup]
+  );
+
+  const goPrev = useCallback(
+    (e: React.MouseEvent<HTMLElement>) => {
+      e.preventDefault();
+
+      let cpg = currentPageGroup - 1;
+      let cp = 5 * (cpg - 1) + 1;
+
+      setCurrentPageGroup(cpg);
+      setCurrentPage(cp);
+
+      dispatch(noticeActions.loadAllNoticeReq({ page: cp }));
+
+      setPagination(cp, cpg);
+    },
+    [
+      currentPageGroup,
+      setCurrentPage,
+      setCurrentPageGroup,
+      setPagination,
+      dispatch,
+    ]
+  );
+  const goNext = useCallback(
+    (e: React.MouseEvent<HTMLElement>) => {
+      e.preventDefault();
+
+      let cpg = currentPageGroup + 1;
+      let cp = 5 * (cpg - 1) + 1;
+
+      setCurrentPageGroup(cpg);
+      setCurrentPage(cp);
+
+      dispatch(noticeActions.loadAllNoticeReq({ page: cp }));
+
+      setPagination(cp, cpg);
+    },
+    [
+      currentPageGroup,
+      setCurrentPage,
+      setCurrentPageGroup,
+      setPagination,
+      dispatch,
+    ]
+  );
 
   const onSearch = useCallback(
     (e: React.KeyboardEvent<HTMLElement>) => {
@@ -121,13 +255,25 @@ const Notice: NextPage = () => {
             ))}
             <NoticePaginationCont>
               <div>
-                <NoticePaginationLArr></NoticePaginationLArr>
-                <NoticePaginationBtn className="active">1</NoticePaginationBtn>
-                <NoticePaginationBtn>2</NoticePaginationBtn>
-                <NoticePaginationBtn>3</NoticePaginationBtn>
-                <NoticePaginationBtn>4</NoticePaginationBtn>
-                <NoticePaginationBtn>5</NoticePaginationBtn>
-                <NoticePaginationRArr></NoticePaginationRArr>
+                <NoticePaginationLArr
+                  active={larrActive}
+                  onClick={goPrev}
+                ></NoticePaginationLArr>
+                {Array.isArray(pages)
+                  ? pages.map((page) => (
+                      <NoticePaginationBtn
+                        key={page.key}
+                        className={page.cls}
+                        onClick={() => onChangePage(page.key)}
+                      >
+                        {page.key}
+                      </NoticePaginationBtn>
+                    ))
+                  : ""}
+                <NoticePaginationRArr
+                  active={rarrActive}
+                  onClick={goNext}
+                ></NoticePaginationRArr>
               </div>
             </NoticePaginationCont>
           </NoticeLeft>

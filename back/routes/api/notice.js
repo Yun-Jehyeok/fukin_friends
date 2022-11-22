@@ -4,19 +4,25 @@ const { Notice } = require("../../models/notice");
 
 const router = express.Router();
 
-// Find All Notices / GET
-router.get("/", async (req, res) => {
-  const notices = await Notice.find().sort({ date: -1 });
+// Get Notices with Pagination / GET
+router.get("/:page", async (req, res) => {
+  try {
+    let page = (Number(req.params.page) - 1) * 8;
 
-  if (!notices)
-    return res
-      .status(400)
-      .json({ isSuc: false, msg: "공지사항이 존재하지 않습니다." });
+    const noticeCount = await Notice.countDocuments();
+    const noticeFindResult = await Notice.find()
+      .skip(page)
+      .limit(8)
+      .sort({ date: -1 });
 
-  res.status(200).json({
-    isSuc: true,
-    notices: notices,
-  });
+    res.status(200).json({
+      isSuc: true,
+      allNoticesCnt: noticeCount,
+      notices: noticeFindResult,
+    });
+  } catch (e) {
+    res.status(400).json({ isSuc: false, msg: e.message });
+  }
 });
 
 // Find only 8 notices for main page / GET
@@ -32,25 +38,6 @@ router.get("/main", async (req, res) => {
     isSuc: true,
     notices: notices,
   });
-});
-
-// Get Notices with Pagination / GET
-router.get("/skip/:skip", async (req, res) => {
-  try {
-    const noticeCount = await Notice.countDocuments();
-    const noticeFindResult = await Notice.find()
-      .skip(Number(req.params.skip))
-      .limit(12)
-      .sort({ date: -1 });
-
-    res.status(200).json({
-      isSuc: true,
-      allNoticesCnt: noticeCount,
-      notices: noticeFindResult,
-    });
-  } catch (e) {
-    res.status(400).json({ isSuc: false, msg: e.message });
-  }
 });
 
 // Create Notice / POST
