@@ -1,7 +1,7 @@
 import { all, call, fork, put, takeLatest } from "redux-saga/effects";
 
-import type { AxiosResponse } from "axios";
 import type { PayloadAction } from "@reduxjs/toolkit";
+import type { AxiosResponse } from "axios";
 import type {
   ChangePWReq,
   ChangePWRes,
@@ -49,7 +49,6 @@ function* registerUserApi(action: PayloadAction<RegisterUserReq>) {
     );
   }
 }
-
 function* watchRegisterUser() {
   yield takeLatest(userActions.registerUserReq, registerUserApi);
 }
@@ -69,7 +68,6 @@ function* loginUserApi(action: PayloadAction<LoginUserReq>) {
     );
   }
 }
-
 function* watchLoginUser() {
   yield takeLatest(userActions.loginUserReq, loginUserApi);
 }
@@ -89,7 +87,6 @@ function* changePWApi(action: PayloadAction<ChangePWReq>) {
     );
   }
 }
-
 function* watchChangePW() {
   yield takeLatest(userActions.changePWReq, changePWApi);
 }
@@ -109,7 +106,6 @@ function* loadUserApi(action: PayloadAction<LoadUserReq>) {
     );
   }
 }
-
 function* watchloadUser() {
   yield takeLatest(userActions.loadUserReq, loadUserApi);
 }
@@ -127,7 +123,6 @@ function* searchUserApi(action: PayloadAction<SearchUserReq>) {
     yield put(userActions.userSearchFail());
   }
 }
-
 function* watchSearchUser() {
   yield takeLatest(userActions.userSearchReq, searchUserApi);
 }
@@ -146,7 +141,6 @@ function* logoutApi(action: PayloadAction<LogoutUserReq>) {
     yield put(userActions.logoutFail());
   }
 }
-
 function* watchLogout() {
   yield takeLatest(userActions.logoutReq, logoutApi);
 }
@@ -164,7 +158,6 @@ function* paApi(action: PayloadAction<PAReq>) {
     yield put(userActions.userPAFail({ isSuc: false, msg: "서버에러입니다." }));
   }
 }
-
 function* watchPA() {
   yield takeLatest(userActions.userPAReq, paApi);
 }
@@ -184,7 +177,6 @@ function* sendEmailApi(action: PayloadAction<SendEmailReq>) {
     );
   }
 }
-
 function* watchSendEmail() {
   yield takeLatest(userActions.sendEmailReq, sendEmailApi);
 }

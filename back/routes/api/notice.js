@@ -5,7 +5,7 @@ const { Notice } = require("../../models/notice");
 const router = express.Router();
 
 // Get Notices with Pagination / GET
-router.get("/:page", async (req, res) => {
+router.get("/skip/:page", async (req, res) => {
   try {
     let page = (Number(req.params.page) - 1) * 8;
 

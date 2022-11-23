@@ -1,10 +1,10 @@
 import { NextPage } from "next";
-import { Cont } from "styles/styleRepo/global";
 import Image from "next/image";
+import { Cont } from "styles/styleRepo/global";
 
-import NoticeList from "./Section/NoticeList/NoticeList";
-import MusicList from "./Section/MusicList/MusicList";
 import AlbumList from "./Section/AlbumList/AlbumList";
+import MusicList from "./Section/MusicList/MusicList";
+import NoticeList from "./Section/NoticeList/NoticeList";
 import { HomeTopImgCont, ItemBox } from "./style";
 
 import friend1 from "public/img/friend1.jpg";
@@ -32,7 +32,7 @@ const Home: NextPage = () => {
         {items.map((item) => (
           <ItemBox key={item.id}>
             <div>
-              <Image src={item.src} />
+              <Image src={item.src} alt={item.title} />
             </div>
             <div>
               <div>{item.title}</div>

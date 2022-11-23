@@ -13,15 +13,28 @@ export const useStringInput = (initialValue: string) => {
   return { value, onChange };
 };
 
+export const useStringTextArea = (initialValue: string) => {
+  const [value, setValue] = useState(initialValue);
+  const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const {
+      target: { value },
+    } = e;
+
+    setValue(value);
+  };
+
+  return { value, onChange };
+};
+
 export const useNumberInput = (initialValue: number) => {
-  const [numVal, setNumVal] = useState(initialValue);
+  const [value, setValue] = useState(initialValue);
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const {
       target: { value },
     } = e;
 
-    setNumVal(numVal);
+    setValue(Number(value));
   };
 
-  return { numVal, onChange };
+  return { value, onChange };
 };

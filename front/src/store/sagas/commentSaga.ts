@@ -38,7 +38,6 @@ function* loadAllCommentsApi(action: PayloadAction<LoadAllCommentsReq>) {
     );
   }
 }
-
 function* watchloadAllComments() {
   yield takeLatest(commentActions.loadAllCommentsReq, loadAllCommentsApi);
 }
@@ -60,7 +59,6 @@ function* createCommentApi(action: PayloadAction<CreateCommentReq>) {
     );
   }
 }
-
 function* watchcreateComment() {
   yield takeLatest(commentActions.createCommentReq, createCommentApi);
 }
@@ -82,7 +80,6 @@ function* updateCommentApi(action: PayloadAction<UpdateCommentReq>) {
     );
   }
 }
-
 function* watchupdateComment() {
   yield takeLatest(commentActions.updateCommentReq, updateCommentApi);
 }
@@ -104,7 +101,6 @@ function* deleteCommentApi(action: PayloadAction<DeleteCommentReq>) {
     );
   }
 }
-
 function* watchdeleteComment() {
   yield takeLatest(commentActions.deleteCommentReq, deleteCommentApi);
 }

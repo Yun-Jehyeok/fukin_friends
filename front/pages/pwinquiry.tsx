@@ -1,9 +1,8 @@
-import type { NextPage } from "next";
-import { useCallback } from "react";
 import { useAppDispatch } from "hooks/reduxHooks";
-import { PwInquiryForm, PwInquiryLab } from "styles/styleRepo/pwInquiry";
 import { useStringInput } from "hooks/useInput";
+import type { NextPage } from "next";
 import Link from "next/link";
+import { useCallback } from "react";
 import { userActions } from "src/store/reducers/userReducer";
 import {
   AuthBtn,
@@ -11,6 +10,7 @@ import {
   AuthInp,
   AuthTitle,
 } from "styles/styleRepo/authFormStyle";
+import { PwInquiryForm, PwInquiryLab } from "styles/styleRepo/pwInquiry";
 
 const PwInquiry: NextPage = () => {
   const email = useStringInput("");
@@ -21,9 +21,8 @@ const PwInquiry: NextPage = () => {
     (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
 
-      if (email.value) {
+      if (email.value)
         dispatch(userActions.sendEmailReq({ email: email.value }));
-      }
     },
     [dispatch, email]
   );

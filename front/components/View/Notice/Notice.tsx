@@ -230,7 +230,7 @@ const Notice: NextPage = () => {
                     <NoticeDatePlace>
                       <NoticeDate>
                         <div></div>
-                        <div>{item.date}</div>
+                        <div>{item.date.slice(0, 10)}</div>
                       </NoticeDate>
                       <NoticePlace>{item.location}</NoticePlace>
                     </NoticeDatePlace>

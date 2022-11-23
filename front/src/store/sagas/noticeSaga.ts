@@ -31,7 +31,7 @@ function* loadAllNoticeApi(action: PayloadAction<LoadAllNoticeReq>) {
   try {
     const { data }: AxiosResponse<LoadAllNoticeRes> = yield call(
       loadAllNotice,
-      action.payload
+      action.payload.page
     );
 
     yield put(noticeActions.loadAllNoticeSuc(data));
@@ -44,7 +44,6 @@ function* loadAllNoticeApi(action: PayloadAction<LoadAllNoticeReq>) {
     );
   }
 }
-
 function* watchloadAllNotice() {
   yield takeLatest(noticeActions.loadAllNoticeReq, loadAllNoticeApi);
 }
@@ -66,7 +65,6 @@ function* loadMainNoticeApi() {
     );
   }
 }
-
 function* watchloadMainNotice() {
   yield takeLatest(noticeActions.loadMainNoticeReq, loadMainNoticeApi);
 }
@@ -89,7 +87,6 @@ function* createNoticeApi(action: PayloadAction<CreateNoticeReq>) {
     );
   }
 }
-
 function* watchcreateNotice() {
   yield takeLatest(noticeActions.createNoticeReq, createNoticeApi);
 }
@@ -99,7 +96,7 @@ function* loadNoticeApi(action: PayloadAction<LoadNoticeReq>) {
   try {
     const { data }: AxiosResponse<LoadNoticeSucRes> = yield call(
       loadNotice,
-      action.payload
+      action.payload.noticeId
     );
 
     yield put(noticeActions.loadNoticeSuc(data));
@@ -112,7 +109,6 @@ function* loadNoticeApi(action: PayloadAction<LoadNoticeReq>) {
     );
   }
 }
-
 function* watchloadNotice() {
   yield takeLatest(noticeActions.loadNoticeReq, loadNoticeApi);
 }
@@ -134,7 +130,6 @@ function* updateNoticeApi(action: PayloadAction<UpdateNoticeReq>) {
     );
   }
 }
-
 function* watchupdateNotice() {
   yield takeLatest(noticeActions.updateNoticeReq, updateNoticeApi);
 }
@@ -156,7 +151,6 @@ function* deleteNoticeApi(action: PayloadAction<DeleteNoticeReq>) {
     );
   }
 }
-
 function* watchdeleteNotice() {
   yield takeLatest(noticeActions.deleteNoticeReq, deleteNoticeApi);
 }

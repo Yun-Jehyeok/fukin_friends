@@ -1,18 +1,11 @@
-import type { NextPage } from "next";
-import { useCallback, useState } from "react";
-import { useStringInput } from "hooks/useInput";
-import Link from "next/link";
-import { userActions } from "src/store/reducers/userReducer";
 import { useAppDispatch } from "hooks/reduxHooks";
+import { useStringInput } from "hooks/useInput";
+import type { NextPage } from "next";
+import Link from "next/link";
+import { useCallback, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "src/configureStore";
-import {
-  LoginForm,
-  OtherSection,
-  GoogleBtn,
-  Divider,
-  SocialLoginCont,
-} from "styles/styleRepo/loginStyle";
+import { userActions } from "src/store/reducers/userReducer";
 import {
   AuthBtn,
   AuthCont,
@@ -21,6 +14,13 @@ import {
   AuthLab,
   AuthTitle,
 } from "styles/styleRepo/authFormStyle";
+import {
+  Divider,
+  GoogleBtn,
+  LoginForm,
+  OtherSection,
+  SocialLoginCont,
+} from "styles/styleRepo/loginStyle";
 
 const Login: NextPage = () => {
   const email = useStringInput("");
@@ -37,12 +37,8 @@ const Login: NextPage = () => {
     (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
 
-      if (email.value === "") {
-        setIsEmailBlank(true);
-      }
-      if (password.value === "") {
-        setIsPasswordBlank(true);
-      }
+      if (email.value === "") setIsEmailBlank(true);
+      if (password.value === "") setIsPasswordBlank(true);
 
       if (!isEmailBlank && !isPasswordBlank) {
         dispatch(
@@ -78,11 +74,6 @@ const Login: NextPage = () => {
                 required
                 {...email}
               />
-              {errMsg && errMsg.includes("이메일") ? (
-                <AuthInpErrMsg>{errMsg}</AuthInpErrMsg>
-              ) : (
-                ""
-              )}
               <AuthLab>비밀번호</AuthLab>
               <AuthInp
                 type="password"
@@ -91,8 +82,10 @@ const Login: NextPage = () => {
                 placeholder="비밀번호를 입력하세요"
                 {...password}
               />
-              {errMsg && errMsg.includes("비밀번호") ? (
-                <AuthInpErrMsg>{errMsg}</AuthInpErrMsg>
+              {errMsg ? (
+                <AuthInpErrMsg>
+                  이메일 혹은 비밀번호를 확인해주세요.
+                </AuthInpErrMsg>
               ) : (
                 ""
               )}

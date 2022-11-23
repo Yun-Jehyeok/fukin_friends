@@ -32,7 +32,6 @@ export interface CreateCommentReq {
   userId: string;
   content: string;
 }
-
 export interface CreateCommentRes {
   isSuc: boolean;
 }

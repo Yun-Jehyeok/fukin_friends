@@ -3,10 +3,8 @@ import type {
   CreateNoticeRes,
   DeleteNoticeReq,
   DeleteNoticeRes,
-  LoadAllNoticeReq,
   LoadAllNoticeRes,
   LoadMainNoticesRes,
-  LoadNoticeReq,
   LoadNoticeSucRes,
   UpdateNoticeReq,
   UpdateNoticeRes,
@@ -16,8 +14,8 @@ import axios from "axios";
 
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_SERVER_URL;
 
-export const loadAllNotice = async (page: LoadAllNoticeReq) => {
-  return await axios.get<LoadAllNoticeRes>(`/api/notice/${page.page}`);
+export const loadAllNotice = async (page: number) => {
+  return await axios.get<LoadAllNoticeRes>(`/api/notice/skip/${page}`);
 };
 
 export const loadMainNotices = async () => {
@@ -28,8 +26,8 @@ export const createNotice = async (notice: CreateNoticeReq) => {
   return await axios.post<CreateNoticeRes>("/api/notice", notice);
 };
 
-export const loadNotice = async (noticeId: LoadNoticeReq) => {
-  return await axios.get<LoadNoticeSucRes>(`/api/notice/${noticeId.noticeId}`);
+export const loadNotice = async (noticeId: string) => {
+  return await axios.get<LoadNoticeSucRes>(`/api/notice/${noticeId}`);
 };
 
 export const updateNotice = async (notice: UpdateNoticeReq) => {

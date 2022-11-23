@@ -18,11 +18,15 @@ import { NextPage } from "next";
 import { Cont } from "styles/styleRepo/global";
 import { AppCont, Body, ContentWrap } from "styles/styleRepo/style";
 
+import "@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css";
+import "@toast-ui/editor/dist/theme/toastui-editor-dark.css";
+import "@toast-ui/editor/dist/toastui-editor.css";
 import { Viewer } from "@toast-ui/react-editor";
+
 import Footer from "components/Footer/Footer";
 import Header from "components/Header/Header";
 import { useAppDispatch } from "hooks/reduxHooks";
-import { useStringInput } from "hooks/useInput";
+import { useStringTextArea } from "hooks/useInput";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useCallback, useEffect } from "react";
@@ -68,12 +72,16 @@ const importantList = [
   },
 ];
 
+// const Viewer = dynamic(() => import("components/Editor/EditorViewer"), {
+//   ssr: false,
+// });
+
 const Notice: NextPage = () => {
   const { notice } = useSelector((state: RootState) => state.notice);
   const { user } = useSelector((state: RootState) => state.user);
   const { comments } = useSelector((state: RootState) => state.comment);
 
-  const comment = useStringInput("");
+  const comment = useStringTextArea("");
 
   const router = useRouter();
 
@@ -172,7 +180,7 @@ const Notice: NextPage = () => {
                     <NoticeDatePlace>
                       <NoticeDate>
                         <div></div>
-                        <div>{notice.date}</div>
+                        <div>{notice.date.slice(0, 10)}</div>
                       </NoticeDate>
                       <NoticePlace>{notice.location}</NoticePlace>
                     </NoticeDatePlace>
@@ -233,7 +241,9 @@ const Notice: NextPage = () => {
                                   <CommentContent>
                                     {comment.contents}
                                   </CommentContent>
-                                  <CommentDate>{comment.date}</CommentDate>
+                                  <CommentDate>
+                                    {comment.date.slice(0, 10)}
+                                  </CommentDate>
                                 </div>
                               </div>
                             ))

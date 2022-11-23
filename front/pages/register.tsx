@@ -1,17 +1,12 @@
-import type { NextPage } from "next";
-import { useState, useCallback } from "react";
-import { useStringInput } from "hooks/useInput";
-import Link from "next/link";
-import { useAppDispatch } from "hooks/reduxHooks";
-import { userActions } from "src/store/reducers/userReducer";
 import TermsOfService from "components/Auth/TermsOfService/TermsOfService";
-import { RootState } from "src/configureStore";
+import { useAppDispatch } from "hooks/reduxHooks";
+import { useStringInput } from "hooks/useInput";
+import type { NextPage } from "next";
+import Link from "next/link";
+import { useCallback, useState } from "react";
 import { useSelector } from "react-redux";
-import {
-  RegisterForm,
-  RegisterAuthCont,
-  RegisterAuthBtn,
-} from "styles/styleRepo/registerStyle";
+import { RootState } from "src/configureStore";
+import { userActions } from "src/store/reducers/userReducer";
 import {
   AuthBtn,
   AuthCont,
@@ -21,6 +16,11 @@ import {
   AuthLabSpan,
   AuthTitle,
 } from "styles/styleRepo/authFormStyle";
+import {
+  RegisterAuthBtn,
+  RegisterAuthCont,
+  RegisterForm,
+} from "styles/styleRepo/registerStyle";
 
 const Register: NextPage = () => {
   const name = useStringInput("");
@@ -31,7 +31,6 @@ const Register: NextPage = () => {
   const authNum = useStringInput("");
 
   const [isTOSSuccess, setIsTOSSuccess] = useState(false);
-
   const [isNameBlank, setIsNameBlank] = useState(false);
   const [isEmailBlank, setIsEmailBlank] = useState(false);
   const [isPasswordBlank, setIsPasswordBlank] = useState(false);
@@ -45,11 +44,8 @@ const Register: NextPage = () => {
   const { PANum } = useSelector((state: RootState) => state.user);
 
   const onCheckTOS = (checkTerms: boolean) => {
-    if (checkTerms) {
-      setIsTOSSuccess(true);
-    } else {
-      setIsTOSSuccess(false);
-    }
+    if (checkTerms) setIsTOSSuccess(true);
+    else setIsTOSSuccess(false);
   };
 
   const dispatch = useAppDispatch();
@@ -84,7 +80,7 @@ const Register: NextPage = () => {
 
       dispatch(userActions.userPAReq({ phoneNum: phone.value }));
     },
-    [dispatch, name, phone]
+    [dispatch, phone]
   );
 
   const checkPA = (e: React.MouseEvent<HTMLElement>) => {
@@ -93,33 +89,22 @@ const Register: NextPage = () => {
     if (PANum === authNum.value) {
       setIsPASuccess(true);
       alert("인증번호가 확인되었습니다.");
-    } else {
-      setIsPASuccess(false);
-    }
+    } else setIsPASuccess(false);
   };
 
   const handleSubmit = useCallback(
     (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
 
-      if (!isPASuccess) {
-        alert("인증번호를 확인해주세요.");
-      }
-      if (name.value === "") {
-        setIsNameBlank(true);
-      }
-      if (email.value === "") {
-        setIsEmailBlank(true);
-      }
-      if (password.value === "") {
-        setIsPasswordBlank(true);
-      }
+      if (!isPASuccess) alert("인증번호를 확인해주세요.");
+      if (name.value === "") setIsNameBlank(true);
+      if (email.value === "") setIsEmailBlank(true);
+      if (password.value === "") setIsPasswordBlank(true);
 
       let reg = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 
-      if (!reg.test(password.value)) {
+      if (!reg.test(password.value))
         alert("비밀번호는 최소 8자 이상, 문자와 숫자 조합이어야 합니다.");
-      }
 
       if (!isNameBlank && !isEmailBlank && !isPasswordBlank && isPASuccess) {
         if (password.value === passwordCheck.value) {
@@ -133,9 +118,7 @@ const Register: NextPage = () => {
               phone: phone.value,
             })
           );
-        } else {
-          setIsPasswordCheckErr(true);
-        }
+        } else setIsPasswordCheckErr(true);
       }
     },
     [
@@ -146,6 +129,7 @@ const Register: NextPage = () => {
       isPASuccess,
       name,
       email,
+      phone,
       password,
       passwordCheck,
     ]

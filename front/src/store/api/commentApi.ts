@@ -13,8 +13,10 @@ import {
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_SERVER_URL;
 
 export const loadAllComments = async (comment: LoadAllCommentsReq) => {
+  const { path, id } = comment;
+
   return await axios.get<LoadAllCommentsSucRes>(
-    `/api/comment/path=${comment.path}&${comment.id}`
+    `/api/comment/path=${path}&${id}`
   );
 };
 
