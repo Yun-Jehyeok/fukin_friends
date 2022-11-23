@@ -1,8 +1,8 @@
+import ViewHeader from "components/View/Header";
 import { NextPage } from "next";
-import { Cont } from "styles/styleRepo/global";
-import { NoticeHeader, NoticeHeaderDesc, NoticeHeaderTitle } from "../../style";
-import { EditorCont } from "../CreateNotice/style";
 import dynamic from "next/dynamic";
+import { Cont } from "styles/styleRepo/global";
+import { EditorCont } from "../CreateNotice/style";
 
 const NoSsrWysiwyg = dynamic(() => import("components/Editor/MyEditor"), {
   ssr: false,
@@ -11,16 +11,10 @@ const NoSsrWysiwyg = dynamic(() => import("components/Editor/MyEditor"), {
 const NoticeCreate: NextPage = () => {
   return (
     <Cont>
-      <NoticeHeader>
-        <div>
-          <div>
-            <NoticeHeaderTitle>Updating Notice Page</NoticeHeaderTitle>
-            <NoticeHeaderDesc>
-              It&apos;s Just Updating Notice Page
-            </NoticeHeaderDesc>
-          </div>
-        </div>
-      </NoticeHeader>
+      <ViewHeader
+        title="Updating Notice Page"
+        desc="It's Just Updating Notice Page"
+      />
       <EditorCont>
         <NoSsrWysiwyg pageName="update" />
       </EditorCont>

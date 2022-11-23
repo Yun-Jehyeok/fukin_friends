@@ -29,6 +29,7 @@ export interface UserStateType {
   isSuc: boolean;
   PANum?: string; // PA : Phone Authentication
   searchedUser: IUser[];
+  isLoginErr: null | string;
 }
 
 const initialState: UserStateType = {
@@ -39,6 +40,7 @@ const initialState: UserStateType = {
   isSuc: false,
   PANum: "",
   searchedUser: [],
+  isLoginErr: null,
 };
 
 const userSlice = createSlice({
@@ -69,6 +71,7 @@ const userSlice = createSlice({
     loginUserReq(state, action: PayloadAction<LoginUserReq>) {
       state.isLoading = true;
       state.errMsg = null;
+      state.isLoginErr = null;
     },
     loginUserSuc(state, action: PayloadAction<LoginUserRes>) {
       window.location.href = "/";
@@ -83,6 +86,7 @@ const userSlice = createSlice({
 
       state.isLoading = false;
       state.errMsg = action.payload.msg;
+      state.isLoginErr = action.payload.msg;
     },
 
     // 비밀번호 변경

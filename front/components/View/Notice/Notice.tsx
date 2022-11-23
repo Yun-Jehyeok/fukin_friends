@@ -7,16 +7,13 @@ import { useSelector } from "react-redux";
 import { RootState } from "src/configureStore";
 import { noticeActions } from "src/store/reducers/noticeReducer";
 import { Cont } from "styles/styleRepo/global";
+import ViewHeader from "../Header";
 import {
-  CreateNotice,
   ImportantItem,
   ImportantNotice,
   NoticeBody,
   NoticeDate,
   NoticeDatePlace,
-  NoticeHeader,
-  NoticeHeaderDesc,
-  NoticeHeaderTitle,
   NoticeItem,
   NoticeItemDesc,
   NoticeItemTitle,
@@ -208,17 +205,12 @@ const Notice: NextPage = () => {
 
   return (
     <Cont>
-      <NoticeHeader>
-        <div>
-          <div>
-            <NoticeHeaderTitle>Notice Page</NoticeHeaderTitle>
-            <NoticeHeaderDesc>It&apos;s Just Notice Page</NoticeHeaderDesc>
-          </div>
-          <CreateNotice>
-            <Link href="/notice/create">Create Notice</Link>
-          </CreateNotice>
-        </div>
-      </NoticeHeader>
+      <ViewHeader
+        title="Notice Page"
+        desc="It's Just Notice Page"
+        url="/notice/create"
+        url_title="Create Notice"
+      />
       <NoticeBody>
         <div>
           <NoticeLeft>

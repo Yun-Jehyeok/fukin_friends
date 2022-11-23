@@ -4,9 +4,6 @@ import {
   NoticeBody,
   NoticeDate,
   NoticeDatePlace,
-  NoticeHeader,
-  NoticeHeaderDesc,
-  NoticeHeaderTitle,
   NoticeItemDesc,
   NoticeItemTitle,
   NoticeLeft,
@@ -25,6 +22,7 @@ import { Viewer } from "@toast-ui/react-editor";
 
 import Footer from "components/Footer/Footer";
 import Header from "components/Header/Header";
+import ViewHeader from "components/View/Header";
 import { useAppDispatch } from "hooks/reduxHooks";
 import { useStringTextArea } from "hooks/useInput";
 import Link from "next/link";
@@ -162,16 +160,10 @@ const Notice: NextPage = () => {
       <Body>
         <ContentWrap>
           <Cont>
-            <NoticeHeader>
-              <div>
-                <div>
-                  <NoticeHeaderTitle>Notice Detail Page</NoticeHeaderTitle>
-                  <NoticeHeaderDesc>
-                    It&apos;s Notice Detail Page
-                  </NoticeHeaderDesc>
-                </div>
-              </div>
-            </NoticeHeader>
+            <ViewHeader
+              title="Notice Detail Page"
+              desc="It's Notice Detail Page"
+            />
             <NoticeBody>
               <div>
                 <NoticeLeft>

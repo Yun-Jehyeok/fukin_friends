@@ -12,14 +12,14 @@ import {
   AuthInp,
   AuthInpErrMsg,
   AuthLab,
-  AuthTitle,
+  AuthTitle
 } from "styles/styleRepo/authFormStyle";
 import {
   Divider,
   GoogleBtn,
   LoginForm,
   OtherSection,
-  SocialLoginCont,
+  SocialLoginCont
 } from "styles/styleRepo/loginStyle";
 
 const Login: NextPage = () => {
@@ -29,7 +29,7 @@ const Login: NextPage = () => {
   const [isEmailBlank, setIsEmailBlank] = useState(false);
   const [isPasswordBlank, setIsPasswordBlank] = useState(false);
 
-  const { errMsg } = useSelector((state: RootState) => state.user);
+  const { isLoginErr } = useSelector((state: RootState) => state.user);
 
   const dispatch = useAppDispatch();
 
@@ -82,7 +82,7 @@ const Login: NextPage = () => {
                 placeholder="비밀번호를 입력하세요"
                 {...password}
               />
-              {errMsg ? (
+              {isLoginErr ? (
                 <AuthInpErrMsg>
                   이메일 혹은 비밀번호를 확인해주세요.
                 </AuthInpErrMsg>
