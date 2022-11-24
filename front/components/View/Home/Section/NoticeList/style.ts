@@ -81,6 +81,7 @@ export const List = styled.div<IList>`
 
     &:hover {
       border: 1px solid #2f1ac4;
+      box-shadow: 0 0 12px rgb(47 26 196 / 30%);
     }
     &:hover ${Desc} {
       background-color: #2f1ac4;
