@@ -5,6 +5,8 @@ import type { AxiosResponse } from "axios";
 import type {
   ChangePWReq,
   ChangePWRes,
+  GoogleReq,
+  GoogleRes,
   LoadUserReq,
   LoadUserRes,
   LoginUserReq,
@@ -22,6 +24,7 @@ import type {
 
 import {
   changePWUser,
+  googleLogin,
   loadUser,
   loginUser,
   registerUser,
@@ -70,6 +73,25 @@ function* loginUserApi(action: PayloadAction<LoginUserReq>) {
 }
 function* watchLoginUser() {
   yield takeLatest(userActions.loginUserReq, loginUserApi);
+}
+
+// 구글 로그인
+function* googleApi(action: PayloadAction<GoogleReq>) {
+  try {
+    const { data }: AxiosResponse<GoogleRes> = yield call(
+      googleLogin,
+      action.payload
+    );
+
+    console.log("data:::", data);
+
+    yield put(userActions.googleSuc(data));
+  } catch (e: any) {
+    yield put(userActions.googleFail({ isSuc: false, msg: "서버에러입니다." }));
+  }
+}
+function* watchGoogle() {
+  yield takeLatest(userActions.googleReq, googleApi);
 }
 
 // 비밀번호 변경
@@ -185,6 +207,7 @@ export default function* userSaga() {
   yield all([
     fork(watchRegisterUser),
     fork(watchLoginUser),
+    fork(watchGoogle),
     fork(watchChangePW),
     fork(watchPA),
     fork(watchloadUser),

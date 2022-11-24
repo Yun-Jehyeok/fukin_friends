@@ -1,6 +1,8 @@
-import type {
+import {
   ChangePWReq,
   ChangePWRes,
+  GoogleReq,
+  GoogleRes,
   LoadUserReq,
   LoadUserRes,
   LoginUserReq,
@@ -36,6 +38,10 @@ export const changePWUser = async ({ userId, password }: ChangePWReq) => {
 
 export const loadUser = async (token: LoadUserReq) => {
   return await axios.post<LoadUserRes>("/api/auth/user", { token });
+};
+
+export const googleLogin = async (data: GoogleReq) => {
+  return await axios.post<GoogleRes>("/api/auth/google", { data });
 };
 
 export const sendPhoneAuth = async (paData: PAReq) => {

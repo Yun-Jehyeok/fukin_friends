@@ -65,6 +65,70 @@ router.post("/login", (req, res) => {
   });
 });
 
+// GOOGLE LOGIN / POST
+router.post("/google", (req, res) => {
+  const { email, name, token } = req.body.data;
+
+  if (token) {
+    User.findOne({ email }).then((user) => {
+      if (!user) {
+        const newUser = new User({
+          name,
+          email,
+          password: Math.random().toString(36).slice(-8),
+          login_way: "google",
+        });
+
+        bcrypt.genSalt(10, (err, salt) => {
+          bcrypt.hash(newUser.password, salt, (err, hash) => {
+            if (err) return res.status(400).json({ err });
+
+            newUser.password = hash;
+
+            newUser.save().then((user) => {
+              jwt.sign(
+                { id: user.id },
+                JWT_SECRET,
+                { expiresIn: 3600 },
+                (err, token) => {
+                  if (err) return res.status(400).json({ err });
+
+                  res.json({
+                    token,
+                    user: {
+                      id: user.id,
+                      name: user.name,
+                      email: user.email,
+                    },
+                  });
+                }
+              );
+            });
+          });
+        });
+      } else {
+        jwt.sign(
+          { id: user.id },
+          JWT_SECRET,
+          { expiresIn: 3600 },
+          (err, token) => {
+            if (err) return res.status(400).json({ err });
+
+            res.json({
+              token,
+              user: {
+                id: user.id,
+                name: user.name,
+                email: user.email,
+              },
+            });
+          }
+        );
+      }
+    });
+  }
+});
+
 // CLOSE ACCOUNT / DELETE
 router.delete("/:id", async (req, res) => {
   try {

@@ -28,6 +28,18 @@ export interface LoginUserRes {
   token: string;
 }
 
+// 구글 로그인
+export interface GoogleReq {
+  name: string;
+  email: string;
+  token: string;
+}
+export interface GoogleRes {
+  isSuc: boolean;
+  user: IUser;
+  token: string;
+}
+
 // 비밀번호 변경
 export interface ChangePWReq {
   userId: string;

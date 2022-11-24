@@ -5,6 +5,8 @@ import type { ResponseFail } from "../types";
 import type {
   ChangePWReq,
   ChangePWRes,
+  GoogleReq,
+  GoogleRes,
   LoadUserReq,
   LoadUserRes,
   LoginUserReq,
@@ -82,6 +84,28 @@ const userSlice = createSlice({
       state.token = action.payload.token;
     },
     loginUserFail(state, action: PayloadAction<ResponseFail>) {
+      localStorage.removeItem("token");
+
+      state.isLoading = false;
+      state.errMsg = action.payload.msg;
+      state.isLoginErr = action.payload.msg;
+    },
+
+    // 구글 로그인
+    googleReq(state, action: PayloadAction<GoogleReq>) {
+      state.isLoading = true;
+      state.errMsg = null;
+      state.isLoginErr = null;
+    },
+    googleSuc(state, action: PayloadAction<GoogleRes>) {
+      window.location.href = "/";
+      localStorage.setItem("token", action.payload.token);
+
+      state.isLoading = false;
+      state.user = action.payload.user;
+      state.token = action.payload.token;
+    },
+    googleFail(state, action: PayloadAction<ResponseFail>) {
       localStorage.removeItem("token");
 
       state.isLoading = false;

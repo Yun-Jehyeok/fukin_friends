@@ -3,6 +3,7 @@ import { useStringInput } from "hooks/useInput";
 import type { NextPage } from "next";
 import Link from "next/link";
 import { useCallback, useState } from "react";
+import GoogleLogin from "react-google-login";
 import { useSelector } from "react-redux";
 import { RootState } from "src/configureStore";
 import { userActions } from "src/store/reducers/userReducer";
@@ -12,14 +13,14 @@ import {
   AuthInp,
   AuthInpErrMsg,
   AuthLab,
-  AuthTitle
+  AuthTitle,
 } from "styles/styleRepo/authFormStyle";
 import {
   Divider,
   GoogleBtn,
   LoginForm,
   OtherSection,
-  SocialLoginCont
+  SocialLoginCont,
 } from "styles/styleRepo/loginStyle";
 
 const Login: NextPage = () => {
@@ -52,6 +53,20 @@ const Login: NextPage = () => {
     [dispatch, isEmailBlank, isPasswordBlank, email, password]
   );
 
+  const responseGoogle = useCallback(
+    (res: any) => {
+      const { email, name } = res.profileObj;
+      const { tokenId } = res;
+
+      dispatch(userActions.googleReq({ email, name, token: tokenId }));
+    },
+    [dispatch]
+  );
+
+  const responseFail = (err: any) => {
+    console.log(err);
+  };
+
   return (
     <AuthCont>
       <LoginForm>
@@ -62,7 +77,16 @@ const Login: NextPage = () => {
             </AuthTitle>
             <SocialLoginCont>
               <Divider>소셜 로그인</Divider>
-              <GoogleBtn></GoogleBtn>
+              <GoogleLogin
+                clientId="534707785395-1c3aq9gp00tfbib4rgg0eemp6ma0ddup.apps.googleusercontent.com"
+                render={(renderProps) => (
+                  <GoogleBtn onClick={renderProps.onClick}></GoogleBtn>
+                )}
+                onSuccess={responseGoogle}
+                onFailure={responseFail}
+                theme="dark"
+              />
+              {/* <GoogleBtn></GoogleBtn> */}
             </SocialLoginCont>
             <Divider>이메일 로그인</Divider>
             <form onSubmit={handleSubmit}>
