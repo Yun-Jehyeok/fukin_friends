@@ -83,8 +83,6 @@ function* googleApi(action: PayloadAction<GoogleReq>) {
       action.payload
     );
 
-    console.log("data:::", data);
-
     yield put(userActions.googleSuc(data));
   } catch (e: any) {
     yield put(userActions.googleFail({ isSuc: false, msg: "서버에러입니다." }));

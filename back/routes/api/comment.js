@@ -79,10 +79,10 @@ router.post("/", (req, res) => {
 // Update Comment / PUT
 router.put("/:id", (req, res) => {
   const id = req.params.id;
-  const { content } = req.body;
+  const { content } = req.body.comment;
 
   Comment.findByIdAndUpdate(id, {
-    content,
+    contents: content,
   })
     .then(() => {
       res.status(200).json({ isSuc: true });

@@ -1,10 +1,6 @@
 import { NoticeItem } from "components/View/Notice/style";
 import styled from "styled-components";
 
-interface ILikeBtn {
-  isLiked: boolean;
-}
-
 // 상세 페이지
 export const NoticeDetailItem = styled(NoticeItem)`
   cursor: initial !important;
@@ -13,38 +9,6 @@ export const NoticeDetailItem = styled(NoticeItem)`
     text-decoration: none;
   }
 `;
-
-// export const LikeBtn = styled.div<ILikeBtn>`
-//   width: 100%;
-//   display: flex;
-//   justify-content: center;
-//   margin-top: -40px;
-
-//   & > div {
-//     width: 16px;
-//     height: 16px;
-//     background: ${(props) => (props.isLiked ? "#ea2027" : "black")};
-//     position: relative;
-//     transform: rotate(45deg);
-//     cursor: pointer;
-
-//     &::before,
-//     &::after {
-//       content: "";
-//       width: 16px;
-//       height: 16px;
-//       position: absolute;
-//       border-radius: 50%;
-//       background: ${(props) => (props.isLiked ? "#ea2027" : "black")};
-//     }
-//     &::before {
-//       left: -50%;
-//     }
-//     &::after {
-//       top: -50%;
-//     }
-//   }
-// `;
 
 export const NoticeControllerBtnCont = styled.div`
   width: 100%;
@@ -56,6 +20,7 @@ export const NoticeControllerBtnCont = styled.div`
     display: flex;
   }
 `;
+
 export const NoticeControllerBtn = styled.div`
   cursor: pointer;
   margin-left: 8px;
@@ -191,36 +156,4 @@ export const CommentDate = styled.div`
   font-size: 14px;
   color: #8a8fb9;
   font-family: "Lato", sans-serif;
-`;
-
-export const CommentPaginationCont = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-
-  & > div {
-    width: fit-content;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0 8px;
-  }
-`;
-
-export const CommentPaginationBtn = styled.div`
-  width: 24px;
-  height: 24px;
-  text-align: center;
-  line-height: 24px;
-  border-radius: 50%;
-  background-color: white;
-  color: #151875;
-  font-family: "Josefin Sans", sans-serif;
-  cursor: pointer;
-
-  &:first-child {
-    color: #fb2e86;
-  }
-  &:hover {
-    background-color: #eeeffb;
-  }
 `;

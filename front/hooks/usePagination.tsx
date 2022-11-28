@@ -71,5 +71,5 @@ export default function usePagination(allCnt: number) {
     ]
   );
 
-  return { pages };
+  return { larrActive, rarrActive, pages };
 }

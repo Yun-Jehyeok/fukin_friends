@@ -99,8 +99,6 @@ function* loadNoticeApi(action: PayloadAction<LoadNoticeReq>) {
       action.payload.noticeId
     );
 
-    console.log("data:::", data);
-
     yield put(noticeActions.loadNoticeSuc(data));
   } catch (e: any) {
     yield put(

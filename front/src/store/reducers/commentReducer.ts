@@ -19,6 +19,7 @@ export interface CommentStateType {
   isLoading: boolean;
   errMsg: null | string;
   isSuc: boolean;
+  isEditSuc: boolean;
 }
 
 const initialState: CommentStateType = {
@@ -26,6 +27,7 @@ const initialState: CommentStateType = {
   isLoading: false,
   errMsg: null,
   isSuc: false,
+  isEditSuc: false,
 };
 
 const commentSlice = createSlice({
@@ -65,14 +67,17 @@ const commentSlice = createSlice({
     updateCommentReq(state, action: PayloadAction<UpdateCommentReq>) {
       state.isLoading = true;
       state.errMsg = null;
+      state.isEditSuc = false;
     },
     updateCommentSuc(state, action: PayloadAction<UpdateCommentRes>) {
       state.isLoading = false;
       state.isSuc = true;
+      state.isEditSuc = true;
     },
     updateCommentFail(state, action: PayloadAction<UpdateCommentRes>) {
       state.isLoading = false;
       state.isSuc = false;
+      state.isEditSuc = true;
     },
 
     // 댓글 삭제

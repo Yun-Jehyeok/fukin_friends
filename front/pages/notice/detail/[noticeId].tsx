@@ -23,6 +23,7 @@ import { Viewer } from "@toast-ui/react-editor";
 import Footer from "components/Footer/Footer";
 import Header from "components/Header/Header";
 import ViewHeader from "components/View/Header";
+import Comment from "components/View/Notice/Comment/Comment";
 import { useAppDispatch } from "hooks/reduxHooks";
 import { useStringTextArea } from "hooks/useInput";
 import Link from "next/link";
@@ -33,16 +34,9 @@ import { RootState } from "src/configureStore";
 import { commentActions } from "src/store/reducers/commentReducer";
 import { noticeActions } from "src/store/reducers/noticeReducer";
 import {
-  CommentBtn,
   CommentCont,
-  CommentContent,
   CommentContents,
-  CommentCreator,
-  CommentDate,
-  CommentHeader,
   CommentInp,
-  CommentPaginationBtn,
-  CommentPaginationCont,
   CommentSubmitBtn,
   NoticeControllerBtn,
   NoticeControllerBtnCont,
@@ -134,26 +128,6 @@ const Notice: NextPage = () => {
     [dispatch, router, comment, user]
   );
 
-  const deleteComment = useCallback(
-    (e: React.MouseEvent<HTMLElement>) => {
-      e.preventDefault();
-
-      let noticeId = router.query.noticeId as string;
-      let userId = user.id;
-      let commentId = e.currentTarget.dataset.id as string;
-
-      dispatch(
-        commentActions.deleteCommentReq({
-          id: commentId,
-          userId,
-          path: "notice",
-          pathId: noticeId,
-        })
-      );
-    },
-    [router, user, dispatch]
-  );
-
   return (
     <AppCont>
       <Header />
@@ -210,45 +184,15 @@ const Notice: NextPage = () => {
                       {Array.isArray(comments)
                         ? comments.length > 0
                           ? comments.map((comment) => (
-                              <div key={comment._id}>
-                                <CommentHeader>
-                                  <CommentCreator>
-                                    {comment.creator.name}
-                                  </CommentCreator>
-                                  {comment.creator._id === user.id ? (
-                                    <CommentBtn>
-                                      <div>Edit</div>
-                                      <div
-                                        data-id={comment._id}
-                                        onClick={deleteComment}
-                                      >
-                                        Delete
-                                      </div>
-                                    </CommentBtn>
-                                  ) : (
-                                    ""
-                                  )}
-                                </CommentHeader>
-                                <div>
-                                  <CommentContent>
-                                    {comment.contents}
-                                  </CommentContent>
-                                  <CommentDate>
-                                    {comment.date.slice(0, 10)}
-                                  </CommentDate>
-                                </div>
-                              </div>
+                              <Comment
+                                key={comment._id}
+                                comment={comment}
+                                user={user}
+                              />
                             ))
                           : ""
                         : ""}
                     </CommentContents>
-                    <CommentPaginationCont>
-                      <div>
-                        <CommentPaginationBtn>1</CommentPaginationBtn>
-                        <CommentPaginationBtn>2</CommentPaginationBtn>
-                        <CommentPaginationBtn>3</CommentPaginationBtn>
-                      </div>
-                    </CommentPaginationCont>
                   </CommentCont>
                 </NoticeLeft>
                 <NoticeRight>

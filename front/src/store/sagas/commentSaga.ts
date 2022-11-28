@@ -6,7 +6,7 @@ import {
   createComment,
   deleteComment,
   loadAllComments,
-  updateComment,
+  updateComment
 } from "../api/commentApi";
 import { commentActions } from "../reducers/commentReducer";
 import {
@@ -17,7 +17,7 @@ import {
   LoadAllCommentsReq,
   LoadAllCommentsSucRes,
   UpdateCommentReq,
-  UpdateCommentRes,
+  UpdateCommentRes
 } from "../types/comment";
 
 // 전체 댓글 로딩
