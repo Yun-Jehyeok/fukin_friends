@@ -15,17 +15,14 @@ import { NextPage } from "next";
 import { Cont } from "styles/styleRepo/global";
 import { AppCont, Body, ContentWrap } from "styles/styleRepo/style";
 
-import "@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css";
-import "@toast-ui/editor/dist/theme/toastui-editor-dark.css";
-import "@toast-ui/editor/dist/toastui-editor.css";
-import { Viewer } from "@toast-ui/react-editor";
-
+// import EditorViewer from "components/Editor/EditorViewer";
 import Footer from "components/Footer/Footer";
 import Header from "components/Header/Header";
 import ViewHeader from "components/View/Header";
 import Comment from "components/View/Notice/Comment/Comment";
 import { useAppDispatch } from "hooks/reduxHooks";
 import { useStringTextArea } from "hooks/useInput";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useCallback, useEffect } from "react";
@@ -64,9 +61,9 @@ const importantList = [
   },
 ];
 
-// const Viewer = dynamic(() => import("components/Editor/EditorViewer"), {
-//   ssr: false,
-// });
+const EditorViewer = dynamic(() => import("components/Editor/EditorViewer"), {
+  ssr: false,
+});
 
 const Notice: NextPage = () => {
   const { notice } = useSelector((state: RootState) => state.notice);
@@ -151,7 +148,7 @@ const Notice: NextPage = () => {
                       <NoticePlace>{notice.location}</NoticePlace>
                     </NoticeDatePlace>
                     <NoticeItemDesc>
-                      <Viewer initialValue={notice.content} />
+                      <EditorViewer data={notice.content} />
                     </NoticeItemDesc>
                     {user.id === notice.creator ? (
                       <NoticeControllerBtnCont>
