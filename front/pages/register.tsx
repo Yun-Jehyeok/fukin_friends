@@ -1,6 +1,6 @@
 import TermsOfService from "components/Auth/TermsOfService/TermsOfService";
 import { useAppDispatch } from "hooks/reduxHooks";
-import { useStringInput } from "hooks/useInput";
+import { useInput } from "hooks/useInput";
 import type { NextPage } from "next";
 import Link from "next/link";
 import { useCallback, useState } from "react";
@@ -23,12 +23,12 @@ import {
 } from "styles/styleRepo/registerStyle";
 
 const Register: NextPage = () => {
-  const name = useStringInput("");
-  const email = useStringInput("");
-  const password = useStringInput("");
-  const passwordCheck = useStringInput("");
-  const phone = useStringInput("");
-  const authNum = useStringInput("");
+  const name = useInput("");
+  const email = useInput("");
+  const password = useInput("");
+  const passwordCheck = useInput("");
+  const phone = useInput("");
+  const authNum = useInput("");
 
   const [isTOSSuccess, setIsTOSSuccess] = useState(false);
   const [isNameBlank, setIsNameBlank] = useState(false);

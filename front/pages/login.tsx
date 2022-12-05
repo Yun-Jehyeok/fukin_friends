@@ -1,5 +1,5 @@
 import { useAppDispatch } from "hooks/reduxHooks";
-import { useStringInput } from "hooks/useInput";
+import { useInput } from "hooks/useInput";
 import type { NextPage } from "next";
 import Link from "next/link";
 import { useCallback, useState } from "react";
@@ -24,8 +24,8 @@ import {
 } from "styles/styleRepo/loginStyle";
 
 const Login: NextPage = () => {
-  const email = useStringInput("");
-  const password = useStringInput("");
+  const email = useInput("");
+  const password = useInput("");
 
   const [isEmailBlank, setIsEmailBlank] = useState(false);
   const [isPasswordBlank, setIsPasswordBlank] = useState(false);

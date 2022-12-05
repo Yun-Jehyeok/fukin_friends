@@ -1,5 +1,5 @@
 import { useAppDispatch } from "hooks/reduxHooks";
-import { useStringInput } from "hooks/useInput";
+import { useInput } from "hooks/useInput";
 import type { NextPage } from "next";
 import Link from "next/link";
 import { useCallback } from "react";
@@ -13,7 +13,7 @@ import {
 import { PwInquiryForm, PwInquiryLab } from "styles/styleRepo/pwInquiry";
 
 const PwInquiry: NextPage = () => {
-  const email = useStringInput("");
+  const email = useInput("");
 
   const dispatch = useAppDispatch();
 

@@ -1,7 +1,18 @@
 import { NextPage } from "next";
+import Image from "next/image";
+import cat from "public/img/cat1.jpg";
 import { Cont } from "styles/styleRepo/global";
 import ViewHeader from "../Header";
-import { FeedCon } from "./style";
+import {
+  FeedCon,
+  FeedContent,
+  FeedCreator,
+  FeedCreatorAndDate,
+  FeedDate,
+  FeedImg,
+  FeedItem,
+  FeedItemCon,
+} from "./style";
 
 const Feed: NextPage = () => {
   return (
@@ -13,7 +24,26 @@ const Feed: NextPage = () => {
         url_title="Create Feed"
       />
       <FeedCon>
-        <div>test</div>
+        <div>
+          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item) => {
+            return (
+              <FeedItem key={item}>
+                <FeedImg>
+                  <Image src={cat} alt="cat" width={370} height={255} />
+                </FeedImg>
+                <FeedItemCon>
+                  <FeedCreatorAndDate>
+                    <FeedCreator></FeedCreator>
+                    <div>Jehyeok</div>
+                    <FeedDate></FeedDate>
+                    <div>14 Octorbor, 2022</div>
+                  </FeedCreatorAndDate>
+                  <FeedContent>nn</FeedContent>
+                </FeedItemCon>
+              </FeedItem>
+            );
+          })}
+        </div>
       </FeedCon>
     </Cont>
   );

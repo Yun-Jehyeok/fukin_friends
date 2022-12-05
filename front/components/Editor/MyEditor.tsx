@@ -1,26 +1,26 @@
-import "@toast-ui/editor/dist/toastui-editor.css";
-import "@toast-ui/editor/dist/theme/toastui-editor-dark.css";
-import "tui-color-picker/dist/tui-color-picker.css";
-import "@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css";
-import { Editor } from "@toast-ui/react-editor";
 import colorSyntax from "@toast-ui/editor-plugin-color-syntax";
-import { useCallback, useRef } from "react";
+import "@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css";
+import "@toast-ui/editor/dist/theme/toastui-editor-dark.css";
+import "@toast-ui/editor/dist/toastui-editor.css";
+import { Editor } from "@toast-ui/react-editor";
+import { useAppDispatch } from "hooks/reduxHooks";
+import { useInput } from "hooks/useInput";
 import { NextPage } from "next";
+import { useRouter } from "next/router";
+import { useCallback, useRef } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "src/configureStore";
+import { noticeActions } from "src/store/reducers/noticeReducer";
+import "tui-color-picker/dist/tui-color-picker.css";
 import {
-  EditorDesc,
-  EditorTitle,
   DateInp,
   EditorBtn,
+  EditorDesc,
+  EditorTitle,
   LocationInp,
   LocDateCont,
   TitleInp,
 } from "./style";
-import { useStringInput } from "hooks/useInput";
-import { useSelector } from "react-redux";
-import { RootState } from "src/configureStore";
-import { useAppDispatch } from "hooks/reduxHooks";
-import { noticeActions } from "src/store/reducers/noticeReducer";
-import { useRouter } from "next/router";
 
 interface EditorType {
   pageName: string;
@@ -39,9 +39,9 @@ const WysiwygEditor: NextPage<EditorType> = ({ pageName }) => {
 
   const dispatch = useAppDispatch();
 
-  const title = useStringInput(setData("", notice.title));
-  const date = useStringInput(setData("", notice.date));
-  const location = useStringInput(setData("", notice.location));
+  const title = useInput(setData("", notice.title));
+  const date = useInput(setData("", notice.date));
+  const location = useInput(setData("", notice.location));
 
   const editorRef = useRef<Editor>(null);
   const toolbarItems = [

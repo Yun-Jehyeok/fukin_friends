@@ -1,5 +1,5 @@
 import { useAppDispatch } from "hooks/reduxHooks";
-import { useStringInput } from "hooks/useInput";
+import { useInput } from "hooks/useInput";
 import { NextPage } from "next";
 import Link from "next/link";
 import React, { useCallback, useEffect, useState } from "react";
@@ -55,7 +55,7 @@ interface IPages {
 }
 
 const Notice: NextPage = () => {
-  const noticeSearchTerm = useStringInput("");
+  const noticeSearchTerm = useInput("");
 
   // pagination -- S --
   const [totalPage, setTotalPage] = useState(0);

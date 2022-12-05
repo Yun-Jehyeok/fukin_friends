@@ -1,5 +1,5 @@
 import { useAppDispatch } from "hooks/reduxHooks";
-import { useStringInput } from "hooks/useInput";
+import { useInput } from "hooks/useInput";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import React, { useCallback, useState } from "react";
@@ -19,8 +19,8 @@ const ChangePassword: NextPage = () => {
   const router = useRouter();
   const { userId } = router.query;
 
-  const password = useStringInput("");
-  const passwordCheck = useStringInput("");
+  const password = useInput("");
+  const passwordCheck = useInput("");
 
   const [isPasswordBlank, setIsPasswordBlank] = useState(false);
   const [isPasswordCheckErr, setIsPasswordCheckErr] = useState(false);

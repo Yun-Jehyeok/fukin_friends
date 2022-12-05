@@ -21,7 +21,7 @@ import Header from "components/Header/Header";
 import ViewHeader from "components/View/Header";
 import Comment from "components/View/Notice/Comment/Comment";
 import { useAppDispatch } from "hooks/reduxHooks";
-import { useStringTextArea } from "hooks/useInput";
+import { useInput } from "hooks/useInput";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -70,7 +70,7 @@ const Notice: NextPage = () => {
   const { user } = useSelector((state: RootState) => state.user);
   const { comments } = useSelector((state: RootState) => state.comment);
 
-  const comment = useStringTextArea("");
+  const comment = useInput("");
 
   const router = useRouter();
 
