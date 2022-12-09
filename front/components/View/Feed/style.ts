@@ -20,6 +20,14 @@ export const FeedItem = styled.div`
   margin-bottom: 48px;
   border-radius: 5px;
   box-shadow: 0 5px 8px rgb(0 0 0 / 5%);
+  position: relative;
+  cursor: pointer;
+  bottom: 0;
+  transition: bottom 0.25s cubic-bezier(0.24, 0.77, 0.32, 0.95);
+
+  &:hover {
+    bottom: 5px;
+  }
 `;
 
 export const FeedImg = styled.div`
@@ -66,6 +74,21 @@ export const FeedDate = styled.div`
 `;
 export const FeedContent = styled.div`
   width: 100%;
-  padding: 12px 19px;
+  padding: 0 19px;
   font-family: "Josefin Sans";
+  color: #72718f;
+  font-size: 16px;
+`;
+export const FeedTag = styled.div`
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  padding: 19px;
+  display: flex;
+
+  & > div {
+    font-size: 12px;
+    margin-right: 16px;
+    color: gray;
+  }
 `;

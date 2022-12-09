@@ -12,6 +12,7 @@ import {
   FeedImg,
   FeedItem,
   FeedItemCon,
+  FeedTag,
 } from "./style";
 
 const Feed: NextPage = () => {
@@ -38,7 +39,16 @@ const Feed: NextPage = () => {
                     <FeedDate></FeedDate>
                     <div>14 Octorbor, 2022</div>
                   </FeedCreatorAndDate>
-                  <FeedContent>nn</FeedContent>
+                  <FeedContent>
+                    Lorem Ipsum is simply dummy text of the printing and
+                    typesetting industry. Lorem Ipsum has been the industry's
+                    standard test dummy text ever since the 1500s
+                  </FeedContent>
+                  <FeedTag>
+                    {["TAG1", "TAG2", "TAG3"].map((item) => (
+                      <div key={item}># {item}</div>
+                    ))}
+                  </FeedTag>
                 </FeedItemCon>
               </FeedItem>
             );
