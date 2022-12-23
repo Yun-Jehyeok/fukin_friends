@@ -1,21 +1,11 @@
-import Modal from "components/Modal/modal";
+import Modal from "components/Modal";
 import { NextPage } from "next";
 import Image from "next/image";
 import cat from "public/img/cat1.jpg";
 import { useState } from "react";
 import { Cont } from "styles/styleRepo/global";
 import ViewHeader from "../Header";
-import {
-  FeedCon,
-  FeedContent,
-  FeedCreator,
-  FeedCreatorAndDate,
-  FeedDate,
-  FeedImg,
-  FeedItem,
-  FeedItemCon,
-  FeedTag,
-} from "./style";
+import { FeedCreator, FeedDate } from "./style";
 
 const exampleData = [
   {
@@ -142,33 +132,51 @@ const Feed: NextPage = () => {
         url="/feed/create"
         url_title="Create Feed"
       />
-      <FeedCon>
-        <div>
+      <div className="w-full flex justify-center pt-20">
+        <div className="flex justify-between w-default flex-wrap">
           {exampleData.map((item) => {
             return (
-              <FeedItem key={item.id} onClick={() => handleModal(item)}>
-                <FeedImg>
-                  <Image src={cat} alt="cat" width={370} height={255} />
-                </FeedImg>
-                <FeedItemCon>
-                  <FeedCreatorAndDate>
+              <div
+                className="w-[370px] h-[193px] mb-12 rounded-[5px] shadow-md relative cursor-pointer bottom-0 transition-all duration-[250ms] ease-default hover:bottom-[5px]"
+                key={item.id}
+                onClick={() => handleModal(item)}
+              >
+                <div className="w-full h-[255px]">
+                  <Image
+                    className="w-full h-full rounded-[5px]"
+                    src={cat}
+                    alt="cat"
+                    width={370}
+                    height={255}
+                  />
+                </div>
+                <div className="w-full">
+                  <div className="w-full py-[19px] px-[14px] font-josefin flex">
                     <FeedCreator></FeedCreator>
-                    <div>{item.creator}</div>
+                    <div className="text-[14px] text-[#151875]">
+                      {item.creator}
+                    </div>
                     <FeedDate></FeedDate>
-                    <div>{item.date}</div>
-                  </FeedCreatorAndDate>
-                  <FeedContent>{item.content}</FeedContent>
-                  <FeedTag>
+                    <div className="text-[14px] text-[#151875]">
+                      {item.date}
+                    </div>
+                  </div>
+                  <div className="w-full py-0 px-[19px] font-josefin text-[#72718f] text-base">
+                    {item.content}
+                  </div>
+                  <div className="w-full absolute bottom-0 p-[19px] flex">
                     {item.tags.map((item) => (
-                      <div key={item}># {item}</div>
+                      <div key={item} className="text-xs mr-4 text-gray-600">
+                        # {item}
+                      </div>
                     ))}
-                  </FeedTag>
-                </FeedItemCon>
-              </FeedItem>
+                  </div>
+                </div>
+              </div>
             );
           })}
         </div>
-      </FeedCon>
+      </div>
       {openModal ? (
         <Modal open={openModal} handleModal={closeModal} data={modalData} />
       ) : (

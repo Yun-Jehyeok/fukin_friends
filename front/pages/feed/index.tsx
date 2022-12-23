@@ -1,8 +1,8 @@
 import type { NextPage } from "next";
 import { AppCont, Body, ContentWrap, NeedLogin } from "styles/styleRepo/style";
 
-import Footer from "components/Footer/Footer";
-import Header from "components/Header/Header";
+import Footer from "components/Footer";
+import Header from "components/Header";
 import Feed from "components/View/Feed/Feed";
 import { useSelector } from "react-redux";
 import { RootState } from "src/configureStore";

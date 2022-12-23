@@ -16,8 +16,8 @@ import { Cont } from "styles/styleRepo/global";
 import { AppCont, Body, ContentWrap } from "styles/styleRepo/style";
 
 // import EditorViewer from "components/Editor/EditorViewer";
-import Footer from "components/Footer/Footer";
-import Header from "components/Header/Header";
+import Footer from "components/Footer";
+import Header from "components/Header";
 import ViewHeader from "components/View/Header";
 import Comment from "components/View/Notice/Comment/Comment";
 import { useAppDispatch } from "hooks/reduxHooks";

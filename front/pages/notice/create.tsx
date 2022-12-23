@@ -1,11 +1,11 @@
 import type { NextPage } from "next";
-import { Body, AppCont, NeedLogin, ContentWrap } from "styles/styleRepo/style";
+import { AppCont, Body, ContentWrap, NeedLogin } from "styles/styleRepo/style";
 
-import Header from "components/Header/Header";
+import Footer from "components/Footer";
+import Header from "components/Header";
+import NoticeCreate from "components/View/Notice/Section/CreateNotice/CreateNotice";
 import { useSelector } from "react-redux";
 import { RootState } from "src/configureStore";
-import Footer from "components/Footer/Footer";
-import NoticeCreate from "components/View/Notice/Section/CreateNotice/CreateNotice";
 
 const CreateNotice: NextPage = () => {
   const { token } = useSelector((state: RootState) => state.user);

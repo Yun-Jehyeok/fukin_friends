@@ -1,4 +1,4 @@
-import TermsOfService from "components/Auth/TermsOfService/TermsOfService";
+import TermsOfService from "components/TermsOfService";
 import { useAppDispatch } from "hooks/reduxHooks";
 import { useInput } from "hooks/useInput";
 import type { NextPage } from "next";
