@@ -1,16 +1,3 @@
-import {
-  ImportantItem,
-  ImportantNotice,
-  NoticeBody,
-  NoticeDate,
-  NoticeDatePlace,
-  NoticeItemDesc,
-  NoticeItemTitle,
-  NoticeLeft,
-  NoticePlace,
-  NoticeRight,
-  NoticeSearch,
-} from "components/View/Notice/style";
 import { NextPage } from "next";
 import { Cont } from "styles/styleRepo/global";
 import { AppCont, Body, ContentWrap } from "styles/styleRepo/style";
@@ -18,8 +5,8 @@ import { AppCont, Body, ContentWrap } from "styles/styleRepo/style";
 // import EditorViewer from "components/Editor/EditorViewer";
 import Footer from "components/Footer";
 import Header from "components/Header";
-import ViewHeader from "components/View/Header";
-import Comment from "components/View/Notice/Comment/Comment";
+import Comment from "components/Notice/Comment";
+import ViewHeader from "components/ViewHeader";
 import { useAppDispatch } from "hooks/reduxHooks";
 import { useInput } from "hooks/useInput";
 import dynamic from "next/dynamic";
@@ -30,15 +17,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "src/configureStore";
 import { commentActions } from "src/store/reducers/commentReducer";
 import { noticeActions } from "src/store/reducers/noticeReducer";
-import {
-  CommentCont,
-  CommentContents,
-  CommentInp,
-  CommentSubmitBtn,
-  NoticeControllerBtn,
-  NoticeControllerBtnCont,
-  NoticeDetailItem,
-} from "styles/styleRepo/noticeStyle";
+import { Calendar } from "styles/styleRepo/icons";
 
 const importantList = [
   {
@@ -135,49 +114,67 @@ const Notice: NextPage = () => {
               title="Notice Detail Page"
               desc="It's Notice Detail Page"
             />
-            <NoticeBody>
-              <div>
-                <NoticeLeft>
-                  <NoticeDetailItem key={notice._id}>
-                    <NoticeItemTitle>{notice.title}</NoticeItemTitle>
-                    <NoticeDatePlace>
-                      <NoticeDate>
-                        <div></div>
-                        <div>{notice.date.slice(0, 10)}</div>
-                      </NoticeDate>
-                      <NoticePlace>{notice.location}</NoticePlace>
-                    </NoticeDatePlace>
-                    <NoticeItemDesc>
+            <div className="w-full flex justify-center mt-20">
+              <div className="w-default flex justify-between">
+                <div className="w-[870px]">
+                  <div key={notice._id} className="w-full mb-20">
+                    <div className="font-josefin text-[30px] font-bold text-darkblue hover:underline">
+                      {notice.title}
+                    </div>
+                    <div className="flex mt-3">
+                      <div className="flex">
+                        <Calendar className="w-4 h-4 bg-white bg-center bg-no-repeat relative top-1 mr-2"></Calendar>
+                        <div className="bg-[#ffece2] text-darkblue text-sm font-lato font-semibold rounded-sm px-9 py-1">
+                          {notice.date.slice(0, 10)}
+                        </div>
+                      </div>
+                      <div className="bg-[#ffe7f9] text-darkblue text-sm font-lato font-semibold rounded-sm px-9 py-1 ml-3">
+                        {notice.location}
+                      </div>
+                    </div>
+                    <div className="font-lato text-[#8a8fb9] text-base mt-6">
                       <EditorViewer data={notice.content} />
-                    </NoticeItemDesc>
+                    </div>
                     {user.id === notice.creator ? (
-                      <NoticeControllerBtnCont>
-                        <div>
-                          <NoticeControllerBtn>
-                            <Link href={`/notice/update/${notice._id}`}>
+                      <div className="w-full flex justify-end mt-9">
+                        <div className="flex">
+                          <div className="cursor-pointer ml-2 font-lato text-sm text-[#808080]">
+                            <Link
+                              className="text-[#808080]"
+                              href={`/notice/update/${notice._id}`}
+                            >
                               Edit
                             </Link>
-                          </NoticeControllerBtn>
-                          <NoticeControllerBtn onClick={onDeleteNotice}>
+                          </div>
+                          <div
+                            className="cursor-pointer ml-2 font-lato text-sm text-[#808080]"
+                            onClick={onDeleteNotice}
+                          >
                             Delete
-                          </NoticeControllerBtn>
+                          </div>
                         </div>
-                      </NoticeControllerBtnCont>
+                      </div>
                     ) : (
                       ""
                     )}
-                  </NoticeDetailItem>
-                  <CommentCont>
-                    <div>Comment</div>
-                    <CommentInp
+                  </div>
+                  <div className="w-full h-fit mt-16">
+                    <div className="text-darkblue text-2xl font-bold font-josefin mb-3">
+                      Comment
+                    </div>
+                    <textarea
+                      className="w-full h-16 border-[1px] border-solid border-[#8a8fb9] p-3 outline-none font-lato resize-none placeholder:font-lato"
                       {...comment}
                       maxLength={200}
                       placeholder="Write your comment"
-                    ></CommentInp>
-                    <CommentSubmitBtn onClick={submitComment}>
+                    ></textarea>
+                    <button
+                      className="w-full h-10 bg-basered outline-none border-none cursor-pointer text-white font-roboto hover:bg-[#f72182]"
+                      onClick={submitComment}
+                    >
                       Submit
-                    </CommentSubmitBtn>
-                    <CommentContents>
+                    </button>
+                    <div className="w-full h-fit mt-12">
                       {Array.isArray(comments)
                         ? comments.length > 0
                           ? comments.map((comment) => (
@@ -189,29 +186,38 @@ const Notice: NextPage = () => {
                             ))
                           : ""
                         : ""}
-                    </CommentContents>
-                  </CommentCont>
-                </NoticeLeft>
-                <NoticeRight>
-                  <NoticeSearch>
-                    <div>Search</div>
+                    </div>
+                  </div>
+                </div>
+                <div className="w-[270px]">
+                  <div className="w-full">
+                    <div className="font-josefin text-darkblue font-bold text-2xl">
+                      Search
+                    </div>
                     <input
+                      className="w-full h-10 border-[1px] border-solid border-[#bdbdd8] outline-none rounded-sm pr-10 pl-3 mt-5 bg-search bg-no-repeat bg-cr12 placeholder:text-darkblue opacity-20"
                       placeholder="Search For Notice"
                       onKeyDown={onSearch}
                     />
-                  </NoticeSearch>
-                  <ImportantNotice>
-                    <div>Important Notice</div>
+                  </div>
+                  <div className="w-full mt-20">
+                    <div className="font-josefin text-darkblue font-bold text-2xl mb-8">
+                      Important Notice
+                    </div>
                     {importantList.map((item) => (
-                      <ImportantItem key={item.id}>
-                        <div>{item.title}</div>
-                        <div>{item.date}</div>
-                      </ImportantItem>
+                      <div key={item.id} className="mb-6 cursor-pointer">
+                        <div className="hover:underline font-josefin text-sm text-[#3f509e]">
+                          {item.title}
+                        </div>
+                        <div className="font-lato text-[11px] text-[#8a8fb9] mt-2">
+                          {item.date}
+                        </div>
+                      </div>
                     ))}
-                  </ImportantNotice>
-                </NoticeRight>
+                  </div>
+                </div>
               </div>
-            </NoticeBody>
+            </div>
           </Cont>
         </ContentWrap>
       </Body>

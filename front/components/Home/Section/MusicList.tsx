@@ -1,12 +1,11 @@
 import { NextPage } from "next";
-import { MuListCont, MuDesc, MuItem, MuList, MuTitle } from "./style";
 import twelve_45 from "public/img/12_45.jpg";
-import youth from "public/img/youth.jpg";
-import memories from "public/img/memories.jpg";
 import ghostTown from "public/img/ghost_town.jpg";
-import outOfTime from "public/img/out_of_time.jpg";
-import OffMyFace from "public/img/off_my_face.jpg";
+import memories from "public/img/memories.jpg";
 import SamSmith from "public/img/not_the_only_one.jpg";
+import OffMyFace from "public/img/off_my_face.jpg";
+import outOfTime from "public/img/out_of_time.jpg";
+import youth from "public/img/youth.jpg";
 
 import Image from "next/image";
 
@@ -57,20 +56,24 @@ let itemList = [
 
 const MusicList: NextPage = () => {
   return (
-    <MuListCont>
-      <MuTitle>Recently Played</MuTitle>
-      <MuList>
+    <div className="w-full mt-28">
+      <div className="text-darkblue text-[40px] font-bold text-center font-josefin mb-[53px]">
+        Recently Played
+      </div>
+      <div className="flex w-full h-fit overflow-x-hidden justify-center gap-6">
         {itemList.map((item) => (
-          <MuItem key={item.id}>
+          <div className="w-[147px] h-fit mr-6" key={item.id}>
             <Image src={item.img} alt={item.title} width={147} height={160} />
-            <MuDesc>
-              <div>{item.title}</div>
-              <div>{item.singer}</div>
-            </MuDesc>
-          </MuItem>
+            <div className="w-full mt-2">
+              <div className="text-center text-sm">{item.title}</div>
+              <div className="text-center text-s text-gray-500">
+                {item.singer}
+              </div>
+            </div>
+          </div>
         ))}
-      </MuList>
-    </MuListCont>
+      </div>
+    </div>
   );
 };
 

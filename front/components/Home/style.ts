@@ -1,19 +1,5 @@
 import styled from "styled-components";
 
-export const HomeTopImgCont = styled.div`
-  width: 100%;
-  height: 764px;
-  background-color: #f2f0ff;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  text-align: center;
-  font-size: 53px;
-  font-weight: bold;
-  font-family: "Josefin Sans", sans-serif;
-  position: relative;
-`;
-
 export const ItemBox = styled.div`
   width: fit-content;
   height: fit-content;

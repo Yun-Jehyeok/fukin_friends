@@ -73,7 +73,7 @@ const Header: NextPage = () => {
               <Link href="/feed">
                 <div
                   data-active={pathname.includes("feed")}
-                  className="h-full leading-10 font-lato cursor-pointer transition-colors ease-linear duration-150 hover:text-[#fb2e86]"
+                  className="h-full leading-10 font-lato cursor-pointer transition-colors ease-linear duration-150 hover:text-basered"
                 >
                   Feed
                 </div>
@@ -81,7 +81,7 @@ const Header: NextPage = () => {
               <Link href="/notice">
                 <div
                   data-active={pathname.includes("notice")}
-                  className="h-full leading-10 font-lato cursor-pointer transition-colors ease-linear duration-150 hover:text-[#fb2e86]"
+                  className="h-full leading-10 font-lato cursor-pointer transition-colors ease-linear duration-150 hover:text-basered"
                 >
                   Notice
                 </div>
@@ -89,7 +89,7 @@ const Header: NextPage = () => {
               <Link href="/event">
                 <div
                   data-active={pathname.includes("event")}
-                  className="h-full leading-10 font-lato cursor-pointer transition-colors ease-linear duration-150 hover:text-[#fb2e86]"
+                  className="h-full leading-10 font-lato cursor-pointer transition-colors ease-linear duration-150 hover:text-basered"
                 >
                   Event
                 </div>
@@ -97,7 +97,7 @@ const Header: NextPage = () => {
               <Link href="/album">
                 <div
                   data-active={pathname.includes("album")}
-                  className="h-full leading-10 font-lato cursor-pointer transition-colors ease-linear duration-150 hover:text-[#fb2e86]"
+                  className="h-full leading-10 font-lato cursor-pointer transition-colors ease-linear duration-150 hover:text-basered"
                 >
                   Album
                 </div>
@@ -105,7 +105,7 @@ const Header: NextPage = () => {
               <Link href="/playlist">
                 <div
                   data-active={pathname.includes("playlist")}
-                  className="h-full leading-10 font-lato cursor-pointer transition-colors ease-linear duration-150 hover:text-[#fb2e86]"
+                  className="h-full leading-10 font-lato cursor-pointer transition-colors ease-linear duration-150 hover:text-basered"
                 >
                   Play list
                 </div>
@@ -114,7 +114,7 @@ const Header: NextPage = () => {
           </div>
           <div className="w-[317px] h-10 border border-[#e7e6ef] rounded-[4px] box-border bg-white shadow-default flex">
             <input className="w-full h-full outline-none border-none rounded-[4px] bg-white py-0 px-4" />
-            <Search className="w-[51px] h-10 relative bottom-[1px] rounded-tr-[4px] rounded-br-[4px] bg-[#fb2e86] bg-no-repeat bg-center cursor-pointer"></Search>
+            <Search className="w-[51px] h-10 relative bottom-[1px] rounded-tr-[4px] rounded-br-[4px] bg-basered bg-no-repeat bg-center cursor-pointer"></Search>
           </div>
         </div>
       </div>

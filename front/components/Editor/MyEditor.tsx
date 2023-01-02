@@ -87,7 +87,7 @@ const WysiwygEditor: NextPage<EditorType> = ({ pageName }) => {
   );
 
   return (
-    <div>
+    <div className="w-default p-24 h-fit shadow-md">
       <EditorTitle>{setData("Create Notice", "Updating Notice")}</EditorTitle>
       <EditorDesc>Please notice detail bellow.</EditorDesc>
       <TitleInp

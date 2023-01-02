@@ -6,15 +6,6 @@ import { RootState } from "src/configureStore";
 import { commentActions } from "src/store/reducers/commentReducer";
 import { IComment } from "src/store/types/comment";
 import { IUser } from "src/store/types/user";
-import {
-  CommentBtn,
-  CommentContent,
-  CommentCreator,
-  CommentDate,
-  CommentEditInp,
-  CommentEditModeBtn,
-  CommentHeader,
-} from "styles/styleRepo/noticeStyle";
 
 interface Props {
   comment: IComment;
@@ -87,36 +78,66 @@ const Comment: React.FC<Props> = ({ comment, user }) => {
   );
 
   return (
-    <div key={comment._id}>
-      <CommentHeader>
-        <CommentCreator>{comment.creator.name}</CommentCreator>
+    <div key={comment._id} className="mb-9">
+      <div className="w-full flex justify-between">
+        <div className="text-darkblue font-josefin text-lg font-bold mb-2">
+          {comment.creator.name}
+        </div>
         {comment.creator._id === user.id ? (
-          <CommentBtn>
-            {isEdit ? "" : <div onClick={onChangeMode}>Edit</div>}
-            <div data-id={comment._id} onClick={deleteComment}>
+          <div className="flex">
+            {isEdit ? (
+              ""
+            ) : (
+              <div
+                className="font-lato text-sm text-gray-500 ml-2 cursor-pointer"
+                onClick={onChangeMode}
+              >
+                Edit
+              </div>
+            )}
+            <div
+              className="font-lato text-sm text-gray-500 ml-2 cursor-pointer"
+              data-id={comment._id}
+              onClick={deleteComment}
+            >
               Delete
             </div>
-          </CommentBtn>
+          </div>
         ) : (
           ""
         )}
-      </CommentHeader>
+      </div>
       <div>
         {isEdit ? (
-          <CommentEditInp
+          <textarea
+            className="w-full h-20 outline-none p-3 border-[1px] border-solid border-[#8a8fb9] font-lato resize-none rounded-[3px] placeholder:font-lato"
             onChange={onChangeComment}
             defaultValue={comment.contents}
-          ></CommentEditInp>
+          ></textarea>
         ) : (
-          <CommentContent>{comment.contents}</CommentContent>
+          <div className="text-base text-[#3f509e] font-lato mb-2">
+            {comment.contents}
+          </div>
         )}
         {isEdit ? (
-          <CommentEditModeBtn>
-            <div onClick={onChangeMode}>cancel</div>
-            <div onClick={onEditComment}>edit</div>
-          </CommentEditModeBtn>
+          <div className="flex justify-end mt-2">
+            <div
+              className="text-sm text-gray-500 font-lato cursor-pointer ml-2 hover:text-basered"
+              onClick={onChangeMode}
+            >
+              cancel
+            </div>
+            <div
+              className="text-sm text-gray-500 font-lato cursor-pointer ml-2 hover:text-basered"
+              onClick={onEditComment}
+            >
+              edit
+            </div>
+          </div>
         ) : (
-          <CommentDate>{comment.date.slice(0, 10)}</CommentDate>
+          <div className="text-[#8a8fb9] text-sm font-lato">
+            {comment.date.slice(0, 10)}
+          </div>
         )}
       </div>
     </div>

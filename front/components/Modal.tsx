@@ -1,11 +1,10 @@
-import { FeedCreator, FeedDate } from "components/View/Feed/style";
 import Image from "next/image";
 import cat from "public/img/cat1.jpg";
 import friend1 from "public/img/friend1.jpg";
 import friend2 from "public/img/friend2.jpg";
 
 import { useEffect } from "react";
-import { Close } from "styles/styleRepo/icons";
+import { Calendar, Close, Creator } from "styles/styleRepo/icons";
 
 interface IModal {
   open: Boolean;
@@ -84,14 +83,14 @@ export default function Modal({ open, handleModal, data }: IModal) {
             </div>
             <div>
               <div className="w-full font-josefin flex pb-[6px]">
-                <FeedCreator></FeedCreator>
-                <div className="text-[#151875] text-[14px]">{creator}</div>
-                <FeedDate></FeedDate>
-                <div className="text-[#151875] text-[14px]">{date}</div>
+                <Creator className="w-[14px] h-[22px] mr-1 bg-no-repeat bg-center"></Creator>
+                <div className="text-darkblue text-[14px]">{creator}</div>
+                <Calendar className="w-[14px] h-[18px] mr-1 ml-9 bg-no-repeat bg-center"></Calendar>
+                <div className="text-darkblue text-[14px]">{date}</div>
               </div>
 
               <div className="flex gap-2 mt-3 font-josefin">
-                <div className="text-[#151875] font-bold mr-2">TAGS</div>
+                <div className="text-darkblue font-bold mr-2">TAGS</div>
                 {tags.map((item) => (
                   <div key={tags.indexOf(item)}>{item}</div>
                 ))}

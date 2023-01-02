@@ -6,18 +6,14 @@ import { useSelector } from "react-redux";
 import { RootState } from "src/configureStore";
 import { noticeActions } from "src/store/reducers/noticeReducer";
 import {
-  NoticeListCont,
-  ItemTitle,
-  List,
-  Title,
   Desc,
-  DSCTitle,
-  DSCPlace,
   DSCDate,
-  ListCont,
+  DSCPlace,
+  DSCTitle,
+  ItemTitle,
   Pagination,
   PaginationItem,
-} from "./style";
+} from "../../View/Home/Section/NoticeList/style";
 
 const NoticeList: NextPage = () => {
   const [activeIdx, setActiveIdx] = useState(0);
@@ -56,14 +52,23 @@ const NoticeList: NextPage = () => {
   };
 
   return (
-    <NoticeListCont>
-      <Title>Notice</Title>
-      <ListCont>
-        <div>
-          <List activeIdx={activeIdx}>
+    <div className="w-full mt-[200px]">
+      <div className="text-darkblue font-bold text-[40px] text-center font-josefin mb-[53px]">
+        Notice
+      </div>
+      <div className="w-full h-fit flex justify-center">
+        <div className="w-full max-w-[1192px] overflow-hidden">
+          <div
+            className={`flex w-fit h-[384px] justify-center relative left-[${
+              activeIdx === 0 ? "12" : "-1188"
+            }px] transition-all duration-[800ms]`}
+          >
             {Array.isArray(notices)
               ? notices.map((item) => (
-                  <div key={item._id}>
+                  <div
+                    className="w-[270px] h-[360px] mr-[30px] text-white shadow-md cursor-pointer relative top-3 box-border hover:border-[1px] hover:border-solid hover:border-[#2f1ac4] hover:shadow-md"
+                    key={item._id}
+                  >
                     <Link href={`/notice/detail/${item._id}`}>
                       <a>
                         <ItemTitle>{item.title}</ItemTitle>
@@ -79,13 +84,13 @@ const NoticeList: NextPage = () => {
                   </div>
                 ))
               : ""}
-          </List>
+          </div>
         </div>
-      </ListCont>
+      </div>
       <Pagination>
         <div>{paginationUI()}</div>
       </Pagination>
-    </NoticeListCont>
+    </div>
   );
 };
 

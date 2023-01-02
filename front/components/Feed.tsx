@@ -4,8 +4,8 @@ import Image from "next/image";
 import cat from "public/img/cat1.jpg";
 import { useState } from "react";
 import { Cont } from "styles/styleRepo/global";
-import ViewHeader from "../Header";
-import { FeedCreator, FeedDate } from "./style";
+import { Calendar, Creator } from "styles/styleRepo/icons";
+import ViewHeader from "./ViewHeader";
 
 const exampleData = [
   {
@@ -133,11 +133,11 @@ const Feed: NextPage = () => {
         url_title="Create Feed"
       />
       <div className="w-full flex justify-center pt-20">
-        <div className="flex justify-between w-default flex-wrap">
+        <div className="flex gap-x-[33.5px] w-default flex-wrap">
           {exampleData.map((item) => {
             return (
               <div
-                className="w-[370px] h-[193px] mb-12 rounded-[5px] shadow-md relative cursor-pointer bottom-0 transition-all duration-[250ms] ease-default hover:bottom-[5px]"
+                className="w-[370px] h-[493px] mb-12 rounded-[5px] shadow-md relative cursor-pointer bottom-0 transition-all duration-[250ms] ease-default hover:bottom-[5px]"
                 key={item.id}
                 onClick={() => handleModal(item)}
               >
@@ -152,14 +152,12 @@ const Feed: NextPage = () => {
                 </div>
                 <div className="w-full">
                   <div className="w-full py-[19px] px-[14px] font-josefin flex">
-                    <FeedCreator></FeedCreator>
-                    <div className="text-[14px] text-[#151875]">
+                    <Creator className="w-[14px] h-[22px] mr-1 bg-no-repeat bg-center"></Creator>
+                    <div className="text-[14px] text-darkblue">
                       {item.creator}
                     </div>
-                    <FeedDate></FeedDate>
-                    <div className="text-[14px] text-[#151875]">
-                      {item.date}
-                    </div>
+                    <Calendar className="w-[14px] h-[18px] mr-1 ml-9 bg-no-repeat bg-center"></Calendar>
+                    <div className="text-[14px] text-darkblue">{item.date}</div>
                   </div>
                   <div className="w-full py-0 px-[19px] font-josefin text-[#72718f] text-base">
                     {item.content}

@@ -1,5 +1,5 @@
 import { NextPage } from "next";
-import { Facebook, Instagram, Twitter } from "styles/styleRepo/global";
+import { Facebook, Instagram, Twitter } from "styles/styleRepo/icons";
 
 const Footer: NextPage = () => {
   return (
@@ -14,7 +14,7 @@ const Footer: NextPage = () => {
               className="w-[220px] h-[44px] rounded-[3px] bg-white px-6 py-0 border-none outline-none"
               placeholder="Enter Email Address"
             />
-            <button className="w-[135px] h-[39px] mt-[2.5px] mr-[2.5px] bg-[#fb2e86] border-none outline-none rounded-[3px] text-white font-roboto cursor-pointer hover:bg-[#f72182]">
+            <button className="w-[135px] h-[39px] mt-[2.5px] mr-[2.5px] bg-basered border-none outline-none rounded-[3px] text-white font-roboto cursor-pointer hover:bg-[#f72182]">
               Send
             </button>
           </div>

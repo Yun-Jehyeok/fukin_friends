@@ -3,7 +3,7 @@ import { AppCont, Body, ContentWrap, NeedLogin } from "styles/styleRepo/style";
 
 import Footer from "components/Footer";
 import Header from "components/Header";
-import Home from "components/View/Home/Home";
+import Home from "components/Home/Home";
 import { useSelector } from "react-redux";
 import { RootState } from "src/configureStore";
 

@@ -7,26 +7,9 @@ import { useSelector } from "react-redux";
 import { RootState } from "src/configureStore";
 import { noticeActions } from "src/store/reducers/noticeReducer";
 import { Cont } from "styles/styleRepo/global";
-import ViewHeader from "../Header";
-import {
-  ImportantItem,
-  ImportantNotice,
-  NoticeBody,
-  NoticeDate,
-  NoticeDatePlace,
-  NoticeItem,
-  NoticeItemDesc,
-  NoticeItemTitle,
-  NoticeLeft,
-  NoticePaginationBtn,
-  NoticePaginationCont,
-  NoticePaginationLArr,
-  NoticePaginationRArr,
-  NoticePlace,
-  NoticeRight,
-  NoticeSearch,
-  ReadMore,
-} from "./style";
+import { Calendar } from "styles/styleRepo/icons";
+import ViewHeader from "../ViewHeader";
+import { NoticePaginationBtn } from "./style";
 
 const importantList = [
   {
@@ -211,22 +194,28 @@ const Notice: NextPage = () => {
         url="/notice/create"
         url_title="Create Notice"
       />
-      <NoticeBody>
-        <div>
-          <NoticeLeft>
+      <div className="w-full flex justify-center mt-20">
+        <div className="w-default flex justify-between">
+          <div className="w-[870px]">
             {notices.map((item) => (
-              <NoticeItem key={item._id}>
+              <div key={item._id} className="w-full mb-20 cursor-pointer">
                 <Link href={`/notice/detail/${item._id}`}>
                   <a>
-                    <NoticeItemTitle>{item.title}</NoticeItemTitle>
-                    <NoticeDatePlace>
-                      <NoticeDate>
-                        <div></div>
-                        <div>{item.date.slice(0, 10)}</div>
-                      </NoticeDate>
-                      <NoticePlace>{item.location}</NoticePlace>
-                    </NoticeDatePlace>
-                    <NoticeItemDesc>
+                    <div className="font-josefin text-[30px] font-bold text-darkblue hover:underline">
+                      {item.title}
+                    </div>
+                    <div className="flex mt-3">
+                      <div className="flex">
+                        <Calendar className="w-4 h-4 bg-white bg-center bg-no-repeat relative top-1 mr-2"></Calendar>
+                        <div className="bg-[#ffece2] text-darkblue text-sm font-lato font-semibold rounded-sm px-9 py-1">
+                          {item.date.slice(0, 10)}
+                        </div>
+                      </div>
+                      <div className="bg-[#ffe7f9] text-darkblue text-sm font-lato font-semibold rounded-sm px-9 py-1 ml-3">
+                        {item.location}
+                      </div>
+                    </div>
+                    <div className="font-lato text-[#8a8fb9] text-base mt-6">
                       {item.content.length > 200
                         ? item.content
                             .slice(0, 200)
@@ -236,21 +225,23 @@ const Notice: NextPage = () => {
                             /<\/?("[^"]*"|'[^']*'|[^>])*(>|$)/gi,
                             ""
                           )}
-                    </NoticeItemDesc>
-                    <ReadMore>
+                    </div>
+                    <div className="font-lato text-lg font-semibold flex mt-6 text-darkblue">
                       Read More
-                      <div></div>
-                    </ReadMore>
+                      <div className="w-[5px] h-[5px] rounded-full bg-basered ml-1 relative top-[9px]"></div>
+                    </div>
                   </a>
                 </Link>
-              </NoticeItem>
+              </div>
             ))}
-            <NoticePaginationCont>
-              <div>
-                <NoticePaginationLArr
-                  active={larrActive}
+            <div className="w-full flex justify-center">
+              <div className="w-fit flex flex-wrap gap-x-2">
+                <div
+                  className={`w-2 h-2 border-b-[1px] border-l-[1px] border-[#151875] border-solid rotate-45 relative top-3 cursor-pointer mr-3 ${
+                    larrActive ? "" : "pointer-events-none"
+                  }`}
                   onClick={goPrev}
-                ></NoticePaginationLArr>
+                ></div>
                 {Array.isArray(pages)
                   ? pages.map((page) => (
                       <NoticePaginationBtn
@@ -262,34 +253,45 @@ const Notice: NextPage = () => {
                       </NoticePaginationBtn>
                     ))
                   : ""}
-                <NoticePaginationRArr
-                  active={rarrActive}
+                <div
+                  className={`w-2 h-2 border-t-[1px] border-r-[1px] border-[#151875] border-solid rotate-45 relative top-3 cursor-pointer ml-3 ${
+                    rarrActive ? "" : "pointer-events-none"
+                  }`}
                   onClick={goNext}
-                ></NoticePaginationRArr>
+                ></div>
               </div>
-            </NoticePaginationCont>
-          </NoticeLeft>
-          <NoticeRight>
-            <NoticeSearch>
-              <div>Search</div>
+            </div>
+          </div>
+          <div className="w-[270px]">
+            <div className="w-full">
+              <div className="font-josefin text-darkblue font-bold text-2xl">
+                Search
+              </div>
               <input
+                className="w-full h-10 border-[1px] border-solid border-[#bdbdd8] outline-none rounded-sm pr-10 pl-3 mt-5 bg-search bg-no-repeat bg-cr12 placeholder:text-darkblue opacity-20"
                 placeholder="Search For Notice"
                 onKeyDown={onSearch}
                 {...noticeSearchTerm}
               />
-            </NoticeSearch>
-            <ImportantNotice>
-              <div>Important Notice</div>
+            </div>
+            <div className="w-full mt-20">
+              <div className="font-josefin text-darkblue font-bold text-2xl mb-8">
+                Important Notice
+              </div>
               {importantList.map((item) => (
-                <ImportantItem key={item.id}>
-                  <div>{item.title}</div>
-                  <div>{item.date}</div>
-                </ImportantItem>
+                <div key={item.id} className="mb-6 cursor-pointer">
+                  <div className="hover:underline font-josefin text-sm text-[#3f509e]">
+                    {item.title}
+                  </div>
+                  <div className="font-lato text-[11px] text-[#8a8fb9] mt-2">
+                    {item.date}
+                  </div>
+                </div>
               ))}
-            </ImportantNotice>
-          </NoticeRight>
+            </div>
+          </div>
         </div>
-      </NoticeBody>
+      </div>
     </Cont>
   );
 };

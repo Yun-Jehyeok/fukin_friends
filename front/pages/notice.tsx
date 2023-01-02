@@ -3,7 +3,7 @@ import { AppCont, Body, ContentWrap, NeedLogin } from "styles/styleRepo/style";
 
 import Footer from "components/Footer";
 import Header from "components/Header";
-import Notice from "components/View/Notice/Notice";
+import Notice from "components/Notice";
 import { useSelector } from "react-redux";
 import { RootState } from "src/configureStore";
 
