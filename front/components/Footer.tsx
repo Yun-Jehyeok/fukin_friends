@@ -1,5 +1,4 @@
 import { NextPage } from "next";
-import { Facebook, Instagram, Twitter } from "styles/styleRepo/icons";
 
 const Footer: NextPage = () => {
   return (
@@ -26,9 +25,9 @@ const Footer: NextPage = () => {
             &copy;&nbsp;FUKINFRIENDS - No Rights Reserved
           </div>
           <div className="flex h-5 mt-[16.5px] gap-[11px]">
-            <Facebook className="w-[20px] h-5 bg-transparent bg-no-repeat bg-center"></Facebook>
-            <Instagram className="w-[20px] h-5 bg-transparent bg-no-repeat bg-center"></Instagram>
-            <Twitter className="w-[20px] h-5 bg-transparent bg-no-repeat bg-center"></Twitter>
+            <div className="w-[20px] h-5 bg-fb bg-transparent bg-no-repeat bg-center"></div>
+            <div className="w-[20px] h-5 bg-insta bg-transparent bg-no-repeat bg-center"></div>
+            <div className="w-[20px] h-5 bg-twitter bg-transparent bg-no-repeat bg-center"></div>
           </div>
         </div>
       </div>

@@ -7,20 +7,6 @@ import { useCallback, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "src/configureStore";
 import { userActions } from "src/store/reducers/userReducer";
-import {
-  AuthBtn,
-  AuthCont,
-  AuthInp,
-  AuthInpErrMsg,
-  AuthLab,
-  AuthLabSpan,
-  AuthTitle,
-} from "styles/styleRepo/authFormStyle";
-import {
-  RegisterAuthBtn,
-  RegisterAuthCont,
-  RegisterForm,
-} from "styles/styleRepo/registerStyle";
 
 const Register: NextPage = () => {
   const name = useInput("");
@@ -140,16 +126,18 @@ const Register: NextPage = () => {
       {!isTOSSuccess ? (
         <TermsOfService checkTOS={onCheckTOS} />
       ) : (
-        <AuthCont>
-          <RegisterForm>
-            <div>
+        <div className="w-full h-screen overflow-x-hidden overflow-y-auto flex justify-center flex-col bg-[#f4f9fc]">
+          <div className="w-530 rounded-2xl mx-auto my-0">
+            <div className="h-full p-12 flex justify-center flex-col">
               <div>
-                <AuthTitle>
+                <div className="font-bold text-5xl text-center mb-8 text-[#5455dd]">
                   <Link href="/">SIGN UP</Link>
-                </AuthTitle>
+                </div>
                 <form onSubmit={handleSubmit}>
-                  <AuthLab>이름</AuthLab>
-                  <AuthInp
+                  <div className="mb-2 text-sm text-black font-bold">이름</div>
+                  <input
+                    className="w-full h-12 mb-4 outline-none pl-3 border-[1px] border-solid border-black text-base"
+                    autoComplete="off"
                     type="text"
                     name="name"
                     required
@@ -157,12 +145,18 @@ const Register: NextPage = () => {
                     placeholder="이름을 입력하세요"
                   />
                   {isNameBlank ? (
-                    <AuthInpErrMsg>* 이름은 필수값입니다.</AuthInpErrMsg>
+                    <div className="text-red-500 text-xs mb-4 -mt-2">
+                      * 이름은 필수값입니다.
+                    </div>
                   ) : (
                     ""
                   )}
-                  <AuthLab>이메일</AuthLab>
-                  <AuthInp
+                  <div className="mb-2 text-sm text-black font-bold">
+                    이메일
+                  </div>
+                  <input
+                    className="w-full h-12 mb-4 outline-none pl-3 border-[1px] border-solid border-black text-base"
+                    autoComplete="off"
                     type="email"
                     name="email"
                     required
@@ -170,17 +164,21 @@ const Register: NextPage = () => {
                     placeholder="이메일을 입력하세요"
                   />
                   {isEmailBlank ? (
-                    <AuthInpErrMsg>* 이메일은 필수값입니다.</AuthInpErrMsg>
+                    <div className="text-red-500 text-xs mb-4 -mt-2">
+                      * 이메일은 필수값입니다.
+                    </div>
                   ) : (
                     ""
                   )}
-                  <AuthLab>
+                  <div className="mb-2 text-sm text-black font-bold">
                     비밀번호
-                    <AuthLabSpan>
+                    <div className="ml-1 text-gray-500 text-xs">
                       (비밀번호는 8자 이상, 문자와 숫자 조합)
-                    </AuthLabSpan>
-                  </AuthLab>
-                  <AuthInp
+                    </div>
+                  </div>
+                  <input
+                    className="w-full h-12 mb-4 outline-none pl-3 border-[1px] border-solid border-black text-base"
+                    autoComplete="off"
                     type="password"
                     name="password"
                     required
@@ -188,22 +186,32 @@ const Register: NextPage = () => {
                     {...password}
                   />
                   {isPasswordBlank ? (
-                    <AuthInpErrMsg>* 비밀번호는 필수값입니다.</AuthInpErrMsg>
+                    <div className="text-red-500 text-xs mb-4 -mt-2">
+                      * 비밀번호는 필수값입니다.
+                    </div>
                   ) : (
                     ""
                   )}
-                  <AuthLab>비밀번호 확인</AuthLab>
-                  <AuthInp
+                  <div className="mb-2 text-sm text-black font-bold">
+                    비밀번호 확인
+                  </div>
+                  <input
+                    className="w-full h-12 mb-4 outline-none pl-3 border-[1px] border-solid border-black text-base"
+                    autoComplete="off"
                     type="password"
                     name="passwordCheck"
                     required
                     placeholder="비밀번호 확인을 입력하세요"
                     {...passwordCheck}
                   />
-                  <AuthLab>휴대폰 인증</AuthLab>
-                  <RegisterAuthCont>
-                    <div>
-                      <AuthInp
+                  <div className="mb-2 text-sm text-black font-bold">
+                    휴대폰 인증
+                  </div>
+                  <div className="w-full flex justify-between h-12 mb-4">
+                    <div className="w-[calc(80%-4px)]">
+                      <input
+                        className="w-full h-12 mb-4 outline-none pl-3 border-[1px] border-solid border-black text-base"
+                        autoComplete="off"
                         type="text"
                         name="phone"
                         required
@@ -211,19 +219,25 @@ const Register: NextPage = () => {
                         {...phone}
                       />
                     </div>
-                    <div>
-                      <RegisterAuthBtn
-                        sendPASuccess={sendPASuccess}
+                    <div className="w-[calc(20%-4px)]">
+                      <div
+                        className={`w-full h-full text-white bg-[#5455dd] text-center border-none ${
+                          sendPASuccess
+                            ? "pointer-events-none"
+                            : "cursor-pointer"
+                        } text-base hover:bg-[#3d3ebe]`}
                         onClick={sendPA}
                       >
                         {sendPASuccess ? minute + ":" + second : "보내기"}
-                      </RegisterAuthBtn>
+                      </div>
                     </div>
-                  </RegisterAuthCont>
+                  </div>
 
-                  <RegisterAuthCont>
-                    <div>
-                      <AuthInp
+                  <div className="w-full flex justify-between h-12 mb-4">
+                    <div className="w-[calc(80%-4px)]">
+                      <input
+                        className="w-full h-12 mb-4 outline-none pl-3 border-[1px] border-solid border-black text-base"
+                        autoComplete="off"
                         type="text"
                         name="authNum"
                         required
@@ -231,25 +245,30 @@ const Register: NextPage = () => {
                         {...authNum}
                       />
                     </div>
-                    <div>
-                      <RegisterAuthBtn sendPASuccess={false} onClick={checkPA}>
+                    <div className="w-[calc(20%-4px)]">
+                      <div
+                        className="w-full h-full text-white bg-[#5455dd] text-center border-none cursor-pointer text-base hover:bg-[#3d3ebe]"
+                        onClick={checkPA}
+                      >
                         확인
-                      </RegisterAuthBtn>
+                      </div>
                     </div>
-                  </RegisterAuthCont>
+                  </div>
                   {isPasswordCheckErr ? (
-                    <AuthInpErrMsg>
+                    <div className="text-red-500 text-xs mb-4 -mt-2">
                       * 비밀번호 확인란은 비밀번호와 같아야 합니다.
-                    </AuthInpErrMsg>
+                    </div>
                   ) : (
                     ""
                   )}
-                  <AuthBtn>회원가입</AuthBtn>
+                  <div className="w-full h-14 text-white bg-[#5455dd] text-center text-lg cursor-pointer border-none outline-none hover:bg-[#3d3ebe] leading-[56px]">
+                    회원가입
+                  </div>
                 </form>
               </div>
             </div>
-          </RegisterForm>
-        </AuthCont>
+          </div>
+        </div>
       )}
     </div>
   );

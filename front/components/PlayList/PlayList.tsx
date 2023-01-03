@@ -1,12 +1,11 @@
 import { NextPage } from "next";
-import { Cont } from "styles/styleRepo/global";
-import PlayListItems from "./PlayListItems/PlayListItems";
+import PlayListItems from "./PlayListItems";
 
 const PlayList: NextPage = () => {
   return (
-    <Cont>
+    <div className="w-full">
       <PlayListItems />
-    </Cont>
+    </div>
   );
 };
 

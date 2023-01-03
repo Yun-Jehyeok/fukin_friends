@@ -3,8 +3,6 @@ import { NextPage } from "next";
 import Image from "next/image";
 import cat from "public/img/cat1.jpg";
 import { useState } from "react";
-import { Cont } from "styles/styleRepo/global";
-import { Calendar, Creator } from "styles/styleRepo/icons";
 import ViewHeader from "./ViewHeader";
 
 const exampleData = [
@@ -125,7 +123,7 @@ const Feed: NextPage = () => {
   };
 
   return (
-    <Cont>
+    <div className="w-full">
       <ViewHeader
         title="Feed Page"
         desc="It's Just Feed Page"
@@ -152,11 +150,11 @@ const Feed: NextPage = () => {
                 </div>
                 <div className="w-full">
                   <div className="w-full py-[19px] px-[14px] font-josefin flex">
-                    <Creator className="w-[14px] h-[22px] mr-1 bg-no-repeat bg-center"></Creator>
+                    <div className="w-[14px] h-[22px] mr-1 bg-creator bg-no-repeat bg-center"></div>
                     <div className="text-[14px] text-darkblue">
                       {item.creator}
                     </div>
-                    <Calendar className="w-[14px] h-[18px] mr-1 ml-9 bg-no-repeat bg-center"></Calendar>
+                    <div className="w-[14px] h-[18px] mr-1 ml-9 bg-calendar bg-no-repeat bg-center"></div>
                     <div className="text-[14px] text-darkblue">{item.date}</div>
                   </div>
                   <div className="w-full py-0 px-[19px] font-josefin text-[#72718f] text-base">
@@ -180,7 +178,7 @@ const Feed: NextPage = () => {
       ) : (
         ""
       )}
-    </Cont>
+    </div>
   );
 };
 

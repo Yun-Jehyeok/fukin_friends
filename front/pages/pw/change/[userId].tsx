@@ -4,16 +4,6 @@ import { NextPage } from "next";
 import { useRouter } from "next/router";
 import React, { useCallback, useState } from "react";
 import { userActions } from "src/store/reducers/userReducer";
-import {
-  AuthBtn,
-  AuthCont,
-  AuthInp,
-  AuthInpErrMsg,
-  AuthLab,
-  AuthLabSpan,
-  AuthTitle,
-} from "styles/styleRepo/authFormStyle";
-import { PwInquiryForm } from "styles/styleRepo/pwInquiry";
 
 const ChangePassword: NextPage = () => {
   const router = useRouter();
@@ -67,43 +57,58 @@ const ChangePassword: NextPage = () => {
   );
 
   return (
-    <AuthCont>
-      <AuthTitle>비밀번호 변경</AuthTitle>
-      <PwInquiryForm>
-        <div>
+    <div className="w-full h-screen overflow-x-hidden overflow-y-auto flex justify-center flex-col bg-[#f4f9fc]">
+      <div className="font-bold text-5xl text-center mb-8 text-[#5455dd]">
+        비밀번호 변경
+      </div>
+      <div className="w-530 mx-auto my-0">
+        <div className="h-fit -p-12 flex justify-center flex-col">
           <form onSubmit={changePassword}>
-            <AuthLab>
+            <div className="mb-2 text-sm text-black font-bold">
               비밀번호
-              <AuthLabSpan>(비밀번호는 8자 이상, 문자와 숫자 조합)</AuthLabSpan>
-            </AuthLab>
-            <AuthInp
+              <div className="ml-1 text-gray-500 text-xs">
+                (비밀번호는 8자 이상, 문자와 숫자 조합)
+              </div>
+            </div>
+            <input
+              className="w-full h-12 mb-4 outline-none pl-3 border-[1px] border-solid border-black text-base"
+              autoComplete="off"
               type="password"
               name="password"
               placeholder="비밀번호를 입력하세요"
               {...password}
             />
             {isPasswordBlank ? (
-              <AuthInpErrMsg>{passwordErrMsg}</AuthInpErrMsg>
+              <div className="text-red-500 text-xs mb-4 -mt-2">
+                {passwordErrMsg}
+              </div>
             ) : (
               ""
             )}
-            <AuthLab>비밀번호 확인</AuthLab>
-            <AuthInp
+            <div className="mb-2 text-sm text-black font-bold">
+              비밀번호 확인
+            </div>
+            <input
+              autoComplete="off"
               type="password"
               name="passwordCheck"
               placeholder="비밀번호 확인을 입력하세요"
               {...passwordCheck}
             />
             {isPasswordCheckErr ? (
-              <AuthInpErrMsg>{passwordCheckErrMsg}</AuthInpErrMsg>
+              <div className="text-red-500 text-xs mb-4 -mt-2">
+                {passwordCheckErrMsg}
+              </div>
             ) : (
               ""
             )}
-            <AuthBtn>변경</AuthBtn>
+            <div className="w-full h-14 text-white bg-[#5455dd] text-center text-lg cursor-pointer border-none outline-none hover:bg-[#3d3ebe] leading-[56px]">
+              변경
+            </div>
           </form>
         </div>
-      </PwInquiryForm>
-    </AuthCont>
+      </div>
+    </div>
   );
 };
 

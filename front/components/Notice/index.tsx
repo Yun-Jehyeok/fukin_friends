@@ -6,10 +6,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "src/configureStore";
 import { noticeActions } from "src/store/reducers/noticeReducer";
-import { Cont } from "styles/styleRepo/global";
-import { Calendar } from "styles/styleRepo/icons";
 import ViewHeader from "../ViewHeader";
-import { NoticePaginationBtn } from "./style";
 
 const importantList = [
   {
@@ -65,7 +62,7 @@ const Notice: NextPage = () => {
       i++
     ) {
       if (i <= totalPage) {
-        pageList.push({ key: i, cls: i === currentPage ? "active" : "" });
+        pageList.push({ key: i, cls: i === currentPage ? "text-basered" : "" });
       } else {
         break;
       }
@@ -187,7 +184,7 @@ const Notice: NextPage = () => {
   );
 
   return (
-    <Cont>
+    <div className="w-full">
       <ViewHeader
         title="Notice Page"
         desc="It's Just Notice Page"
@@ -206,7 +203,7 @@ const Notice: NextPage = () => {
                     </div>
                     <div className="flex mt-3">
                       <div className="flex">
-                        <Calendar className="w-4 h-4 bg-white bg-center bg-no-repeat relative top-1 mr-2"></Calendar>
+                        <div className="w-4 h-4 bg-white bg-center bg-calendar bg-no-repeat relative top-1 mr-2"></div>
                         <div className="bg-[#ffece2] text-darkblue text-sm font-lato font-semibold rounded-sm px-9 py-1">
                           {item.date.slice(0, 10)}
                         </div>
@@ -244,13 +241,16 @@ const Notice: NextPage = () => {
                 ></div>
                 {Array.isArray(pages)
                   ? pages.map((page) => (
-                      <NoticePaginationBtn
+                      <div
                         key={page.key}
-                        className={page.cls}
+                        className={
+                          "w-9 h-9 text-center leading-9 rounded-full bg-white text-darkblue font-josefin cursor-pointer text-lg first:text-basered hover:bg-[#eeeffb]" +
+                          page.cls
+                        }
                         onClick={() => onChangePage(page.key)}
                       >
                         {page.key}
-                      </NoticePaginationBtn>
+                      </div>
                     ))
                   : ""}
                 <div
@@ -292,7 +292,7 @@ const Notice: NextPage = () => {
           </div>
         </div>
       </div>
-    </Cont>
+    </div>
   );
 };
 

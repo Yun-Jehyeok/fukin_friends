@@ -5,15 +5,6 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "src/configureStore";
 import { noticeActions } from "src/store/reducers/noticeReducer";
-import {
-  Desc,
-  DSCDate,
-  DSCPlace,
-  DSCTitle,
-  ItemTitle,
-  Pagination,
-  PaginationItem,
-} from "../../View/Home/Section/NoticeList/style";
 
 const NoticeList: NextPage = () => {
   const [activeIdx, setActiveIdx] = useState(0);
@@ -39,12 +30,15 @@ const NoticeList: NextPage = () => {
 
     for (let i = 0; i < itemLength; i++) {
       returnArr.push(
-        <PaginationItem
+        <div
           key={i}
+          className={`w-4 h-1 bg-[#febad7] rounded-[10px] cursor-pointer ${
+            i === activeIdx ? "w-6 bg-[#fb2e86]" : ""
+          }`}
           data-key={i}
           data-active={i === activeIdx}
           onClick={onClickPagination}
-        ></PaginationItem>
+        ></div>
       );
     }
 
@@ -71,14 +65,22 @@ const NoticeList: NextPage = () => {
                   >
                     <Link href={`/notice/detail/${item._id}`}>
                       <a>
-                        <ItemTitle>{item.title}</ItemTitle>
-                        <Desc>
-                          <div>
-                            <DSCTitle>{item.title}</DSCTitle>
-                            <DSCPlace>{item.location}</DSCPlace>
-                            <DSCDate>{item.date.slice(0, 10)}</DSCDate>
+                        <div className="w-full h-3/5 bg-[#f6f7fb] flex justify-center flex-col text-center text-xl font-josefin px-3 py-0">
+                          {item.title}
+                        </div>
+                        <div className="w-full h-2/5 text-center flex justify-center flex-col px-3 py-0">
+                          <div className="h-fit">
+                            <div className="font-lato text-lg text-basered font-bold">
+                              {item.title}
+                            </div>
+                            <div className="font-josefin text-sm text-darkblue mt-3">
+                              {item.location}
+                            </div>
+                            <div className="font-josefin text-sm text-darkblue mt-2">
+                              {item.date.slice(0, 10)}
+                            </div>
                           </div>
-                        </Desc>
+                        </div>
                       </a>
                     </Link>
                   </div>
@@ -87,9 +89,9 @@ const NoticeList: NextPage = () => {
           </div>
         </div>
       </div>
-      <Pagination>
-        <div>{paginationUI()}</div>
-      </Pagination>
+      <div className="w-full flex justify-center mt-12">
+        <div className="flex w-fit gap-1.5">{paginationUI()}</div>
+      </div>
     </div>
   );
 };

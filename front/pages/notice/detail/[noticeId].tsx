@@ -1,6 +1,4 @@
 import { NextPage } from "next";
-import { Cont } from "styles/styleRepo/global";
-import { AppCont, Body, ContentWrap } from "styles/styleRepo/style";
 
 // import EditorViewer from "components/Editor/EditorViewer";
 import Footer from "components/Footer";
@@ -17,7 +15,6 @@ import { useSelector } from "react-redux";
 import { RootState } from "src/configureStore";
 import { commentActions } from "src/store/reducers/commentReducer";
 import { noticeActions } from "src/store/reducers/noticeReducer";
-import { Calendar } from "styles/styleRepo/icons";
 
 const importantList = [
   {
@@ -105,11 +102,11 @@ const Notice: NextPage = () => {
   );
 
   return (
-    <AppCont>
+    <div className="w-full min-w-[1200px]">
       <Header />
-      <Body>
-        <ContentWrap>
-          <Cont>
+      <div className="w-full flex">
+        <div className="w-full relative">
+          <div className="w-full">
             <ViewHeader
               title="Notice Detail Page"
               desc="It's Notice Detail Page"
@@ -123,7 +120,7 @@ const Notice: NextPage = () => {
                     </div>
                     <div className="flex mt-3">
                       <div className="flex">
-                        <Calendar className="w-4 h-4 bg-white bg-center bg-no-repeat relative top-1 mr-2"></Calendar>
+                        <div className="w-4 h-4 bg-white bg-calendar bg-center bg-no-repeat relative top-1 mr-2"></div>
                         <div className="bg-[#ffece2] text-darkblue text-sm font-lato font-semibold rounded-sm px-9 py-1">
                           {notice.date.slice(0, 10)}
                         </div>
@@ -218,11 +215,11 @@ const Notice: NextPage = () => {
                 </div>
               </div>
             </div>
-          </Cont>
-        </ContentWrap>
-      </Body>
+          </div>
+        </div>
+      </div>
       <Footer />
-    </AppCont>
+    </div>
   );
 };
 

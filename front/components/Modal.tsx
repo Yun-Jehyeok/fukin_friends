@@ -4,7 +4,6 @@ import friend1 from "public/img/friend1.jpg";
 import friend2 from "public/img/friend2.jpg";
 
 import { useEffect } from "react";
-import { Calendar, Close, Creator } from "styles/styleRepo/icons";
 
 interface IModal {
   open: Boolean;
@@ -83,9 +82,9 @@ export default function Modal({ open, handleModal, data }: IModal) {
             </div>
             <div>
               <div className="w-full font-josefin flex pb-[6px]">
-                <Creator className="w-[14px] h-[22px] mr-1 bg-no-repeat bg-center"></Creator>
+                <div className="w-[14px] h-[22px] mr-1 bg-creator bg-no-repeat bg-center"></div>
                 <div className="text-darkblue text-[14px]">{creator}</div>
-                <Calendar className="w-[14px] h-[18px] mr-1 ml-9 bg-no-repeat bg-center"></Calendar>
+                <div className="w-[14px] h-[18px] mr-1 ml-9 bg-calendar bg-no-repeat bg-center"></div>
                 <div className="text-darkblue text-[14px]">{date}</div>
               </div>
 
@@ -97,10 +96,10 @@ export default function Modal({ open, handleModal, data }: IModal) {
               </div>
             </div>
           </div>
-          <Close
-            className="w-[18px] h-[18px] p-1 absolute top-[7px] right-[7px] bg-no-repeat bg-center cursor-pointer hover:rounded-full hover:bg-[#f6f2fe] hover:text-[#9061f9]"
+          <div
+            className="w-[18px] h-[18px] p-1 absolute top-[7px] right-[7px] bg-close bg-no-repeat bg-center cursor-pointer hover:rounded-full hover:bg-[#f6f2fe] hover:text-[#9061f9]"
             onClick={handleModal}
-          ></Close>
+          ></div>
         </div>
       </div>
     </div>

@@ -12,15 +12,6 @@ import { useSelector } from "react-redux";
 import { RootState } from "src/configureStore";
 import { noticeActions } from "src/store/reducers/noticeReducer";
 import "tui-color-picker/dist/tui-color-picker.css";
-import {
-  DateInp,
-  EditorBtn,
-  EditorDesc,
-  EditorTitle,
-  LocationInp,
-  LocDateCont,
-  TitleInp,
-} from "./style";
 
 interface EditorType {
   pageName: string;
@@ -88,19 +79,32 @@ const WysiwygEditor: NextPage<EditorType> = ({ pageName }) => {
 
   return (
     <div className="w-default p-24 h-fit shadow-md">
-      <EditorTitle>{setData("Create Notice", "Updating Notice")}</EditorTitle>
-      <EditorDesc>Please notice detail bellow.</EditorDesc>
-      <TitleInp
+      <div className="font-josefin text-[32px] font-bold text-center mb-4">
+        {setData("Create Notice", "Updating Notice")}
+      </div>
+      <div className="text-[#9096b2] text-[17px] font-lato mb-10 text-center">
+        Please notice detail bellow.
+      </div>
+      <input
+        className="w-full h-12 px-3 py-0 border-[1px] border-solid border-[#dadde6] outline-none mb-3 rounded-[3px]"
         type="text"
         name="title"
         placeholder="제목을 입력해주세요."
         {...title}
       />
 
-      <LocDateCont>
-        <LocationInp placeholder="위치를 입력해주세요." {...location} />
-        <DateInp type="date" {...date} />
-      </LocDateCont>
+      <div className="w-full h-12 mb-3 flex justify-between">
+        <input
+          className="w-[calc(80%-4px)] h-full text-[13px] flex justify-center flex-col text-[#757575] px-3 py-0 border-[1px] border-solid border-[#dadde6] outline-none rounded-[3px]"
+          placeholder="위치를 입력해주세요."
+          {...location}
+        />
+        <input
+          className="w-[calc(20%-4px)] h-full px-3 py-0 border-[1px] border-solid border-[#dadde6] outline-none rounded-[3px]"
+          type="date"
+          {...date}
+        />
+      </div>
 
       <Editor
         ref={editorRef}
@@ -113,7 +117,12 @@ const WysiwygEditor: NextPage<EditorType> = ({ pageName }) => {
         toolbarItems={toolbarItems}
         plugins={[colorSyntax]}
       />
-      <EditorBtn onClick={onSubmit}>{setData("Write", "Edit")}</EditorBtn>
+      <button
+        className="w-full h-12 border-none outline-none text-white bg-basered rounded-[3px] font-bold text-[17px] font-lato mt-5 cursor-pointer hover:bg-[#f72182]"
+        onClick={onSubmit}
+      >
+        {setData("Write", "Edit")}
+      </button>
     </div>
   );
 };

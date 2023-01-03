@@ -6,7 +6,6 @@ import { useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "src/configureStore";
 import { userActions } from "src/store/reducers/userReducer";
-import { Email, Login, Phone, Search } from "styles/styleRepo/icons";
 
 const Header: NextPage = () => {
   const router = useRouter();
@@ -32,11 +31,11 @@ const Header: NextPage = () => {
         <div className="w-default h-full leading-[44px] flex justify-between">
           <div className="flex gap-6">
             <div className="text-[#f1f1f1] flex font-josefin">
-              <Email className="w-4 h-4 bg-no-repeat bg-center mt-3"></Email>
+              <div className="w-4 h-4 bg-email bg-no-repeat bg-center mt-3"></div>
               dbswpgur2@naver.com
             </div>
             <div className="text-[#f1f1f1] flex font-josefin">
-              <Phone className="w-4 h-4 bg-no-repeat bg-center mt-3"></Phone>
+              <div className="w-4 h-4 bg-phone bg-no-repeat bg-center mt-3"></div>
               010-5629-4023
             </div>
           </div>
@@ -56,7 +55,7 @@ const Header: NextPage = () => {
               ) : (
                 <Link href="/login">Login</Link>
               )}
-              <Login className="w-4 h-4 bg-no-repeat bg-center mt-3"></Login>
+              <div className="w-4 h-4 bg-login bg-no-repeat bg-center mt-3"></div>
             </div>
           </div>
         </div>
@@ -114,7 +113,7 @@ const Header: NextPage = () => {
           </div>
           <div className="w-[317px] h-10 border border-[#e7e6ef] rounded-[4px] box-border bg-white shadow-default flex">
             <input className="w-full h-full outline-none border-none rounded-[4px] bg-white py-0 px-4" />
-            <Search className="w-[51px] h-10 relative bottom-[1px] rounded-tr-[4px] rounded-br-[4px] bg-basered bg-no-repeat bg-center cursor-pointer"></Search>
+            <div className="w-[51px] h-10 relative bottom-[1px] rounded-tr-[4px] rounded-br-[4px] bg-basered bg-xsearch bg-no-repeat bg-center cursor-pointer"></div>
           </div>
         </div>
       </div>
