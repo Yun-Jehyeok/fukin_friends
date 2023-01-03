@@ -154,7 +154,7 @@ const Feed: NextPage = () => {
                     <div className="text-[14px] text-darkblue">
                       {item.creator}
                     </div>
-                    <div className="w-[14px] h-[18px] mr-1 ml-9 bg-calendar bg-no-repeat bg-center"></div>
+                    <div className="w-[14px] h-4.5 mr-1 ml-9 bg-calendar bg-no-repeat bg-center"></div>
                     <div className="text-[14px] text-darkblue">{item.date}</div>
                   </div>
                   <div className="w-full py-0 px-[19px] font-josefin text-[#72718f] text-base">

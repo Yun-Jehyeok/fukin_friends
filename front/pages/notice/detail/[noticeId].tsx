@@ -115,7 +115,7 @@ const Notice: NextPage = () => {
               <div className="w-default flex justify-between">
                 <div className="w-[870px]">
                   <div key={notice._id} className="w-full mb-20">
-                    <div className="font-josefin text-[30px] font-bold text-darkblue hover:underline">
+                    <div className="font-josefin text-[30px] font-bold text-darkblue">
                       {notice.title}
                     </div>
                     <div className="flex mt-3">
@@ -160,13 +160,13 @@ const Notice: NextPage = () => {
                       Comment
                     </div>
                     <textarea
-                      className="w-full h-16 border-[1px] border-solid border-[#8a8fb9] p-3 outline-none font-lato resize-none placeholder:font-lato"
+                      className="w-full h-16 border border-solid border-[#8a8fb9] p-3 outline-none font-lato resize-none placeholder:font-lato"
                       {...comment}
                       maxLength={200}
                       placeholder="Write your comment"
                     ></textarea>
                     <button
-                      className="w-full h-10 bg-basered outline-none border-none cursor-pointer text-white font-roboto hover:bg-[#f72182]"
+                      className="w-full h-10 bg-basered outline-none border-none cursor-pointer text-white font-roboto hover:bg-hoverred"
                       onClick={submitComment}
                     >
                       Submit
@@ -192,7 +192,7 @@ const Notice: NextPage = () => {
                       Search
                     </div>
                     <input
-                      className="w-full h-10 border-[1px] border-solid border-[#bdbdd8] outline-none rounded-sm pr-10 pl-3 mt-5 bg-search bg-no-repeat bg-cr12 placeholder:text-darkblue opacity-20"
+                      className="w-full h-10 border border-solid border-[#bdbdd8] outline-none rounded-sm pr-10 pl-3 mt-5 bg-search bg-no-repeat bg-cr12 placeholder:text-darkblue opacity-20"
                       placeholder="Search For Notice"
                       onKeyDown={onSearch}
                     />

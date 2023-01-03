@@ -1,3 +1,4 @@
+import Input from "components/Input";
 import TermsOfService from "components/TermsOfService";
 import { useAppDispatch } from "hooks/reduxHooks";
 import { useInput } from "hooks/useInput";
@@ -130,19 +131,20 @@ const Register: NextPage = () => {
           <div className="w-530 rounded-2xl mx-auto my-0">
             <div className="h-full p-12 flex justify-center flex-col">
               <div>
-                <div className="font-bold text-5xl text-center mb-8 text-[#5455dd]">
-                  <Link href="/">SIGN UP</Link>
+                <div className="font-bold text-5xl text-center mb-8">
+                  <Link href="/">
+                    <a className="text-lightblue hover:text-lightblue">
+                      SIGN UP
+                    </a>
+                  </Link>
                 </div>
                 <form onSubmit={handleSubmit}>
                   <div className="mb-2 text-sm text-black font-bold">이름</div>
-                  <input
-                    className="w-full h-12 mb-4 outline-none pl-3 border-[1px] border-solid border-black text-base"
-                    autoComplete="off"
+                  <Input
                     type="text"
                     name="name"
-                    required
-                    {...name}
                     placeholder="이름을 입력하세요"
+                    data={name}
                   />
                   {isNameBlank ? (
                     <div className="text-red-500 text-xs mb-4 -mt-2">
@@ -154,14 +156,11 @@ const Register: NextPage = () => {
                   <div className="mb-2 text-sm text-black font-bold">
                     이메일
                   </div>
-                  <input
-                    className="w-full h-12 mb-4 outline-none pl-3 border-[1px] border-solid border-black text-base"
-                    autoComplete="off"
+                  <Input
                     type="email"
                     name="email"
-                    required
-                    {...email}
                     placeholder="이메일을 입력하세요"
+                    data={email}
                   />
                   {isEmailBlank ? (
                     <div className="text-red-500 text-xs mb-4 -mt-2">
@@ -172,18 +171,15 @@ const Register: NextPage = () => {
                   )}
                   <div className="mb-2 text-sm text-black font-bold">
                     비밀번호
-                    <div className="ml-1 text-gray-500 text-xs">
+                    <span className="ml-1 text-gray-500 text-xs">
                       (비밀번호는 8자 이상, 문자와 숫자 조합)
-                    </div>
+                    </span>
                   </div>
-                  <input
-                    className="w-full h-12 mb-4 outline-none pl-3 border-[1px] border-solid border-black text-base"
-                    autoComplete="off"
+                  <Input
                     type="password"
                     name="password"
-                    required
                     placeholder="비밀번호를 입력하세요"
-                    {...password}
+                    data={password}
                   />
                   {isPasswordBlank ? (
                     <div className="text-red-500 text-xs mb-4 -mt-2">
@@ -195,63 +191,54 @@ const Register: NextPage = () => {
                   <div className="mb-2 text-sm text-black font-bold">
                     비밀번호 확인
                   </div>
-                  <input
-                    className="w-full h-12 mb-4 outline-none pl-3 border-[1px] border-solid border-black text-base"
-                    autoComplete="off"
+                  <Input
                     type="password"
                     name="passwordCheck"
-                    required
                     placeholder="비밀번호 확인을 입력하세요"
-                    {...passwordCheck}
+                    data={passwordCheck}
                   />
                   <div className="mb-2 text-sm text-black font-bold">
                     휴대폰 인증
                   </div>
                   <div className="w-full flex justify-between h-12 mb-4">
-                    <div className="w-[calc(80%-4px)]">
-                      <input
-                        className="w-full h-12 mb-4 outline-none pl-3 border-[1px] border-solid border-black text-base"
-                        autoComplete="off"
+                    <div className="w-80%">
+                      <Input
                         type="text"
                         name="phone"
-                        required
                         placeholder="휴대폰 번호를 입력하세요"
-                        {...phone}
+                        data={phone}
                       />
                     </div>
-                    <div className="w-[calc(20%-4px)]">
-                      <div
-                        className={`w-full h-full text-white bg-[#5455dd] text-center border-none ${
+                    <div className="w-20%">
+                      <button
+                        className={`w-full h-full leading text-white bg-lightblue text-center border-none ${
                           sendPASuccess
                             ? "pointer-events-none"
                             : "cursor-pointer"
-                        } text-base hover:bg-[#3d3ebe]`}
+                        } text-base hover:bg-hoverlightblue`}
                         onClick={sendPA}
                       >
                         {sendPASuccess ? minute + ":" + second : "보내기"}
-                      </div>
+                      </button>
                     </div>
                   </div>
 
                   <div className="w-full flex justify-between h-12 mb-4">
-                    <div className="w-[calc(80%-4px)]">
-                      <input
-                        className="w-full h-12 mb-4 outline-none pl-3 border-[1px] border-solid border-black text-base"
-                        autoComplete="off"
+                    <div className="w-80%">
+                      <Input
                         type="text"
                         name="authNum"
-                        required
                         placeholder="인증번호를 입력하세요"
-                        {...authNum}
+                        data={authNum}
                       />
                     </div>
-                    <div className="w-[calc(20%-4px)]">
-                      <div
-                        className="w-full h-full text-white bg-[#5455dd] text-center border-none cursor-pointer text-base hover:bg-[#3d3ebe]"
+                    <div className="w-20%">
+                      <button
+                        className="w-full h-full text-white bg-lightblue text-center border-none cursor-pointer text-base hover:bg-hoverlightblue"
                         onClick={checkPA}
                       >
                         확인
-                      </div>
+                      </button>
                     </div>
                   </div>
                   {isPasswordCheckErr ? (
@@ -261,7 +248,7 @@ const Register: NextPage = () => {
                   ) : (
                     ""
                   )}
-                  <div className="w-full h-14 text-white bg-[#5455dd] text-center text-lg cursor-pointer border-none outline-none hover:bg-[#3d3ebe] leading-[56px]">
+                  <div className="w-full h-14 text-white bg-lightblue text-center text-lg cursor-pointer border-none outline-none hover:bg-hoverlightblue leading-[56px]">
                     회원가입
                   </div>
                 </form>

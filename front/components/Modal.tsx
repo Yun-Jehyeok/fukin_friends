@@ -46,21 +46,21 @@ export default function Modal({ open, handleModal, data }: IModal) {
         <div className="w-[1170px] h-full bg-white flex relative">
           <div className="w-fit h-full p-[11px] flex flex-col gap-[11px]">
             <Image
-              className="rounded-[3px]"
+              className="rounded-3"
               src={cat}
               alt="cat"
               width={151}
               height={155}
             />
             <Image
-              className="rounded-[3px]"
+              className="rounded-3"
               src={friend1}
               alt="cat"
               width={151}
               height={155}
             />
             <Image
-              className="rounded-[3px]"
+              className="rounded-3"
               src={friend2}
               alt="cat"
               width={151}
@@ -69,7 +69,7 @@ export default function Modal({ open, handleModal, data }: IModal) {
           </div>
           <div className="h-[487px] p-[11px]">
             <Image
-              className="rounded-[3px]"
+              className="rounded-3"
               src={cat}
               alt="cat"
               width={375}
@@ -84,7 +84,7 @@ export default function Modal({ open, handleModal, data }: IModal) {
               <div className="w-full font-josefin flex pb-[6px]">
                 <div className="w-[14px] h-[22px] mr-1 bg-creator bg-no-repeat bg-center"></div>
                 <div className="text-darkblue text-[14px]">{creator}</div>
-                <div className="w-[14px] h-[18px] mr-1 ml-9 bg-calendar bg-no-repeat bg-center"></div>
+                <div className="w-[14px] h-4.5 mr-1 ml-9 bg-calendar bg-no-repeat bg-center"></div>
                 <div className="text-darkblue text-[14px]">{date}</div>
               </div>
 
@@ -97,7 +97,7 @@ export default function Modal({ open, handleModal, data }: IModal) {
             </div>
           </div>
           <div
-            className="w-[18px] h-[18px] p-1 absolute top-[7px] right-[7px] bg-close bg-no-repeat bg-center cursor-pointer hover:rounded-full hover:bg-[#f6f2fe] hover:text-[#9061f9]"
+            className="w-4.5 h-4.5 p-1 absolute top-[7px] right-[7px] bg-close bg-no-repeat bg-center cursor-pointer hover:rounded-full hover:bg-[#f6f2fe] hover:text-[#9061f9]"
             onClick={handleModal}
           ></div>
         </div>

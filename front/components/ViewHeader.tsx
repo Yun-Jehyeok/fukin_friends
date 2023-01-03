@@ -20,9 +20,9 @@ export default function ViewHeader({ title, desc, url, url_title }: IHeader) {
           </div>
         </div>
         {url ? (
-          <div className="cursor-pointer outline-none border-none h-[50px] w-[200px] bg-basered font-josefin font-bold text-[17px] relative top-4">
-            <Link className="text-white hover:bg-[#f72182]" href={url}>
-              {url_title}
+          <div className="cursor-pointer hover:bg-hoverred outline-none border-none h-[50px] w-[200px] flex justify-center flex-col text-center bg-basered font-josefin font-bold text-[17px] relative top-4">
+            <Link href={url}>
+              <a className="text-white hover:text-white">{url_title}</a>
             </Link>
           </div>
         ) : (

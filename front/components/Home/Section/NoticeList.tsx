@@ -53,14 +53,14 @@ const NoticeList: NextPage = () => {
       <div className="w-full h-fit flex justify-center">
         <div className="w-full max-w-[1192px] overflow-hidden">
           <div
-            className={`flex w-fit h-[384px] justify-center relative left-[${
-              activeIdx === 0 ? "12" : "-1188"
-            }px] transition-all duration-[800ms]`}
+            className={`flex w-fit h-[384px] justify-center relative ${
+              activeIdx === 0 ? "left-[12px]" : "-left-[1188px]"
+            } transition-all duration-[800ms]`}
           >
             {Array.isArray(notices)
               ? notices.map((item) => (
                   <div
-                    className="w-[270px] h-[360px] mr-[30px] text-white shadow-md cursor-pointer relative top-3 box-border hover:border-[1px] hover:border-solid hover:border-[#2f1ac4] hover:shadow-md"
+                    className="w-[270px] h-[360px] mr-[30px] text-white shadow-md cursor-pointer relative top-3 box-border hover:border hover:border-solid hover:border-[#2f1ac4]"
                     key={item._id}
                   >
                     <Link href={`/notice/detail/${item._id}`}>

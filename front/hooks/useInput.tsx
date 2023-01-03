@@ -11,6 +11,8 @@ export const useInput = (initialValue: any) => {
       target: { value },
     } = e;
 
+    console.log(value);
+
     setValue(value);
   };
 

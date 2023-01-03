@@ -8,12 +8,12 @@ const Footer: NextPage = () => {
           <div className="font-bold text-[38px] relative top-[7px] font-josefin">
             FUKIN FRIENDS
           </div>
-          <div className="w-[377px] h-[44px] rounded-[3px] bg-white flex justify-between">
+          <div className="w-[377px] h-[44px] rounded-3 bg-white flex justify-between">
             <input
-              className="w-[220px] h-[44px] rounded-[3px] bg-white px-6 py-0 border-none outline-none"
+              className="w-[220px] h-[44px] rounded-3 bg-white px-6 py-0 border-none outline-none"
               placeholder="Enter Email Address"
             />
-            <button className="w-[135px] h-[39px] mt-[2.5px] mr-[2.5px] bg-basered border-none outline-none rounded-[3px] text-white font-roboto cursor-pointer hover:bg-[#f72182]">
+            <button className="w-[135px] h-[39px] mt-[2.5px] mr-[2.5px] mt- bg-basered border-none outline-none rounded-3 text-white font-roboto cursor-pointer hover:bg-hoverred">
               Send
             </button>
           </div>
@@ -25,9 +25,9 @@ const Footer: NextPage = () => {
             &copy;&nbsp;FUKINFRIENDS - No Rights Reserved
           </div>
           <div className="flex h-5 mt-[16.5px] gap-[11px]">
-            <div className="w-[20px] h-5 bg-fb bg-transparent bg-no-repeat bg-center"></div>
-            <div className="w-[20px] h-5 bg-insta bg-transparent bg-no-repeat bg-center"></div>
-            <div className="w-[20px] h-5 bg-twitter bg-transparent bg-no-repeat bg-center"></div>
+            <div className="w-5 h-5 bg-fb bg-transparent bg-no-repeat bg-center"></div>
+            <div className="w-5 h-5 bg-insta bg-transparent bg-no-repeat bg-center"></div>
+            <div className="w-5 h-5 bg-twitter bg-transparent bg-no-repeat bg-center"></div>
           </div>
         </div>
       </div>

@@ -195,24 +195,24 @@ const Notice: NextPage = () => {
         <div className="w-default flex justify-between">
           <div className="w-[870px]">
             {notices.map((item) => (
-              <div key={item._id} className="w-full mb-20 cursor-pointer">
+              <div key={item._id} className="w-full mb-20 cursor-pointer group">
                 <Link href={`/notice/detail/${item._id}`}>
                   <a>
-                    <div className="font-josefin text-[30px] font-bold text-darkblue hover:underline">
+                    <div className="font-josefin text-[30px] font-bold text-darkblue group-hover:underline">
                       {item.title}
                     </div>
                     <div className="flex mt-3">
                       <div className="flex">
                         <div className="w-4 h-4 bg-white bg-center bg-calendar bg-no-repeat relative top-1 mr-2"></div>
-                        <div className="bg-[#ffece2] text-darkblue text-sm font-lato font-semibold rounded-sm px-9 py-1">
+                        <div className="bg-[#ffece2] text-darkblue text-sm font-lato font-semibold rounded-sm px-9 py-1 group-hover:underline">
                           {item.date.slice(0, 10)}
                         </div>
                       </div>
-                      <div className="bg-[#ffe7f9] text-darkblue text-sm font-lato font-semibold rounded-sm px-9 py-1 ml-3">
+                      <div className="bg-[#ffe7f9] text-darkblue text-sm font-lato font-semibold rounded-sm px-9 py-1 ml-3 group-hover:underline">
                         {item.location}
                       </div>
                     </div>
-                    <div className="font-lato text-[#8a8fb9] text-base mt-6">
+                    <div className="font-lato text-[#8a8fb9] text-base mt-6 group-hover:underline">
                       {item.content.length > 200
                         ? item.content
                             .slice(0, 200)
@@ -223,7 +223,7 @@ const Notice: NextPage = () => {
                             ""
                           )}
                     </div>
-                    <div className="font-lato text-lg font-semibold flex mt-6 text-darkblue">
+                    <div className="font-lato text-lg font-semibold flex mt-6 text-darkblue group-hover:underline">
                       Read More
                       <div className="w-[5px] h-[5px] rounded-full bg-basered ml-1 relative top-[9px]"></div>
                     </div>
@@ -268,7 +268,7 @@ const Notice: NextPage = () => {
                 Search
               </div>
               <input
-                className="w-full h-10 border-[1px] border-solid border-[#bdbdd8] outline-none rounded-sm pr-10 pl-3 mt-5 bg-search bg-no-repeat bg-cr12 placeholder:text-darkblue opacity-20"
+                className="w-full h-10 border border-solid border-[#bdbdd8] outline-none rounded-sm pr-10 pl-3 mt-5 bg-search bg-no-repeat bg-cr12 placeholder:text-darkblue opacity-20"
                 placeholder="Search For Notice"
                 onKeyDown={onSearch}
                 {...noticeSearchTerm}
@@ -279,11 +279,11 @@ const Notice: NextPage = () => {
                 Important Notice
               </div>
               {importantList.map((item) => (
-                <div key={item.id} className="mb-6 cursor-pointer">
-                  <div className="hover:underline font-josefin text-sm text-[#3f509e]">
+                <div key={item.id} className="mb-6 cursor-pointer group">
+                  <div className="group-hover:underline font-josefin text-sm text-[#3f509e]">
                     {item.title}
                   </div>
-                  <div className="font-lato text-[11px] text-[#8a8fb9] mt-2">
+                  <div className="font-lato text-[11px] text-[#8a8fb9] mt-2 group-hover:underline">
                     {item.date}
                   </div>
                 </div>

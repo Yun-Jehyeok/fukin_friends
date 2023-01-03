@@ -44,8 +44,10 @@ const TermsOfService: NextPage<PageTypeProps> = ({ checkTOS }: child) => {
   return (
     <div className="w-full min-w-[1320px] h-full min-h-screen p-0 pt-24 pb-24 flex justify-center flex-col bg-[#f4f9fc]">
       <div className="w-[40%] my-0 mx-auto">
-        <div className="mb-12 text-5xl text-[#5455dd] font-bold text-center">
-          <Link href="/">FUKIN FRIENDS</Link>
+        <div className="mb-12 text-5xl font-bold text-center">
+          <Link href="/">
+            <a className="text-lightblue hover:text-lightblue">FUKIN FRIENDS</a>
+          </Link>
         </div>
         <div>
           <div className="font-bold mb-4 text-lg text-black">
@@ -59,7 +61,7 @@ const TermsOfService: NextPage<PageTypeProps> = ({ checkTOS }: child) => {
               />
             </span>
             FUKIN FRIEND 이용 약관 동의{" "}
-            <span className="text-[#5455dd] relative bottom-[2px] text-base">
+            <span className="text-lightblue relative bottom-[2px] text-base">
               (필수)
             </span>
           </div>
@@ -87,7 +89,7 @@ const TermsOfService: NextPage<PageTypeProps> = ({ checkTOS }: child) => {
               />
             </span>
             개인정보 수집 및 이용 동의{" "}
-            <span className="text-[#5455dd] relative bottom-[2px] text-base">
+            <span className="text-lightblue relative bottom-[2px] text-base">
               (필수)
             </span>
           </div>
@@ -125,7 +127,7 @@ const TermsOfService: NextPage<PageTypeProps> = ({ checkTOS }: child) => {
             취소
           </div>
           <div
-            className="w-[calc(50%-8px)] h-14 text-white text-lg border-none outline-none cursor-pointer leading-[56px] text-center bg-[#5455dd] hover:bg-[#3d3ebe]"
+            className="w-[calc(50%-8px)] h-14 text-white text-lg border-none outline-none cursor-pointer leading-[56px] text-center bg-lightblue hover:bg-hoverlightblue"
             onClick={handleCheckTerms}
           >
             확인

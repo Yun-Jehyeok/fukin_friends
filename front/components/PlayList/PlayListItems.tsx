@@ -21,7 +21,7 @@ const itemList = [
 const PlayListItems: NextPage = () => {
   return (
     <div>
-      <div className="font-bold text-[32px] mt-3 mb-[18px]">플레이리스트</div>
+      <div className="font-bold text-[32px] mt-3 mb-4.5">플레이리스트</div>
       <div className="w-full flex">
         {itemList.map((item) => (
           <div

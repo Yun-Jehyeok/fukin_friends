@@ -1,3 +1,4 @@
+import Input from "components/Input";
 import { useAppDispatch } from "hooks/reduxHooks";
 import { useInput } from "hooks/useInput";
 import { NextPage } from "next";
@@ -58,7 +59,7 @@ const ChangePassword: NextPage = () => {
 
   return (
     <div className="w-full h-screen overflow-x-hidden overflow-y-auto flex justify-center flex-col bg-[#f4f9fc]">
-      <div className="font-bold text-5xl text-center mb-8 text-[#5455dd]">
+      <div className="font-bold text-5xl text-center mb-8 text-lightblue">
         비밀번호 변경
       </div>
       <div className="w-530 mx-auto my-0">
@@ -70,13 +71,11 @@ const ChangePassword: NextPage = () => {
                 (비밀번호는 8자 이상, 문자와 숫자 조합)
               </div>
             </div>
-            <input
-              className="w-full h-12 mb-4 outline-none pl-3 border-[1px] border-solid border-black text-base"
-              autoComplete="off"
+            <Input
               type="password"
               name="password"
               placeholder="비밀번호를 입력하세요"
-              {...password}
+              data={password}
             />
             {isPasswordBlank ? (
               <div className="text-red-500 text-xs mb-4 -mt-2">
@@ -102,7 +101,7 @@ const ChangePassword: NextPage = () => {
             ) : (
               ""
             )}
-            <div className="w-full h-14 text-white bg-[#5455dd] text-center text-lg cursor-pointer border-none outline-none hover:bg-[#3d3ebe] leading-[56px]">
+            <div className="w-full h-14 text-white bg-lightblue text-center text-lg cursor-pointer border-none outline-none hover:bg-hoverlightblue leading-[56px]">
               변경
             </div>
           </form>

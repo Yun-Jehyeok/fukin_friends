@@ -1,3 +1,4 @@
+import Input from "components/Input";
 import { useAppDispatch } from "hooks/reduxHooks";
 import { useInput } from "hooks/useInput";
 import type { NextPage } from "next";
@@ -58,18 +59,20 @@ const Login: NextPage = () => {
       <div className="w-530 mx-auto my-0">
         <div className="h-full p-12 flex justify-center flex-col">
           <div>
-            <div className="font-bold text-5xl text-center mb-8 text-[#5455dd]">
-              <Link href="/">SIGN IN</Link>
+            <div className="font-bold text-5xl text-center mb-8">
+              <Link href="/">
+                <a className="text-lightblue hover:text-lightblue">SIGN IN</a>
+              </Link>
             </div>
             <div className="w-full mb-8">
-              <div className="text-base font-bold text-center mb-[18px] relative before:w-[calc(50%-60px)] before:h-[1px] before:bg-black before:absolute before:left-0 before:top-1/2 after:w-[calc(50%-60px)] after:h-[1px] after:bg-black after:absolute after:right-0 after:top-1/2 before:content-[''] after:content-['']">
+              <div className="text-base font-bold text-center mb-4.5 relative before:w-[calc(50%-60px)] before:h-[0.5px] before:bg-black before:absolute before:left-0 before:top-1/2 after:w-[calc(50%-60px)] after:h-[0.5px] after:bg-black after:absolute after:right-0 after:top-1/2 before:content-[''] after:content-['']">
                 소셜 로그인
               </div>
               <GoogleLogin
                 clientId="534707785395-1c3aq9gp00tfbib4rgg0eemp6ma0ddup.apps.googleusercontent.com"
                 render={(renderProps) => (
                   <GoogleButton
-                    className="mb-2 !w-full text-white"
+                    className="mb-2 !w-full"
                     onClick={renderProps.onClick}
                   ></GoogleButton>
                 )}
@@ -77,31 +80,24 @@ const Login: NextPage = () => {
                 onFailure={responseFail}
                 theme="dark"
               />
-              {/* <GoogleBtn></GoogleBtn> */}
             </div>
-            <div className="text-base font-bold text-center mb-[18px] relative before:w-[calc(50%-60px)] before:h-[1px] before:bg-black before:absolute before:left-0 before:top-1/2 after:w-[calc(50%-60px)] after:h-[1px] after:bg-black after:absolute after:right-0 after:top-1/2 before:content-[''] after:content-['']">
+            <div className="text-base font-bold text-center mb-4.5 relative before:w-[calc(50%-60px)] before:h-[0.5px] before:bg-black before:absolute before:left-0 before:top-1/2 after:w-[calc(50%-60px)] after:h-[0.5px] after:bg-black after:absolute after:right-0 after:top-1/2 before:content-[''] after:content-['']">
               이메일 로그인
             </div>
             <form onSubmit={handleSubmit}>
               <div className="mb-2 text-sm text-black font-bold">이메일</div>
-              <input
-                className="w-full h-12 mb-4 outline-none pl-3 border-[1px] border-solid border-black text-base"
-                autoComplete="off"
+              <Input
                 type="email"
                 name="email"
                 placeholder="이메일을 입력하세요"
-                required
-                {...email}
+                data={email}
               />
               <div className="mb-2 text-sm text-black font-bold">비밀번호</div>
-              <input
-                className="w-full h-12 mb-4 outline-none pl-3 border-[1px] border-solid border-black text-base"
-                autoComplete="off"
+              <Input
                 type="password"
                 name="password"
-                required
                 placeholder="비밀번호를 입력하세요"
-                {...password}
+                data={password}
               />
               {isLoginErr ? (
                 <div className="text-red-500 text-xs mb-4 -mt-2">
@@ -110,19 +106,23 @@ const Login: NextPage = () => {
               ) : (
                 ""
               )}
-              <div className="w-full h-14 text-white bg-[#5455dd] text-center text-lg cursor-pointer border-none outline-none hover:bg-[#3d3ebe] leading-[56px]">
+              <div className="w-full h-14 text-white bg-lightblue text-center text-lg cursor-pointer border-none outline-none hover:bg-hoverlightblue leading-[56px]">
                 로그인
               </div>
             </form>
             <div className="w-full text-center mt-6 text-sm">
-              <Link
-                href="/pwinquiry"
-                className="text-[#5455dd] font-bold underline"
-              >
-                비밀번호를 잊어버리셨나요?
+              <Link href="/pwinquiry">
+                <a className="text-lightblue hover:text-lightblue font-bold hover:underline">
+                  비밀번호를 잊어버리셨나요?
+                </a>
               </Link>
               <div className="mt-2">
-                회원이 아니신가요?&nbsp;<Link href="/register">회원가입</Link>
+                회원이 아니신가요?&nbsp;
+                <Link href="/register">
+                  <a className="text-lightblue hover:text-lightblue font-bold hover:underline">
+                    회원가입
+                  </a>
+                </Link>
               </div>
             </div>
           </div>

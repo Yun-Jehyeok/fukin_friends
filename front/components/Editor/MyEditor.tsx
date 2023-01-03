@@ -86,7 +86,7 @@ const WysiwygEditor: NextPage<EditorType> = ({ pageName }) => {
         Please notice detail bellow.
       </div>
       <input
-        className="w-full h-12 px-3 py-0 border-[1px] border-solid border-[#dadde6] outline-none mb-3 rounded-[3px]"
+        className="w-full h-12 px-3 py-0 border border-solid border-[#dadde6] outline-none mb-3 rounded-3"
         type="text"
         name="title"
         placeholder="제목을 입력해주세요."
@@ -95,12 +95,12 @@ const WysiwygEditor: NextPage<EditorType> = ({ pageName }) => {
 
       <div className="w-full h-12 mb-3 flex justify-between">
         <input
-          className="w-[calc(80%-4px)] h-full text-[13px] flex justify-center flex-col text-[#757575] px-3 py-0 border-[1px] border-solid border-[#dadde6] outline-none rounded-[3px]"
+          className="w-80% h-full text-[13px] flex justify-center flex-col text-[#757575] px-3 py-0 border border-solid border-[#dadde6] outline-none rounded-3"
           placeholder="위치를 입력해주세요."
           {...location}
         />
         <input
-          className="w-[calc(20%-4px)] h-full px-3 py-0 border-[1px] border-solid border-[#dadde6] outline-none rounded-[3px]"
+          className="w-20% h-full px-3 py-0 border border-solid border-[#dadde6] outline-none rounded-3"
           type="date"
           {...date}
         />
@@ -118,7 +118,7 @@ const WysiwygEditor: NextPage<EditorType> = ({ pageName }) => {
         plugins={[colorSyntax]}
       />
       <button
-        className="w-full h-12 border-none outline-none text-white bg-basered rounded-[3px] font-bold text-[17px] font-lato mt-5 cursor-pointer hover:bg-[#f72182]"
+        className="w-full h-12 border-none outline-none text-white bg-basered rounded-3 font-bold text-[17px] font-lato mt-5 cursor-pointer hover:bg-hoverred"
         onClick={onSubmit}
       >
         {setData("Write", "Edit")}

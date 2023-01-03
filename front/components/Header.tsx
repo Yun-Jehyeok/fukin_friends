@@ -7,6 +7,34 @@ import { useSelector } from "react-redux";
 import { RootState } from "src/configureStore";
 import { userActions } from "src/store/reducers/userReducer";
 
+const menus = [
+  {
+    id: 0,
+    path: "feed",
+    content: "Feed",
+  },
+  {
+    id: 1,
+    path: "notice",
+    content: "Notice",
+  },
+  {
+    id: 2,
+    path: "event",
+    content: "Event",
+  },
+  {
+    id: 3,
+    path: "album",
+    content: "Album",
+  },
+  {
+    id: 4,
+    path: "playlist",
+    content: "Play list",
+  },
+];
+
 const Header: NextPage = () => {
   const router = useRouter();
   const [pathname, setPathname] = useState("");
@@ -53,7 +81,9 @@ const Header: NextPage = () => {
                   Logout
                 </div>
               ) : (
-                <Link href="/login">Login</Link>
+                <Link href="/login">
+                  <a className="text-white">Login</a>
+                </Link>
               )}
               <div className="w-4 h-4 bg-login bg-no-repeat bg-center mt-3"></div>
             </div>
@@ -64,51 +94,23 @@ const Header: NextPage = () => {
         <div className="w-default h-10 leading-10 flex justify-between">
           <div className="flex">
             <div className="font-bold text-[34px] font-josefin pt-[5px]">
-              <Link className="text-[#0d0e43]" href="/">
-                FUKIN FRIENDS
+              <Link href="/">
+                <a className="text-[#0d0e43] hover:text-[#0d0e43]">
+                  FUKIN FRIENDS
+                </a>
               </Link>
             </div>
             <div className="w-fit h-full flex ml-24 gap-9">
-              <Link href="/feed">
-                <div
-                  data-active={pathname.includes("feed")}
-                  className="h-full leading-10 font-lato cursor-pointer transition-colors ease-linear duration-150 hover:text-basered"
-                >
-                  Feed
-                </div>
-              </Link>
-              <Link href="/notice">
-                <div
-                  data-active={pathname.includes("notice")}
-                  className="h-full leading-10 font-lato cursor-pointer transition-colors ease-linear duration-150 hover:text-basered"
-                >
-                  Notice
-                </div>
-              </Link>
-              <Link href="/event">
-                <div
-                  data-active={pathname.includes("event")}
-                  className="h-full leading-10 font-lato cursor-pointer transition-colors ease-linear duration-150 hover:text-basered"
-                >
-                  Event
-                </div>
-              </Link>
-              <Link href="/album">
-                <div
-                  data-active={pathname.includes("album")}
-                  className="h-full leading-10 font-lato cursor-pointer transition-colors ease-linear duration-150 hover:text-basered"
-                >
-                  Album
-                </div>
-              </Link>
-              <Link href="/playlist">
-                <div
-                  data-active={pathname.includes("playlist")}
-                  className="h-full leading-10 font-lato cursor-pointer transition-colors ease-linear duration-150 hover:text-basered"
-                >
-                  Play list
-                </div>
-              </Link>
+              {menus.map((menu) => (
+                <Link href={"/" + menu.path} key={menu.id}>
+                  <div
+                    data-active={pathname.includes(menu.path)}
+                    className="h-full leading-10 font-lato cursor-pointer transition-colors ease-linear duration-150 hover:text-basered"
+                  >
+                    {menu.content}
+                  </div>
+                </Link>
+              ))}
             </div>
           </div>
           <div className="w-[317px] h-10 border border-[#e7e6ef] rounded-[4px] box-border bg-white shadow-default flex">
