@@ -9,10 +9,13 @@ import type {
   DeleteNoticeRes,
   LoadAllNoticeReq,
   LoadAllNoticeRes,
+  LoadImportantNoticesRes,
   LoadMainNoticesRes,
   LoadNoticeFailRes,
   LoadNoticeReq,
   LoadNoticeSucRes,
+  SearchNoticeReq,
+  SearchNoticeRes,
   UpdateNoticeReq,
   UpdateNoticeRes,
 } from "../types/notice";
@@ -20,6 +23,7 @@ import { INotice } from "../types/notice";
 
 export interface NoticeStateType {
   notices: INotice[];
+  importantNotices: INotice[];
   isLoading: boolean;
   errMsg: null | string;
   isSuc: boolean;
@@ -29,6 +33,7 @@ export interface NoticeStateType {
 
 const initialState: NoticeStateType = {
   notices: [],
+  importantNotices: [],
   isLoading: false,
   errMsg: null,
   isSuc: false,
@@ -73,6 +78,38 @@ const noticeSlice = createSlice({
       state.notices = action.payload.notices;
     },
     loadMainNoticeFail(state, action: PayloadAction<ResponseFail>) {
+      state.isLoading = false;
+      state.errMsg = action.payload.msg;
+    },
+
+    // 중요 공지사항 로딩
+    loadImportantNoticeReq(state) {
+      state.isLoading = true;
+      state.errMsg = null;
+    },
+    loadImportantNoticeSuc(
+      state,
+      action: PayloadAction<LoadImportantNoticesRes>
+    ) {
+      state.isLoading = false;
+      state.importantNotices = action.payload.notices;
+    },
+    loadImportantNoticeFail(state, action: PayloadAction<ResponseFail>) {
+      state.isLoading = false;
+      state.errMsg = action.payload.msg;
+    },
+
+    // 공지사항 검색
+    searchNoticeReq(state, action: PayloadAction<SearchNoticeReq>) {
+      state.isLoading = true;
+      state.errMsg = null;
+    },
+    searchNoticeSuc(state, action: PayloadAction<SearchNoticeRes>) {
+      state.isLoading = false;
+      state.notices = action.payload.notices;
+      state.allNoticesCnt = action.payload.searchAllCnt;
+    },
+    searchNoticeFail(state, action: PayloadAction<ResponseFail>) {
       state.isLoading = false;
       state.errMsg = action.payload.msg;
     },

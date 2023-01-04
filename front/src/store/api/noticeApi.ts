@@ -1,11 +1,14 @@
-import type {
+import {
   CreateNoticeReq,
   CreateNoticeRes,
   DeleteNoticeReq,
   DeleteNoticeRes,
   LoadAllNoticeRes,
+  LoadImportantNoticesRes,
   LoadMainNoticesRes,
   LoadNoticeSucRes,
+  SearchNoticeReq,
+  SearchNoticeRes,
   UpdateNoticeReq,
   UpdateNoticeRes,
 } from "../types/notice";
@@ -20,6 +23,14 @@ export const loadAllNotice = async (page: number) => {
 
 export const loadMainNotices = async () => {
   return await axios.get<LoadMainNoticesRes>(`/api/notice/main`);
+};
+
+export const loadImportantNotices = async () => {
+  return await axios.get<LoadImportantNoticesRes>("/api/notice/important");
+};
+
+export const searchNotice = async ({ term, skip }: SearchNoticeReq) => {
+  return await axios.get<SearchNoticeRes>(`/api/notice/${term}/${skip}`);
 };
 
 export const createNotice = async (notice: CreateNoticeReq) => {

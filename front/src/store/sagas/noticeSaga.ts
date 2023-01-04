@@ -9,9 +9,12 @@ import type {
   DeleteNoticeRes,
   LoadAllNoticeReq,
   LoadAllNoticeRes,
+  LoadImportantNoticesRes,
   LoadMainNoticesRes,
   LoadNoticeReq,
   LoadNoticeSucRes,
+  SearchNoticeReq,
+  SearchNoticeRes,
   UpdateNoticeReq,
   UpdateNoticeRes,
 } from "../types/notice";
@@ -20,8 +23,10 @@ import {
   createNotice,
   deleteNotice,
   loadAllNotice,
+  loadImportantNotices,
   loadMainNotices,
   loadNotice,
+  searchNotice,
   updateNotice,
 } from "../api/noticeApi";
 import { noticeActions } from "../reducers/noticeReducer";
@@ -67,6 +72,52 @@ function* loadMainNoticeApi() {
 }
 function* watchloadMainNotice() {
   yield takeLatest(noticeActions.loadMainNoticeReq, loadMainNoticeApi);
+}
+
+// 중요 공지사항 로딩
+function* loadImportantNoticeApi() {
+  try {
+    const { data }: AxiosResponse<LoadImportantNoticesRes> = yield call(
+      loadImportantNotices
+    );
+
+    yield put(noticeActions.loadImportantNoticeSuc(data));
+  } catch (e: any) {
+    yield put(
+      noticeActions.loadImportantNoticeFail({
+        isSuc: false,
+        msg: e.message,
+      })
+    );
+  }
+}
+function* watchloadImportantNotice() {
+  yield takeLatest(
+    noticeActions.loadImportantNoticeReq,
+    loadImportantNoticeApi
+  );
+}
+
+// 공지사항 검색
+function* searchNoticeApi(action: PayloadAction<SearchNoticeReq>) {
+  try {
+    const { data }: AxiosResponse<SearchNoticeRes> = yield call(
+      searchNotice,
+      action.payload
+    );
+
+    yield put(noticeActions.searchNoticeSuc(data));
+  } catch (e: any) {
+    yield put(
+      noticeActions.searchNoticeFail({
+        isSuc: false,
+        msg: e.message,
+      })
+    );
+  }
+}
+function* watchSearchNotice() {
+  yield takeLatest(noticeActions.searchNoticeReq, searchNoticeApi);
 }
 
 // 공지사항 작성
@@ -159,6 +210,8 @@ export default function* noticeSaga() {
   yield all([
     fork(watchloadAllNotice),
     fork(watchloadMainNotice),
+    fork(watchloadImportantNotice),
+    fork(watchSearchNotice),
     fork(watchcreateNotice),
     fork(watchloadNotice),
     fork(watchupdateNotice),

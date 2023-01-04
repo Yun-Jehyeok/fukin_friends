@@ -1,4 +1,3 @@
-import NoticeUpdate from "components/Notice/UpdateNotice";
 import { useSelector } from "react-redux";
 import { RootState } from "src/configureStore";
 import Feed from "./Feed";
@@ -6,7 +5,7 @@ import Footer from "./Footer";
 import Header from "./Header";
 import Home from "./Home/Home";
 import Notice from "./Notice";
-import NoticeCreate from "./Notice/CreateNotice";
+import NoticeEditor from "./Notice/Section/NoticeEditor";
 
 interface IBaseContainer {
   component: string;
@@ -16,13 +15,33 @@ export default function BaseContainer({ component }: IBaseContainer) {
   const { token } = useSelector((state: RootState) => state.user);
   const comp =
     component === "notice" ? (
-      <Notice />
+      <Notice
+        title="Notice Page"
+        desc="It's Just Notice Page"
+        url="/notice/create"
+        url_title="Create Notice"
+        type="list"
+      />
+    ) : component === "notice-search" ? (
+      <Notice
+        title="Notice Search Page"
+        desc="It's Just Notice Search Page"
+        type="search"
+      />
+    ) : component === "notice-create" ? (
+      <NoticeEditor
+        title="Create Notice Page"
+        desc="It's Just Create Notice Page"
+        pageName="create"
+      />
     ) : component === "notice-update" ? (
-      <NoticeUpdate />
+      <NoticeEditor
+        title="Updating Notice Page"
+        desc="It's Just Updating Notice Page"
+        pageName="update"
+      />
     ) : component === "feed" ? (
       <Feed />
-    ) : component === "notice-create" ? (
-      <NoticeCreate />
     ) : component === "home" ? (
       <Home />
     ) : (

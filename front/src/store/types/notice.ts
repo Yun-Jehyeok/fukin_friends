@@ -24,6 +24,23 @@ export interface LoadMainNoticesRes {
   isSuc: boolean;
 }
 
+// 중요 공지사항
+export interface LoadImportantNoticesRes {
+  isSuc: boolean;
+  notices: INotice[];
+}
+
+// 공지 검색
+export interface SearchNoticeReq {
+  term: string;
+  skip: number;
+}
+export interface SearchNoticeRes {
+  notices: INotice[];
+  isSuc: boolean;
+  searchAllCnt: number;
+}
+
 // 공지 생성
 export interface CreateNoticeReq {
   userId: string;

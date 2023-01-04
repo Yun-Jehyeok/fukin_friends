@@ -25,6 +25,47 @@ router.get("/skip/:page", async (req, res) => {
   }
 });
 
+// Get Important Notices
+router.get("/important", async (req, res) => {
+  try {
+    const notices = await Notice.find().limit(3).sort({ date: -1 });
+
+    res.status(200).json({
+      isSuc: true,
+      notices,
+    });
+  } catch (e) {
+    res.status(400).json({ isSuc: false, msg: e.message });
+  }
+});
+
+// Search Notices
+router.get("/:term/:skip", async (req, res, next) => {
+  try {
+    let page = (Number(req.params.skip) - 1) * 8;
+
+    const noticeCount = await Notice.countDocuments({
+      title: {
+        $regex: req.params.term,
+        $options: "i", // 대소문자 구분 X
+      },
+    });
+    const result = await Notice.find({
+      title: {
+        $regex: req.params.term,
+        $options: "i", // 대소문자 구분 X
+      },
+    })
+      .skip(page)
+      .limit(8)
+      .sort({ date: -1 });
+
+    res.send({ isSuc: true, notices: result, searchAllCnt: noticeCount });
+  } catch (e) {
+    next(e);
+  }
+});
+
 // Find only 8 notices for main page / GET
 router.get("/main", async (req, res) => {
   const notices = await Notice.find().sort({ date: -1 }).limit(8);
