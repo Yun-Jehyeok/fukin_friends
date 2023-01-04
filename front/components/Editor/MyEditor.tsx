@@ -93,14 +93,14 @@ const WysiwygEditor: NextPage<EditorType> = ({ pageName }) => {
         {...title}
       />
 
-      <div className="w-full h-12 mb-3 flex justify-between">
+      <div className="w-full h-12 mb-3 flex justify-between gap-2">
         <input
-          className="w-80% h-full text-[13px] flex justify-center flex-col text-[#757575] px-3 py-0 border border-solid border-[#dadde6] outline-none rounded-3"
+          className="w-4/5 h-full text-[13px] flex justify-center flex-col text-[#757575] px-3 py-0 border border-solid border-[#dadde6] outline-none rounded-3"
           placeholder="위치를 입력해주세요."
           {...location}
         />
         <input
-          className="w-20% h-full px-3 py-0 border border-solid border-[#dadde6] outline-none rounded-3"
+          className="w-1/5 h-full px-3 py-0 border border-solid border-[#dadde6] outline-none rounded-3"
           type="date"
           {...date}
         />

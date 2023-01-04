@@ -6,6 +6,8 @@ import Link from "next/link";
 import { useCallback } from "react";
 import { userActions } from "src/store/reducers/userReducer";
 
+// 에러처리 안했네...
+
 const PwInquiry: NextPage = () => {
   const email = useInput("");
 

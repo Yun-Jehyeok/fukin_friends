@@ -1,3 +1,4 @@
+import errMsg from "components/errMsg";
 import Input from "components/Input";
 import TermsOfService from "components/TermsOfService";
 import { useAppDispatch } from "hooks/reduxHooks";
@@ -83,6 +84,8 @@ const Register: NextPage = () => {
     (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
 
+      console.log("here");
+
       if (!isPASuccess) alert("인증번호를 확인해주세요.");
       if (name.value === "") setIsNameBlank(true);
       if (email.value === "") setIsEmailBlank(true);
@@ -146,13 +149,7 @@ const Register: NextPage = () => {
                     placeholder="이름을 입력하세요"
                     data={name}
                   />
-                  {isNameBlank ? (
-                    <div className="text-red-500 text-xs mb-4 -mt-2">
-                      * 이름은 필수값입니다.
-                    </div>
-                  ) : (
-                    ""
-                  )}
+                  {isNameBlank ? errMsg("이름은 필수값입니다.") : ""}
                   <div className="mb-2 text-sm text-black font-bold">
                     이메일
                   </div>
@@ -162,13 +159,7 @@ const Register: NextPage = () => {
                     placeholder="이메일을 입력하세요"
                     data={email}
                   />
-                  {isEmailBlank ? (
-                    <div className="text-red-500 text-xs mb-4 -mt-2">
-                      * 이메일은 필수값입니다.
-                    </div>
-                  ) : (
-                    ""
-                  )}
+                  {isEmailBlank ? errMsg("이메일은 필수값입니다.") : ""}
                   <div className="mb-2 text-sm text-black font-bold">
                     비밀번호
                     <span className="ml-1 text-gray-500 text-xs">
@@ -181,13 +172,7 @@ const Register: NextPage = () => {
                     placeholder="비밀번호를 입력하세요"
                     data={password}
                   />
-                  {isPasswordBlank ? (
-                    <div className="text-red-500 text-xs mb-4 -mt-2">
-                      * 비밀번호는 필수값입니다.
-                    </div>
-                  ) : (
-                    ""
-                  )}
+                  {isPasswordBlank ? errMsg("비밀번호는 필수값입니다.") : ""}
                   <div className="mb-2 text-sm text-black font-bold">
                     비밀번호 확인
                   </div>
@@ -200,8 +185,8 @@ const Register: NextPage = () => {
                   <div className="mb-2 text-sm text-black font-bold">
                     휴대폰 인증
                   </div>
-                  <div className="w-full flex justify-between h-12 mb-4">
-                    <div className="w-80%">
+                  <div className="w-full flex justify-between gap-2 h-12 mb-4">
+                    <div className="w-4/5">
                       <Input
                         type="text"
                         name="phone"
@@ -209,7 +194,7 @@ const Register: NextPage = () => {
                         data={phone}
                       />
                     </div>
-                    <div className="w-20%">
+                    <div className="w-1/5">
                       <button
                         className={`w-full h-full leading text-white bg-lightblue text-center border-none ${
                           sendPASuccess
@@ -223,8 +208,8 @@ const Register: NextPage = () => {
                     </div>
                   </div>
 
-                  <div className="w-full flex justify-between h-12 mb-4">
-                    <div className="w-80%">
+                  <div className="w-full flex justify-between gap-2 h-12 mb-4">
+                    <div className="w-4/5">
                       <Input
                         type="text"
                         name="authNum"
@@ -232,7 +217,7 @@ const Register: NextPage = () => {
                         data={authNum}
                       />
                     </div>
-                    <div className="w-20%">
+                    <div className="w-1/5">
                       <button
                         className="w-full h-full text-white bg-lightblue text-center border-none cursor-pointer text-base hover:bg-hoverlightblue"
                         onClick={checkPA}
@@ -241,16 +226,12 @@ const Register: NextPage = () => {
                       </button>
                     </div>
                   </div>
-                  {isPasswordCheckErr ? (
-                    <div className="text-red-500 text-xs mb-4 -mt-2">
-                      * 비밀번호 확인란은 비밀번호와 같아야 합니다.
-                    </div>
-                  ) : (
-                    ""
-                  )}
-                  <div className="w-full h-14 text-white bg-lightblue text-center text-lg cursor-pointer border-none outline-none hover:bg-hoverlightblue leading-[56px]">
+                  {isPasswordCheckErr
+                    ? errMsg("비밀번호 확인란은 비밀번호와 같아야 합니다.")
+                    : ""}
+                  <button className="w-full h-14 text-white bg-lightblue text-center text-lg cursor-pointer border-none outline-none hover:bg-hoverlightblue leading-[56px]">
                     회원가입
-                  </div>
+                  </button>
                 </form>
               </div>
             </div>

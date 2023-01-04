@@ -1,5 +1,4 @@
 import Modal from "components/Modal";
-import { NextPage } from "next";
 import Image from "next/image";
 import cat from "public/img/cat1.jpg";
 import { useState } from "react";
@@ -104,7 +103,7 @@ interface IModalData {
   tags: String[];
 }
 
-const Feed: NextPage = () => {
+export default function Feed() {
   const [openModal, setOpenModal] = useState(false);
   const [modalData, setModalData] = useState<IModalData>({
     id: 0,
@@ -180,6 +179,4 @@ const Feed: NextPage = () => {
       )}
     </div>
   );
-};
-
-export default Feed;
+}

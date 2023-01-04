@@ -1,3 +1,4 @@
+import errMsg from "components/errMsg";
 import Input from "components/Input";
 import { useAppDispatch } from "hooks/reduxHooks";
 import { useInput } from "hooks/useInput";
@@ -99,13 +100,7 @@ const Login: NextPage = () => {
                 placeholder="비밀번호를 입력하세요"
                 data={password}
               />
-              {isLoginErr ? (
-                <div className="text-red-500 text-xs mb-4 -mt-2">
-                  이메일 혹은 비밀번호를 확인해주세요.
-                </div>
-              ) : (
-                ""
-              )}
+              {isLoginErr ? errMsg("이메일 혹은 비밀번호를 확인해주세요.") : ""}
               <div className="w-full h-14 text-white bg-lightblue text-center text-lg cursor-pointer border-none outline-none hover:bg-hoverlightblue leading-[56px]">
                 로그인
               </div>

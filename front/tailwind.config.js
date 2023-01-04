@@ -14,8 +14,6 @@ module.exports = {
       width: {
         default: "1177px",
         530: "530px",
-        "80%": "calc(80% - 4px)",
-        "20%": "calc(20% - 4px)",
         4.5: "18px",
       },
       height: {

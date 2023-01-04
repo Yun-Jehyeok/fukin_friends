@@ -3,7 +3,9 @@ import cat from "public/img/cat1.jpg";
 import friend1 from "public/img/friend1.jpg";
 import friend2 from "public/img/friend2.jpg";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "src/configureStore";
 
 interface IModal {
   open: Boolean;
@@ -18,7 +20,10 @@ interface IModal {
 }
 
 export default function Modal({ open, handleModal, data }: IModal) {
-  const { creator, date, content, tags } = data;
+  const [mainImg, setMainImg] = useState(cat);
+
+  const { id, creator, date, content, tags } = data;
+  const { user } = useSelector((state: RootState) => state.user);
 
   // modal 밖에서 스크롤 없애기
   const preventScroll = (e: Event) => {
@@ -46,22 +51,26 @@ export default function Modal({ open, handleModal, data }: IModal) {
         <div className="w-[1170px] h-full bg-white flex relative">
           <div className="w-fit h-full p-[11px] flex flex-col gap-[11px]">
             <Image
-              className="rounded-3"
+              className="rounded-3 cursor-pointer"
+              onClick={() => setMainImg(cat)}
               src={cat}
               alt="cat"
               width={151}
               height={155}
             />
+
             <Image
-              className="rounded-3"
+              className="rounded-3 cursor-pointer"
               src={friend1}
+              onClick={() => setMainImg(friend1)}
               alt="cat"
               width={151}
               height={155}
             />
             <Image
-              className="rounded-3"
+              className="rounded-3 cursor-pointer"
               src={friend2}
+              onClick={() => setMainImg(friend2)}
               alt="cat"
               width={151}
               height={155}
@@ -70,7 +79,7 @@ export default function Modal({ open, handleModal, data }: IModal) {
           <div className="h-[487px] p-[11px]">
             <Image
               className="rounded-3"
-              src={cat}
+              src={mainImg}
               alt="cat"
               width={375}
               height={487}
@@ -80,7 +89,18 @@ export default function Modal({ open, handleModal, data }: IModal) {
             <div className="text-[#0d134e] text-base font-josefin mb-4">
               {content}
             </div>
+
             <div>
+              {user.id !== String(id) ? (
+                <div className="w-full flex justify-end mb-4">
+                  <div className="flex gap-2">
+                    <div className="cursor-pointer">Edtit</div>
+                    <div className="cursor-pointer">Delete</div>
+                  </div>
+                </div>
+              ) : (
+                ""
+              )}
               <div className="w-full font-josefin flex pb-[6px]">
                 <div className="w-[14px] h-[22px] mr-1 bg-creator bg-no-repeat bg-center"></div>
                 <div className="text-darkblue text-[14px]">{creator}</div>

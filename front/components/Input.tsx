@@ -19,7 +19,6 @@ export default function Input({ type, name, placeholder, data }: IInput) {
       autoComplete="off"
       type={type}
       name={name}
-      required
       placeholder={placeholder}
       {...data}
     />

@@ -1,3 +1,4 @@
+import errMsg from "components/errMsg";
 import Input from "components/Input";
 import { useAppDispatch } from "hooks/reduxHooks";
 import { useInput } from "hooks/useInput";
@@ -77,13 +78,7 @@ const ChangePassword: NextPage = () => {
               placeholder="비밀번호를 입력하세요"
               data={password}
             />
-            {isPasswordBlank ? (
-              <div className="text-red-500 text-xs mb-4 -mt-2">
-                {passwordErrMsg}
-              </div>
-            ) : (
-              ""
-            )}
+            {isPasswordBlank ? errMsg(passwordErrMsg) : ""}
             <div className="mb-2 text-sm text-black font-bold">
               비밀번호 확인
             </div>
@@ -94,13 +89,7 @@ const ChangePassword: NextPage = () => {
               placeholder="비밀번호 확인을 입력하세요"
               {...passwordCheck}
             />
-            {isPasswordCheckErr ? (
-              <div className="text-red-500 text-xs mb-4 -mt-2">
-                {passwordCheckErrMsg}
-              </div>
-            ) : (
-              ""
-            )}
+            {isPasswordCheckErr ? errMsg(passwordCheckErrMsg) : ""}
             <div className="w-full h-14 text-white bg-lightblue text-center text-lg cursor-pointer border-none outline-none hover:bg-hoverlightblue leading-[56px]">
               변경
             </div>

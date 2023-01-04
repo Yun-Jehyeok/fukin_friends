@@ -82,7 +82,7 @@ const Header: NextPage = () => {
                 </div>
               ) : (
                 <Link href="/login">
-                  <a className="text-white">Login</a>
+                  <a className="text-white hover:text-white">Login</a>
                 </Link>
               )}
               <div className="w-4 h-4 bg-login bg-no-repeat bg-center mt-3"></div>
