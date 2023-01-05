@@ -2,7 +2,7 @@ import Modal from "components/Modal";
 import Image from "next/image";
 import cat from "public/img/cat1.jpg";
 import { useState } from "react";
-import ViewHeader from "./ViewHeader";
+import ViewHeader from "../ViewHeader";
 
 const exampleData = [
   {

@@ -89,7 +89,7 @@ const WysiwygEditor: NextPage<EditorType> = ({ pageName }) => {
         className="w-full h-12 px-3 py-0 border border-solid border-[#dadde6] outline-none mb-3 rounded-3"
         type="text"
         name="title"
-        placeholder="제목을 입력해주세요."
+        placeholder="Enter the Title."
         {...title}
       />
 

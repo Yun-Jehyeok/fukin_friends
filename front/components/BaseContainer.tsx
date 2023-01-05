@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import { RootState } from "src/configureStore";
 import Feed from "./Feed";
+import FeedEditor from "./Feed/FeedEditor";
 import Footer from "./Footer";
 import Header from "./Header";
 import Home from "./Home/Home";
@@ -42,6 +43,8 @@ export default function BaseContainer({ component }: IBaseContainer) {
       />
     ) : component === "feed" ? (
       <Feed />
+    ) : component === "feed-create" ? (
+      <FeedEditor />
     ) : component === "home" ? (
       <Home />
     ) : (
