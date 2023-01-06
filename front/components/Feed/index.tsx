@@ -148,18 +148,16 @@ export default function Feed() {
                   />
                 </div>
                 <div className="w-full">
-                  <div className="w-full py-[19px] px-[14px] font-josefin flex">
-                    <div className="w-[14px] h-[22px] mr-1 bg-creator bg-no-repeat bg-center"></div>
-                    <div className="text-[14px] text-darkblue">
-                      {item.creator}
-                    </div>
-                    <div className="w-[14px] h-4.5 mr-1 ml-9 bg-calendar bg-no-repeat bg-center"></div>
-                    <div className="text-[14px] text-darkblue">{item.date}</div>
+                  <div className="w-full py-4.75 px-3.5 font-josefin flex">
+                    <div className="w-3.5 h-[22px] mr-1 bg-creator bg-no-repeat bg-center"></div>
+                    <div className="text-sm text-darkblue">{item.creator}</div>
+                    <div className="w-3.5 h-4.5 mr-1 ml-9 bg-calendar bg-no-repeat bg-center"></div>
+                    <div className="text-sm text-darkblue">{item.date}</div>
                   </div>
-                  <div className="w-full py-0 px-[19px] font-josefin text-[#72718f] text-base">
+                  <div className="w-full py-0 px-4.75 font-josefin text-[#72718f] text-base">
                     {item.content}
                   </div>
-                  <div className="w-full absolute bottom-0 p-[19px] flex">
+                  <div className="w-full absolute bottom-0 p-4.75 flex">
                     {item.tags.map((item) => (
                       <div key={item} className="text-xs mr-4 text-gray-600">
                         # {item}

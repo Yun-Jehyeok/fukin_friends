@@ -148,9 +148,14 @@ export default function FeedEditor() {
               className="w-full h-12 text-[13px] flex justify-center flex-col text-[#757575] px-3 py-0 border border-solid border-[#dadde6] active:border-[#dadde6] active:ring-0 focus:ring-0 focus:border-[#dadde6] outline-none rounded-3"
               type="text"
               value={newTag}
-              placeholder="Enter the Tag"
+              placeholder={
+                tags.length < 5
+                  ? "Enter the Tag"
+                  : "Up to 5 tags can be created."
+              }
               onChange={onChangeNewTag}
               onKeyDown={enterTag}
+              disabled={tags.length >= 5}
             />
 
             <div className="flex mt-4 gap-2">

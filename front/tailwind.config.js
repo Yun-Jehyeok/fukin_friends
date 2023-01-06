@@ -19,6 +19,9 @@ module.exports = {
       height: {
         4.5: "18px",
       },
+      padding: {
+        4.75: "19px",
+      },
       boxShadow: {
         default: "0 1px 3px rgb(115 115 115 / 16%)",
       },

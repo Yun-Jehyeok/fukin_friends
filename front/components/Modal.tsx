@@ -78,7 +78,7 @@ export default function Modal({ open, handleModal, data }: IModal) {
       } fixed top-0 left-0 flex-col mx-auto my-0 justify-center`}
     >
       <div className="w-full h-[509px] flex justify-center">
-        <div className="w-[1170px] h-full bg-white flex relative">
+        <div className="w-[1170px] min-w-[1170px] h-full bg-white flex relative">
           <div className="w-fit h-full p-[11px] flex flex-col gap-[11px]">
             <Image
               className="rounded-3 cursor-pointer"
@@ -130,11 +130,11 @@ export default function Modal({ open, handleModal, data }: IModal) {
             </div>
 
             <div>
-              <div className="w-full font-josefin flex pb-[6px]">
-                <div className="w-[14px] h-[22px] mr-1 bg-creator bg-no-repeat bg-center"></div>
-                <div className="text-darkblue text-[14px]">{creator}</div>
-                <div className="w-[14px] h-4.5 mr-1 ml-9 bg-calendar bg-no-repeat bg-center"></div>
-                <div className="text-darkblue text-[14px]">{date}</div>
+              <div className="w-full font-josefin flex pb-1.5">
+                <div className="w-3.5 h-[22px] mr-1 bg-creator bg-no-repeat bg-center"></div>
+                <div className="text-darkblue text-sm">{creator}</div>
+                <div className="w-3.5 h-4.5 mr-1 ml-9 bg-calendar bg-no-repeat bg-center"></div>
+                <div className="text-darkblue text-sm">{date}</div>
               </div>
 
               <div className="flex gap-2 mt-3 font-josefin">
@@ -156,9 +156,14 @@ export default function Modal({ open, handleModal, data }: IModal) {
                       <input
                         value={newTag}
                         onChange={onChangeNewTag}
-                        placeholder="Enter the Tag"
-                        className="bg-white border-none outline-none"
+                        placeholder={
+                          tags.length < 5
+                            ? "Enter the Tag"
+                            : "Up to 5 tags can be created."
+                        }
+                        className="bg-white border-none outline-none w-48 h-full"
                         onKeyDown={enterTag}
+                        disabled={tags.length >= 5}
                       />
                     </div>
                   </>

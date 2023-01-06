@@ -90,7 +90,7 @@ const Header: NextPage = () => {
           </div>
         </div>
       </div>
-      <div className="w-full flex justify-center h-fit py-[19px] px-0 bg-white">
+      <div className="w-full flex justify-center h-fit py-4.75 px-0 bg-white">
         <div className="w-default h-10 leading-10 flex justify-between">
           <div className="flex">
             <div className="font-bold text-[34px] font-josefin pt-[5px]">
@@ -104,8 +104,9 @@ const Header: NextPage = () => {
               {menus.map((menu) => (
                 <Link href={"/" + menu.path} key={menu.id}>
                   <div
-                    data-active={pathname.includes(menu.path)}
-                    className="h-full leading-10 font-lato cursor-pointer transition-colors ease-linear duration-150 hover:text-basered"
+                    className={`h-full leading-10 ${
+                      pathname.includes(menu.path) ? "text-basered" : ""
+                    } font-lato cursor-pointer transition-colors ease-linear duration-150 hover:text-basered`}
                   >
                     {menu.content}
                   </div>
