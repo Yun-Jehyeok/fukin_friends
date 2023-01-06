@@ -146,19 +146,21 @@ export default function Modal({ open, handleModal, data }: IModal) {
                     {tags.map((item) => (
                       <div
                         key={tags.indexOf(item)}
-                        className="cursor-pointer bg-[#f6f2fe] text-[#9061f9] rounded-full p-1.5"
+                        className="cursor-pointer h-fit bg-[#f6f2fe] text-[#9061f9] rounded-full p-1.5"
                         onClick={onDeleteTag}
                       >
                         {item}
                       </div>
                     ))}
-                    <input
-                      value={newTag}
-                      onChange={onChangeNewTag}
-                      placeholder="Enter the Tag"
-                      className="bg-white border-none outline-none"
-                      onKeyDown={enterTag}
-                    />
+                    <div>
+                      <input
+                        value={newTag}
+                        onChange={onChangeNewTag}
+                        placeholder="Enter the Tag"
+                        className="bg-white border-none outline-none"
+                        onKeyDown={enterTag}
+                      />
+                    </div>
                   </>
                 ) : (
                   tags.map((item) => <div key={tags.indexOf(item)}>{item}</div>)

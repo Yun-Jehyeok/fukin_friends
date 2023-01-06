@@ -84,8 +84,6 @@ const Register: NextPage = () => {
     (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
 
-      console.log("here");
-
       if (!isPASuccess) alert("인증번호를 확인해주세요.");
       if (name.value === "") setIsNameBlank(true);
       if (email.value === "") setIsEmailBlank(true);

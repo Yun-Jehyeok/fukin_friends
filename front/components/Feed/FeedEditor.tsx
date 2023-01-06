@@ -1,11 +1,36 @@
 import ViewHeader from "components/ViewHeader";
 import Image from "next/image";
-import cat from "public/img/cat1.jpg";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 export default function FeedEditor() {
-  const [tags, setTags] = useState<String[]>(["TAG1"]);
+  const [tags, setTags] = useState<string[]>([]);
   const [newTag, setNewTag] = useState("");
+  const [images, setImages] = useState<string[]>([]);
+  const [empties, setEmpties] = useState(3);
+  const [isActive, setIsActive] = useState(false);
+
+  const onDragAddImage = (e: React.DragEvent<HTMLLabelElement>) => {
+    e.stopPropagation();
+    e.preventDefault();
+
+    const data = Array.from(e.dataTransfer.files as FileList);
+    const selectedFiles: string[] = data.map((item) =>
+      URL.createObjectURL(item)
+    );
+
+    const totalLen = images.length + selectedFiles.length;
+
+    if (totalLen > 3) {
+      alert("이미지는 총 3개까지 업로드 할 수 있습니다.");
+    } else {
+      setImages((prev) => prev.concat(selectedFiles));
+      setEmpties(3 - totalLen);
+    }
+  };
+  const onPreventDragOver = (e: React.DragEvent<HTMLLabelElement>) => {
+    e.stopPropagation();
+    e.preventDefault();
+  };
 
   const onChangeNewTag = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewTag(e.target.value);
@@ -24,14 +49,49 @@ export default function FeedEditor() {
     }
   };
 
+  const handleImages = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(e.target.files as FileList);
+    const selectedFiles: string[] = files.map((file) =>
+      URL.createObjectURL(file)
+    );
+
+    const totalLen = images.length + selectedFiles.length;
+
+    if (totalLen > 3) {
+      alert("이미지는 총 3개까지 업로드 할 수 있습니다.");
+    } else {
+      setImages((prev) => prev.concat(selectedFiles));
+      setEmpties(3 - totalLen);
+    }
+  };
+
+  const deleteImage = (e: React.MouseEvent<HTMLImageElement>) => {
+    setImages(images.filter((image) => image !== e.currentTarget.currentSrc));
+    setEmpties(4 - images.length);
+  };
+
+  const handleSubmit = useCallback((e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+  }, []);
+
   return (
     <div className="w-full">
       <ViewHeader title="Create Feed Page" desc="It's Just Create Feed Page" />
       <div className="w-full flex justify-center">
-        <form className="w-default">
+        <form className="w-default" onSubmit={handleSubmit}>
           <div className="w-full mt-20">
             <div className="text-4xl font-bold mb-4">Images</div>
-            <label className="w-full cursor-pointer text-gray-600 hover:border-[#FB2E86] flex items-center justify-center border-2 border-dashed border-gray-300 h-48 rounded-md">
+            <label
+              onDrop={onDragAddImage}
+              onDragOver={onPreventDragOver}
+              onMouseOver={() => setIsActive(true)}
+              onMouseLeave={() => setIsActive(false)}
+              onDragLeave={() => setIsActive(false)}
+              onDragEnter={() => setIsActive(true)}
+              className={`w-full cursor-pointer text-gray-600 flex items-center justify-center border-2 border-dashed ${
+                isActive ? "border-[#FB2E86]" : "border-gray-300"
+              } h-48 rounded-md`}
+            >
               <svg
                 className="h-12 w-12"
                 stroke="currentColor"
@@ -47,44 +107,43 @@ export default function FeedEditor() {
                 />
               </svg>
               <div className="ml-2 font-lato">Select the images</div>
-              <input className="hidden" type="file" />
+              <input
+                className="hidden"
+                type="file"
+                accept="image/*"
+                multiple
+                onChange={handleImages}
+              />
             </label>
           </div>
           <div className="flex mt-4 gap-4">
-            <div className="w-32 h-32 rounded-md">
-              <Image
-                className="rounded-md cursor-pointer"
-                src={cat}
-                alt="cat"
-                width={128}
-                height={128}
-              />
-            </div>
-            <div className="font-lato w-32 h-32 text-gray-600 border-2 border-gray-300 rounded-md text-center flex justify-center flex-col">
-              Empty...
-            </div>
-            <div className="font-lato w-32 h-32 text-gray-600 border-2 border-gray-300 rounded-md text-center flex justify-center flex-col">
-              Empty...
-            </div>
-            <div className="font-lato w-32 h-32 text-gray-600 border-2 border-gray-300 rounded-md text-center flex justify-center flex-col">
-              Empty...
-            </div>
-            <div className="font-lato w-32 h-32 text-gray-600 border-2 border-gray-300 rounded-md text-center flex justify-center flex-col">
-              Empty...
-            </div>
-            <div className="font-lato w-32 h-32 text-gray-600 border-2 border-gray-300 rounded-md text-center flex justify-center flex-col">
-              Empty...
-            </div>
-            <div className="font-lato w-32 h-32 text-gray-600 border-2 border-gray-300 rounded-md text-center flex justify-center flex-col">
-              Empty...
-            </div>
-            <div className="font-lato w-32 h-32 text-gray-600 border-2 border-gray-300 rounded-md text-center flex justify-center flex-col">
-              Empty...
-            </div>
+            {images.map((image, i) => (
+              <div key={i} className="w-32 h-32 rounded-md">
+                <Image
+                  className="rounded-md w-full h-full cursor-pointer"
+                  src={image}
+                  width={128}
+                  height={128}
+                  alt={image}
+                  onClick={deleteImage}
+                />
+              </div>
+            ))}
+            {[1, 2, 3].map((item, i) => {
+              if (item <= empties) {
+                return (
+                  <div
+                    key={i}
+                    className="font-lato w-32 h-32 text-gray-600 border-2 border-gray-300 rounded-md text-center flex justify-center flex-col"
+                  >
+                    Empty...
+                  </div>
+                );
+              }
+            })}
           </div>
           <div className="mt-20">
             <div className="text-4xl font-bold mb-4">Tags</div>
-            <input className="hidden" />
             <input
               className="w-full h-12 text-[13px] flex justify-center flex-col text-[#757575] px-3 py-0 border border-solid border-[#dadde6] active:border-[#dadde6] active:ring-0 focus:ring-0 focus:border-[#dadde6] outline-none rounded-3"
               type="text"
@@ -93,6 +152,7 @@ export default function FeedEditor() {
               onChange={onChangeNewTag}
               onKeyDown={enterTag}
             />
+
             <div className="flex mt-4 gap-2">
               {tags.map((item) => (
                 <div
