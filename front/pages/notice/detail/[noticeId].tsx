@@ -1,6 +1,5 @@
 import { NextPage } from "next";
 
-// import EditorViewer from "components/Editor/EditorViewer";
 import Footer from "components/Footer";
 import Header from "components/Header";
 import Comment from "components/Notice/Comment";

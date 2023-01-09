@@ -50,7 +50,6 @@ const noticeSlice = createSlice({
   name: "notice",
   initialState,
   reducers: {
-    // 전체 공지사항 로딩
     loadAllNoticeReq(state, action: PayloadAction<LoadAllNoticeReq>) {
       state.isLoading = true;
       state.errMsg = null;
@@ -65,7 +64,6 @@ const noticeSlice = createSlice({
       state.errMsg = action.payload.msg;
     },
 
-    // 메인 공지사항 로딩
     loadMainNoticeReq(state) {
       state.isLoading = true;
       state.errMsg = null;
@@ -79,7 +77,6 @@ const noticeSlice = createSlice({
       state.errMsg = action.payload.msg;
     },
 
-    // 중요 공지사항 로딩
     loadImportantNoticeReq(state) {
       state.isLoading = true;
       state.errMsg = null;
@@ -96,7 +93,6 @@ const noticeSlice = createSlice({
       state.errMsg = action.payload.msg;
     },
 
-    // 공지사항 검색
     searchNoticeReq(state, action: PayloadAction<SearchNoticeReq>) {
       state.isLoading = true;
       state.errMsg = null;
@@ -111,7 +107,6 @@ const noticeSlice = createSlice({
       state.errMsg = action.payload.msg;
     },
 
-    // 공지사항 생성
     createNoticeReq(state, action: PayloadAction<CreateNoticeReq>) {
       state.isLoading = true;
       state.errMsg = null;
@@ -126,7 +121,6 @@ const noticeSlice = createSlice({
       state.errMsg = action.payload.msg;
     },
 
-    // 공지사항 상세
     loadNoticeReq(state, action: PayloadAction<LoadNoticeReq>) {
       state.isLoading = true;
       state.errMsg = null;
@@ -140,7 +134,6 @@ const noticeSlice = createSlice({
       state.errMsg = action.payload.msg;
     },
 
-    // 공지사항 수정
     updateNoticeReq(state, action: PayloadAction<UpdateNoticeReq>) {
       state.isLoading = true;
       state.errMsg = null;
@@ -152,7 +145,6 @@ const noticeSlice = createSlice({
       state.isLoading = false;
     },
 
-    // 공지사항 삭제
     deleteNoticeReq(state, action: PayloadAction<DeleteNoticeReq>) {
       state.isLoading = true;
       state.errMsg = null;

@@ -5,7 +5,6 @@ const { Notice } = require("../../models/notice");
 
 const router = express.Router();
 
-// Get All Comments / GET
 router.get("/path=:path&:id", async (req, res) => {
   const id = req.params.id;
   const path = req.params.path;
@@ -33,7 +32,6 @@ router.get("/path=:path&:id", async (req, res) => {
   }
 });
 
-// Create Comment / POST
 router.post("/", (req, res) => {
   const { path, pathId, userId, content } = req.body;
 
@@ -76,7 +74,6 @@ router.post("/", (req, res) => {
   });
 });
 
-// Update Comment / PUT
 router.put("/:id", (req, res) => {
   const id = req.params.id;
   const { content } = req.body.comment;
@@ -92,7 +89,6 @@ router.put("/:id", (req, res) => {
     });
 });
 
-// Delete Notice / DELETE
 router.delete("/:id", async (req, res) => {
   const id = req.params.id;
   const { path, pathId, userId } = req.body;
@@ -100,7 +96,6 @@ router.delete("/:id", async (req, res) => {
   try {
     await Comment.deleteOne({ _id: id });
 
-    // 유저의 댓글 삭제
     await User.findByIdAndUpdate(userId, {
       $pull: {
         comments: { id },
@@ -108,7 +103,6 @@ router.delete("/:id", async (req, res) => {
     });
 
     if (path === "notice") {
-      // Notice 의 댓글 삭제
       await Notice.findByIdAndUpdate(pathId, {
         $pull: {
           comments: { id },

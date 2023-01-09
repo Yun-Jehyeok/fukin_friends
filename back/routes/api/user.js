@@ -8,7 +8,6 @@ const { JWT_SECRET } = config;
 
 const router = express.Router();
 
-// Get All User / GET
 router.get("/", async (req, res) => {
   try {
     const users = await User.find();
@@ -27,7 +26,6 @@ router.get("/", async (req, res) => {
   }
 });
 
-// Register User / POST
 router.post("/register", (req, res) => {
   const { name, email, password, phone } = req.body;
 
@@ -87,7 +85,6 @@ router.post("/register", (req, res) => {
   });
 });
 
-// Change User Password / PUT
 router.put("/password", (req, res) => {
   const { userId, password } = req.body;
 
@@ -135,7 +132,6 @@ router.put("/password", (req, res) => {
   });
 });
 
-// 유저 검색
 router.get("/search/:searchTerm", async (req, res) => {
   try {
     const users = await User.find({

@@ -4,7 +4,6 @@ const { Feed } = require("../../models/feed");
 
 const router = express.Router();
 
-// Get Feeds with Pagination / GET
 router.get("/skip/:skip", async (req, res) => {
   try {
     const feedCount = await Feed.countDocuments();
@@ -35,7 +34,6 @@ router.get("/skip/:skip", async (req, res) => {
   }
 });
 
-// Create feed / POST
 router.post("/", (req, res) => {
   const { userId, content, imgs, tags } = req.body;
 
@@ -66,7 +64,6 @@ router.post("/", (req, res) => {
   });
 });
 
-// Get Feed Detail / GET
 router.get("/:id", (req, res) => {
   const id = req.params.id;
 
@@ -82,7 +79,6 @@ router.get("/:id", (req, res) => {
     });
 });
 
-// Update Feed / PUT
 router.put("/:id", (req, res) => {
   const id = req.params.id;
   const { content, imgs, tags } = req.body;
@@ -103,7 +99,6 @@ router.put("/:id", (req, res) => {
     });
 });
 
-// Delete Feed / DELETE
 router.delete("/:id", async (req, res) => {
   const id = req.params.id;
 

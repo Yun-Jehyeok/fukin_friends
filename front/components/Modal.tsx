@@ -24,7 +24,6 @@ export default function Modal({ open, handleModal, data }: IModal) {
   const { _id, creator, date } = data;
   const { user } = useSelector((state: RootState) => state.user);
 
-  // modal 밖에서 스크롤 없애기
   const preventScroll = (e: Event) => {
     e.preventDefault();
   };

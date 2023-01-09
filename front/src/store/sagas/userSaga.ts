@@ -34,7 +34,6 @@ import {
 import { userActions } from "../reducers/userReducer";
 import { BaseRes } from "../types";
 
-// 회원가입
 function* registerUserApi(action: PayloadAction<RegisterUserReq>) {
   try {
     const { data }: AxiosResponse<RegisterUserRes> = yield call(
@@ -56,7 +55,6 @@ function* watchRegisterUser() {
   yield takeLatest(userActions.registerUserReq, registerUserApi);
 }
 
-// 로그인
 function* loginUserApi(action: PayloadAction<LoginUserReq>) {
   try {
     const { data }: AxiosResponse<LoginUserRes> = yield call(
@@ -75,7 +73,6 @@ function* watchLoginUser() {
   yield takeLatest(userActions.loginUserReq, loginUserApi);
 }
 
-// 구글 로그인
 function* googleApi(action: PayloadAction<GoogleReq>) {
   try {
     const { data }: AxiosResponse<GoogleRes> = yield call(
@@ -94,7 +91,6 @@ function* watchGoogle() {
   yield takeLatest(userActions.googleReq, googleApi);
 }
 
-// 비밀번호 변경
 function* changePWApi(action: PayloadAction<ChangePWReq>) {
   try {
     const { data }: AxiosResponse<ChangePWRes> = yield call(
@@ -113,7 +109,6 @@ function* watchChangePW() {
   yield takeLatest(userActions.changePWReq, changePWApi);
 }
 
-// 유저 인증
 function* loadUserApi(action: PayloadAction<LoadUserReq>) {
   try {
     const { data }: AxiosResponse<LoadUserRes> = yield call(
@@ -132,7 +127,6 @@ function* watchloadUser() {
   yield takeLatest(userActions.loadUserReq, loadUserApi);
 }
 
-// 유저 검색
 function* searchUserApi(action: PayloadAction<SearchUserReq>) {
   try {
     const { data }: AxiosResponse<SearchUserRes> = yield call(
@@ -149,7 +143,6 @@ function* watchSearchUser() {
   yield takeLatest(userActions.userSearchReq, searchUserApi);
 }
 
-// 로그아웃
 function* logoutApi(action: PayloadAction<LogoutUserReq>) {
   try {
     if (action.payload) {
@@ -167,7 +160,6 @@ function* watchLogout() {
   yield takeLatest(userActions.logoutReq, logoutApi);
 }
 
-// 휴대폰 인증
 function* paApi(action: PayloadAction<PAReq>) {
   try {
     const { data }: AxiosResponse<PARes> = yield call(
@@ -186,7 +178,6 @@ function* watchPA() {
   yield takeLatest(userActions.userPAReq, paApi);
 }
 
-// 이메일 보내기
 function* sendEmailApi(action: PayloadAction<SendEmailReq>) {
   try {
     const { data }: AxiosResponse<BaseRes> = yield call(

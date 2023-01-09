@@ -18,7 +18,6 @@ const { PlayList } = require("../../models/playList");
 
 const router = express.Router();
 
-// LOGIN / POST
 router.post("/login", (req, res) => {
   const { email, password } = req.body;
 
@@ -65,7 +64,6 @@ router.post("/login", (req, res) => {
   });
 });
 
-// GOOGLE LOGIN / POST
 router.post("/google", (req, res) => {
   const { email, name, token } = req.body.data;
 
@@ -129,7 +127,6 @@ router.post("/google", (req, res) => {
   }
 });
 
-// CLOSE ACCOUNT / DELETE
 router.delete("/:id", async (req, res) => {
   try {
     await User.deleteOne({ _id: req.params.id });
@@ -145,7 +142,6 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-// email 인증
 router.post("/email", async (req, res) => {
   const { email } = req.body;
 
@@ -182,7 +178,6 @@ router.post("/email", async (req, res) => {
   });
 });
 
-// Send Phone Auth / POST
 router.post("/phone", (req, res) => {
   let authNum = "";
   for (let i = 0; i < 6; i++) {
@@ -242,7 +237,6 @@ router.post("/phone", (req, res) => {
   );
 });
 
-// Authentication / POST
 router.post("/user", auth, async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select("-password");

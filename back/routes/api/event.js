@@ -4,7 +4,6 @@ const { Event } = require("../../models/event");
 
 const router = express.Router();
 
-// Find All Events / GET
 router.get("/", async (req, res) => {
   const events = await Event.find();
 
@@ -19,7 +18,6 @@ router.get("/", async (req, res) => {
   });
 });
 
-// Get Events with Pagination / GET
 router.get("/skip/:skip", async (req, res) => {
   try {
     const eventCount = await Event.countDocuments();
@@ -38,7 +36,6 @@ router.get("/skip/:skip", async (req, res) => {
   }
 });
 
-// Create Event / POST
 router.post("/create", (req, res) => {
   const { userId, title, content, date } = req.body;
 
@@ -68,7 +65,6 @@ router.post("/create", (req, res) => {
   });
 });
 
-// Get Event Detail / GET
 router.get("/:id", (req, res) => {
   const id = req.params.id;
 
@@ -82,7 +78,6 @@ router.get("/:id", (req, res) => {
   });
 });
 
-// Update Event / PUT
 router.put("/:id", (req, res) => {
   const id = req.params.id;
   const { title, content, date } = req.body;
@@ -102,7 +97,6 @@ router.put("/:id", (req, res) => {
     });
 });
 
-// Delete Event / DELETE
 router.delete("/:id", async (req, res) => {
   const id = req.params.id;
 

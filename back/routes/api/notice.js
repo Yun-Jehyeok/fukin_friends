@@ -4,7 +4,6 @@ const { Notice } = require("../../models/notice");
 
 const router = express.Router();
 
-// Get Notices with Pagination / GET
 router.get("/skip/:page", async (req, res) => {
   try {
     let page = (Number(req.params.page) - 1) * 8;
@@ -25,7 +24,6 @@ router.get("/skip/:page", async (req, res) => {
   }
 });
 
-// Get Important Notices
 router.get("/important", async (req, res) => {
   try {
     const notices = await Notice.find().limit(3).sort({ date: -1 });
@@ -39,7 +37,6 @@ router.get("/important", async (req, res) => {
   }
 });
 
-// Search Notices
 router.get("/:term/:skip", async (req, res, next) => {
   try {
     let page = (Number(req.params.skip) - 1) * 8;
@@ -47,13 +44,13 @@ router.get("/:term/:skip", async (req, res, next) => {
     const noticeCount = await Notice.countDocuments({
       title: {
         $regex: req.params.term,
-        $options: "i", // 대소문자 구분 X
+        $options: "i",
       },
     });
     const result = await Notice.find({
       title: {
         $regex: req.params.term,
-        $options: "i", // 대소문자 구분 X
+        $options: "i",
       },
     })
       .skip(page)
@@ -66,7 +63,6 @@ router.get("/:term/:skip", async (req, res, next) => {
   }
 });
 
-// Find only 8 notices for main page / GET
 router.get("/main", async (req, res) => {
   const notices = await Notice.find().sort({ date: -1 }).limit(8);
 
@@ -81,7 +77,6 @@ router.get("/main", async (req, res) => {
   });
 });
 
-// Create Notice / POST
 router.post("/", (req, res) => {
   const { userId, title, content, location, date } = req.body;
 
@@ -112,7 +107,6 @@ router.post("/", (req, res) => {
   });
 });
 
-// Get Notice Detail / GET
 router.get("/:id", (req, res) => {
   const id = req.params.id;
 
@@ -126,7 +120,6 @@ router.get("/:id", (req, res) => {
   });
 });
 
-// Update Notice / PUT
 router.put("/:id", (req, res) => {
   const id = req.params.id;
   const { title, content, location, date } = req.body.notice;
@@ -145,7 +138,6 @@ router.put("/:id", (req, res) => {
     });
 });
 
-// Delete Notice / DELETE
 router.delete("/:id", async (req, res) => {
   const id = req.params.id;
 

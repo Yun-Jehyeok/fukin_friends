@@ -32,7 +32,6 @@ const commentSlice = createSlice({
   name: "comment",
   initialState,
   reducers: {
-    // 전체 댓글 로딩
     loadAllCommentsReq(state, action: PayloadAction<LoadAllCommentsReq>) {
       state.isLoading = true;
       state.errMsg = null;
@@ -47,7 +46,6 @@ const commentSlice = createSlice({
       state.comments = [];
     },
 
-    // 댓글 생성
     createCommentReq(state, action: PayloadAction<CreateCommentReq>) {
       state.isLoading = true;
       state.errMsg = null;
@@ -61,7 +59,6 @@ const commentSlice = createSlice({
       state.success = false;
     },
 
-    // 댓글 수정
     updateCommentReq(state, action: PayloadAction<UpdateCommentReq>) {
       state.isLoading = true;
       state.errMsg = null;
@@ -78,7 +75,6 @@ const commentSlice = createSlice({
       state.isEditSuc = true;
     },
 
-    // 댓글 삭제
     deleteCommentReq(state, action: PayloadAction<DeleteCommentReq>) {
       state.isLoading = true;
       state.errMsg = null;

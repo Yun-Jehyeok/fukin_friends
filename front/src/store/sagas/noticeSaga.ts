@@ -29,7 +29,6 @@ import {
 import { noticeActions } from "../reducers/noticeReducer";
 import { BaseRes } from "../types";
 
-// 전체 공지사항 로딩
 function* loadAllNoticeApi(action: PayloadAction<LoadAllNoticeReq>) {
   try {
     const { data }: AxiosResponse<LoadAllNoticeRes> = yield call(
@@ -51,7 +50,6 @@ function* watchloadAllNotice() {
   yield takeLatest(noticeActions.loadAllNoticeReq, loadAllNoticeApi);
 }
 
-// 메인 공지사항 로딩
 function* loadMainNoticeApi() {
   try {
     const { data }: AxiosResponse<LoadMainNoticesRes> = yield call(
@@ -72,7 +70,6 @@ function* watchloadMainNotice() {
   yield takeLatest(noticeActions.loadMainNoticeReq, loadMainNoticeApi);
 }
 
-// 중요 공지사항 로딩
 function* loadImportantNoticeApi() {
   try {
     const { data }: AxiosResponse<LoadImportantNoticesRes> = yield call(
@@ -96,7 +93,6 @@ function* watchloadImportantNotice() {
   );
 }
 
-// 공지사항 검색
 function* searchNoticeApi(action: PayloadAction<SearchNoticeReq>) {
   try {
     const { data }: AxiosResponse<SearchNoticeRes> = yield call(
@@ -118,7 +114,6 @@ function* watchSearchNotice() {
   yield takeLatest(noticeActions.searchNoticeReq, searchNoticeApi);
 }
 
-// 공지사항 작성
 function* createNoticeApi(action: PayloadAction<CreateNoticeReq>) {
   try {
     const { data }: AxiosResponse<BaseRes> = yield call(
@@ -140,7 +135,6 @@ function* watchcreateNotice() {
   yield takeLatest(noticeActions.createNoticeReq, createNoticeApi);
 }
 
-// 공지사항 상세
 function* loadNoticeApi(action: PayloadAction<LoadNoticeReq>) {
   try {
     const { data }: AxiosResponse<LoadNoticeSucRes> = yield call(
@@ -162,7 +156,6 @@ function* watchloadNotice() {
   yield takeLatest(noticeActions.loadNoticeReq, loadNoticeApi);
 }
 
-// 공지사항 수정
 function* updateNoticeApi(action: PayloadAction<UpdateNoticeReq>) {
   try {
     const { data }: AxiosResponse<BaseRes> = yield call(
@@ -183,7 +176,6 @@ function* watchupdateNotice() {
   yield takeLatest(noticeActions.updateNoticeReq, updateNoticeApi);
 }
 
-// 공지사항 삭제
 function* deleteNoticeApi(action: PayloadAction<DeleteNoticeReq>) {
   try {
     const { data }: AxiosResponse<BaseRes> = yield call(

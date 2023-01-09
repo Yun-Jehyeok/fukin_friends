@@ -11,7 +11,6 @@ export interface IComment {
   date: string;
 }
 
-// 전체 댓글
 export interface LoadAllCommentsReq {
   path: string;
   id: string;
@@ -25,7 +24,6 @@ export interface LoadAllCommentsFailRes {
   msg: string;
 }
 
-// 댓글 생성
 export interface CreateCommentReq {
   path: string;
   pathId: string;
@@ -33,13 +31,11 @@ export interface CreateCommentReq {
   content: string;
 }
 
-// 댓글 수정
 export interface UpdateCommentReq {
   id: string;
   content: string;
 }
 
-// 댓글 삭제
 export interface DeleteCommentReq {
   id: string;
   userId: string;

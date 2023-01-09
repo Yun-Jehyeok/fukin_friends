@@ -48,7 +48,6 @@ const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    // 회원가입
     registerUserReq(state, action: PayloadAction<RegisterUserReq>) {
       state.isLoading = true;
       state.errMsg = null;
@@ -68,7 +67,6 @@ const userSlice = createSlice({
       state.errMsg = action.payload.msg;
     },
 
-    // 로그인
     loginUserReq(state, action: PayloadAction<LoginUserReq>) {
       state.isLoading = true;
       state.errMsg = null;
@@ -90,7 +88,6 @@ const userSlice = createSlice({
       state.isLoginErr = action.payload.msg;
     },
 
-    // 구글 로그인
     googleReq(state, action: PayloadAction<GoogleReq>) {
       state.isLoading = true;
       state.errMsg = null;
@@ -112,7 +109,6 @@ const userSlice = createSlice({
       state.isLoginErr = action.payload.msg;
     },
 
-    // 비밀번호 변경
     changePWReq(state, action: PayloadAction<ChangePWReq>) {
       state.isLoading = true;
       state.errMsg = null;
@@ -137,7 +133,6 @@ const userSlice = createSlice({
       state.errMsg = action.payload.msg;
     },
 
-    // 유저 인증
     loadUserReq(state, action: PayloadAction<LoadUserReq>) {
       state.isLoading = true;
       state.errMsg = null;
@@ -152,7 +147,6 @@ const userSlice = createSlice({
       state.errMsg = action.payload.msg;
     },
 
-    // 로그아웃
     logoutReq(state, action: PayloadAction<LogoutUserReq>) {
       state.isLoading = true;
       state.isLoading = true;
@@ -169,7 +163,6 @@ const userSlice = createSlice({
       state.isLoading = false;
     },
 
-    // 휴대폰 인증
     userPAReq(state, action: PayloadAction<PAReq>) {
       state.isLoading = true;
       state.errMsg = null;
@@ -185,7 +178,6 @@ const userSlice = createSlice({
       state.errMsg = "인증번호를 확인해주세요.";
     },
 
-    // 유저 검색
     userSearchReq(state, action: PayloadAction<SearchUserReq>) {
       state.isLoading = true;
       state.searchedUser = [];
@@ -199,7 +191,6 @@ const userSlice = createSlice({
       state.searchedUser = [];
     },
 
-    // 이메일 보내기
     sendEmailReq(state, action: PayloadAction<SendEmailReq>) {
       state.isLoading = true;
     },

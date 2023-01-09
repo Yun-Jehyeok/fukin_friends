@@ -1,5 +1,3 @@
-import { IUser } from "./user";
-
 export interface IFeed {
   _id: string;
   content: string;
@@ -8,7 +6,7 @@ export interface IFeed {
   previewImg: string;
   imgs: string[];
   tags: string[];
-  user: IUser;
+  userName: string;
 }
 
 export interface GetAllFeedsReq {
