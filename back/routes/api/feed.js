@@ -11,7 +11,19 @@ router.get("/skip/:skip", async (req, res) => {
     const feedFindResult = await Feed.find()
       .skip(Number(req.params.skip))
       .limit(12)
-      .sort({ date: -1 });
+      .sort({ date: -1 })
+      .populate({ path: "creator" });
+
+    feedFindResult = feedFindResult.map((item) => {
+      item.userName = item.creator.name;
+      item.creator = item.creator._id;
+
+      return item;
+    });
+
+    // 시바
+
+    console.log(feedFindResult);
 
     res.status(200).json({
       success: true,
@@ -24,16 +36,16 @@ router.get("/skip/:skip", async (req, res) => {
 });
 
 // Create feed / POST
-router.post("/create", (req, res) => {
-  const { userId, title, content, imgs, tags } = req.body;
+router.post("/", (req, res) => {
+  const { userId, content, imgs, tags } = req.body;
 
   User.findOne({ _id: userId }).then((user) => {
     if (!user) return res.status(400).json({ success: false });
 
     const newFeed = new Feed({
-      title,
       content,
       previewImg: imgs[0],
+      imgs: imgs,
       tags,
       creator: userId,
     });
@@ -58,26 +70,27 @@ router.post("/create", (req, res) => {
 router.get("/:id", (req, res) => {
   const id = req.params.id;
 
-  Feed.findOne({ _id: id }).then((feed) => {
-    if (!feed)
-      return res
-        .status(400)
-        .json({ success: false, msg: "해당 피드가 존재하지 않습니다." });
+  Feed.findOne({ _id: id })
+    .populate("user")
+    .then((feed) => {
+      if (!feed)
+        return res
+          .status(400)
+          .json({ success: false, msg: "해당 피드가 존재하지 않습니다." });
 
-    res.status(200).json({ success: true, feed: feed });
-  });
+      res.status(200).json({ success: true, feed: feed });
+    });
 });
 
 // Update Feed / PUT
 router.put("/:id", (req, res) => {
   const id = req.params.id;
-  const { title, content, imgs, tags } = req.body;
+  const { content, imgs, tags } = req.body;
 
   Feed.findByIdAndUpdate(id, {
     $push: {
-      title,
       content,
-      imgs,
+      imgs: imgs,
       tags,
       previewImg: imgs[0],
     },

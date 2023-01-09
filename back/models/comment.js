@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const moment = require("moment");
 
 const CommentSchema = new mongoose.Schema({
-  contents: {
+  content: {
     type: String,
     required: true,
   },

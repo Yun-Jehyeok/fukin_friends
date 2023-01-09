@@ -1,13 +1,24 @@
 import ViewHeader from "components/ViewHeader";
+import { useAppDispatch } from "hooks/reduxHooks";
+import { useInput } from "hooks/useInput";
 import Image from "next/image";
 import { useCallback, useState } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "src/configureStore";
+import { feedActions } from "src/store/reducers/feedReducer";
 
 export default function FeedEditor() {
   const [tags, setTags] = useState<string[]>([]);
   const [newTag, setNewTag] = useState("");
-  const [images, setImages] = useState<string[]>([]);
+  const [imgs, setImgs] = useState<string[]>([]);
   const [empties, setEmpties] = useState(3);
   const [isActive, setIsActive] = useState(false);
+
+  const content = useInput("");
+
+  const { user } = useSelector((state: RootState) => state.user);
+
+  const dispatch = useAppDispatch();
 
   const onDragAddImage = (e: React.DragEvent<HTMLLabelElement>) => {
     e.stopPropagation();
@@ -18,12 +29,12 @@ export default function FeedEditor() {
       URL.createObjectURL(item)
     );
 
-    const totalLen = images.length + selectedFiles.length;
+    const totalLen = imgs.length + selectedFiles.length;
 
     if (totalLen > 3) {
       alert("이미지는 총 3개까지 업로드 할 수 있습니다.");
     } else {
-      setImages((prev) => prev.concat(selectedFiles));
+      setImgs((prev) => prev.concat(selectedFiles));
       setEmpties(3 - totalLen);
     }
   };
@@ -49,38 +60,50 @@ export default function FeedEditor() {
     }
   };
 
-  const handleImages = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImgs = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(e.target.files as FileList);
     const selectedFiles: string[] = files.map((file) =>
       URL.createObjectURL(file)
     );
 
-    const totalLen = images.length + selectedFiles.length;
+    const totalLen = imgs.length + selectedFiles.length;
 
     if (totalLen > 3) {
       alert("이미지는 총 3개까지 업로드 할 수 있습니다.");
     } else {
-      setImages((prev) => prev.concat(selectedFiles));
+      setImgs((prev) => prev.concat(selectedFiles));
       setEmpties(3 - totalLen);
     }
   };
 
   const deleteImage = (e: React.MouseEvent<HTMLImageElement>) => {
-    setImages(images.filter((image) => image !== e.currentTarget.currentSrc));
-    setEmpties(4 - images.length);
+    setImgs(imgs.filter((image) => image !== e.currentTarget.currentSrc));
+    setEmpties(4 - imgs.length);
   };
 
-  const handleSubmit = useCallback((e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-  }, []);
+  const handleSubmit = useCallback(
+    (e: React.MouseEvent<HTMLButtonElement>) => {
+      e.preventDefault();
+
+      let feed = {
+        userId: user.id,
+        content: content.value,
+        imgs: imgs,
+        tags: tags,
+      };
+
+      dispatch(feedActions.createFeedReq(feed));
+    },
+    [dispatch, user, content, imgs, tags]
+  );
 
   return (
     <div className="w-full">
       <ViewHeader title="Create Feed Page" desc="It's Just Create Feed Page" />
       <div className="w-full flex justify-center">
-        <form className="w-default" onSubmit={handleSubmit}>
+        <div className="w-default">
           <div className="w-full mt-20">
-            <div className="text-4xl font-bold mb-4">Images</div>
+            <div className="text-4xl font-bold mb-4">Imgs</div>
             <label
               onDrop={onDragAddImage}
               onDragOver={onPreventDragOver}
@@ -106,18 +129,18 @@ export default function FeedEditor() {
                   strokeLinejoin="round"
                 />
               </svg>
-              <div className="ml-2 font-lato">Select the images</div>
+              <div className="ml-2 font-lato">Select the imgs</div>
               <input
                 className="hidden"
                 type="file"
                 accept="image/*"
                 multiple
-                onChange={handleImages}
+                onChange={handleImgs}
               />
             </label>
           </div>
           <div className="flex mt-4 gap-4">
-            {images.map((image, i) => (
+            {imgs.map((image, i) => (
               <div key={i} className="w-32 h-32 rounded-md">
                 <Image
                   className="rounded-md w-full h-full cursor-pointer"
@@ -171,16 +194,20 @@ export default function FeedEditor() {
             </div>
           </div>
           <div className="mt-10">
-            <div className="text-4xl font-bold mb-4">Contents</div>
+            <div className="text-4xl font-bold mb-4">content</div>
             <textarea
               className="w-full h-60 resize-none text-[13px] text-[#757575] p-3 border border-solid border-[#dadde6] active:border-[#dadde6] active:ring-0 focus:ring-0 focus:border-[#dadde6] outline-none rounded-3"
-              placeholder="Enter the Contents"
+              placeholder="Enter the content"
+              {...content}
             ></textarea>
           </div>
-          <button className="w-full h-12 border-none outline-none text-white bg-basered rounded-3 font-bold text-[17px] font-lato mt-5 cursor-pointer hover:bg-hoverred">
+          <button
+            className="w-full h-12 border-none outline-none text-white bg-basered rounded-3 font-bold text-[17px] font-lato mt-5 cursor-pointer hover:bg-hoverred"
+            onClick={handleSubmit}
+          >
             Write
           </button>
-        </form>
+        </div>
       </div>
     </div>
   );

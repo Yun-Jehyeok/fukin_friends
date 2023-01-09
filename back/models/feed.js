@@ -2,11 +2,7 @@ const mongoose = require("mongoose");
 const moment = require("moment");
 
 const FeedSchema = new mongoose.Schema({
-  title: {
-    type: String,
-    required: true,
-  },
-  contents: {
+  content: {
     type: String,
     required: true,
   },
@@ -23,7 +19,7 @@ const FeedSchema = new mongoose.Schema({
   previewImg: {
     type: String,
   },
-  images: [{ type: String }],
+  imgs: [{ type: String }],
   tags: [{ type: String }],
 });
 

@@ -28,6 +28,8 @@ export default function* feedSaga() {
         action.payload
       );
 
+      console.log(data);
+
       yield put(feedActions.loadAllFeedSuc(data));
     } catch (e: any) {
       yield put(

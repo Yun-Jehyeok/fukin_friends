@@ -41,7 +41,7 @@ router.post("/", (req, res) => {
     if (!user) return res.status(400).json({ success: false });
 
     const newComment = new Comment({
-      contents: content,
+      content,
       date: new Date(),
       creator: userId,
       path,
@@ -82,7 +82,7 @@ router.put("/:id", (req, res) => {
   const { content } = req.body.comment;
 
   Comment.findByIdAndUpdate(id, {
-    contents: content,
+    content,
   })
     .then(() => {
       res.status(200).json({ success: true });

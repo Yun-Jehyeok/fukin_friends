@@ -6,17 +6,12 @@ import friend2 from "public/img/friend2.jpg";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "src/configureStore";
+import { IFeed } from "src/store/types/feed";
 
 interface IModal {
   open: Boolean;
   handleModal: () => void;
-  data: {
-    id: Number;
-    creator: String;
-    date: String;
-    content: String;
-    tags: String[];
-  };
+  data: IFeed;
 }
 
 export default function Modal({ open, handleModal, data }: IModal) {
@@ -26,7 +21,7 @@ export default function Modal({ open, handleModal, data }: IModal) {
   const [newTag, setNewTag] = useState("");
   const [content, setContent] = useState(data.content as string);
 
-  const { id, creator, date } = data;
+  const { _id, creator, date } = data;
   const { user } = useSelector((state: RootState) => state.user);
 
   // modal 밖에서 스크롤 없애기
@@ -121,7 +116,7 @@ export default function Modal({ open, handleModal, data }: IModal) {
                 <textarea
                   value={content}
                   onChange={onChangeContent}
-                  placeholder="Enter the contents"
+                  placeholder="Enter the content"
                   className="w-full h-64 outline-none p-3 border border-solid border-[#8a8fb9] font-lato resize-none rounded-3 focus:border-[#8a8fb9] ring-0 focus:ring-0 focus:ring-[#8a8fb9] focus:outline-none overflow-y-auto"
                 />
               ) : (
@@ -171,7 +166,7 @@ export default function Modal({ open, handleModal, data }: IModal) {
                   tags.map((item) => <div key={tags.indexOf(item)}>{item}</div>)
                 )}
               </div>
-              {user.id !== String(id) ? (
+              {user.id !== creator ? (
                 <div className="w-full flex justify-end mb-4">
                   <div className="flex gap-2">
                     {isEdit ? (

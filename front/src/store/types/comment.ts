@@ -1,6 +1,6 @@
 export interface IComment {
   _id: string;
-  contents: string;
+  content: string;
   creator: {
     _id: string;
     name: string;

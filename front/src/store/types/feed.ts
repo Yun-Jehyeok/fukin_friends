@@ -1,12 +1,14 @@
+import { IUser } from "./user";
+
 export interface IFeed {
   _id: string;
-  title: string;
-  contents: string;
+  content: string;
   date: string;
   creator: string;
   previewImg: string;
-  images: string[];
+  imgs: string[];
   tags: string[];
+  user: IUser;
 }
 
 export interface GetAllFeedsReq {
@@ -20,7 +22,6 @@ export interface GetAllFeedsRes {
 
 export interface CreateFeedReq {
   userId: string;
-  title: string;
   content: string;
   imgs: string[];
   tags: string[];
@@ -36,7 +37,6 @@ export interface GetFeedRes {
 
 export interface UpdateFeedReq {
   id: string;
-  title: string;
   content: string;
   imgs: string[];
   tags: string[];

@@ -14,7 +14,7 @@ interface Props {
 
 const Comment: React.FC<Props> = ({ comment, user }) => {
   const [isEdit, setIsEdit] = useState(false);
-  const [contents, setContents] = useState("");
+  const [content, setContent] = useState("");
 
   const { isEditSuc } = useSelector((state: RootState) => state.comment);
 
@@ -42,7 +42,7 @@ const Comment: React.FC<Props> = ({ comment, user }) => {
       target: { value },
     } = e;
 
-    setContents(value);
+    setContent(value);
   };
 
   const deleteComment = useCallback(
@@ -70,11 +70,10 @@ const Comment: React.FC<Props> = ({ comment, user }) => {
       e.preventDefault();
 
       let id = comment._id;
-      let content = contents;
 
       dispatch(commentActions.updateCommentReq({ id, content }));
     },
-    [dispatch, comment, contents]
+    [dispatch, comment, content]
   );
 
   return (
@@ -112,11 +111,11 @@ const Comment: React.FC<Props> = ({ comment, user }) => {
           <textarea
             className="w-full h-20 outline-none p-3 border border-solid border-[#8a8fb9] font-lato resize-none rounded-3 placeholder:font-lato"
             onChange={onChangeComment}
-            defaultValue={comment.contents}
+            defaultValue={comment.content}
           ></textarea>
         ) : (
           <div className="text-base text-[#3f509e] font-lato mb-2">
-            {comment.contents}
+            {comment.content}
           </div>
         )}
         {isEdit ? (

@@ -26,13 +26,17 @@ const initialState: FeedStateType = {
   allFeedsCnt: 0,
   feed: {
     _id: "",
-    title: "",
-    contents: "",
+    content: "",
     date: "",
     creator: "",
     previewImg: "",
-    images: [],
+    imgs: [],
     tags: [],
+    user: {
+      id: "",
+      name: "",
+      email: "",
+    },
   },
 };
 
@@ -101,13 +105,17 @@ const feedSlice = createSlice({
 
       state.feed = {
         _id: "",
-        title: "",
-        contents: "",
+        content: "",
         date: "",
         creator: "",
         previewImg: "",
-        images: [],
+        imgs: [],
         tags: [],
+        user: {
+          id: "",
+          name: "",
+          email: "",
+        },
       };
       state.isLoading = false;
     },

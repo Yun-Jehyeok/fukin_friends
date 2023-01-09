@@ -17,6 +17,8 @@ export const loadAllFeeds = async (req: GetAllFeedsReq) => {
 };
 
 export const createFeed = async (feed: CreateFeedReq) => {
+  console.log("req::::::", feed);
+
   return await axios.post<BaseRes>("/api/feed", feed);
 };
 
