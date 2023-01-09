@@ -6,18 +6,16 @@ import {
   createComment,
   deleteComment,
   loadAllComments,
-  updateComment
+  updateComment,
 } from "../api/commentApi";
 import { commentActions } from "../reducers/commentReducer";
+import { BaseRes } from "../types";
 import {
   CreateCommentReq,
-  CreateCommentRes,
   DeleteCommentReq,
-  DeleteCommentRes,
   LoadAllCommentsReq,
   LoadAllCommentsSucRes,
   UpdateCommentReq,
-  UpdateCommentRes
 } from "../types/comment";
 
 // 전체 댓글 로딩
@@ -32,7 +30,7 @@ function* loadAllCommentsApi(action: PayloadAction<LoadAllCommentsReq>) {
   } catch (e: any) {
     yield put(
       commentActions.loadAllCommentsFail({
-        isSuc: false,
+        success: false,
         msg: e.message,
       })
     );
@@ -45,7 +43,7 @@ function* watchloadAllComments() {
 // 댓글 작성
 function* createCommentApi(action: PayloadAction<CreateCommentReq>) {
   try {
-    const { data }: AxiosResponse<CreateCommentRes> = yield call(
+    const { data }: AxiosResponse<BaseRes> = yield call(
       createComment,
       action.payload
     );
@@ -54,7 +52,7 @@ function* createCommentApi(action: PayloadAction<CreateCommentReq>) {
   } catch (e: any) {
     yield put(
       commentActions.createCommentFail({
-        isSuc: false,
+        success: false,
       })
     );
   }
@@ -66,7 +64,7 @@ function* watchcreateComment() {
 // 댓글 수정
 function* updateCommentApi(action: PayloadAction<UpdateCommentReq>) {
   try {
-    const { data }: AxiosResponse<UpdateCommentRes> = yield call(
+    const { data }: AxiosResponse<BaseRes> = yield call(
       updateComment,
       action.payload
     );
@@ -75,7 +73,7 @@ function* updateCommentApi(action: PayloadAction<UpdateCommentReq>) {
   } catch (e: any) {
     yield put(
       commentActions.updateCommentFail({
-        isSuc: false,
+        success: false,
       })
     );
   }
@@ -87,7 +85,7 @@ function* watchupdateComment() {
 // 댓글 삭제
 function* deleteCommentApi(action: PayloadAction<DeleteCommentReq>) {
   try {
-    const { data }: AxiosResponse<DeleteCommentRes> = yield call(
+    const { data }: AxiosResponse<BaseRes> = yield call(
       deleteComment,
       action.payload
     );
@@ -96,7 +94,7 @@ function* deleteCommentApi(action: PayloadAction<DeleteCommentReq>) {
   } catch (e: any) {
     yield put(
       commentActions.deleteCommentFail({
-        isSuc: false,
+        success: false,
       })
     );
   }

@@ -4,9 +4,7 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import type { AxiosResponse } from "axios";
 import type {
   CreateNoticeReq,
-  CreateNoticeRes,
   DeleteNoticeReq,
-  DeleteNoticeRes,
   LoadAllNoticeReq,
   LoadAllNoticeRes,
   LoadImportantNoticesRes,
@@ -16,7 +14,6 @@ import type {
   SearchNoticeReq,
   SearchNoticeRes,
   UpdateNoticeReq,
-  UpdateNoticeRes,
 } from "../types/notice";
 
 import {
@@ -30,6 +27,7 @@ import {
   updateNotice,
 } from "../api/noticeApi";
 import { noticeActions } from "../reducers/noticeReducer";
+import { BaseRes } from "../types";
 
 // 전체 공지사항 로딩
 function* loadAllNoticeApi(action: PayloadAction<LoadAllNoticeReq>) {
@@ -43,7 +41,7 @@ function* loadAllNoticeApi(action: PayloadAction<LoadAllNoticeReq>) {
   } catch (e: any) {
     yield put(
       noticeActions.loadAllNoticeFail({
-        isSuc: false,
+        success: false,
         msg: e.message,
       })
     );
@@ -64,7 +62,7 @@ function* loadMainNoticeApi() {
   } catch (e: any) {
     yield put(
       noticeActions.loadMainNoticeFail({
-        isSuc: false,
+        success: false,
         msg: e.message,
       })
     );
@@ -85,7 +83,7 @@ function* loadImportantNoticeApi() {
   } catch (e: any) {
     yield put(
       noticeActions.loadImportantNoticeFail({
-        isSuc: false,
+        success: false,
         msg: e.message,
       })
     );
@@ -110,7 +108,7 @@ function* searchNoticeApi(action: PayloadAction<SearchNoticeReq>) {
   } catch (e: any) {
     yield put(
       noticeActions.searchNoticeFail({
-        isSuc: false,
+        success: false,
         msg: e.message,
       })
     );
@@ -123,7 +121,7 @@ function* watchSearchNotice() {
 // 공지사항 작성
 function* createNoticeApi(action: PayloadAction<CreateNoticeReq>) {
   try {
-    const { data }: AxiosResponse<CreateNoticeRes> = yield call(
+    const { data }: AxiosResponse<BaseRes> = yield call(
       createNotice,
       action.payload
     );
@@ -132,7 +130,7 @@ function* createNoticeApi(action: PayloadAction<CreateNoticeReq>) {
   } catch (e: any) {
     yield put(
       noticeActions.createNoticeFail({
-        isSuc: false,
+        success: false,
         msg: e.message,
       })
     );
@@ -154,7 +152,7 @@ function* loadNoticeApi(action: PayloadAction<LoadNoticeReq>) {
   } catch (e: any) {
     yield put(
       noticeActions.loadNoticeFail({
-        isSuc: false,
+        success: false,
         msg: e.message,
       })
     );
@@ -167,7 +165,7 @@ function* watchloadNotice() {
 // 공지사항 수정
 function* updateNoticeApi(action: PayloadAction<UpdateNoticeReq>) {
   try {
-    const { data }: AxiosResponse<UpdateNoticeRes> = yield call(
+    const { data }: AxiosResponse<BaseRes> = yield call(
       updateNotice,
       action.payload
     );
@@ -176,7 +174,7 @@ function* updateNoticeApi(action: PayloadAction<UpdateNoticeReq>) {
   } catch (e: any) {
     yield put(
       noticeActions.updateNoticeFail({
-        isSuc: false,
+        success: false,
       })
     );
   }
@@ -188,7 +186,7 @@ function* watchupdateNotice() {
 // 공지사항 삭제
 function* deleteNoticeApi(action: PayloadAction<DeleteNoticeReq>) {
   try {
-    const { data }: AxiosResponse<DeleteNoticeRes> = yield call(
+    const { data }: AxiosResponse<BaseRes> = yield call(
       deleteNotice,
       action.payload
     );
@@ -197,7 +195,7 @@ function* deleteNoticeApi(action: PayloadAction<DeleteNoticeReq>) {
   } catch (e: any) {
     yield put(
       noticeActions.deleteNoticeFail({
-        isSuc: false,
+        success: false,
       })
     );
   }

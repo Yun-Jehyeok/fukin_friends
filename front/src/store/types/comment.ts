@@ -17,11 +17,11 @@ export interface LoadAllCommentsReq {
   id: string;
 }
 export interface LoadAllCommentsSucRes {
-  isSuc: boolean;
+  success: boolean;
   comments: IComment[];
 }
 export interface LoadAllCommentsFailRes {
-  isSuc: boolean;
+  success: boolean;
   msg: string;
 }
 
@@ -32,17 +32,11 @@ export interface CreateCommentReq {
   userId: string;
   content: string;
 }
-export interface CreateCommentRes {
-  isSuc: boolean;
-}
 
 // 댓글 수정
 export interface UpdateCommentReq {
   id: string;
   content: string;
-}
-export interface UpdateCommentRes {
-  isSuc: boolean;
 }
 
 // 댓글 삭제
@@ -51,7 +45,4 @@ export interface DeleteCommentReq {
   userId: string;
   path: string;
   pathId: string;
-}
-export interface DeleteCommentRes {
-  isSuc: boolean;
 }

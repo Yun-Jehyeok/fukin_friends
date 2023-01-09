@@ -12,7 +12,7 @@ export interface RegisterUserReq {
   phone: string;
 }
 export interface RegisterUserRes {
-  isSuc: boolean;
+  success: boolean;
   user: IUser;
   token: string;
 }
@@ -23,7 +23,7 @@ export interface LoginUserReq {
   password: string;
 }
 export interface LoginUserRes {
-  isSuc: boolean;
+  success: boolean;
   user: IUser;
   token: string;
 }
@@ -35,7 +35,7 @@ export interface GoogleReq {
   token: string;
 }
 export interface GoogleRes {
-  isSuc: boolean;
+  success: boolean;
   user: IUser;
   token: string;
 }
@@ -46,7 +46,7 @@ export interface ChangePWReq {
   password: string;
 }
 export interface ChangePWRes {
-  isSuc: boolean;
+  success: boolean;
   user: IUser;
   token: string;
 }
@@ -56,7 +56,7 @@ export interface LoadUserReq {
   token: string | null;
 }
 export interface LoadUserRes {
-  isSuc: boolean;
+  success: boolean;
   user: IUser;
 }
 
@@ -78,14 +78,11 @@ export interface PAReq {
   phoneNum: string;
 }
 export interface PARes {
-  isSuc: boolean;
+  success: boolean;
   num: string;
 }
 
 // 이메일 보내기
 export interface SendEmailReq {
   email: string;
-}
-export interface SendEmailRes {
-  isSuc: boolean;
 }

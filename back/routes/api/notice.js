@@ -16,12 +16,12 @@ router.get("/skip/:page", async (req, res) => {
       .sort({ date: -1 });
 
     res.status(200).json({
-      isSuc: true,
+      success: true,
       allNoticesCnt: noticeCount,
       notices: noticeFindResult,
     });
   } catch (e) {
-    res.status(400).json({ isSuc: false, msg: e.message });
+    res.status(400).json({ success: false, msg: e.message });
   }
 });
 
@@ -31,11 +31,11 @@ router.get("/important", async (req, res) => {
     const notices = await Notice.find().limit(3).sort({ date: -1 });
 
     res.status(200).json({
-      isSuc: true,
+      success: true,
       notices,
     });
   } catch (e) {
-    res.status(400).json({ isSuc: false, msg: e.message });
+    res.status(400).json({ success: false, msg: e.message });
   }
 });
 
@@ -60,7 +60,7 @@ router.get("/:term/:skip", async (req, res, next) => {
       .limit(8)
       .sort({ date: -1 });
 
-    res.send({ isSuc: true, notices: result, searchAllCnt: noticeCount });
+    res.send({ success: true, notices: result, searchAllCnt: noticeCount });
   } catch (e) {
     next(e);
   }
@@ -73,10 +73,10 @@ router.get("/main", async (req, res) => {
   if (!notices)
     return res
       .status(400)
-      .json({ isSuc: false, msg: "공지사항이 존재하지 않습니다." });
+      .json({ success: false, msg: "공지사항이 존재하지 않습니다." });
 
   res.status(200).json({
-    isSuc: true,
+    success: true,
     notices: notices,
   });
 });
@@ -86,7 +86,7 @@ router.post("/", (req, res) => {
   const { userId, title, content, location, date } = req.body;
 
   User.findOne({ _id: userId }).then((user) => {
-    if (!user) return res.status(400).json({ isSuc: false });
+    if (!user) return res.status(400).json({ success: false });
 
     const newNotice = new Notice({
       title,
@@ -103,10 +103,10 @@ router.post("/", (req, res) => {
         },
       })
         .then(() => {
-          res.status(200).json({ isSuc: true });
+          res.status(200).json({ success: true });
         })
         .catch((e) => {
-          res.status(400).json({ isSuc: false });
+          res.status(400).json({ success: false });
         });
     });
   });
@@ -120,9 +120,9 @@ router.get("/:id", (req, res) => {
     if (!notice)
       return res
         .status(400)
-        .json({ isSuc: false, msg: "해당 공지사항이 존재하지 않습니다." });
+        .json({ success: false, msg: "해당 공지사항이 존재하지 않습니다." });
 
-    res.status(200).json({ isSuc: true, notice: notice });
+    res.status(200).json({ success: true, notice: notice });
   });
 });
 
@@ -138,10 +138,10 @@ router.put("/:id", (req, res) => {
     date,
   })
     .then(() => {
-      res.status(200).json({ isSuc: true });
+      res.status(200).json({ success: true });
     })
     .catch((e) => {
-      res.status(400).json({ isSuc: false });
+      res.status(400).json({ success: false });
     });
 });
 
@@ -153,9 +153,9 @@ router.delete("/:id", async (req, res) => {
     // 유저 내부 공지사항 삭제도 해야됨
     await Notice.deleteOne({ _id: id });
 
-    return res.status(200).json({ isSuc: true });
+    return res.status(200).json({ success: true });
   } catch (e) {
-    return res.status(400).json({ isSuc: false });
+    return res.status(400).json({ success: false });
   }
 });
 

@@ -19,7 +19,6 @@ import type {
   SearchUserReq,
   SearchUserRes,
   SendEmailReq,
-  SendEmailRes,
 } from "../types/user";
 
 import {
@@ -33,6 +32,7 @@ import {
   sendPhoneAuth,
 } from "../api/userApi";
 import { userActions } from "../reducers/userReducer";
+import { BaseRes } from "../types";
 
 // 회원가입
 function* registerUserApi(action: PayloadAction<RegisterUserReq>) {
@@ -46,7 +46,7 @@ function* registerUserApi(action: PayloadAction<RegisterUserReq>) {
   } catch (e: any) {
     yield put(
       userActions.registerUserFail({
-        isSuc: false,
+        success: false,
         msg: "서버에러입니다.",
       })
     );
@@ -67,7 +67,7 @@ function* loginUserApi(action: PayloadAction<LoginUserReq>) {
     yield put(userActions.loginUserSuc(data));
   } catch (e: any) {
     yield put(
-      userActions.loginUserFail({ isSuc: false, msg: "서버에러입니다." })
+      userActions.loginUserFail({ success: false, msg: "서버에러입니다." })
     );
   }
 }
@@ -85,7 +85,9 @@ function* googleApi(action: PayloadAction<GoogleReq>) {
 
     yield put(userActions.googleSuc(data));
   } catch (e: any) {
-    yield put(userActions.googleFail({ isSuc: false, msg: "서버에러입니다." }));
+    yield put(
+      userActions.googleFail({ success: false, msg: "서버에러입니다." })
+    );
   }
 }
 function* watchGoogle() {
@@ -103,7 +105,7 @@ function* changePWApi(action: PayloadAction<ChangePWReq>) {
     yield put(userActions.changePWSuc(data));
   } catch (e: any) {
     yield put(
-      userActions.changePWFail({ isSuc: false, msg: "서버에러입니다." })
+      userActions.changePWFail({ success: false, msg: "서버에러입니다." })
     );
   }
 }
@@ -122,7 +124,7 @@ function* loadUserApi(action: PayloadAction<LoadUserReq>) {
     yield put(userActions.loadUserSuc(data));
   } catch (e: any) {
     yield put(
-      userActions.loadUserFail({ isSuc: false, msg: "서버에러입니다." })
+      userActions.loadUserFail({ success: false, msg: "서버에러입니다." })
     );
   }
 }
@@ -175,7 +177,9 @@ function* paApi(action: PayloadAction<PAReq>) {
 
     yield put(userActions.userPASuc(data));
   } catch (e: any) {
-    yield put(userActions.userPAFail({ isSuc: false, msg: "서버에러입니다." }));
+    yield put(
+      userActions.userPAFail({ success: false, msg: "서버에러입니다." })
+    );
   }
 }
 function* watchPA() {
@@ -185,7 +189,7 @@ function* watchPA() {
 // 이메일 보내기
 function* sendEmailApi(action: PayloadAction<SendEmailReq>) {
   try {
-    const { data }: AxiosResponse<SendEmailRes> = yield call(
+    const { data }: AxiosResponse<BaseRes> = yield call(
       sendEmail,
       action.payload
     );
@@ -193,7 +197,7 @@ function* sendEmailApi(action: PayloadAction<SendEmailReq>) {
     yield put(userActions.sendEmailSuc(data));
   } catch (e: any) {
     yield put(
-      userActions.sendEmailFail({ isSuc: false, msg: "서버에러입니다." })
+      userActions.sendEmailFail({ success: false, msg: "서버에러입니다." })
     );
   }
 }

@@ -1,12 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 import type { PayloadAction } from "@reduxjs/toolkit";
-import type { ResponseFail } from "../types";
+import type { BaseRes, ResponseFail } from "../types";
 import type {
   CreateNoticeReq,
-  CreateNoticeRes,
   DeleteNoticeReq,
-  DeleteNoticeRes,
   LoadAllNoticeReq,
   LoadAllNoticeRes,
   LoadImportantNoticesRes,
@@ -17,7 +15,6 @@ import type {
   SearchNoticeReq,
   SearchNoticeRes,
   UpdateNoticeReq,
-  UpdateNoticeRes,
 } from "../types/notice";
 import { INotice } from "../types/notice";
 
@@ -26,7 +23,7 @@ export interface NoticeStateType {
   importantNotices: INotice[];
   isLoading: boolean;
   errMsg: null | string;
-  isSuc: boolean;
+  success: boolean;
   notice: INotice;
   allNoticesCnt: number;
 }
@@ -36,7 +33,7 @@ const initialState: NoticeStateType = {
   importantNotices: [],
   isLoading: false,
   errMsg: null,
-  isSuc: false,
+  success: false,
   allNoticesCnt: 0,
   notice: {
     _id: "",
@@ -119,7 +116,7 @@ const noticeSlice = createSlice({
       state.isLoading = true;
       state.errMsg = null;
     },
-    createNoticeSuc(state, action: PayloadAction<CreateNoticeRes>) {
+    createNoticeSuc(state, action: PayloadAction<BaseRes>) {
       window.location.href = "/notice";
 
       state.isLoading = false;
@@ -148,10 +145,10 @@ const noticeSlice = createSlice({
       state.isLoading = true;
       state.errMsg = null;
     },
-    updateNoticeSuc(state, action: PayloadAction<UpdateNoticeRes>) {
+    updateNoticeSuc(state, action: PayloadAction<BaseRes>) {
       state.isLoading = false;
     },
-    updateNoticeFail(state, action: PayloadAction<UpdateNoticeRes>) {
+    updateNoticeFail(state, action: PayloadAction<BaseRes>) {
       state.isLoading = false;
     },
 
@@ -160,7 +157,7 @@ const noticeSlice = createSlice({
       state.isLoading = true;
       state.errMsg = null;
     },
-    deleteNoticeSuc(state, action: PayloadAction<DeleteNoticeRes>) {
+    deleteNoticeSuc(state, action: PayloadAction<BaseRes>) {
       window.location.href = "/notice";
 
       state.notice = {
@@ -174,7 +171,7 @@ const noticeSlice = createSlice({
       };
       state.isLoading = false;
     },
-    deleteNoticeFail(state, action: PayloadAction<DeleteNoticeRes>) {
+    deleteNoticeFail(state, action: PayloadAction<BaseRes>) {
       state.isLoading = false;
     },
   },

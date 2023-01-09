@@ -3,6 +3,7 @@ import { combineReducers } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
 
 import commentReducer, { CommentStateType } from "./commentReducer";
+import feedReducer, { FeedStateType } from "./feedReducer";
 import noticeReducer, { NoticeStateType } from "./noticeReducer";
 import userReducer, { UserStateType } from "./userReducer";
 
@@ -10,6 +11,7 @@ interface ReducerState {
   user: UserStateType;
   notice: NoticeStateType;
   comment: CommentStateType;
+  feed: FeedStateType;
 }
 
 const rootReducer = (
@@ -28,6 +30,7 @@ const rootReducer = (
         user: userReducer,
         notice: noticeReducer,
         comment: commentReducer,
+        feed: feedReducer,
       })(state, action);
   }
 };

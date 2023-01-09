@@ -1,13 +1,11 @@
 import axios from "axios";
+import { BaseRes } from "../types";
 import {
   CreateCommentReq,
-  CreateCommentRes,
   DeleteCommentReq,
-  DeleteCommentRes,
   LoadAllCommentsReq,
   LoadAllCommentsSucRes,
   UpdateCommentReq,
-  UpdateCommentRes,
 } from "../types/comment";
 
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_SERVER_URL;
@@ -21,17 +19,17 @@ export const loadAllComments = async (comment: LoadAllCommentsReq) => {
 };
 
 export const createComment = async (comment: CreateCommentReq) => {
-  return await axios.post<CreateCommentRes>("/api/comment", comment);
+  return await axios.post<BaseRes>("/api/comment", comment);
 };
 
 export const updateComment = async (comment: UpdateCommentReq) => {
-  return await axios.put<UpdateCommentRes>(`/api/comment/${comment.id}`, {
+  return await axios.put<BaseRes>(`/api/comment/${comment.id}`, {
     comment,
   });
 };
 
 export const deleteComment = async (comment: DeleteCommentReq) => {
-  return await axios.delete<DeleteCommentRes>(`/api/comment/${comment.id}`, {
+  return await axios.delete<BaseRes>(`/api/comment/${comment.id}`, {
     data: comment,
   });
 };

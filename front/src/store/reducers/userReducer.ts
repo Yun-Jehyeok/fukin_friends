@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 import type { PayloadAction } from "@reduxjs/toolkit";
-import type { ResponseFail } from "../types";
+import type { BaseRes, ResponseFail } from "../types";
 import type {
   ChangePWReq,
   ChangePWRes,
@@ -19,7 +19,6 @@ import type {
   SearchUserReq,
   SearchUserRes,
   SendEmailReq,
-  SendEmailRes,
 } from "../types/user";
 import { IUser } from "../types/user";
 
@@ -28,7 +27,7 @@ export interface UserStateType {
   isLoading: boolean;
   errMsg: null | string;
   token: null | string;
-  isSuc: boolean;
+  success: boolean;
   PANum?: string; // PA : Phone Authentication
   searchedUser: IUser[];
   isLoginErr: null | string;
@@ -39,7 +38,7 @@ const initialState: UserStateType = {
   isLoading: false,
   errMsg: null,
   token: null,
-  isSuc: false,
+  success: false,
   PANum: "",
   searchedUser: [],
   isLoginErr: null,
@@ -177,12 +176,12 @@ const userSlice = createSlice({
     },
     userPASuc(state, action: PayloadAction<PARes>) {
       state.isLoading = false;
-      state.isSuc = true;
+      state.success = true;
       state.PANum = action.payload.num;
     },
     userPAFail(state, action: PayloadAction<ResponseFail>) {
       state.isLoading = false;
-      state.isSuc = false;
+      state.success = false;
       state.errMsg = "인증번호를 확인해주세요.";
     },
 
@@ -204,15 +203,15 @@ const userSlice = createSlice({
     sendEmailReq(state, action: PayloadAction<SendEmailReq>) {
       state.isLoading = true;
     },
-    sendEmailSuc(state, action: PayloadAction<SendEmailRes>) {
+    sendEmailSuc(state, action: PayloadAction<BaseRes>) {
       alert("이메일이 성공적으로 발송되었습니다.");
 
       state.isLoading = false;
-      state.isSuc = action.payload.isSuc;
+      state.success = action.payload.success;
     },
     sendEmailFail(state, action: PayloadAction<ResponseFail>) {
       state.isLoading = false;
-      state.isSuc = action.payload.isSuc;
+      state.success = action.payload.success;
     },
   },
 });

@@ -4,21 +4,6 @@ const { Feed } = require("../../models/feed");
 
 const router = express.Router();
 
-// Find All Feeds / GET
-router.get("/", async (req, res) => {
-  const feeds = await Feed.find();
-
-  if (!feeds)
-    return res
-      .status(400)
-      .json({ isSuc: false, msg: "피드가 존재하지 않습니다." });
-
-  res.status(200).json({
-    isSuc: true,
-    feeds: feeds,
-  });
-});
-
 // Get Feeds with Pagination / GET
 router.get("/skip/:skip", async (req, res) => {
   try {
@@ -29,12 +14,12 @@ router.get("/skip/:skip", async (req, res) => {
       .sort({ date: -1 });
 
     res.status(200).json({
-      isSuc: true,
+      success: true,
       allFeedsCnt: feedCount,
       feeds: feedFindResult,
     });
   } catch (e) {
-    res.status(400).json({ isSuc: false, msg: e.message });
+    res.status(400).json({ success: false, msg: e.message });
   }
 });
 
@@ -43,7 +28,7 @@ router.post("/create", (req, res) => {
   const { userId, title, content, imgs, tags } = req.body;
 
   User.findOne({ _id: userId }).then((user) => {
-    if (!user) return res.status(400).json({ isSuc: false });
+    if (!user) return res.status(400).json({ success: false });
 
     const newFeed = new Feed({
       title,
@@ -60,10 +45,10 @@ router.post("/create", (req, res) => {
         },
       })
         .then(() => {
-          res.status(200).json({ isSuc: true });
+          res.status(200).json({ success: true });
         })
         .catch((e) => {
-          res.status(400).json({ isSuc: false });
+          res.status(400).json({ success: false });
         });
     });
   });
@@ -77,9 +62,9 @@ router.get("/:id", (req, res) => {
     if (!feed)
       return res
         .status(400)
-        .json({ isSuc: false, msg: "해당 피드가 존재하지 않습니다." });
+        .json({ success: false, msg: "해당 피드가 존재하지 않습니다." });
 
-    res.status(200).json({ isSuc: true, feed: feed });
+    res.status(200).json({ success: true, feed: feed });
   });
 });
 
@@ -98,10 +83,10 @@ router.put("/:id", (req, res) => {
     },
   })
     .then(() => {
-      res.status(200).json({ isSuc: true });
+      res.status(200).json({ success: true });
     })
     .catch((e) => {
-      res.status(400).json({ isSuc: false });
+      res.status(400).json({ success: false });
     });
 });
 
@@ -113,9 +98,9 @@ router.delete("/:id", async (req, res) => {
     await User.deleteOne({ feeds: req.params.id });
     await Feed.deleteOne({ _id: id });
 
-    return res.status(200).json({ isSuc: true });
+    return res.status(200).json({ success: true });
   } catch (e) {
-    return res.status(400).json({ isSuc: false });
+    return res.status(400).json({ success: false });
   }
 });
 

@@ -14,19 +14,19 @@ export interface LoadAllNoticeReq {
 }
 export interface LoadAllNoticeRes {
   notices: INotice[];
-  isSuc: boolean;
+  success: boolean;
   allNoticesCnt: number;
 }
 
 // 메인페이지 공지사항
 export interface LoadMainNoticesRes {
   notices: INotice[];
-  isSuc: boolean;
+  success: boolean;
 }
 
 // 중요 공지사항
 export interface LoadImportantNoticesRes {
-  isSuc: boolean;
+  success: boolean;
   notices: INotice[];
 }
 
@@ -37,7 +37,7 @@ export interface SearchNoticeReq {
 }
 export interface SearchNoticeRes {
   notices: INotice[];
-  isSuc: boolean;
+  success: boolean;
   searchAllCnt: number;
 }
 
@@ -49,9 +49,6 @@ export interface CreateNoticeReq {
   location: string;
   date: string;
 }
-export interface CreateNoticeRes {
-  isSuc: boolean;
-}
 
 // 공지사항 상세
 export interface LoadNoticeReq {
@@ -59,10 +56,10 @@ export interface LoadNoticeReq {
 }
 export interface LoadNoticeSucRes {
   notice: INotice;
-  isSuc: boolean;
+  success: boolean;
 }
 export interface LoadNoticeFailRes {
-  isSuc: boolean;
+  success: boolean;
   msg: string;
 }
 
@@ -74,14 +71,8 @@ export interface UpdateNoticeReq {
   location: string;
   date: string;
 }
-export interface UpdateNoticeRes {
-  isSuc: boolean;
-}
 
 // 공지사항 삭제
 export interface DeleteNoticeReq {
   noticeId: string;
-}
-export interface DeleteNoticeRes {
-  isSuc: boolean;
 }

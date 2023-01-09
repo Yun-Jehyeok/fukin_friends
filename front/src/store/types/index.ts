@@ -1,4 +1,7 @@
+export interface BaseRes {
+  success: boolean;
+}
 export interface ResponseFail {
-  isSuc: boolean;
+  success: boolean;
   msg: string;
 }

@@ -19,15 +19,15 @@ router.get("/path=:path&:id", async (req, res) => {
     if (!comments)
       return res
         .status(400)
-        .json({ isSuc: false, msg: "댓글이 존재하지 않습니다." });
+        .json({ success: false, msg: "댓글이 존재하지 않습니다." });
 
     res.status(200).json({
-      isSuc: true,
+      success: true,
       comments: comments,
     });
   } else {
     res.status(400).json({
-      isSuc: false,
+      success: false,
       msg: "path가 정확하지 않습니다.",
     });
   }
@@ -38,7 +38,7 @@ router.post("/", (req, res) => {
   const { path, pathId, userId, content } = req.body;
 
   User.findOne({ _id: userId }).then((user) => {
-    if (!user) return res.status(400).json({ isSuc: false });
+    if (!user) return res.status(400).json({ success: false });
 
     const newComment = new Comment({
       contents: content,
@@ -62,15 +62,15 @@ router.post("/", (req, res) => {
               },
             })
               .then(() => {
-                res.status(200).json({ isSuc: true });
+                res.status(200).json({ success: true });
               })
               .catch((e) => {
-                res.status(400).json({ isSuc: false });
+                res.status(400).json({ success: false });
               });
           }
         })
         .catch((e) => {
-          res.status(400).json({ isSuc: false });
+          res.status(400).json({ success: false });
         });
     });
   });
@@ -85,10 +85,10 @@ router.put("/:id", (req, res) => {
     contents: content,
   })
     .then(() => {
-      res.status(200).json({ isSuc: true });
+      res.status(200).json({ success: true });
     })
     .catch((e) => {
-      res.status(400).json({ isSuc: false });
+      res.status(400).json({ success: false });
     });
 });
 
@@ -116,9 +116,9 @@ router.delete("/:id", async (req, res) => {
       });
     }
 
-    return res.status(200).json({ isSuc: true });
+    return res.status(200).json({ success: true });
   } catch (e) {
-    return res.status(400).json({ isSuc: false });
+    return res.status(400).json({ success: false });
   }
 });
 

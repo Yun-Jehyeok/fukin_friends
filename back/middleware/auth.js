@@ -19,7 +19,7 @@ const auth = (req, res, next) => {
 
     next();
   } catch (e) {
-    res.status(400).json({ isSuc: false, msg: e.message });
+    res.status(400).json({ success: false, msg: e.message });
   }
 };
 

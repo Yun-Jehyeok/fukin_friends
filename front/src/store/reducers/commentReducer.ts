@@ -1,24 +1,22 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 import type { PayloadAction } from "@reduxjs/toolkit";
+import { BaseRes } from "../types";
 import {
   CreateCommentReq,
-  CreateCommentRes,
   DeleteCommentReq,
-  DeleteCommentRes,
   IComment,
   LoadAllCommentsFailRes,
   LoadAllCommentsReq,
   LoadAllCommentsSucRes,
   UpdateCommentReq,
-  UpdateCommentRes,
 } from "../types/comment";
 
 export interface CommentStateType {
   comments: IComment[];
   isLoading: boolean;
   errMsg: null | string;
-  isSuc: boolean;
+  success: boolean;
   isEditSuc: boolean;
 }
 
@@ -26,7 +24,7 @@ const initialState: CommentStateType = {
   comments: [],
   isLoading: false,
   errMsg: null,
-  isSuc: false,
+  success: false,
   isEditSuc: false,
 };
 
@@ -54,13 +52,13 @@ const commentSlice = createSlice({
       state.isLoading = true;
       state.errMsg = null;
     },
-    createCommentSuc(state, action: PayloadAction<CreateCommentRes>) {
+    createCommentSuc(state, action: PayloadAction<BaseRes>) {
       state.isLoading = false;
-      state.isSuc = true;
+      state.success = true;
     },
-    createCommentFail(state, action: PayloadAction<CreateCommentRes>) {
+    createCommentFail(state, action: PayloadAction<BaseRes>) {
       state.isLoading = false;
-      state.isSuc = false;
+      state.success = false;
     },
 
     // 댓글 수정
@@ -69,14 +67,14 @@ const commentSlice = createSlice({
       state.errMsg = null;
       state.isEditSuc = false;
     },
-    updateCommentSuc(state, action: PayloadAction<UpdateCommentRes>) {
+    updateCommentSuc(state, action: PayloadAction<BaseRes>) {
       state.isLoading = false;
-      state.isSuc = true;
+      state.success = true;
       state.isEditSuc = true;
     },
-    updateCommentFail(state, action: PayloadAction<UpdateCommentRes>) {
+    updateCommentFail(state, action: PayloadAction<BaseRes>) {
       state.isLoading = false;
-      state.isSuc = false;
+      state.success = false;
       state.isEditSuc = true;
     },
 
@@ -85,13 +83,13 @@ const commentSlice = createSlice({
       state.isLoading = true;
       state.errMsg = null;
     },
-    deleteCommentSuc(state, action: PayloadAction<DeleteCommentRes>) {
+    deleteCommentSuc(state, action: PayloadAction<BaseRes>) {
       state.isLoading = false;
-      state.isSuc = true;
+      state.success = true;
     },
-    deleteCommentFail(state, action: PayloadAction<DeleteCommentRes>) {
+    deleteCommentFail(state, action: PayloadAction<BaseRes>) {
       state.isLoading = false;
-      state.isSuc = false;
+      state.success = false;
     },
   },
 });

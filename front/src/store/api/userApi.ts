@@ -14,10 +14,10 @@ import {
   SearchUserReq,
   SearchUserRes,
   SendEmailReq,
-  SendEmailRes,
 } from "../types/user";
 
 import axios from "axios";
+import { BaseRes } from "../types";
 
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_SERVER_URL;
 
@@ -53,5 +53,5 @@ export const searchUser = async (user: SearchUserReq) => {
 };
 
 export const sendEmail = async (email: SendEmailReq) => {
-  return await axios.post<SendEmailRes>(`/api/auth/email`, email);
+  return await axios.post<BaseRes>(`/api/auth/email`, email);
 };
