@@ -1,11 +1,10 @@
+import "antd/dist/antd.css";
 import { useAppDispatch } from "hooks/reduxHooks";
 import type { AppProps } from "next/app";
 import { useEffect } from "react";
 import wrapper from "src/configureStore";
 import { userActions } from "src/store/reducers/userReducer";
 import "styles/globals.css";
-
-import "antd/dist/antd.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const dispatch = useAppDispatch();

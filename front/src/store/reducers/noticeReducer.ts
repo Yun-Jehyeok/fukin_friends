@@ -122,6 +122,7 @@ const noticeSlice = createSlice({
     },
 
     loadNoticeReq(state, action: PayloadAction<LoadNoticeReq>) {
+      console.log("req:::", action.payload);
       state.isLoading = true;
       state.errMsg = null;
     },

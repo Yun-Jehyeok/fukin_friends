@@ -2,20 +2,37 @@ import colorSyntax from "@toast-ui/editor-plugin-color-syntax";
 import "@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css";
 import "@toast-ui/editor/dist/theme/toastui-editor-dark.css";
 import "@toast-ui/editor/dist/toastui-editor.css";
-import { Editor } from "@toast-ui/react-editor";
+import { Editor as EditorT, EditorProps } from "@toast-ui/react-editor";
 import { useAppDispatch } from "hooks/reduxHooks";
 import { useInput } from "hooks/useInput";
 import { NextPage } from "next";
+import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
-import { useCallback, useRef } from "react";
+import React, { useCallback, useRef } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "src/configureStore";
 import { noticeActions } from "src/store/reducers/noticeReducer";
 import "tui-color-picker/dist/tui-color-picker.css";
+import { TuiEditorWithForwardedProps } from "./TUIEditorWrapper";
 
 interface EditorType {
   pageName: string;
 }
+
+interface EditorPropsWithHandlers extends EditorProps {
+  onChange?(value: string): void;
+}
+
+const Editor = dynamic<TuiEditorWithForwardedProps>(
+  () => import("./TUIEditorWrapper"),
+  { ssr: false }
+);
+const EditorWithForwardedRef = React.forwardRef<
+  EditorT | undefined,
+  EditorPropsWithHandlers
+>((props, ref) => (
+  <Editor {...props} forwardedRef={ref as React.MutableRefObject<EditorT>} />
+));
 
 const WysiwygEditor: NextPage<EditorType> = ({ pageName }) => {
   const { user } = useSelector((state: RootState) => state.user);
@@ -34,7 +51,7 @@ const WysiwygEditor: NextPage<EditorType> = ({ pageName }) => {
   const date = useInput(setData("", notice.date));
   const location = useInput(setData("", notice.location));
 
-  const editorRef = useRef<Editor>(null);
+  const editorRef = useRef<EditorT>(null);
   const toolbarItems = [
     ["heading", "bold", "italic", "strike"],
     ["hr"],
@@ -106,7 +123,7 @@ const WysiwygEditor: NextPage<EditorType> = ({ pageName }) => {
         />
       </div>
 
-      <Editor
+      <EditorWithForwardedRef
         ref={editorRef}
         initialValue={setData(" ", notice.content)}
         initialEditType="wysiwyg"

@@ -1,5 +1,6 @@
 import { NextPage } from "next";
 
+import EditorViewer from "components/Editor/EditorViewer";
 import Footer from "components/Footer";
 import Header from "components/Header";
 import Comment from "components/Notice/Comment";
@@ -7,7 +8,6 @@ import NoticeSideBar from "components/Notice/Section/NoticeSidebar";
 import ViewHeader from "components/ViewHeader";
 import { useAppDispatch } from "hooks/reduxHooks";
 import { useInput } from "hooks/useInput";
-import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useCallback, useEffect } from "react";
@@ -15,31 +15,6 @@ import { useSelector } from "react-redux";
 import { RootState } from "src/configureStore";
 import { commentActions } from "src/store/reducers/commentReducer";
 import { noticeActions } from "src/store/reducers/noticeReducer";
-
-const importantList = [
-  {
-    id: 0,
-    title: "Mauris at orci non vulputate diam tincidunt nec.",
-    date: "2022-08-12 6:00 PM",
-    place: "Yeouinaru station",
-  },
-  {
-    id: 1,
-    title: "Aenean vitae in aliquam ultrices lectus. Etiam.",
-    date: "2022-08-12 6:00 PM",
-    place: "Yeouinaru station",
-  },
-  {
-    id: 2,
-    title: "Sit nam congue feugiat nisl, mauris amet nisi.",
-    date: "2022-08-17 4:00 PM",
-    place: "Hannam-dong Chicken",
-  },
-];
-
-const EditorViewer = dynamic(() => import("components/Editor/EditorViewer"), {
-  ssr: false,
-});
 
 const Notice: NextPage = () => {
   const { notice } = useSelector((state: RootState) => state.notice);
@@ -55,10 +30,12 @@ const Notice: NextPage = () => {
   useEffect(() => {
     let noticeId = router.query.noticeId as string;
 
-    dispatch(noticeActions.loadNoticeReq({ noticeId }));
-    dispatch(
-      commentActions.loadAllCommentsReq({ path: "notice", id: noticeId })
-    );
+    if (noticeId) {
+      dispatch(noticeActions.loadNoticeReq({ noticeId }));
+      dispatch(
+        commentActions.loadAllCommentsReq({ path: "notice", id: noticeId })
+      );
+    } else return;
   }, [dispatch, router]);
 
   const onDeleteNotice = useCallback(
@@ -80,17 +57,19 @@ const Notice: NextPage = () => {
     (e: React.MouseEvent<HTMLElement>) => {
       e.preventDefault();
 
-      let noticeId = router.query.noticeId as string;
-      let userId = user.id;
+      if (router && router.query) {
+        let noticeId = router.query.noticeId as string;
+        let userId = user.id;
 
-      dispatch(
-        commentActions.createCommentReq({
-          path: "notice",
-          pathId: noticeId,
-          userId,
-          content: comment.value,
-        })
-      );
+        dispatch(
+          commentActions.createCommentReq({
+            path: "notice",
+            pathId: noticeId,
+            userId,
+            content: comment.value,
+          })
+        );
+      }
     },
     [dispatch, router, comment, user]
   );
