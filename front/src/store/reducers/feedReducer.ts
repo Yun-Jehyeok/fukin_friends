@@ -46,7 +46,7 @@ const feedSlice = createSlice({
     },
     loadAllFeedSuc(state, action: PayloadAction<GetAllFeedsRes>) {
       state.isLoading = false;
-      state.feeds = action.payload.feeds;
+      state.feeds = state.feeds.concat(action.payload.feeds);
       state.allFeedsCnt = action.payload.allFeedsCnt;
     },
     loadAllFeedFail(state, action: PayloadAction<ResponseFail>) {

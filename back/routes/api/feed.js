@@ -26,8 +26,6 @@ router.get("/skip/:skip", async (req, res) => {
 router.post("/", (req, res) => {
   const { userId, content, imgs, tags } = req.body;
 
-  console.log("tags:::", tags);
-
   User.findOne({ _id: userId }).then((user) => {
     if (!user) return res.status(400).json({ success: false });
 

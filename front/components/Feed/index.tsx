@@ -1,7 +1,6 @@
 import Modal from "components/Modal";
 import Image from "next/image";
-import cat from "public/img/cat1.jpg";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "src/configureStore";
 import { feedActions } from "src/store/reducers/feedReducer";
@@ -27,7 +26,9 @@ export default function Feed() {
     tags: [],
     creatorName: "",
   });
-  const { feeds } = useSelector((state: RootState) => state.feed);
+  const { isLoading, feeds, allFeedsCnt } = useSelector(
+    (state: RootState) => state.feed
+  );
 
   const dispatch = useDispatch();
 
@@ -53,6 +54,51 @@ export default function Feed() {
     );
   };
 
+  const skipNumberRef = useRef(0);
+  const postCountRef = useRef(0);
+  const endMsg = useRef(false);
+
+  postCountRef.current = allFeedsCnt - 12;
+
+  const useOnScreen = (options: any) => {
+    const lastPostElementRef = useRef(null);
+
+    useEffect(() => {
+      const observer = new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting) {
+          let remainPostCount = postCountRef.current - skipNumberRef.current;
+
+          if (remainPostCount >= 0) {
+            dispatch(
+              feedActions.loadAllFeedReq({ skip: skipNumberRef.current + 12 })
+            );
+            skipNumberRef.current += 6;
+          } else {
+            endMsg.current = true;
+          }
+        }
+      }, options);
+
+      if (lastPostElementRef.current) {
+        observer.observe(lastPostElementRef.current);
+      }
+
+      const LastElementReturnFunc = () => {
+        if (lastPostElementRef.current) {
+          observer.unobserve(lastPostElementRef.current);
+        }
+      };
+
+      return LastElementReturnFunc;
+    }, [lastPostElementRef, options]);
+
+    return [lastPostElementRef];
+  };
+
+  const [lastPostElementRef] = useOnScreen({
+    threshold: "0.5",
+  });
+
   return (
     <div className="w-full">
       <ViewHeader
@@ -74,8 +120,8 @@ export default function Feed() {
                   <div className="w-full h-[255px]">
                     <Image
                       className="w-full h-full rounded-[5px]"
-                      src={cat}
-                      alt="cat"
+                      src={item.previewImg}
+                      alt={item.previewImg}
                       width={370}
                       height={255}
                     />
@@ -111,6 +157,9 @@ export default function Feed() {
             </div>
           )}
         </div>
+      </div>
+      <div ref={lastPostElementRef} className="flex justify-center">
+        {isLoading && "Loading..."}
       </div>
       {openModal ? (
         <Modal

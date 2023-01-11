@@ -1,8 +1,5 @@
 import { useAppDispatch } from "hooks/reduxHooks";
 import Image from "next/image";
-import cat from "public/img/cat1.jpg";
-import friend1 from "public/img/friend1.jpg";
-import friend2 from "public/img/friend2.jpg";
 
 import { useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -13,15 +10,15 @@ import { IEditFeed } from "./Feed";
 
 interface IModal {
   open: Boolean;
-  handleModal: () => void;
   data: IFeed;
+  handleModal: () => void;
   handleEdit: ({ _id, content, tags, imgs }: IEditFeed) => void;
 }
 
 export default function Modal({ open, handleModal, data, handleEdit }: IModal) {
   const { user } = useSelector((state: RootState) => state.user);
 
-  const [mainImg, setMainImg] = useState(cat);
+  const [mainImg, setMainImg] = useState(data.previewImg);
   const [isEdit, setIsEdit] = useState(false);
   const [tags, setTags] = useState(data.tags);
   const [newTag, setNewTag] = useState("");
@@ -108,37 +105,24 @@ export default function Modal({ open, handleModal, data, handleEdit }: IModal) {
       <div className="w-full h-[509px] flex justify-center">
         <div className="w-[1170px] min-w-[1170px] h-full bg-white flex relative">
           <div className="w-fit h-full p-[11px] flex flex-col gap-[11px]">
-            <Image
-              className="rounded-3 cursor-pointer"
-              onClick={() => setMainImg(cat)}
-              src={cat}
-              alt="cat"
-              width={151}
-              height={155}
-            />
-
-            <Image
-              className="rounded-3 cursor-pointer"
-              src={friend1}
-              onClick={() => setMainImg(friend1)}
-              alt="cat"
-              width={151}
-              height={155}
-            />
-            <Image
-              className="rounded-3 cursor-pointer"
-              src={friend2}
-              onClick={() => setMainImg(friend2)}
-              alt="cat"
-              width={151}
-              height={155}
-            />
+            {data.imgs.map((image) => {
+              return (
+                <Image
+                  className="rounded-3 cursor-pointer"
+                  onClick={() => setMainImg(image)}
+                  src={image}
+                  alt={image}
+                  width={151}
+                  height={155}
+                />
+              );
+            })}
           </div>
           <div className="h-[487px] p-[11px]">
             <Image
               className="rounded-3"
               src={mainImg}
-              alt="cat"
+              alt={mainImg}
               width={375}
               height={487}
             />
