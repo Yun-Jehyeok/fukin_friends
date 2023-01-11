@@ -8,96 +8,12 @@ import { feedActions } from "src/store/reducers/feedReducer";
 import { IFeed } from "src/store/types/feed";
 import ViewHeader from "../ViewHeader";
 
-const exampleData = [
-  {
-    id: 0,
-    creator: "Jehyeok",
-    date: "14 Octorbor, 2022",
-    content:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&apos;s standard test dummy text ever since the 1500s",
-    tags: ["TAG1", "TAG2", "TAG3"],
-  },
-  {
-    id: 1,
-    creator: "Jehyeok",
-    date: "15 Octorbor, 2022",
-    content:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&apos;s standard test dummy text ever since the 1500s",
-    tags: ["TAG1", "TAG2", "TAG3"],
-  },
-  {
-    id: 2,
-    creator: "Jehyeok",
-    date: "16 Octorbor, 2022",
-    content:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&apos;s standard test dummy text ever since the 1500s",
-    tags: ["TAG1", "TAG2", "TAG3"],
-  },
-  {
-    id: 3,
-    creator: "Jehyeok",
-    date: "17 Octorbor, 2022",
-    content:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&apos;s standard test dummy text ever since the 1500s",
-    tags: ["TAG1", "TAG2", "TAG3"],
-  },
-  {
-    id: 4,
-    creator: "Jehyeok",
-    date: "18 Octorbor, 2022",
-    content:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&apos;s standard test dummy text ever since the 1500s",
-    tags: ["TAG1", "TAG2", "TAG3"],
-  },
-  {
-    id: 5,
-    creator: "Jehyeok",
-    date: "19 Octorbor, 2022",
-    content:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&apos;s standard test dummy text ever since the 1500s",
-    tags: ["TAG1", "TAG2", "TAG3"],
-  },
-  {
-    id: 6,
-    creator: "Jehyeok",
-    date: "20 Octorbor, 2022",
-    content:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&apos;s standard test dummy text ever since the 1500s",
-    tags: ["TAG1", "TAG2", "TAG3"],
-  },
-  {
-    id: 7,
-    creator: "Jehyeok",
-    date: "21 Octorbor, 2022",
-    content:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&apos;s standard test dummy text ever since the 1500s",
-    tags: ["TAG1", "TAG2", "TAG3"],
-  },
-  {
-    id: 8,
-    creator: "Jehyeok",
-    date: "22 Octorbor, 2022",
-    content:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&apos;s standard test dummy text ever since the 1500s",
-    tags: ["TAG1", "TAG2", "TAG3"],
-  },
-  {
-    id: 9,
-    creator: "Jehyeok",
-    date: "23 Octorbor, 2022",
-    content:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&apos;s standard test dummy text ever since the 1500s",
-    tags: ["TAG1", "TAG2", "TAG3"],
-  },
-  {
-    id: 10,
-    creator: "Jehyeok",
-    date: "24 Octorbor, 2022",
-    content:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&apos;s standard test dummy text ever since the 1500s",
-    tags: ["TAG1", "TAG2", "TAG3"],
-  },
-];
+export interface IEditFeed {
+  _id: string;
+  content: string;
+  imgs: string[];
+  tags: string[];
+}
 
 export default function Feed() {
   const [openModal, setOpenModal] = useState(false);
@@ -109,10 +25,10 @@ export default function Feed() {
     previewImg: "",
     imgs: [],
     tags: [],
+    creatorName: "",
   });
   const { feeds } = useSelector((state: RootState) => state.feed);
 
-  console.log(feeds);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -125,6 +41,16 @@ export default function Feed() {
   };
   const closeModal = () => {
     setOpenModal(false);
+  };
+  const handleEdit = ({ _id, content, tags, imgs }: IEditFeed) => {
+    dispatch(
+      feedActions.updateFeedReq({
+        id: _id,
+        content: content,
+        tags: tags,
+        imgs: imgs,
+      })
+    );
   };
 
   return (
@@ -158,10 +84,12 @@ export default function Feed() {
                     <div className="w-full py-4.75 px-3.5 font-josefin flex">
                       <div className="w-3.5 h-[22px] mr-1 bg-creator bg-no-repeat bg-center"></div>
                       <div className="text-sm text-darkblue">
-                        {item.creator}
+                        {item.creatorName}
                       </div>
                       <div className="w-3.5 h-4.5 mr-1 ml-9 bg-calendar bg-no-repeat bg-center"></div>
-                      <div className="text-sm text-darkblue">{item.date}</div>
+                      <div className="text-sm text-darkblue">
+                        {item.date.slice(0, 10)}
+                      </div>
                     </div>
                     <div className="w-full py-0 px-4.75 font-josefin text-[#72718f] text-base">
                       {item.content}
@@ -185,7 +113,12 @@ export default function Feed() {
         </div>
       </div>
       {openModal ? (
-        <Modal open={openModal} handleModal={closeModal} data={modalData} />
+        <Modal
+          open={openModal}
+          handleModal={closeModal}
+          data={modalData}
+          handleEdit={handleEdit}
+        />
       ) : (
         ""
       )}

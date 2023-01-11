@@ -6,7 +6,7 @@ export interface IFeed {
   previewImg: string;
   imgs: string[];
   tags: string[];
-  userName: string;
+  creatorName: string;
 }
 
 export interface GetAllFeedsReq {
@@ -42,4 +42,5 @@ export interface UpdateFeedReq {
 
 export interface DeleteFeedReq {
   id: string;
+  userId: string;
 }

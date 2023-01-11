@@ -11,18 +11,7 @@ router.get("/skip/:skip", async (req, res) => {
       .skip(Number(req.params.skip))
       .limit(12)
       .sort({ date: -1 })
-      .populate({ path: "creator" });
-
-    feedFindResult = feedFindResult.map((item) => {
-      item.userName = item.creator.name;
-      item.creator = item.creator._id;
-
-      return item;
-    });
-
-    // 시바
-
-    console.log(feedFindResult);
+      .populate({ path: "creatorName" });
 
     res.status(200).json({
       success: true,
@@ -37,6 +26,8 @@ router.get("/skip/:skip", async (req, res) => {
 router.post("/", (req, res) => {
   const { userId, content, imgs, tags } = req.body;
 
+  console.log("tags:::", tags);
+
   User.findOne({ _id: userId }).then((user) => {
     if (!user) return res.status(400).json({ success: false });
 
@@ -46,6 +37,7 @@ router.post("/", (req, res) => {
       imgs: imgs,
       tags,
       creator: userId,
+      creatorName: user.name,
     });
 
     newFeed.save().then(() => {
@@ -68,7 +60,7 @@ router.get("/:id", (req, res) => {
   const id = req.params.id;
 
   Feed.findOne({ _id: id })
-    .populate("user")
+    .populate("creatorName")
     .then((feed) => {
       if (!feed)
         return res
@@ -81,15 +73,13 @@ router.get("/:id", (req, res) => {
 
 router.put("/:id", (req, res) => {
   const id = req.params.id;
-  const { content, imgs, tags } = req.body;
+  const { content, imgs, tags } = req.body.feed;
 
   Feed.findByIdAndUpdate(id, {
-    $push: {
-      content,
-      imgs: imgs,
-      tags,
-      previewImg: imgs[0],
-    },
+    content,
+    imgs: imgs,
+    tags,
+    previewImg: imgs[0],
   })
     .then(() => {
       res.status(200).json({ success: true });
@@ -99,11 +89,16 @@ router.put("/:id", (req, res) => {
     });
 });
 
-router.delete("/:id", async (req, res) => {
-  const id = req.params.id;
+router.delete("/:id/:userId", async (req, res) => {
+  const { id, userId } = req.params;
 
   try {
-    await User.deleteOne({ feeds: req.params.id });
+    // User의 피드 삭제 안됨
+    await User.findByIdAndUpdate(userId, {
+      $pull: {
+        feeds: { _id: id },
+      },
+    });
     await Feed.deleteOne({ _id: id });
 
     return res.status(200).json({ success: true });

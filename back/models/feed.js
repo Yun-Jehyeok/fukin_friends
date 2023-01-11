@@ -16,6 +16,10 @@ const FeedSchema = new mongoose.Schema({
     ref: "user",
     required: true,
   },
+  creatorName: {
+    type: String,
+    required: true,
+  },
   previewImg: {
     type: String,
   },

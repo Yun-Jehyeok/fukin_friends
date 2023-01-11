@@ -32,7 +32,7 @@ const initialState: FeedStateType = {
     previewImg: "",
     imgs: [],
     tags: [],
-    userName: "",
+    creatorName: "",
   },
 };
 
@@ -107,7 +107,7 @@ const feedSlice = createSlice({
         previewImg: "",
         imgs: [],
         tags: [],
-        userName: "",
+        creatorName: "",
       };
       state.isLoading = false;
     },

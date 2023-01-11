@@ -1,28 +1,35 @@
+import { useAppDispatch } from "hooks/reduxHooks";
 import Image from "next/image";
 import cat from "public/img/cat1.jpg";
 import friend1 from "public/img/friend1.jpg";
 import friend2 from "public/img/friend2.jpg";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "src/configureStore";
+import { feedActions } from "src/store/reducers/feedReducer";
 import { IFeed } from "src/store/types/feed";
+import { IEditFeed } from "./Feed";
 
 interface IModal {
   open: Boolean;
   handleModal: () => void;
   data: IFeed;
+  handleEdit: ({ _id, content, tags, imgs }: IEditFeed) => void;
 }
 
-export default function Modal({ open, handleModal, data }: IModal) {
+export default function Modal({ open, handleModal, data, handleEdit }: IModal) {
+  const { user } = useSelector((state: RootState) => state.user);
+
   const [mainImg, setMainImg] = useState(cat);
   const [isEdit, setIsEdit] = useState(false);
   const [tags, setTags] = useState(data.tags);
   const [newTag, setNewTag] = useState("");
   const [content, setContent] = useState(data.content as string);
 
-  const { _id, creator, date } = data;
-  const { user } = useSelector((state: RootState) => state.user);
+  const { _id, creator, date, creatorName, imgs } = data;
+
+  const dispatch = useAppDispatch();
 
   const preventScroll = (e: Event) => {
     e.preventDefault();
@@ -64,6 +71,33 @@ export default function Modal({ open, handleModal, data }: IModal) {
     setContent(data.content as string);
     setIsEdit(false);
   };
+
+  const handleDelete = useCallback(
+    (e: React.MouseEvent<HTMLElement>) => {
+      e.preventDefault();
+
+      const confirm = window.confirm("해당 피드를 삭제하시겠습니까?");
+
+      if (confirm) {
+        dispatch(feedActions.deleteFeedReq({ id: _id, userId: user.id }));
+      }
+    },
+    [dispatch, _id, user]
+  );
+
+  const onClickEdit = useCallback(
+    (e: React.MouseEvent<HTMLElement>) => {
+      e.preventDefault();
+
+      const confirm = window.confirm("피드를 수정하시겠습니까?");
+
+      if (confirm) {
+        handleEdit({ _id: _id, content: content, tags: tags, imgs: imgs });
+        setIsEdit(false);
+      }
+    },
+    [_id, content, tags, imgs]
+  );
 
   return (
     <div
@@ -126,9 +160,9 @@ export default function Modal({ open, handleModal, data }: IModal) {
             <div>
               <div className="w-full font-josefin flex pb-1.5">
                 <div className="w-3.5 h-[22px] mr-1 bg-creator bg-no-repeat bg-center"></div>
-                <div className="text-darkblue text-sm">{creator}</div>
+                <div className="text-darkblue text-sm">{creatorName}</div>
                 <div className="w-3.5 h-4.5 mr-1 ml-9 bg-calendar bg-no-repeat bg-center"></div>
-                <div className="text-darkblue text-sm">{date}</div>
+                <div className="text-darkblue text-sm">{date.slice(0, 10)}</div>
               </div>
 
               <div className="flex gap-2 mt-3 font-josefin">
@@ -165,7 +199,7 @@ export default function Modal({ open, handleModal, data }: IModal) {
                   tags.map((item) => <div key={tags.indexOf(item)}>{item}</div>)
                 )}
               </div>
-              {user.id !== creator ? (
+              {user.id === creator ? (
                 <div className="w-full flex justify-end mb-4">
                   <div className="flex gap-2">
                     {isEdit ? (
@@ -173,7 +207,9 @@ export default function Modal({ open, handleModal, data }: IModal) {
                         <div className="cursor-pointer" onClick={handleCancel}>
                           Cancel
                         </div>
-                        <div className="cursor-pointer">Edit</div>
+                        <div className="cursor-pointer" onClick={onClickEdit}>
+                          Edit
+                        </div>
                       </>
                     ) : (
                       <>
@@ -183,7 +219,9 @@ export default function Modal({ open, handleModal, data }: IModal) {
                         >
                           Edit
                         </div>
-                        <div className="cursor-pointer">Delete</div>
+                        <div className="cursor-pointer" onClick={handleDelete}>
+                          Delete
+                        </div>
                       </>
                     )}
                   </div>

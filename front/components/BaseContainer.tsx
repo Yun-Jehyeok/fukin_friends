@@ -48,7 +48,9 @@ export default function BaseContainer({ component }: IBaseContainer) {
     ) : component === "home" ? (
       <Home />
     ) : (
-      ""
+      <div className="w-full h-screen text-center flex justify-center flex-col">
+        추후 오픈됩니다!!
+      </div>
     );
 
   return (

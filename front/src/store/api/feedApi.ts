@@ -17,8 +17,6 @@ export const loadAllFeeds = async (req: GetAllFeedsReq) => {
 };
 
 export const createFeed = async (feed: CreateFeedReq) => {
-  console.log("req::::::", feed);
-
   return await axios.post<BaseRes>("/api/feed", feed);
 };
 
@@ -33,5 +31,5 @@ export const updateFeed = async (feed: UpdateFeedReq) => {
 };
 
 export const deleteFeed = async (feed: DeleteFeedReq) => {
-  return await axios.delete<BaseRes>(`/api/feed/${feed.id}`);
+  return await axios.delete<BaseRes>(`/api/feed/${feed.id}/${feed.userId}`);
 };
