@@ -1,4 +1,3 @@
-import "antd/dist/antd.css";
 import { useAppDispatch } from "hooks/reduxHooks";
 import type { AppProps } from "next/app";
 import { useEffect } from "react";
