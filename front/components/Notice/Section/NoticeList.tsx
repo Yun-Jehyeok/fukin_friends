@@ -216,8 +216,8 @@ export default function NoticeList({ type }: INoticeList) {
           </div>
         ))
       ) : (
-        <div className="w-full h-[40%] text-center flex justify-center flex-col">
-          공지사항이 존재하지 않습니다.
+        <div className="w-full h-[50%] text-center flex justify-center flex-col font-josefin text-2xl">
+          No Notices..
         </div>
       )}
       {notices.length > 0 ? (

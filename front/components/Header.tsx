@@ -115,7 +115,10 @@ const Header: NextPage = () => {
             </div>
           </div>
           <div className="w-[317px] h-10 border border-[#e7e6ef] rounded-[4px] box-border bg-white shadow-default flex">
-            <input className="w-full h-full outline-none border-none rounded-[4px] bg-white py-0 px-4" />
+            <input
+              className="w-full h-full outline-none border-none rounded-[4px] bg-white py-0 px-4 placeholder:text-gray-300 text-sm placeholder:text-sm"
+              placeholder="Search For All"
+            />
             <div className="w-[51px] h-10 relative bottom-[1px] rounded-tr-[4px] rounded-br-[4px] bg-basered bg-xsearch bg-no-repeat bg-center cursor-pointer"></div>
           </div>
         </div>
