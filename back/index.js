@@ -22,9 +22,26 @@ app.use(morgan('dev'));
 app.use(express.json());
 
 const { MONGO_URI, PORT } = config;
+<<<<<<< HEAD
 
 mongoose
   .connect(MONGO_URI, {
+=======
+
+let mongo_url = '';
+let port = '';
+
+if (process.env.NODE_ENV === 'production') {
+  mongo_url = process.env.MONGO_URI;
+  port = process.env.PORT || 5000;
+} else {
+  mongo_url = MONGO_URI;
+  port = PORT;
+}
+
+mongoose
+  .connect(mongo_url, {
+>>>>>>> 877818cea7af799aa7b2220f9a197b7f4978e918
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
@@ -46,8 +63,13 @@ app.get('/', (req, res) => {
   res.send('Hello!!');
 });
 
+<<<<<<< HEAD
 // const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
   console.log(`Server started on ${PORT} port`);
+=======
+app.listen(port, () => {
+  console.log(`Server started on ${port} port`);
+>>>>>>> 877818cea7af799aa7b2220f9a197b7f4978e918
 });

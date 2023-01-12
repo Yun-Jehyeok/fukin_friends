@@ -154,7 +154,6 @@ const userSlice = createSlice({
     logoutSuc(state) {
       state.user = { id: "", name: "", email: "" };
       state.userLoading = false;
-      state.userLoading = false;
       state.errMsg = null;
       state.token = null;
     },
