@@ -30,8 +30,6 @@ const Login: NextPage = () => {
       if (password.value === '') setIsPasswordBlank(true);
 
       if (!isEmailBlank && !isPasswordBlank) {
-        console.log('here');
-
         dispatch(
           userActions.loginUserReq({
             email: email.value,

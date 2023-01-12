@@ -1,7 +1,7 @@
-import { all, call, fork, put, takeLatest } from "redux-saga/effects";
+import { all, call, fork, put, takeLatest } from 'redux-saga/effects';
 
-import type { PayloadAction } from "@reduxjs/toolkit";
-import type { AxiosResponse } from "axios";
+import type { PayloadAction } from '@reduxjs/toolkit';
+import type { AxiosResponse } from 'axios';
 import type {
   ChangePWReq,
   ChangePWRes,
@@ -19,7 +19,7 @@ import type {
   SearchUserReq,
   SearchUserRes,
   SendEmailReq,
-} from "../types/user";
+} from '../types/user';
 
 import {
   changePWUser,
@@ -30,15 +30,15 @@ import {
   searchUser,
   sendEmail,
   sendPhoneAuth,
-} from "../api/userApi";
-import { userActions } from "../reducers/userReducer";
-import { BaseRes } from "../types";
+} from '../api/userApi';
+import { userActions } from '../reducers/userReducer';
+import { BaseRes } from '../types';
 
 function* registerUserApi(action: PayloadAction<RegisterUserReq>) {
   try {
     const { data }: AxiosResponse<RegisterUserRes> = yield call(
       registerUser,
-      action.payload
+      action.payload,
     );
 
     yield put(userActions.registerUserSuc(data));
@@ -46,8 +46,8 @@ function* registerUserApi(action: PayloadAction<RegisterUserReq>) {
     yield put(
       userActions.registerUserFail({
         success: false,
-        msg: "서버에러입니다.",
-      })
+        msg: '서버에러입니다.',
+      }),
     );
   }
 }
@@ -59,13 +59,15 @@ function* loginUserApi(action: PayloadAction<LoginUserReq>) {
   try {
     const { data }: AxiosResponse<LoginUserRes> = yield call(
       loginUser,
-      action.payload
+      action.payload,
     );
+
+    console.log('data:::', data);
 
     yield put(userActions.loginUserSuc(data));
   } catch (e: any) {
     yield put(
-      userActions.loginUserFail({ success: false, msg: "서버에러입니다." })
+      userActions.loginUserFail({ success: false, msg: '서버에러입니다.' }),
     );
   }
 }
@@ -77,13 +79,13 @@ function* googleApi(action: PayloadAction<GoogleReq>) {
   try {
     const { data }: AxiosResponse<GoogleRes> = yield call(
       googleLogin,
-      action.payload
+      action.payload,
     );
 
     yield put(userActions.googleSuc(data));
   } catch (e: any) {
     yield put(
-      userActions.googleFail({ success: false, msg: "서버에러입니다." })
+      userActions.googleFail({ success: false, msg: '서버에러입니다.' }),
     );
   }
 }
@@ -95,13 +97,13 @@ function* changePWApi(action: PayloadAction<ChangePWReq>) {
   try {
     const { data }: AxiosResponse<ChangePWRes> = yield call(
       changePWUser,
-      action.payload
+      action.payload,
     );
 
     yield put(userActions.changePWSuc(data));
   } catch (e: any) {
     yield put(
-      userActions.changePWFail({ success: false, msg: "서버에러입니다." })
+      userActions.changePWFail({ success: false, msg: '서버에러입니다.' }),
     );
   }
 }
@@ -113,13 +115,13 @@ function* loadUserApi(action: PayloadAction<LoadUserReq>) {
   try {
     const { data }: AxiosResponse<LoadUserRes> = yield call(
       loadUser,
-      action.payload
+      action.payload,
     );
 
     yield put(userActions.loadUserSuc(data));
   } catch (e: any) {
     yield put(
-      userActions.loadUserFail({ success: false, msg: "서버에러입니다." })
+      userActions.loadUserFail({ success: false, msg: '서버에러입니다.' }),
     );
   }
 }
@@ -131,7 +133,7 @@ function* searchUserApi(action: PayloadAction<SearchUserReq>) {
   try {
     const { data }: AxiosResponse<SearchUserRes> = yield call(
       searchUser,
-      action.payload
+      action.payload,
     );
 
     yield put(userActions.userSearchSuc(data));
@@ -146,7 +148,7 @@ function* watchSearchUser() {
 function* logoutApi(action: PayloadAction<LogoutUserReq>) {
   try {
     if (action.payload) {
-      localStorage.removeItem("token");
+      localStorage.removeItem('token');
 
       yield put(userActions.logoutSuc());
     } else {
@@ -164,13 +166,13 @@ function* paApi(action: PayloadAction<PAReq>) {
   try {
     const { data }: AxiosResponse<PARes> = yield call(
       sendPhoneAuth,
-      action.payload
+      action.payload,
     );
 
     yield put(userActions.userPASuc(data));
   } catch (e: any) {
     yield put(
-      userActions.userPAFail({ success: false, msg: "서버에러입니다." })
+      userActions.userPAFail({ success: false, msg: '서버에러입니다.' }),
     );
   }
 }
@@ -182,13 +184,13 @@ function* sendEmailApi(action: PayloadAction<SendEmailReq>) {
   try {
     const { data }: AxiosResponse<BaseRes> = yield call(
       sendEmail,
-      action.payload
+      action.payload,
     );
 
     yield put(userActions.sendEmailSuc(data));
   } catch (e: any) {
     yield put(
-      userActions.sendEmailFail({ success: false, msg: "서버에러입니다." })
+      userActions.sendEmailFail({ success: false, msg: '서버에러입니다.' }),
     );
   }
 }
