@@ -81,7 +81,7 @@ const Register: NextPage = () => {
   };
 
   const handleSubmit = useCallback(
-    (e: React.FormEvent<HTMLFormElement>) => {
+    (e: React.MouseEvent<HTMLButtonElement>) => {
       e.preventDefault();
 
       if (!isPASuccess) alert("인증번호를 확인해주세요.");
@@ -139,98 +139,95 @@ const Register: NextPage = () => {
                     </a>
                   </Link>
                 </div>
-                <form onSubmit={handleSubmit}>
-                  <div className="mb-2 text-sm text-black font-bold">이름</div>
-                  <Input
-                    type="text"
-                    name="name"
-                    placeholder="이름을 입력하세요"
-                    data={name}
-                  />
-                  {isNameBlank ? errMsg("이름은 필수값입니다.") : ""}
-                  <div className="mb-2 text-sm text-black font-bold">
-                    이메일
+                <div className="mb-2 text-sm text-black font-bold">이름</div>
+                <Input
+                  type="text"
+                  name="name"
+                  placeholder="이름을 입력하세요"
+                  data={name}
+                />
+                {isNameBlank ? errMsg("이름은 필수값입니다.") : ""}
+                <div className="mb-2 text-sm text-black font-bold">이메일</div>
+                <Input
+                  type="email"
+                  name="email"
+                  placeholder="이메일을 입력하세요"
+                  data={email}
+                />
+                {isEmailBlank ? errMsg("이메일은 필수값입니다.") : ""}
+                <div className="mb-2 text-sm text-black font-bold">
+                  비밀번호
+                  <span className="ml-1 text-gray-500 text-xs">
+                    (비밀번호는 8자 이상, 문자와 숫자 조합)
+                  </span>
+                </div>
+                <Input
+                  type="password"
+                  name="password"
+                  placeholder="비밀번호를 입력하세요"
+                  data={password}
+                />
+                {isPasswordBlank ? errMsg("비밀번호는 필수값입니다.") : ""}
+                <div className="mb-2 text-sm text-black font-bold">
+                  비밀번호 확인
+                </div>
+                <Input
+                  type="password"
+                  name="passwordCheck"
+                  placeholder="비밀번호 확인을 입력하세요"
+                  data={passwordCheck}
+                />
+                <div className="mb-2 text-sm text-black font-bold">
+                  휴대폰 인증
+                </div>
+                <div className="w-full flex justify-between gap-2 h-12 mb-4">
+                  <div className="w-4/5">
+                    <Input
+                      type="text"
+                      name="phone"
+                      placeholder="휴대폰 번호를 입력하세요"
+                      data={phone}
+                    />
                   </div>
-                  <Input
-                    type="email"
-                    name="email"
-                    placeholder="이메일을 입력하세요"
-                    data={email}
-                  />
-                  {isEmailBlank ? errMsg("이메일은 필수값입니다.") : ""}
-                  <div className="mb-2 text-sm text-black font-bold">
-                    비밀번호
-                    <span className="ml-1 text-gray-500 text-xs">
-                      (비밀번호는 8자 이상, 문자와 숫자 조합)
-                    </span>
+                  <div className="w-1/5">
+                    <button
+                      className={`w-full h-full leading text-white bg-lightblue text-center border-none ${
+                        sendPASuccess ? "pointer-events-none" : "cursor-pointer"
+                      } text-base hover:bg-hoverlightblue`}
+                      onClick={sendPA}
+                    >
+                      {sendPASuccess ? minute + ":" + second : "보내기"}
+                    </button>
                   </div>
-                  <Input
-                    type="password"
-                    name="password"
-                    placeholder="비밀번호를 입력하세요"
-                    data={password}
-                  />
-                  {isPasswordBlank ? errMsg("비밀번호는 필수값입니다.") : ""}
-                  <div className="mb-2 text-sm text-black font-bold">
-                    비밀번호 확인
-                  </div>
-                  <Input
-                    type="password"
-                    name="passwordCheck"
-                    placeholder="비밀번호 확인을 입력하세요"
-                    data={passwordCheck}
-                  />
-                  <div className="mb-2 text-sm text-black font-bold">
-                    휴대폰 인증
-                  </div>
-                  <div className="w-full flex justify-between gap-2 h-12 mb-4">
-                    <div className="w-4/5">
-                      <Input
-                        type="text"
-                        name="phone"
-                        placeholder="휴대폰 번호를 입력하세요"
-                        data={phone}
-                      />
-                    </div>
-                    <div className="w-1/5">
-                      <button
-                        className={`w-full h-full leading text-white bg-lightblue text-center border-none ${
-                          sendPASuccess
-                            ? "pointer-events-none"
-                            : "cursor-pointer"
-                        } text-base hover:bg-hoverlightblue`}
-                        onClick={sendPA}
-                      >
-                        {sendPASuccess ? minute + ":" + second : "보내기"}
-                      </button>
-                    </div>
-                  </div>
+                </div>
 
-                  <div className="w-full flex justify-between gap-2 h-12 mb-4">
-                    <div className="w-4/5">
-                      <Input
-                        type="text"
-                        name="authNum"
-                        placeholder="인증번호를 입력하세요"
-                        data={authNum}
-                      />
-                    </div>
-                    <div className="w-1/5">
-                      <button
-                        className="w-full h-full text-white bg-lightblue text-center border-none cursor-pointer text-base hover:bg-hoverlightblue"
-                        onClick={checkPA}
-                      >
-                        확인
-                      </button>
-                    </div>
+                <div className="w-full flex justify-between gap-2 h-12 mb-4">
+                  <div className="w-4/5">
+                    <Input
+                      type="text"
+                      name="authNum"
+                      placeholder="인증번호를 입력하세요"
+                      data={authNum}
+                    />
                   </div>
-                  {isPasswordCheckErr
-                    ? errMsg("비밀번호 확인란은 비밀번호와 같아야 합니다.")
-                    : ""}
-                  <button className="w-full h-14 text-white bg-lightblue text-center text-lg cursor-pointer border-none outline-none hover:bg-hoverlightblue leading-[56px]">
-                    회원가입
-                  </button>
-                </form>
+                  <div className="w-1/5">
+                    <button
+                      className="w-full h-full text-white bg-lightblue text-center border-none cursor-pointer text-base hover:bg-hoverlightblue"
+                      onClick={checkPA}
+                    >
+                      확인
+                    </button>
+                  </div>
+                </div>
+                {isPasswordCheckErr
+                  ? errMsg("비밀번호 확인란은 비밀번호와 같아야 합니다.")
+                  : ""}
+                <button
+                  className="w-full h-14 text-white bg-lightblue text-center text-lg cursor-pointer border-none outline-none hover:bg-hoverlightblue leading-[56px]"
+                  onClick={handleSubmit}
+                >
+                  회원가입
+                </button>
               </div>
             </div>
           </div>

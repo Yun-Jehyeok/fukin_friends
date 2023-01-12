@@ -1,10 +1,10 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const config = require('./config/index');
-const hpp = require('hpp');
-const helmet = require('helmet');
-const cors = require('cors');
-const morgan = require('morgan');
+const express = require("express");
+const mongoose = require("mongoose");
+const config = require("./config/index");
+const hpp = require("hpp");
+const helmet = require("helmet");
+const cors = require("cors");
+const morgan = require("morgan");
 
 const app = express();
 
@@ -15,61 +15,44 @@ app.use(
   cors({
     origin: true,
     credentials: true,
-  }),
+  })
 );
 
-app.use(morgan('dev'));
+app.use(morgan("dev"));
 app.use(express.json());
 
 const { MONGO_URI, PORT } = config;
-<<<<<<< HEAD
 
-mongoose
-  .connect(MONGO_URI, {
-=======
+let mongo_url = "";
+let port = "";
 
-let mongo_url = '';
-let port = '';
-
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === "production") {
   mongo_url = process.env.MONGO_URI;
-  port = process.env.PORT || 5000;
+  port = process.env.PORT;
 } else {
-  mongo_url = MONGO_URI;
   port = PORT;
+  mongo_url = MONGO_URI;
 }
 
 mongoose
   .connect(mongo_url, {
->>>>>>> 877818cea7af799aa7b2220f9a197b7f4978e918
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
   .then(() => {
-    console.log('mongodb connecting success');
+    console.log("mongodb connecting success");
   })
   .catch((err) => {
     console.log(err);
   });
 
-app.use('/api/user', require('./routes/api/user'));
-app.use('/api/auth', require('./routes/api/auth'));
-app.use('/api/feed', require('./routes/api/feed'));
-app.use('/api/event', require('./routes/api/event'));
-app.use('/api/notice', require('./routes/api/notice'));
-app.use('/api/comment', require('./routes/api/comment'));
+app.use("/api/user", require("./routes/api/user"));
+app.use("/api/auth", require("./routes/api/auth"));
+app.use("/api/feed", require("./routes/api/feed"));
+app.use("/api/event", require("./routes/api/event"));
+app.use("/api/notice", require("./routes/api/notice"));
+app.use("/api/comment", require("./routes/api/comment"));
 
-app.get('/', (req, res) => {
-  res.send('Hello!!');
-});
-
-<<<<<<< HEAD
-// const PORT = process.env.PORT || 5000;
-
-app.listen(PORT, () => {
-  console.log(`Server started on ${PORT} port`);
-=======
 app.listen(port, () => {
-  console.log(`Server started on ${port} port`);
->>>>>>> 877818cea7af799aa7b2220f9a197b7f4978e918
+  console.log(`Server started on ${PORT} port`);
 });

@@ -46,5 +46,5 @@ export const updateNotice = async (notice: UpdateNoticeReq) => {
 };
 
 export const deleteNotice = async (noticeId: DeleteNoticeReq) => {
-  return await axios.delete<BaseRes>(`/api/notice/${noticeId}`);
+  return await axios.delete<BaseRes>(`/api/notice/${noticeId.noticeId}`);
 };
