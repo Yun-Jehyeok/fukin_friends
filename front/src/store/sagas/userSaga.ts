@@ -62,8 +62,6 @@ function* loginUserApi(action: PayloadAction<LoginUserReq>) {
       action.payload,
     );
 
-    console.log('data:::', data);
-
     yield put(userActions.loginUserSuc(data));
   } catch (e: any) {
     yield put(
