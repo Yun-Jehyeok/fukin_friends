@@ -62,9 +62,9 @@ export default function BaseContainer({ component }: IBaseContainer) {
     );
 
   return (
-    <div className="w-full min-w-[1200px] relative">
+    <div className="w-full min-w-[1200px]">
       {isLoading && (
-        <div className="w-screen h-screen pointer-events-none bg-black absolute top-0 left-0 z-50 opacity-50 text-white text-center flex justify-center flex-col text-2xl">
+        <div className="w-screen h-screen pointer-events-none bg-black fixed top-0 left-0 z-50 opacity-50 text-white text-center flex justify-center flex-col text-2xl">
           <Spin />
         </div>
       )}
