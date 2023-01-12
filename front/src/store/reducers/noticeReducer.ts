@@ -21,7 +21,7 @@ import { INotice } from "../types/notice";
 export interface NoticeStateType {
   notices: INotice[];
   importantNotices: INotice[];
-  isLoading: boolean;
+  noticeLoading: boolean;
   errMsg: null | string;
   success: boolean;
   notice: INotice;
@@ -31,7 +31,7 @@ export interface NoticeStateType {
 const initialState: NoticeStateType = {
   notices: [],
   importantNotices: [],
-  isLoading: false,
+  noticeLoading: false,
   errMsg: null,
   success: false,
   allNoticesCnt: 0,
@@ -51,103 +51,102 @@ const noticeSlice = createSlice({
   initialState,
   reducers: {
     loadAllNoticeReq(state, action: PayloadAction<LoadAllNoticeReq>) {
-      state.isLoading = true;
+      state.noticeLoading = true;
       state.errMsg = null;
     },
     loadAllNoticeSuc(state, action: PayloadAction<LoadAllNoticeRes>) {
-      state.isLoading = false;
+      state.noticeLoading = false;
       state.notices = action.payload.notices;
       state.allNoticesCnt = action.payload.allNoticesCnt;
     },
     loadAllNoticeFail(state, action: PayloadAction<ResponseFail>) {
-      state.isLoading = false;
+      state.noticeLoading = false;
       state.errMsg = action.payload.msg;
     },
 
     loadMainNoticeReq(state) {
-      state.isLoading = true;
+      state.noticeLoading = true;
       state.errMsg = null;
     },
     loadMainNoticeSuc(state, action: PayloadAction<LoadMainNoticesRes>) {
-      state.isLoading = false;
+      state.noticeLoading = false;
       state.notices = action.payload.notices;
     },
     loadMainNoticeFail(state, action: PayloadAction<ResponseFail>) {
-      state.isLoading = false;
+      state.noticeLoading = false;
       state.errMsg = action.payload.msg;
     },
 
     loadImportantNoticeReq(state) {
-      state.isLoading = true;
+      state.noticeLoading = true;
       state.errMsg = null;
     },
     loadImportantNoticeSuc(
       state,
       action: PayloadAction<LoadImportantNoticesRes>
     ) {
-      state.isLoading = false;
+      state.noticeLoading = false;
       state.importantNotices = action.payload.notices;
     },
     loadImportantNoticeFail(state, action: PayloadAction<ResponseFail>) {
-      state.isLoading = false;
+      state.noticeLoading = false;
       state.errMsg = action.payload.msg;
     },
 
     searchNoticeReq(state, action: PayloadAction<SearchNoticeReq>) {
-      state.isLoading = true;
+      state.noticeLoading = true;
       state.errMsg = null;
     },
     searchNoticeSuc(state, action: PayloadAction<SearchNoticeRes>) {
-      state.isLoading = false;
+      state.noticeLoading = false;
       state.notices = action.payload.notices;
       state.allNoticesCnt = action.payload.searchAllCnt;
     },
     searchNoticeFail(state, action: PayloadAction<ResponseFail>) {
-      state.isLoading = false;
+      state.noticeLoading = false;
       state.errMsg = action.payload.msg;
     },
 
     createNoticeReq(state, action: PayloadAction<CreateNoticeReq>) {
-      state.isLoading = true;
+      state.noticeLoading = true;
       state.errMsg = null;
     },
     createNoticeSuc(state, action: PayloadAction<BaseRes>) {
       window.location.href = "/notice";
 
-      state.isLoading = false;
+      state.noticeLoading = false;
     },
     createNoticeFail(state, action: PayloadAction<ResponseFail>) {
-      state.isLoading = false;
+      state.noticeLoading = false;
       state.errMsg = action.payload.msg;
     },
 
     loadNoticeReq(state, action: PayloadAction<LoadNoticeReq>) {
-      console.log("req:::", action.payload);
-      state.isLoading = true;
+      state.noticeLoading = true;
       state.errMsg = null;
     },
     loadNoticeSuc(state, action: PayloadAction<LoadNoticeSucRes>) {
       state.notice = action.payload.notice;
-      state.isLoading = false;
+      state.noticeLoading = false;
     },
     loadNoticeFail(state, action: PayloadAction<LoadNoticeFailRes>) {
-      state.isLoading = false;
+      state.noticeLoading = false;
       state.errMsg = action.payload.msg;
     },
 
     updateNoticeReq(state, action: PayloadAction<UpdateNoticeReq>) {
-      state.isLoading = true;
+      state.noticeLoading = true;
       state.errMsg = null;
     },
     updateNoticeSuc(state, action: PayloadAction<BaseRes>) {
-      state.isLoading = false;
+      state.noticeLoading = false;
     },
     updateNoticeFail(state, action: PayloadAction<BaseRes>) {
-      state.isLoading = false;
+      state.noticeLoading = false;
     },
 
     deleteNoticeReq(state, action: PayloadAction<DeleteNoticeReq>) {
-      state.isLoading = true;
+      state.noticeLoading = true;
       state.errMsg = null;
     },
     deleteNoticeSuc(state, action: PayloadAction<BaseRes>) {
@@ -162,10 +161,10 @@ const noticeSlice = createSlice({
         creator: "",
         location: "",
       };
-      state.isLoading = false;
+      state.noticeLoading = false;
     },
     deleteNoticeFail(state, action: PayloadAction<BaseRes>) {
-      state.isLoading = false;
+      state.noticeLoading = false;
     },
   },
 });

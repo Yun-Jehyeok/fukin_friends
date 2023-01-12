@@ -1,21 +1,29 @@
-import { useSelector } from 'react-redux';
-import { RootState } from 'src/configureStore';
-import Feed from './Feed';
-import FeedEditor from './Feed/FeedEditor';
-import Footer from './Footer';
-import Header from './Header';
-import Home from './Home/Home';
-import Notice from './Notice';
-import NoticeEditor from './Notice/Section/NoticeEditor';
+import { Spin } from "antd";
+import { useSelector } from "react-redux";
+import { RootState } from "src/configureStore";
+import Feed from "./Feed";
+import FeedEditor from "./Feed/FeedEditor";
+import Footer from "./Footer";
+import Header from "./Header";
+import Home from "./Home/Home";
+import Notice from "./Notice";
+import NoticeEditor from "./Notice/Section/NoticeEditor";
 
 interface IBaseContainer {
   component: string;
 }
 
 export default function BaseContainer({ component }: IBaseContainer) {
-  const { token } = useSelector((state: RootState) => state.user);
+  const { token, userLoading } = useSelector((state: RootState) => state.user);
+  const { feedLoading } = useSelector((state: RootState) => state.feed);
+  const { noticeLoading } = useSelector((state: RootState) => state.notice);
+  const { commentLoading } = useSelector((state: RootState) => state.comment);
+
+  const isLoading =
+    userLoading || feedLoading || noticeLoading || commentLoading;
+
   const comp =
-    component === 'notice' ? (
+    component === "notice" ? (
       <Notice
         title="Notice Page"
         desc="It's Just Notice Page"
@@ -23,29 +31,29 @@ export default function BaseContainer({ component }: IBaseContainer) {
         url_title="Create Notice"
         type="list"
       />
-    ) : component === 'notice-search' ? (
+    ) : component === "notice-search" ? (
       <Notice
         title="Notice Search Page"
         desc="It's Just Notice Search Page"
         type="search"
       />
-    ) : component === 'notice-create' ? (
+    ) : component === "notice-create" ? (
       <NoticeEditor
         title="Create Notice Page"
         desc="It's Just Create Notice Page"
         pageName="create"
       />
-    ) : component === 'notice-update' ? (
+    ) : component === "notice-update" ? (
       <NoticeEditor
         title="Updating Notice Page"
         desc="It's Just Updating Notice Page"
         pageName="update"
       />
-    ) : component === 'feed' ? (
+    ) : component === "feed" ? (
       <Feed />
-    ) : component === 'feed-create' ? (
+    ) : component === "feed-create" ? (
       <FeedEditor />
-    ) : component === 'home' ? (
+    ) : component === "home" ? (
       <Home />
     ) : (
       <div className="w-full h-screen text-center flex justify-center flex-col">
@@ -54,7 +62,13 @@ export default function BaseContainer({ component }: IBaseContainer) {
     );
 
   return (
-    <div className="w-full min-w-[1200px]">
+    <div className="w-full min-w-[1200px] relative">
+      {isLoading && (
+        <div className="w-screen h-screen pointer-events-none bg-black absolute top-0 left-0 z-50 opacity-50 text-white text-center flex justify-center flex-col text-2xl">
+          <Spin />
+        </div>
+      )}
+
       <Header />
       <div className="w-full flex">
         <div className="w-full relative">

@@ -14,7 +14,7 @@ import {
 
 export interface CommentStateType {
   comments: IComment[];
-  isLoading: boolean;
+  commentLoading: boolean;
   errMsg: null | string;
   success: boolean;
   isEditSuc: boolean;
@@ -22,7 +22,7 @@ export interface CommentStateType {
 
 const initialState: CommentStateType = {
   comments: [],
-  isLoading: false,
+  commentLoading: false,
   errMsg: null,
   success: false,
   isEditSuc: false,
@@ -33,58 +33,58 @@ const commentSlice = createSlice({
   initialState,
   reducers: {
     loadAllCommentsReq(state, action: PayloadAction<LoadAllCommentsReq>) {
-      state.isLoading = true;
+      state.commentLoading = true;
       state.errMsg = null;
     },
     loadAllCommentsSuc(state, action: PayloadAction<LoadAllCommentsSucRes>) {
-      state.isLoading = false;
+      state.commentLoading = false;
       state.comments = action.payload.comments;
     },
     loadAllCommentsFail(state, action: PayloadAction<LoadAllCommentsFailRes>) {
-      state.isLoading = false;
+      state.commentLoading = false;
       state.errMsg = action.payload.msg;
       state.comments = [];
     },
 
     createCommentReq(state, action: PayloadAction<CreateCommentReq>) {
-      state.isLoading = true;
+      state.commentLoading = true;
       state.errMsg = null;
     },
     createCommentSuc(state, action: PayloadAction<BaseRes>) {
-      state.isLoading = false;
+      state.commentLoading = false;
       state.success = true;
     },
     createCommentFail(state, action: PayloadAction<BaseRes>) {
-      state.isLoading = false;
+      state.commentLoading = false;
       state.success = false;
     },
 
     updateCommentReq(state, action: PayloadAction<UpdateCommentReq>) {
-      state.isLoading = true;
+      state.commentLoading = true;
       state.errMsg = null;
       state.isEditSuc = false;
     },
     updateCommentSuc(state, action: PayloadAction<BaseRes>) {
-      state.isLoading = false;
+      state.commentLoading = false;
       state.success = true;
       state.isEditSuc = true;
     },
     updateCommentFail(state, action: PayloadAction<BaseRes>) {
-      state.isLoading = false;
+      state.commentLoading = false;
       state.success = false;
       state.isEditSuc = true;
     },
 
     deleteCommentReq(state, action: PayloadAction<DeleteCommentReq>) {
-      state.isLoading = true;
+      state.commentLoading = true;
       state.errMsg = null;
     },
     deleteCommentSuc(state, action: PayloadAction<BaseRes>) {
-      state.isLoading = false;
+      state.commentLoading = false;
       state.success = true;
     },
     deleteCommentFail(state, action: PayloadAction<BaseRes>) {
-      state.isLoading = false;
+      state.commentLoading = false;
       state.success = false;
     },
   },

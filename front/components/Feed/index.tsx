@@ -26,7 +26,7 @@ export default function Feed() {
     tags: [],
     creatorName: "",
   });
-  const { isLoading, feeds, allFeedsCnt } = useSelector(
+  const { feedLoading, feeds, allFeedsCnt } = useSelector(
     (state: RootState) => state.feed
   );
 
@@ -159,7 +159,7 @@ export default function Feed() {
         </div>
       </div>
       <div ref={lastPostElementRef} className="flex justify-center">
-        {isLoading && "Loading..."}
+        {feedLoading && "Loading..."}
       </div>
       {openModal ? (
         <Modal

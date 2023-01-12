@@ -24,7 +24,7 @@ import { IUser } from "../types/user";
 
 export interface UserStateType {
   user: IUser;
-  isLoading: boolean;
+  userLoading: boolean;
   errMsg: null | string;
   token: null | string;
   success: boolean;
@@ -35,7 +35,7 @@ export interface UserStateType {
 
 const initialState: UserStateType = {
   user: { id: "", name: "", email: "" },
-  isLoading: false,
+  userLoading: false,
   errMsg: null,
   token: null,
   success: false,
@@ -49,26 +49,26 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     registerUserReq(state, action: PayloadAction<RegisterUserReq>) {
-      state.isLoading = true;
+      state.userLoading = true;
       state.errMsg = null;
     },
     registerUserSuc(state, action: PayloadAction<RegisterUserRes>) {
       localStorage.setItem("token", action.payload.token);
       window.location.href = "/";
 
-      state.isLoading = false;
+      state.userLoading = false;
       state.user = action.payload.user;
       state.token = action.payload.token;
     },
     registerUserFail(state, action: PayloadAction<ResponseFail>) {
       localStorage.removeItem("token");
 
-      state.isLoading = false;
+      state.userLoading = false;
       state.errMsg = action.payload.msg;
     },
 
     loginUserReq(state, action: PayloadAction<LoginUserReq>) {
-      state.isLoading = true;
+      state.userLoading = true;
       state.errMsg = null;
       state.isLoginErr = null;
     },
@@ -76,20 +76,20 @@ const userSlice = createSlice({
       window.location.href = "/";
       localStorage.setItem("token", action.payload.token);
 
-      state.isLoading = false;
+      state.userLoading = false;
       state.user = action.payload.user;
       state.token = action.payload.token;
     },
     loginUserFail(state, action: PayloadAction<ResponseFail>) {
       localStorage.removeItem("token");
 
-      state.isLoading = false;
+      state.userLoading = false;
       state.errMsg = action.payload.msg;
       state.isLoginErr = action.payload.msg;
     },
 
     googleReq(state, action: PayloadAction<GoogleReq>) {
-      state.isLoading = true;
+      state.userLoading = true;
       state.errMsg = null;
       state.isLoginErr = null;
     },
@@ -97,20 +97,20 @@ const userSlice = createSlice({
       window.location.href = "/";
       localStorage.setItem("token", action.payload.token);
 
-      state.isLoading = false;
+      state.userLoading = false;
       state.user = action.payload.user;
       state.token = action.payload.token;
     },
     googleFail(state, action: PayloadAction<ResponseFail>) {
       localStorage.removeItem("token");
 
-      state.isLoading = false;
+      state.userLoading = false;
       state.errMsg = action.payload.msg;
       state.isLoginErr = action.payload.msg;
     },
 
     changePWReq(state, action: PayloadAction<ChangePWReq>) {
-      state.isLoading = true;
+      state.userLoading = true;
       state.errMsg = null;
     },
     changePWSuc(state, action: PayloadAction<ChangePWRes>) {
@@ -122,86 +122,86 @@ const userSlice = createSlice({
 
       localStorage.setItem("token", action.payload.token);
 
-      state.isLoading = false;
+      state.userLoading = false;
       state.user = action.payload.user;
       state.token = action.payload.token;
     },
     changePWFail(state, action: PayloadAction<ResponseFail>) {
       localStorage.removeItem("token");
 
-      state.isLoading = false;
+      state.userLoading = false;
       state.errMsg = action.payload.msg;
     },
 
     loadUserReq(state, action: PayloadAction<LoadUserReq>) {
-      state.isLoading = true;
+      state.userLoading = true;
       state.errMsg = null;
     },
     loadUserSuc(state, action: PayloadAction<LoadUserRes>) {
-      state.isLoading = false;
+      state.userLoading = false;
       state.user = action.payload.user;
       state.token = localStorage.getItem("token");
     },
     loadUserFail(state, action: PayloadAction<ResponseFail>) {
-      state.isLoading = false;
+      state.userLoading = false;
       state.errMsg = action.payload.msg;
     },
 
     logoutReq(state, action: PayloadAction<LogoutUserReq>) {
-      state.isLoading = true;
-      state.isLoading = true;
+      state.userLoading = true;
+      state.userLoading = true;
     },
     logoutSuc(state) {
       state.user = { id: "", name: "", email: "" };
-      state.isLoading = false;
-      state.isLoading = false;
+      state.userLoading = false;
+      state.userLoading = false;
       state.errMsg = null;
       state.token = null;
     },
     logoutFail(state) {
-      state.isLoading = false;
-      state.isLoading = false;
+      state.userLoading = false;
+      state.userLoading = false;
     },
 
     userPAReq(state, action: PayloadAction<PAReq>) {
-      state.isLoading = true;
+      state.userLoading = true;
       state.errMsg = null;
     },
     userPASuc(state, action: PayloadAction<PARes>) {
-      state.isLoading = false;
+      state.userLoading = false;
       state.success = true;
       state.PANum = action.payload.num;
     },
     userPAFail(state, action: PayloadAction<ResponseFail>) {
-      state.isLoading = false;
+      state.userLoading = false;
       state.success = false;
       state.errMsg = "인증번호를 확인해주세요.";
     },
 
     userSearchReq(state, action: PayloadAction<SearchUserReq>) {
-      state.isLoading = true;
+      state.userLoading = true;
       state.searchedUser = [];
     },
     userSearchSuc(state, action: PayloadAction<SearchUserRes>) {
-      state.isLoading = false;
+      state.userLoading = false;
       state.searchedUser = action.payload.users;
     },
     userSearchFail(state) {
-      state.isLoading = false;
+      state.userLoading = false;
       state.searchedUser = [];
     },
 
     sendEmailReq(state, action: PayloadAction<SendEmailReq>) {
-      state.isLoading = true;
+      state.userLoading = true;
     },
     sendEmailSuc(state, action: PayloadAction<BaseRes>) {
       alert("이메일이 성공적으로 발송되었습니다.");
 
-      state.isLoading = false;
+      state.userLoading = false;
       state.success = action.payload.success;
     },
     sendEmailFail(state, action: PayloadAction<ResponseFail>) {
-      state.isLoading = false;
+      state.userLoading = false;
       state.success = action.payload.success;
     },
   },

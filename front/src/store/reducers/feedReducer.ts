@@ -12,7 +12,7 @@ import {
 } from "../types/feed";
 
 export interface FeedStateType {
-  isLoading: boolean;
+  feedLoading: boolean;
   errMsg: null | string;
   feeds: IFeed[];
   feed: IFeed;
@@ -20,7 +20,7 @@ export interface FeedStateType {
 }
 
 const initialState: FeedStateType = {
-  isLoading: false,
+  feedLoading: false,
   errMsg: "",
   feeds: [],
   allFeedsCnt: 0,
@@ -41,59 +41,59 @@ const feedSlice = createSlice({
   initialState,
   reducers: {
     loadAllFeedReq(state, action: PayloadAction<GetAllFeedsReq>) {
-      state.isLoading = true;
+      state.feedLoading = true;
       state.errMsg = null;
     },
     loadAllFeedSuc(state, action: PayloadAction<GetAllFeedsRes>) {
-      state.isLoading = false;
+      state.feedLoading = false;
       state.feeds = state.feeds.concat(action.payload.feeds);
       state.allFeedsCnt = action.payload.allFeedsCnt;
     },
     loadAllFeedFail(state, action: PayloadAction<ResponseFail>) {
-      state.isLoading = false;
+      state.feedLoading = false;
       state.errMsg = action.payload.msg;
     },
 
     createFeedReq(state, action: PayloadAction<CreateFeedReq>) {
-      state.isLoading = true;
+      state.feedLoading = true;
       state.errMsg = null;
     },
     createFeedSuc(state, action: PayloadAction<BaseRes>) {
       window.location.href = "/feed";
 
-      state.isLoading = false;
+      state.feedLoading = false;
     },
     createFeedFail(state, action: PayloadAction<ResponseFail>) {
-      state.isLoading = false;
+      state.feedLoading = false;
       state.errMsg = action.payload.msg;
     },
 
     loadFeedReq(state, action: PayloadAction<GetFeedReq>) {
-      state.isLoading = true;
+      state.feedLoading = true;
       state.errMsg = null;
     },
     loadFeedSuc(state, action: PayloadAction<GetFeedRes>) {
       state.feed = action.payload.feed;
-      state.isLoading = false;
+      state.feedLoading = false;
     },
     loadFeedFail(state, action: PayloadAction<ResponseFail>) {
-      state.isLoading = false;
+      state.feedLoading = false;
       state.errMsg = action.payload.msg;
     },
 
     updateFeedReq(state, action: PayloadAction<UpdateFeedReq>) {
-      state.isLoading = true;
+      state.feedLoading = true;
       state.errMsg = null;
     },
     updateFeedSuc(state, action: PayloadAction<BaseRes>) {
-      state.isLoading = false;
+      state.feedLoading = false;
     },
     updateFeedFail(state, action: PayloadAction<BaseRes>) {
-      state.isLoading = false;
+      state.feedLoading = false;
     },
 
     deleteFeedReq(state, action: PayloadAction<DeleteFeedReq>) {
-      state.isLoading = true;
+      state.feedLoading = true;
       state.errMsg = null;
     },
     deleteFeedSuc(state, action: PayloadAction<BaseRes>) {
@@ -109,10 +109,10 @@ const feedSlice = createSlice({
         tags: [],
         creatorName: "",
       };
-      state.isLoading = false;
+      state.feedLoading = false;
     },
     deleteFeedFail(state, action: PayloadAction<BaseRes>) {
-      state.isLoading = false;
+      state.feedLoading = false;
     },
   },
 });
