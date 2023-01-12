@@ -21,10 +21,10 @@ app.use(
 app.use(morgan('dev'));
 app.use(express.json());
 
-const { MONGO_URI } = config;
+// const { MONGO_URI } = config;
 
 mongoose
-  .connect(MONGO_URI, {
+  .connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
@@ -41,6 +41,10 @@ app.use('/api/feed', require('./routes/api/feed'));
 app.use('/api/event', require('./routes/api/event'));
 app.use('/api/notice', require('./routes/api/notice'));
 app.use('/api/comment', require('./routes/api/comment'));
+
+app.get('/', (req, res) => {
+  res.send('Hello!!');
+});
 
 const PORT = process.env.PORT || 5000;
 
