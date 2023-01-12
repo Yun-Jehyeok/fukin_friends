@@ -1,7 +1,7 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
-import type { PayloadAction } from "@reduxjs/toolkit";
-import type { BaseRes, ResponseFail } from "../types";
+import type { PayloadAction } from '@reduxjs/toolkit';
+import type { BaseRes, ResponseFail } from '../types';
 import type {
   ChangePWReq,
   ChangePWRes,
@@ -19,8 +19,8 @@ import type {
   SearchUserReq,
   SearchUserRes,
   SendEmailReq,
-} from "../types/user";
-import { IUser } from "../types/user";
+} from '../types/user';
+import { IUser } from '../types/user';
 
 export interface UserStateType {
   user: IUser;
@@ -34,18 +34,18 @@ export interface UserStateType {
 }
 
 const initialState: UserStateType = {
-  user: { id: "", name: "", email: "" },
+  user: { id: '', name: '', email: '' },
   isLoading: false,
   errMsg: null,
   token: null,
   success: false,
-  PANum: "",
+  PANum: '',
   searchedUser: [],
   isLoginErr: null,
 };
 
 const userSlice = createSlice({
-  name: "user",
+  name: 'user',
   initialState,
   reducers: {
     registerUserReq(state, action: PayloadAction<RegisterUserReq>) {
@@ -53,15 +53,15 @@ const userSlice = createSlice({
       state.errMsg = null;
     },
     registerUserSuc(state, action: PayloadAction<RegisterUserRes>) {
-      localStorage.setItem("token", action.payload.token);
-      window.location.href = "/";
+      localStorage.setItem('token', action.payload.token);
+      window.location.href = '/';
 
       state.isLoading = false;
       state.user = action.payload.user;
       state.token = action.payload.token;
     },
     registerUserFail(state, action: PayloadAction<ResponseFail>) {
-      localStorage.removeItem("token");
+      localStorage.removeItem('token');
 
       state.isLoading = false;
       state.errMsg = action.payload.msg;
@@ -73,15 +73,15 @@ const userSlice = createSlice({
       state.isLoginErr = null;
     },
     loginUserSuc(state, action: PayloadAction<LoginUserRes>) {
-      window.location.href = "/";
-      localStorage.setItem("token", action.payload.token);
+      window.location.href = '/';
+      localStorage.setItem('token', action.payload.token);
 
       state.isLoading = false;
       state.user = action.payload.user;
       state.token = action.payload.token;
     },
     loginUserFail(state, action: PayloadAction<ResponseFail>) {
-      localStorage.removeItem("token");
+      localStorage.removeItem('token');
 
       state.isLoading = false;
       state.errMsg = action.payload.msg;
@@ -94,15 +94,15 @@ const userSlice = createSlice({
       state.isLoginErr = null;
     },
     googleSuc(state, action: PayloadAction<GoogleRes>) {
-      window.location.href = "/";
-      localStorage.setItem("token", action.payload.token);
+      window.location.href = '/';
+      localStorage.setItem('token', action.payload.token);
 
       state.isLoading = false;
       state.user = action.payload.user;
       state.token = action.payload.token;
     },
     googleFail(state, action: PayloadAction<ResponseFail>) {
-      localStorage.removeItem("token");
+      localStorage.removeItem('token');
 
       state.isLoading = false;
       state.errMsg = action.payload.msg;
@@ -114,20 +114,20 @@ const userSlice = createSlice({
       state.errMsg = null;
     },
     changePWSuc(state, action: PayloadAction<ChangePWRes>) {
-      let confirm = window.confirm("비밀번호가 변경되었습니다.");
+      let confirm = window.confirm('비밀번호가 변경되었습니다.');
 
       if (confirm) {
-        window.location.href = "/";
+        window.location.href = '/';
       }
 
-      localStorage.setItem("token", action.payload.token);
+      localStorage.setItem('token', action.payload.token);
 
       state.isLoading = false;
       state.user = action.payload.user;
       state.token = action.payload.token;
     },
     changePWFail(state, action: PayloadAction<ResponseFail>) {
-      localStorage.removeItem("token");
+      localStorage.removeItem('token');
 
       state.isLoading = false;
       state.errMsg = action.payload.msg;
@@ -140,7 +140,7 @@ const userSlice = createSlice({
     loadUserSuc(state, action: PayloadAction<LoadUserRes>) {
       state.isLoading = false;
       state.user = action.payload.user;
-      state.token = localStorage.getItem("token");
+      state.token = localStorage.getItem('token');
     },
     loadUserFail(state, action: PayloadAction<ResponseFail>) {
       state.isLoading = false;
@@ -152,7 +152,7 @@ const userSlice = createSlice({
       state.isLoading = true;
     },
     logoutSuc(state) {
-      state.user = { id: "", name: "", email: "" };
+      state.user = { id: '', name: '', email: '' };
       state.isLoading = false;
       state.isLoading = false;
       state.errMsg = null;
@@ -168,6 +168,8 @@ const userSlice = createSlice({
       state.errMsg = null;
     },
     userPASuc(state, action: PayloadAction<PARes>) {
+      console.log('인증번호:::', action.payload.num);
+
       state.isLoading = false;
       state.success = true;
       state.PANum = action.payload.num;
@@ -175,7 +177,7 @@ const userSlice = createSlice({
     userPAFail(state, action: PayloadAction<ResponseFail>) {
       state.isLoading = false;
       state.success = false;
-      state.errMsg = "인증번호를 확인해주세요.";
+      state.errMsg = '인증번호를 확인해주세요.';
     },
 
     userSearchReq(state, action: PayloadAction<SearchUserReq>) {
@@ -195,7 +197,7 @@ const userSlice = createSlice({
       state.isLoading = true;
     },
     sendEmailSuc(state, action: PayloadAction<BaseRes>) {
-      alert("이메일이 성공적으로 발송되었습니다.");
+      alert('이메일이 성공적으로 발송되었습니다.');
 
       state.isLoading = false;
       state.success = action.payload.success;
