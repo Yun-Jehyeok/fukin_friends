@@ -58,7 +58,7 @@ export default function BaseContainer({ component }: IBaseContainer) {
       <Header />
       <div className="w-full flex">
         <div className="w-full relative">
-          {!token ? (
+          {token ? (
             comp
           ) : (
             <div className="w-full h-full min-h-[80vh] text-center flex justify-center flex-col">
