@@ -8,6 +8,8 @@ import {
   GetFeedReq,
   GetFeedRes,
   IFeed,
+  TestReq,
+  TestRes,
   UpdateFeedReq,
 } from "../types/feed";
 
@@ -112,6 +114,17 @@ const feedSlice = createSlice({
       state.feedLoading = false;
     },
     deleteFeedFail(state, action: PayloadAction<BaseRes>) {
+      state.feedLoading = false;
+    },
+
+    testReq(state, action: PayloadAction<TestReq>) {
+      state.feedLoading = true;
+      state.errMsg = null;
+    },
+    testSuc(state, action: PayloadAction<TestRes>) {
+      state.feedLoading = false;
+    },
+    testFail(state, action: PayloadAction<BaseRes>) {
       state.feedLoading = false;
     },
   },

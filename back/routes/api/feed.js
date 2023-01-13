@@ -1,8 +1,45 @@
 const express = require("express");
+const multer = require("multer");
+const multerS3 = require("multer-s3");
+const AWS = require("aws-sdk");
+const config = require("../../config/index");
 const { User } = require("../../models/user");
 const { Feed } = require("../../models/feed");
 
 const router = express.Router();
+
+const { S3_ACCESS_KEY, S3_SECRET_ACCESS_KEY } = config;
+
+AWS.config.update({
+  accessKeyId: S3_ACCESS_KEY,
+  secretAccessKey: S3_SECRET_ACCESS_KEY,
+  region: "ap-northeast-2",
+});
+
+const uploadS3 = multer({
+  storage: multerS3({
+    s3: new AWS.S3(),
+    bucket: "fukinfriends",
+    acl: "public-read",
+    contentType: multerS3.AUTO_CONTENT_TYPE,
+    key: function (req, file, cb) {
+      cb(
+        null,
+        `feed/${path.basename(file.originalname)}_${new Date().valueOf()}`
+      );
+    },
+  }),
+  limits: { fileSize: 5 * 1024 * 1024 },
+});
+
+router.post("/image", uploadS3.array("imgs", 3), async (req, res) => {
+  try {
+    res.json({ upload: true, url: req.files.map((v) => v.location) });
+  } catch (e) {
+    console.error(e);
+    res.json({ upload: false, url: null });
+  }
+});
 
 router.get("/skip/:skip", async (req, res) => {
   try {

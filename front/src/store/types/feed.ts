@@ -44,3 +44,11 @@ export interface DeleteFeedReq {
   id: string;
   userId: string;
 }
+
+export interface TestReq {
+  imgs: string[];
+}
+export interface TestRes {
+  upload: boolean;
+  url: string[];
+}

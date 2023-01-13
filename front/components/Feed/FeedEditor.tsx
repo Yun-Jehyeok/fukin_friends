@@ -61,6 +61,8 @@ export default function FeedEditor() {
   };
 
   const handleImgs = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let imgs = Array.from(e.target.files as FileList).map((item) => item.name);
+
     const files = Array.from(e.target.files as FileList);
     const selectedFiles: string[] = files.map((file) =>
       URL.createObjectURL(file)
@@ -80,6 +82,15 @@ export default function FeedEditor() {
     setImgs(imgs.filter((image) => image !== e.currentTarget.currentSrc));
     setEmpties(4 - imgs.length);
   };
+
+  const handleTest = useCallback(
+    (e: React.MouseEvent<HTMLButtonElement>) => {
+      e.preventDefault();
+
+      dispatch(feedActions.testReq({ imgs }));
+    },
+    [dispatch]
+  );
 
   const handleSubmit = useCallback(
     (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -139,6 +150,7 @@ export default function FeedEditor() {
               />
             </label>
           </div>
+          <button onClick={handleTest}>test</button>
           <div className="flex mt-4 gap-4">
             {imgs.map((image, i) => (
               <div key={i} className="w-32 h-32 rounded-md">

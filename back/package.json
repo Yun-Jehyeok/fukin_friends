@@ -16,6 +16,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.245.0",
     "aws-sdk": "^2.1292.0",
     "axios": "^0.27.2",
     "bcryptjs": "^2.4.3",

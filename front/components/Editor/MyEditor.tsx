@@ -8,11 +8,13 @@ import { useInput } from "hooks/useInput";
 import { NextPage } from "next";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
-import React, { useCallback, useRef } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "src/configureStore";
 import { noticeActions } from "src/store/reducers/noticeReducer";
 import "tui-color-picker/dist/tui-color-picker.css";
+
+import { useDaumPostcodePopup } from "react-daum-postcode";
 import { TuiEditorWithForwardedProps } from "./TUIEditorWrapper";
 
 interface EditorType {
@@ -37,6 +39,7 @@ const EditorWithForwardedRef = React.forwardRef<
 const WysiwygEditor: NextPage<EditorType> = ({ pageName }) => {
   const { user } = useSelector((state: RootState) => state.user);
   const { notice } = useSelector((state: RootState) => state.notice);
+  const [location, setLocation] = useState("");
 
   const setData = useCallback(
     (a: any, b: any) => {
@@ -49,16 +52,12 @@ const WysiwygEditor: NextPage<EditorType> = ({ pageName }) => {
 
   const title = useInput(setData("", notice.title));
   const date = useInput(setData("", notice.date));
-  const location = useInput(setData("", notice.location));
 
   const editorRef = useRef<EditorT>(null);
   const toolbarItems = [
     ["heading", "bold", "italic", "strike"],
     ["hr"],
     ["ul", "ol", "task"],
-    ["table", "link"],
-    ["image"],
-    ["code"],
     ["scrollSync"],
   ];
 
@@ -78,14 +77,14 @@ const WysiwygEditor: NextPage<EditorType> = ({ pageName }) => {
             userId: user.id,
             title: title.value,
             content,
-            location: location.value,
+            location: location,
             date: date.value,
           }),
           noticeActions.updateNoticeReq({
             id: noticeId,
             title: title.value,
             content,
-            location: location.value,
+            location: location,
             date: date.value,
           })
         )
@@ -94,13 +93,37 @@ const WysiwygEditor: NextPage<EditorType> = ({ pageName }) => {
     [setData, router, user, title, date, location, dispatch]
   );
 
+  const open = useDaumPostcodePopup();
+
+  const handleComplete = (data: any) => {
+    let fullAddress = data.address;
+    let extraAddress = "";
+
+    if (data.addressType === "R") {
+      if (data.bname !== "") {
+        extraAddress += data.bname;
+      }
+      if (data.buildingName !== "") {
+        extraAddress +=
+          extraAddress !== "" ? `, ${data.buildingName}` : data.buildingName;
+      }
+      fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
+    }
+
+    setLocation(fullAddress);
+  };
+
+  const handleClick = () => {
+    open({ onComplete: handleComplete });
+  };
+
   return (
     <div className="w-default p-24 h-fit shadow-md">
       <div className="font-josefin text-[32px] font-bold text-center mb-4">
         {setData("Create Notice", "Updating Notice")}
       </div>
       <div className="text-[#9096b2] text-[17px] font-lato mb-10 text-center">
-        Please notice detail bellow.
+        Please notice detail below.
       </div>
       <input
         className="w-full h-12 px-3 py-0 border border-solid border-[#dadde6] outline-none mb-3 rounded-3"
@@ -111,11 +134,12 @@ const WysiwygEditor: NextPage<EditorType> = ({ pageName }) => {
       />
 
       <div className="w-full h-12 mb-3 flex justify-between gap-2">
-        <input
-          className="w-4/5 h-full text-[13px] flex justify-center flex-col text-[#757575] px-3 py-0 border border-solid border-[#dadde6] outline-none rounded-3"
-          placeholder="위치를 입력해주세요."
-          {...location}
-        />
+        <button
+          onClick={handleClick}
+          className="w-4/5 h-full flex justify-center flex-col text-[#757575] px-3 py-0 border border-solid border-[#dadde6] outline-none rounded-3"
+        >
+          {location !== "" ? location : "Enter the Location."}
+        </button>
         <input
           className="w-1/5 h-full px-3 py-0 border border-solid border-[#dadde6] outline-none rounded-3"
           type="date"
