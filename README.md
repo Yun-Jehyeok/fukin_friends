@@ -6,9 +6,13 @@ It developed with Next.js, TypeScript, Redux, Node.js, MongoDB.
 
 ## Getting Started
 
-First, clone the project.
+Click this [URL](https://fukin-friends.vercel.app/)!!
 
-Second, install the dependencies of front & back
+or...
+
+First, Clone the project.
+
+Second, Install the dependencies of front & back
 
 ```
 npm i
