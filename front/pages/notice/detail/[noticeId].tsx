@@ -133,7 +133,7 @@ const Notice: NextPage = () => {
                       Comment
                     </div>
                     <textarea
-                      className="w-full h-16 border border-solid border-[#8a8fb9] p-3 outline-none font-lato resize-none placeholder:font-lato"
+                      className="w-full h-16 border border-solid border-[#8a8fb9] p-3 outline-none font-lato resize-none placeholder:font-lato focus:border-[#8a8fb9] focus:ring-0"
                       {...comment}
                       maxLength={200}
                       placeholder="Write your comment"

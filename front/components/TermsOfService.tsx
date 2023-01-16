@@ -51,9 +51,11 @@ const TermsOfService: NextPage<PageTypeProps> = ({ checkTOS }: child) => {
         </div>
         <div>
           <div className="font-bold mb-4 text-lg text-black">
-            <span className="mr-2 cursor-pointer" onClick={onClickFirstTOS}>
+            <span
+              className="mr-2 cursor-pointer relative top-1.5"
+              onClick={onClickFirstTOS}
+            >
               <Image
-                className="top-[5px]"
                 src={firstCheck ? check : noCheck}
                 alt="non-check"
                 width={24}
@@ -61,7 +63,7 @@ const TermsOfService: NextPage<PageTypeProps> = ({ checkTOS }: child) => {
               />
             </span>
             FUKIN FRIEND 이용 약관 동의{" "}
-            <span className="text-lightblue relative bottom-[2px] text-base">
+            <span className="text-lightblue relative bottom-0.5 text-base">
               (필수)
             </span>
           </div>
@@ -79,9 +81,11 @@ const TermsOfService: NextPage<PageTypeProps> = ({ checkTOS }: child) => {
         </div>
         <div>
           <div className="text-black text-lg font-bold mb-4">
-            <span className="mr-2 cursor-pointer" onClick={onClickSecondTOS}>
+            <span
+              className="mr-2 cursor-pointer relative top-1.5"
+              onClick={onClickSecondTOS}
+            >
               <Image
-                className="top-[5px]"
                 src={secondCheck ? check : noCheck}
                 alt="non-check"
                 width={24}
@@ -89,7 +93,7 @@ const TermsOfService: NextPage<PageTypeProps> = ({ checkTOS }: child) => {
               />
             </span>
             개인정보 수집 및 이용 동의{" "}
-            <span className="text-lightblue relative bottom-[2px] text-base">
+            <span className="text-lightblue relative bottom-0.5 text-base">
               (필수)
             </span>
           </div>
