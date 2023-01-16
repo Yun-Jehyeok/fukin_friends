@@ -88,6 +88,8 @@ const feedSlice = createSlice({
       state.errMsg = null;
     },
     updateFeedSuc(state, action: PayloadAction<BaseRes>) {
+      window.location.href = "/feed";
+
       state.feedLoading = false;
     },
     updateFeedFail(state, action: PayloadAction<BaseRes>) {
