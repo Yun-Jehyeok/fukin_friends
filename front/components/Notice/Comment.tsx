@@ -53,14 +53,18 @@ const Comment: React.FC<Props> = ({ comment, user }) => {
       let userId = user.id;
       let commentId = e.currentTarget.dataset.id as string;
 
-      dispatch(
-        commentActions.deleteCommentReq({
-          id: commentId,
-          userId,
-          path: "notice",
-          pathId: noticeId,
-        })
-      );
+      const confirm = window.confirm("댓글을 삭제하시겠습니까?");
+
+      if (confirm) {
+        dispatch(
+          commentActions.deleteCommentReq({
+            id: commentId,
+            userId,
+            path: "notice",
+            pathId: noticeId,
+          })
+        );
+      }
     },
     [router, user, dispatch]
   );

@@ -20,18 +20,8 @@ const menus = [
   },
   {
     id: 2,
-    path: "event",
-    content: "Event",
-  },
-  {
-    id: 3,
     path: "album",
     content: "Album",
-  },
-  {
-    id: 4,
-    path: "playlist",
-    content: "Play list",
   },
 ];
 

@@ -83,15 +83,6 @@ export default function FeedEditor() {
     setEmpties(4 - imgs.length);
   };
 
-  const handleTest = useCallback(
-    (e: React.MouseEvent<HTMLButtonElement>) => {
-      e.preventDefault();
-
-      dispatch(feedActions.testReq({ imgs }));
-    },
-    [dispatch]
-  );
-
   const handleSubmit = useCallback(
     (e: React.MouseEvent<HTMLButtonElement>) => {
       e.preventDefault();
@@ -140,7 +131,7 @@ export default function FeedEditor() {
                   strokeLinejoin="round"
                 />
               </svg>
-              <div className="ml-2 font-lato">Select the imgs</div>
+              <div className="ml-2 font-lato">Select the images</div>
               <input
                 className="hidden"
                 type="file"
@@ -150,7 +141,6 @@ export default function FeedEditor() {
               />
             </label>
           </div>
-          <button onClick={handleTest}>test</button>
           <div className="flex mt-4 gap-4">
             {imgs.map((image, i) => (
               <div key={i} className="w-32 h-32 rounded-md">

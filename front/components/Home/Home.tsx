@@ -2,7 +2,6 @@ import { NextPage } from "next";
 import Image from "next/image";
 
 import AlbumList from "./Section/AlbumList";
-import MusicList from "./Section/MusicList";
 import NoticeList from "./Section/NoticeList";
 
 import friend1 from "public/img/friend1.jpg";
@@ -100,7 +99,6 @@ const Home: NextPage = () => {
         ))}
       </div>
       <NoticeList />
-      <MusicList />
       <AlbumList />
     </div>
   );

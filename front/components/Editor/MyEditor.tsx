@@ -39,7 +39,6 @@ const EditorWithForwardedRef = React.forwardRef<
 const WysiwygEditor: NextPage<EditorType> = ({ pageName }) => {
   const { user } = useSelector((state: RootState) => state.user);
   const { notice } = useSelector((state: RootState) => state.notice);
-  const [location, setLocation] = useState("");
 
   const setData = useCallback(
     (a: any, b: any) => {
@@ -47,6 +46,8 @@ const WysiwygEditor: NextPage<EditorType> = ({ pageName }) => {
     },
     [pageName]
   );
+
+  const [location, setLocation] = useState(setData("", notice.location));
 
   const dispatch = useAppDispatch();
 
@@ -118,7 +119,7 @@ const WysiwygEditor: NextPage<EditorType> = ({ pageName }) => {
   };
 
   return (
-    <div className="w-default p-24 h-fit shadow-md">
+    <div className="w-default p-24 h-fit shadow-editor">
       <div className="font-josefin text-[32px] font-bold text-center mb-4">
         {setData("Create Notice", "Updating Notice")}
       </div>
