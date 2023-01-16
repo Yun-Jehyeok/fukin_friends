@@ -139,6 +139,8 @@ const noticeSlice = createSlice({
       state.errMsg = null;
     },
     updateNoticeSuc(state, action: PayloadAction<BaseRes>) {
+      window.location.href = "/notice";
+
       state.noticeLoading = false;
     },
     updateNoticeFail(state, action: PayloadAction<BaseRes>) {
