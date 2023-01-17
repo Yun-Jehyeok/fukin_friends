@@ -60,7 +60,7 @@ const Header: NextPage = () => {
           <div className="flex gap-6">
             <div className="text-[#f1f1f1] flex font-josefin cursor-pointer">
               English
-              <div className="w-2 h-2 mt-3 ml-2 border-[#f1f1f1] border border-l-0 border-t-0 rotate-45 relative top-[2px]"></div>
+              <div className="w-2 h-2 mt-3 ml-2 border-[#f1f1f1] border border-l-0 border-t-0 rotate-45 relative top-0.5"></div>
             </div>
             <div className="text-[#f1f1f1] flex font-josefin cursor-pointer">
               {token ? (

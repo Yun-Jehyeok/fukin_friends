@@ -1,19 +1,19 @@
-import errMsg from 'components/errMsg';
-import Input from 'components/Input';
-import { useAppDispatch } from 'hooks/reduxHooks';
-import { useInput } from 'hooks/useInput';
-import type { NextPage } from 'next';
-import Link from 'next/link';
-import { useCallback, useState } from 'react';
-import GoogleButton from 'react-google-button';
-import GoogleLogin from 'react-google-login';
-import { useSelector } from 'react-redux';
-import { RootState } from 'src/configureStore';
-import { userActions } from 'src/store/reducers/userReducer';
+import errMsg from "components/errMsg";
+import Input from "components/Input";
+import { useAppDispatch } from "hooks/reduxHooks";
+import { useInput } from "hooks/useInput";
+import type { NextPage } from "next";
+import Link from "next/link";
+import { useCallback, useState } from "react";
+import GoogleLogin from "react-google-login";
+import { useSelector } from "react-redux";
+import { RootState } from "src/configureStore";
+import { userActions } from "src/store/reducers/userReducer";
+import { Google_Button } from "styles/globalStyle";
 
 const Login: NextPage = () => {
-  const email = useInput('');
-  const password = useInput('');
+  const email = useInput("");
+  const password = useInput("");
 
   const [isEmailBlank, setIsEmailBlank] = useState(false);
   const [isPasswordBlank, setIsPasswordBlank] = useState(false);
@@ -26,19 +26,19 @@ const Login: NextPage = () => {
     (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
 
-      if (email.value === '') setIsEmailBlank(true);
-      if (password.value === '') setIsPasswordBlank(true);
+      if (email.value === "") setIsEmailBlank(true);
+      if (password.value === "") setIsPasswordBlank(true);
 
       if (!isEmailBlank && !isPasswordBlank) {
         dispatch(
           userActions.loginUserReq({
             email: email.value,
             password: password.value,
-          }),
+          })
         );
       }
     },
-    [dispatch, isEmailBlank, isPasswordBlank, email, password],
+    [dispatch, isEmailBlank, isPasswordBlank, email, password]
   );
 
   const responseGoogle = useCallback(
@@ -48,7 +48,7 @@ const Login: NextPage = () => {
 
       dispatch(userActions.googleReq({ email, name, token: tokenId }));
     },
-    [dispatch],
+    [dispatch]
   );
 
   const responseFail = (err: any) => {
@@ -72,14 +72,10 @@ const Login: NextPage = () => {
               <GoogleLogin
                 clientId="534707785395-1c3aq9gp00tfbib4rgg0eemp6ma0ddup.apps.googleusercontent.com"
                 render={(renderProps) => (
-                  <GoogleButton
-                    className="mb-2 !w-full"
-                    onClick={renderProps.onClick}
-                  ></GoogleButton>
+                  <Google_Button onClick={renderProps.onClick}></Google_Button>
                 )}
                 onSuccess={responseGoogle}
                 onFailure={responseFail}
-                theme="dark"
               />
             </div>
             <div className="text-base font-bold text-center mb-4.5 relative before:w-[calc(50%-60px)] before:h-[0.5px] before:bg-black before:absolute before:left-0 before:top-1/2 after:w-[calc(50%-60px)] after:h-[0.5px] after:bg-black after:absolute after:right-0 after:top-1/2 before:content-[''] after:content-['']">
@@ -100,8 +96,8 @@ const Login: NextPage = () => {
                 placeholder="비밀번호를 입력하세요"
                 data={password}
               />
-              {isLoginErr ? errMsg('이메일 혹은 비밀번호를 확인해주세요.') : ''}
-              <button className="w-full h-14 text-white bg-lightblue text-center text-lg cursor-pointer border-none outline-none hover:bg-hoverlightblue leading-[56px]">
+              {isLoginErr ? errMsg("이메일 혹은 비밀번호를 확인해주세요.") : ""}
+              <button className="w-full h-14 text-white bg-lightblue text-center text-lg cursor-pointer border-none outline-none hover:bg-hoverlightblue leading-14">
                 로그인
               </button>
             </form>

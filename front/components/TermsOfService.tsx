@@ -125,13 +125,13 @@ const TermsOfService: NextPage<PageTypeProps> = ({ checkTOS }: child) => {
         )}
         <div className="w-full flex justify-between gap-4">
           <div
-            className="w-1/2 h-14 text-white text-lg border-none outline-none cursor-pointer leading-[56px] text-center bg-[#8e8e8e] hover:bg-gray-500"
+            className="w-1/2 h-14 text-white text-lg border-none outline-none cursor-pointer leading-14 text-center bg-[#8e8e8e] hover:bg-gray-500"
             onClick={cancel}
           >
             취소
           </div>
           <div
-            className="w-1/2 h-14 text-white text-lg border-none outline-none cursor-pointer leading-[56px] text-center bg-lightblue hover:bg-hoverlightblue"
+            className="w-1/2 h-14 text-white text-lg border-none outline-none cursor-pointer leading-14 text-center bg-lightblue hover:bg-hoverlightblue"
             onClick={handleCheckTerms}
           >
             확인

@@ -41,7 +41,7 @@ const PwInquiry: NextPage = () => {
             placeholder="이메일을 입력하세요"
             data={email}
           />
-          <div className="w-full h-14 text-white bg-lightblue text-center text-lg cursor-pointer border-none outline-none hover:bg-hoverlightblue leading-[56px]">
+          <div className="w-full h-14 text-white bg-lightblue text-center text-lg cursor-pointer border-none outline-none hover:bg-hoverlightblue leading-14">
             전송
           </div>
         </form>

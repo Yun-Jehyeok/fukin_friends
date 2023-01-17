@@ -90,7 +90,7 @@ const ChangePassword: NextPage = () => {
               {...passwordCheck}
             />
             {isPasswordCheckErr ? errMsg(passwordCheckErrMsg) : ""}
-            <div className="w-full h-14 text-white bg-lightblue text-center text-lg cursor-pointer border-none outline-none hover:bg-hoverlightblue leading-[56px]">
+            <div className="w-full h-14 text-white bg-lightblue text-center text-lg cursor-pointer border-none outline-none hover:bg-hoverlightblue leading-14">
               변경
             </div>
           </form>

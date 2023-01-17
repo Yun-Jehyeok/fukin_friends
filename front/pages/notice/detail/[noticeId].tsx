@@ -5,6 +5,7 @@ import Footer from "components/Footer";
 import Header from "components/Header";
 import Comment from "components/Notice/Comment";
 import NoticeSideBar from "components/Notice/Section/NoticeSidebar";
+import Spinner from "components/Spinner";
 import ViewHeader from "components/ViewHeader";
 import { useAppDispatch } from "hooks/reduxHooks";
 import { useInput } from "hooks/useInput";
@@ -17,7 +18,9 @@ import { commentActions } from "src/store/reducers/commentReducer";
 import { noticeActions } from "src/store/reducers/noticeReducer";
 
 const Notice: NextPage = () => {
-  const { notice } = useSelector((state: RootState) => state.notice);
+  const { notice, noticeLoading } = useSelector(
+    (state: RootState) => state.notice
+  );
   const { user } = useSelector((state: RootState) => state.user);
   const { comments } = useSelector((state: RootState) => state.comment);
 
@@ -76,6 +79,7 @@ const Notice: NextPage = () => {
 
   return (
     <div className="w-full min-w-[1200px]">
+      {noticeLoading && <Spinner />}
       <Header />
       <div className="w-full flex">
         <div className="w-full relative">

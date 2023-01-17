@@ -1,48 +1,9 @@
-import { Row, Spinner } from "reactstrap";
+import { Spin } from "antd";
 
-export const GrowingSpinner = (
-  <>
-    <Row className="flex justify-center m-5">
-      <Spinner
-        style={{ width: "2rem", height: "2rem" }}
-        type="grow"
-        color="secondary"
-      />
-      <Spinner
-        style={{ width: "2rem", height: "2rem" }}
-        type="grow"
-        color="primary"
-      />
-      <Spinner
-        style={{ width: "2rem", height: "2rem" }}
-        type="grow"
-        color="success"
-      />
-      <Spinner
-        style={{ width: "2rem", height: "2rem" }}
-        type="grow"
-        color="danger"
-      />
-      <Spinner
-        style={{ width: "2rem", height: "2rem" }}
-        type="grow"
-        color="warning"
-      />
-      <Spinner
-        style={{ width: "2rem", height: "2rem" }}
-        type="grow"
-        color="info"
-      />
-      <Spinner
-        style={{ width: "2rem", height: "2rem" }}
-        type="grow"
-        color="light"
-      />
-      <Spinner
-        style={{ width: "2rem", height: "2rem" }}
-        type="grow"
-        color="dark"
-      />
-    </Row>
-  </>
-);
+export default function Spinner() {
+  return (
+    <div className="w-screen h-screen pointer-events-none bg-black fixed top-0 left-0 z-50 opacity-50 text-white text-center flex justify-center flex-col text-2xl">
+      <Spin />
+    </div>
+  );
+}

@@ -1,4 +1,3 @@
-import { Spin } from "antd";
 import { useSelector } from "react-redux";
 import { RootState } from "src/configureStore";
 import Feed from "./Feed";
@@ -8,6 +7,7 @@ import Header from "./Header";
 import Home from "./Home/Home";
 import Notice from "./Notice";
 import NoticeEditor from "./Notice/Section/NoticeEditor";
+import Spinner from "./Spinner";
 
 interface IBaseContainer {
   component: string;
@@ -63,11 +63,7 @@ export default function BaseContainer({ component }: IBaseContainer) {
 
   return (
     <div className="w-full min-w-[1200px]">
-      {isLoading && (
-        <div className="w-screen h-screen pointer-events-none bg-black fixed top-0 left-0 z-50 opacity-50 text-white text-center flex justify-center flex-col text-2xl">
-          <Spin />
-        </div>
-      )}
+      {isLoading && <Spinner />}
 
       <Header />
       <div className="w-full flex">

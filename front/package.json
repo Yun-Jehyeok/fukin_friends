@@ -20,6 +20,7 @@
     "@toast-ui/editor": "^3.2.0",
     "@toast-ui/editor-plugin-color-syntax": "^3.1.0",
     "@toast-ui/react-editor": "^3.2.0",
+    "@types/styled-components": "^5.1.26",
     "@zeit/next-less": "^1.0.1",
     "@zeit/next-typescript": "^1.1.1",
     "@zeit/next-workers": "^1.0.0",
@@ -44,6 +45,7 @@
     "reactstrap": "^9.1.5",
     "redux-saga": "^1.1.3",
     "redux-thunk": "^2.4.1",
+    "styled-components": "^5.3.6",
     "swiper": "^8.3.2"
   },
   "devDependencies": {

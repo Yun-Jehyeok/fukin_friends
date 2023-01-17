@@ -76,12 +76,12 @@ export default function NoticeList({ type }: INoticeList) {
       setTotalPage(
         allNoticesCnt % 8 === 0
           ? Math.round(allNoticesCnt / 8)
-          : Math.round(allNoticesCnt / 8) + 1
+          : Math.floor(allNoticesCnt / 8) + 1
       );
       setPageGroup(
         totalPage % 5 === 0
           ? Math.round(totalPage / 5)
-          : Math.round(totalPage / 5) + 1
+          : Math.floor(totalPage / 5) + 1
       );
       setCurrentPage(cp);
       setCurrentPageGroup(cpg);

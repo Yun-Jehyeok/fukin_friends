@@ -19,6 +19,9 @@ module.exports = {
       height: {
         4.5: "18px",
       },
+      lineHeight: {
+        14: "56px",
+      },
       padding: {
         4.75: "19px",
       },

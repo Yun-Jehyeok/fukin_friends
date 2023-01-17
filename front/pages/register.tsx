@@ -223,7 +223,7 @@ const Register: NextPage = () => {
                   ? errMsg("비밀번호 확인란은 비밀번호와 같아야 합니다.")
                   : ""}
                 <button
-                  className="w-full h-14 text-white bg-lightblue text-center text-lg cursor-pointer border-none outline-none hover:bg-hoverlightblue leading-[56px]"
+                  className="w-full h-14 text-white bg-lightblue text-center text-lg cursor-pointer border-none outline-none hover:bg-hoverlightblue leading-14"
                   onClick={handleSubmit}
                 >
                   회원가입
