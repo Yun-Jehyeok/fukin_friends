@@ -4,11 +4,10 @@ import "@toast-ui/editor/dist/theme/toastui-editor-dark.css";
 import "@toast-ui/editor/dist/toastui-editor.css";
 import { Editor as EditorT, EditorProps } from "@toast-ui/react-editor";
 import { useAppDispatch } from "hooks/reduxHooks";
-import { useInput } from "hooks/useInput";
 import { NextPage } from "next";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
-import React, { useCallback, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "src/configureStore";
 import { noticeActions } from "src/store/reducers/noticeReducer";
@@ -48,11 +47,40 @@ const WysiwygEditor: NextPage<EditorType> = ({ pageName }) => {
   );
 
   const [location, setLocation] = useState(setData("", notice.location));
+  const [title, setTitle] = useState(setData("", notice.title));
+  const [date, setDate] = useState(setData("", notice.date.slice(0, 10)));
 
   const dispatch = useAppDispatch();
 
-  const title = useInput(setData("", notice.title));
-  const date = useInput(setData("", notice.date));
+  const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const {
+      target: { value },
+    } = e;
+
+    setTitle(value);
+  };
+  const onChangeDate = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const {
+      target: { value },
+    } = e;
+
+    setDate(value);
+  };
+
+  const router = useRouter();
+
+  useEffect(() => {
+    if (pageName !== "create") {
+      let noticeId = router.query.noticeId as string;
+      dispatch(noticeActions.loadNoticeReq({ noticeId: noticeId }));
+    }
+  }, [router, dispatch]);
+
+  useEffect(() => {
+    setLocation(setData("", notice.location));
+    setTitle(setData("", notice.title));
+    setDate(setData("", notice.date.slice(0, 10)));
+  }, [notice]);
 
   const editorRef = useRef<EditorT>(null);
   const toolbarItems = [
@@ -61,8 +89,6 @@ const WysiwygEditor: NextPage<EditorType> = ({ pageName }) => {
     ["ul", "ol", "task"],
     ["scrollSync"],
   ];
-
-  const router = useRouter();
 
   const onSubmit = useCallback(
     (e: React.MouseEvent<HTMLElement>) => {
@@ -131,7 +157,8 @@ const WysiwygEditor: NextPage<EditorType> = ({ pageName }) => {
         type="text"
         name="title"
         placeholder="Enter the Title."
-        {...title}
+        value={title}
+        onChange={onChangeTitle}
       />
 
       <div className="w-full h-12 mb-3 flex justify-between gap-2">
@@ -144,7 +171,8 @@ const WysiwygEditor: NextPage<EditorType> = ({ pageName }) => {
         <input
           className="w-1/5 h-full px-3 py-0 border border-solid border-[#dadde6] outline-none rounded-3"
           type="date"
-          {...date}
+          value={date}
+          onChange={onChangeDate}
         />
       </div>
 
