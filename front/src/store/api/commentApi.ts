@@ -2,7 +2,9 @@ import axios from "axios";
 import { BaseRes } from "../types";
 import {
   CreateCommentReq,
+  CreateCommentRes,
   DeleteCommentReq,
+  DeleteCommentRes,
   LoadAllCommentsReq,
   LoadAllCommentsSucRes,
   UpdateCommentReq,
@@ -19,7 +21,7 @@ export const loadAllComments = async (comment: LoadAllCommentsReq) => {
 };
 
 export const createComment = async (comment: CreateCommentReq) => {
-  return await axios.post<BaseRes>("/api/comment", comment);
+  return await axios.post<CreateCommentRes>("/api/comment", comment);
 };
 
 export const updateComment = async (comment: UpdateCommentReq) => {
@@ -29,7 +31,7 @@ export const updateComment = async (comment: UpdateCommentReq) => {
 };
 
 export const deleteComment = async (comment: DeleteCommentReq) => {
-  return await axios.delete<BaseRes>(`/api/comment/${comment.id}`, {
+  return await axios.delete<DeleteCommentRes>(`/api/comment/${comment.id}`, {
     data: comment,
   });
 };

@@ -30,6 +30,10 @@ export interface CreateCommentReq {
   userId: string;
   content: string;
 }
+export interface CreateCommentRes {
+  comments: IComment[];
+  success: boolean;
+}
 
 export interface UpdateCommentReq {
   id: string;
@@ -41,4 +45,8 @@ export interface DeleteCommentReq {
   userId: string;
   path: string;
   pathId: string;
+}
+export interface DeleteCommentRes {
+  success: boolean;
+  comments: IComment[];
 }

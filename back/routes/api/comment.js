@@ -59,8 +59,21 @@ router.post("/", (req, res) => {
                 comments: newComment._id,
               },
             })
-              .then(() => {
-                res.status(200).json({ success: true });
+              .then(async () => {
+                const comments = await Comment.find({
+                  path: path,
+                  pathId: pathId,
+                }).populate("creator", "_id name email");
+
+                if (!comments)
+                  return res
+                    .status(400)
+                    .json({ success: false, msg: "댓글이 존재하지 않습니다." });
+
+                res.status(200).json({
+                  success: true,
+                  comments: comments,
+                });
               })
               .catch((e) => {
                 res.status(400).json({ success: false });
@@ -110,7 +123,17 @@ router.delete("/:id", async (req, res) => {
       });
     }
 
-    return res.status(200).json({ success: true });
+    const comments = await Comment.find({
+      path: path,
+      pathId: pathId,
+    }).populate("creator", "_id name email");
+
+    if (!comments)
+      return res
+        .status(400)
+        .json({ success: false, msg: "댓글이 존재하지 않습니다." });
+
+    return res.status(200).json({ success: true, comments: comments });
   } catch (e) {
     return res.status(400).json({ success: false });
   }

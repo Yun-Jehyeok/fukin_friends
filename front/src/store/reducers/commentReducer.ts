@@ -4,7 +4,9 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import { BaseRes } from "../types";
 import {
   CreateCommentReq,
+  CreateCommentRes,
   DeleteCommentReq,
+  DeleteCommentRes,
   IComment,
   LoadAllCommentsFailRes,
   LoadAllCommentsReq,
@@ -50,9 +52,10 @@ const commentSlice = createSlice({
       state.commentLoading = true;
       state.errMsg = null;
     },
-    createCommentSuc(state, action: PayloadAction<BaseRes>) {
+    createCommentSuc(state, action: PayloadAction<CreateCommentRes>) {
       state.commentLoading = false;
       state.success = true;
+      state.comments = action.payload.comments;
     },
     createCommentFail(state, action: PayloadAction<BaseRes>) {
       state.commentLoading = false;
@@ -79,9 +82,10 @@ const commentSlice = createSlice({
       state.commentLoading = true;
       state.errMsg = null;
     },
-    deleteCommentSuc(state, action: PayloadAction<BaseRes>) {
+    deleteCommentSuc(state, action: PayloadAction<DeleteCommentRes>) {
       state.commentLoading = false;
       state.success = true;
+      state.comments = action.payload.comments;
     },
     deleteCommentFail(state, action: PayloadAction<BaseRes>) {
       state.commentLoading = false;

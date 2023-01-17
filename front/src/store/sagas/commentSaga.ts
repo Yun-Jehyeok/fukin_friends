@@ -12,7 +12,9 @@ import { commentActions } from "../reducers/commentReducer";
 import { BaseRes } from "../types";
 import {
   CreateCommentReq,
+  CreateCommentRes,
   DeleteCommentReq,
+  DeleteCommentRes,
   LoadAllCommentsReq,
   LoadAllCommentsSucRes,
   UpdateCommentReq,
@@ -41,7 +43,7 @@ function* watchloadAllComments() {
 
 function* createCommentApi(action: PayloadAction<CreateCommentReq>) {
   try {
-    const { data }: AxiosResponse<BaseRes> = yield call(
+    const { data }: AxiosResponse<CreateCommentRes> = yield call(
       createComment,
       action.payload
     );
@@ -81,7 +83,7 @@ function* watchupdateComment() {
 
 function* deleteCommentApi(action: PayloadAction<DeleteCommentReq>) {
   try {
-    const { data }: AxiosResponse<BaseRes> = yield call(
+    const { data }: AxiosResponse<DeleteCommentRes> = yield call(
       deleteComment,
       action.payload
     );
