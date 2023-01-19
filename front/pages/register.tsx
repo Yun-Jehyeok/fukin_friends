@@ -26,6 +26,9 @@ const Register: NextPage = () => {
   const [sendPASuccess, setSendPASuccess] = useState(false);
   const [isPASuccess, setIsPASuccess] = useState(false);
 
+  const [countInterval, setCountInterval] =
+    useState<ReturnType<typeof setInterval>>();
+
   const [minute, setMinute] = useState("3");
   const [second, setSecond] = useState("00");
 
@@ -42,31 +45,37 @@ const Register: NextPage = () => {
     (e: React.MouseEvent<HTMLElement>) => {
       e.preventDefault();
 
-      setSendPASuccess(true);
+      if (phone.value !== "") {
+        setSendPASuccess(true);
 
-      let secondsRemaining = 180;
-      let min = 0;
-      let sec = 0;
+        let secondsRemaining = 180;
+        let min = 0;
+        let sec = 0;
 
-      let countInterval = setInterval(function () {
-        secondsRemaining = secondsRemaining - 1;
+        let cntIntervalFunc = setInterval(function () {
+          secondsRemaining = secondsRemaining - 1;
 
-        min = secondsRemaining / 60;
-        sec = secondsRemaining % 60;
+          min = secondsRemaining / 60;
+          sec = secondsRemaining % 60;
 
-        let strSec = sec < 10 ? "0" + String(sec) : String(sec);
+          let strSec = sec < 10 ? "0" + String(sec) : String(sec);
 
-        setMinute(String(parseInt(String(min))));
-        setSecond(strSec);
+          setMinute(String(parseInt(String(min))));
+          setSecond(strSec);
 
-        if (secondsRemaining < 0) {
-          setSendPASuccess(false);
-          alert("인증 시간을 초과했습니다. 인증번호를 다시 보내주세요.");
-          clearInterval(countInterval);
-        }
-      }, 1000);
+          if (secondsRemaining < 0) {
+            setSendPASuccess(false);
+            alert("인증 시간을 초과했습니다. 인증번호를 다시 보내주세요.");
+            clearInterval(countInterval);
+          }
+        }, 1000);
 
-      dispatch(userActions.userPAReq({ phoneNum: phone.value }));
+        setCountInterval(cntIntervalFunc);
+
+        dispatch(userActions.userPAReq({ phoneNum: phone.value }));
+      } else {
+        alert("휴대폰 번호를 입력해주세요");
+      }
     },
     [dispatch, phone]
   );
@@ -77,6 +86,8 @@ const Register: NextPage = () => {
     if (PANum === authNum.value) {
       setIsPASuccess(true);
       alert("인증번호가 확인되었습니다.");
+      setSendPASuccess(false);
+      clearInterval(countInterval);
     } else setIsPASuccess(false);
   };
 
@@ -181,22 +192,28 @@ const Register: NextPage = () => {
                   휴대폰 인증
                 </div>
                 <div className="w-full flex justify-between gap-2 h-12 mb-4">
-                  <div className="w-4/5">
-                    <Input
+                  <div className="w-4/5 bg-white h-12 mb-4 outline-none border border-solid border-black text-base flex justify-between">
+                    <input
                       type="text"
                       name="phone"
                       placeholder="휴대폰 번호를 입력하세요"
-                      data={phone}
+                      {...phone}
+                      className="outline-none border-none ring-0 h-full w-4/5 focus:border-none focus:ring-0"
                     />
+                    {sendPASuccess ? (
+                      <div className="h-full w-fit leading-[44px] pr-3 text-red-500">
+                        {minute} : {second}
+                      </div>
+                    ) : (
+                      ""
+                    )}
                   </div>
                   <div className="w-1/5">
                     <button
-                      className={`w-full h-full leading text-white bg-lightblue text-center border-none ${
-                        sendPASuccess ? "pointer-events-none" : "cursor-pointer"
-                      } text-base hover:bg-hoverlightblue`}
+                      className={`w-full h-full leading text-white bg-lightblue text-center border-none cursor-pointer text-base hover:bg-hoverlightblue`}
                       onClick={sendPA}
                     >
-                      {sendPASuccess ? minute + ":" + second : "보내기"}
+                      {sendPASuccess ? "재발송" : "보내기"}
                     </button>
                   </div>
                 </div>
