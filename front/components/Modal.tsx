@@ -134,7 +134,7 @@ export default function Modal({ open, handleModal, data, handleEdit }: IModal) {
                   value={content}
                   onChange={onChangeContent}
                   placeholder="Enter the content"
-                  className="w-full h-64 outline-none p-3 border border-solid border-[#8a8fb9] font-lato resize-none rounded-3 focus:border-[#8a8fb9] ring-0 focus:ring-0 focus:ring-[#8a8fb9] focus:outline-none overflow-y-auto"
+                  className="w-full h-64 outline-none p-3 border border-[#8a8fb9] font-lato resize-none rounded-3 focus:border-[#8a8fb9] ring-0 focus:ring-0 focus:ring-[#8a8fb9] focus:outline-none overflow-y-auto"
                 />
               ) : (
                 content

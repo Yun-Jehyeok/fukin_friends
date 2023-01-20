@@ -46,6 +46,7 @@ const Login: NextPage = () => {
       const { email, name } = res.profileObj;
       const { tokenId } = res;
 
+      console.log("email:::", email);
       dispatch(userActions.googleReq({ email, name, token: tokenId }));
     },
     [dispatch]

@@ -113,7 +113,7 @@ const Comment: React.FC<Props> = ({ comment, user }) => {
       <div>
         {isEdit ? (
           <textarea
-            className="w-full h-20 outline-none p-3 border border-solid border-[#8a8fb9] font-lato resize-none rounded-3 placeholder:font-lato"
+            className="w-full h-20 outline-none p-3 border border-[#8a8fb9] font-lato resize-none rounded-3 placeholder:font-lato"
             onChange={onChangeComment}
             defaultValue={comment.content}
           ></textarea>

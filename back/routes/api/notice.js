@@ -26,7 +26,9 @@ router.get("/skip/:page", async (req, res) => {
 
 router.get("/important", async (req, res) => {
   try {
-    const notices = await Notice.find().limit(3).sort({ date: -1 });
+    const notices = await Notice.find({ isImportant: true })
+      .limit(3)
+      .sort({ date: -1 });
 
     res.status(200).json({
       success: true,
@@ -78,7 +80,15 @@ router.get("/main", async (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  const { userId, title, content, location, date } = req.body;
+  const {
+    userId,
+    title,
+    content,
+    location,
+    detailLocation,
+    date,
+    isImportant,
+  } = req.body;
 
   User.findOne({ _id: userId }).then((user) => {
     if (!user) return res.status(400).json({ success: false });
@@ -87,8 +97,10 @@ router.post("/", (req, res) => {
       title,
       content,
       location,
+      detailLocation,
       date,
       creator: userId,
+      isImportant,
     });
 
     newNotice.save().then(() => {
@@ -122,13 +134,16 @@ router.get("/:id", (req, res) => {
 
 router.put("/:id", (req, res) => {
   const id = req.params.id;
-  const { title, content, location, date } = req.body.notice;
+  const { title, content, location, detailLocation, date, isImportant } =
+    req.body.notice;
 
   Notice.findByIdAndUpdate(id, {
     title,
     content,
     location,
+    detailLocation,
     date,
+    isImportant,
   })
     .then(() => {
       res.status(200).json({ success: true });

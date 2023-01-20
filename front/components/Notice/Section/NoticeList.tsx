@@ -193,7 +193,7 @@ export default function NoticeList({ type }: INoticeList) {
                     </div>
                   </div>
                   <div className="bg-[#ffe7f9] text-darkblue text-sm font-lato font-semibold rounded-sm px-9 py-1 ml-3 group-hover:underline">
-                    {item.location}
+                    {item.location + ", " + item.detailLocation}
                   </div>
                 </div>
                 <div className="font-lato text-[#8a8fb9] text-base mt-6 group-hover:underline">
@@ -224,7 +224,7 @@ export default function NoticeList({ type }: INoticeList) {
         <div className="w-full flex justify-center">
           <div className="w-fit flex flex-wrap gap-x-2">
             <div
-              className={`w-2 h-2 border-b-[1px] border-l-[1px] border-[#151875] border-solid rotate-45 relative top-3 cursor-pointer mr-3 ${
+              className={`w-2 h-2 border-b-[1px] border-l-[1px] border-[#151875] rotate-45 relative top-3 cursor-pointer mr-3 ${
                 larrActive ? "" : "pointer-events-none"
               }`}
               onClick={goPrev}
@@ -244,7 +244,7 @@ export default function NoticeList({ type }: INoticeList) {
                 ))
               : ""}
             <div
-              className={`w-2 h-2 border-t-[1px] border-r-[1px] border-[#151875] border-solid rotate-45 relative top-3 cursor-pointer ml-3 ${
+              className={`w-2 h-2 border-t-[1px] border-r-[1px] border-[#151875] rotate-45 relative top-3 cursor-pointer ml-3 ${
                 rarrActive ? "" : "pointer-events-none"
               }`}
               onClick={goNext}

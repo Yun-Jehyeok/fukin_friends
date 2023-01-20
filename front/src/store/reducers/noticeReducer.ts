@@ -43,6 +43,8 @@ const initialState: NoticeStateType = {
     registerDate: "",
     creator: "",
     location: "",
+    detailLocation: "",
+    isImportant: false,
   },
 };
 
@@ -162,6 +164,8 @@ const noticeSlice = createSlice({
         registerDate: "",
         creator: "",
         location: "",
+        detailLocation: "",
+        isImportant: false,
       };
       state.noticeLoading = false;
     },

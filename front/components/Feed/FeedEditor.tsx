@@ -170,7 +170,7 @@ export default function FeedEditor() {
           <div className="mt-20">
             <div className="text-4xl font-bold mb-4">Tags</div>
             <input
-              className="w-full h-12 text-[13px] flex justify-center flex-col text-[#757575] px-3 py-0 border border-solid border-[#dadde6] active:border-[#dadde6] active:ring-0 focus:ring-0 focus:border-[#dadde6] outline-none rounded-3"
+              className="w-full h-12 text-[13px] flex justify-center flex-col text-[#757575] px-3 py-0 border border-inputcolor active:border-inputcolor active:ring-0 focus:ring-0 focus:border-inputcolor outline-none rounded-3"
               type="text"
               value={newTag}
               placeholder={
@@ -198,7 +198,7 @@ export default function FeedEditor() {
           <div className="mt-10">
             <div className="text-4xl font-bold mb-4">content</div>
             <textarea
-              className="w-full h-60 resize-none text-[13px] text-[#757575] p-3 border border-solid border-[#dadde6] active:border-[#dadde6] active:ring-0 focus:ring-0 focus:border-[#dadde6] outline-none rounded-3"
+              className="w-full h-60 resize-none text-[13px] text-[#757575] p-3 border border-inputcolor active:border-inputcolor active:ring-0 focus:ring-0 focus:border-inputcolor outline-none rounded-3"
               placeholder="Enter the content"
               {...content}
             ></textarea>

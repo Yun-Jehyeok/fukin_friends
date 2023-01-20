@@ -18,6 +18,9 @@ const NoticeSchema = new mongoose.Schema({
   location: {
     type: String,
   },
+  detailLocation: {
+    type: String,
+  },
   date: {
     type: Date,
     default: moment().format("MMMM DD, YYYY"),
@@ -26,6 +29,11 @@ const NoticeSchema = new mongoose.Schema({
   registerDate: {
     type: Date,
     default: moment().format("MMMM DD, YYYY"),
+    required: true,
+  },
+  isImportant: {
+    type: Boolean,
+    default: false,
     required: true,
   },
 });

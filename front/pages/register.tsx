@@ -192,7 +192,7 @@ const Register: NextPage = () => {
                   휴대폰 인증
                 </div>
                 <div className="w-full flex justify-between gap-2 h-12 mb-4">
-                  <div className="w-4/5 bg-white h-12 mb-4 outline-none border border-solid border-black text-base flex justify-between">
+                  <div className="w-4/5 bg-white h-12 mb-4 outline-none border border-black text-base flex justify-between">
                     <input
                       type="text"
                       name="phone"

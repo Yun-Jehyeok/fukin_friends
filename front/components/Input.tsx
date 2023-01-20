@@ -15,7 +15,7 @@ interface IInput {
 export default function Input({ type, name, placeholder, data }: IInput) {
   return (
     <input
-      className="w-full h-12 mb-4 outline-none pl-3 border border-solid border-black text-base"
+      className="w-full h-12 mb-4 outline-none pl-3 border border-black text-base"
       autoComplete="off"
       type={type}
       name={name}

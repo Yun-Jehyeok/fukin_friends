@@ -3,23 +3,22 @@ import "@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-sy
 import "@toast-ui/editor/dist/theme/toastui-editor-dark.css";
 import "@toast-ui/editor/dist/toastui-editor.css";
 import { Editor as EditorT, EditorProps } from "@toast-ui/react-editor";
+import { DatePicker, DatePickerProps } from "antd";
 import { useAppDispatch } from "hooks/reduxHooks";
 import { NextPage } from "next";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import React, { useCallback, useEffect, useRef, useState } from "react";
+import { useDaumPostcodePopup } from "react-daum-postcode";
 import { useSelector } from "react-redux";
 import { RootState } from "src/configureStore";
 import { noticeActions } from "src/store/reducers/noticeReducer";
 import "tui-color-picker/dist/tui-color-picker.css";
-
-import { useDaumPostcodePopup } from "react-daum-postcode";
 import { TuiEditorWithForwardedProps } from "./TUIEditorWrapper";
 
 interface EditorType {
   pageName: string;
 }
-
 interface EditorPropsWithHandlers extends EditorProps {
   onChange?(value: string): void;
 }
@@ -36,8 +35,13 @@ const EditorWithForwardedRef = React.forwardRef<
 ));
 
 const WysiwygEditor: NextPage<EditorType> = ({ pageName }) => {
-  const { user } = useSelector((state: RootState) => state.user);
-  const { notice } = useSelector((state: RootState) => state.notice);
+  const editorRef = useRef<EditorT>(null);
+  const toolbarItems = [
+    ["heading", "bold", "italic", "strike"],
+    ["hr"],
+    ["ul", "ol"],
+    ["scrollSync"],
+  ];
 
   const setData = useCallback(
     (a: any, b: any) => {
@@ -46,27 +50,20 @@ const WysiwygEditor: NextPage<EditorType> = ({ pageName }) => {
     [pageName]
   );
 
+  const { user } = useSelector((state: RootState) => state.user);
+  const { notice } = useSelector((state: RootState) => state.notice);
+
+  const [value, setValue] = useState({
+    title: setData("", notice.title),
+    detailLocation: setData("", notice.detailLocation),
+    date: setData("", notice.date.slice(0, 10)),
+  });
   const [location, setLocation] = useState(setData("", notice.location));
-  const [title, setTitle] = useState(setData("", notice.title));
-  const [date, setDate] = useState(setData("", notice.date.slice(0, 10)));
+  const [isImportant, setIsImportant] = useState(
+    setData(false, notice.isImportant)
+  );
 
   const dispatch = useAppDispatch();
-
-  const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const {
-      target: { value },
-    } = e;
-
-    setTitle(value);
-  };
-  const onChangeDate = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const {
-      target: { value },
-    } = e;
-
-    setDate(value);
-  };
-
   const router = useRouter();
 
   useEffect(() => {
@@ -78,47 +75,21 @@ const WysiwygEditor: NextPage<EditorType> = ({ pageName }) => {
 
   useEffect(() => {
     setLocation(setData("", notice.location));
-    setTitle(setData("", notice.title));
-    setDate(setData("", notice.date.slice(0, 10)));
+    setValue({
+      ...value,
+      title: setData("", notice.title),
+      detailLocation: setData("", notice.detailLocation),
+      date: setData("", notice.date.slice(0, 10)),
+    });
+    setIsImportant(setData(false, notice.isImportant));
   }, [notice]);
 
-  const editorRef = useRef<EditorT>(null);
-  const toolbarItems = [
-    ["heading", "bold", "italic", "strike"],
-    ["hr"],
-    ["ul", "ol", "task"],
-    ["scrollSync"],
-  ];
-
-  const onSubmit = useCallback(
-    (e: React.MouseEvent<HTMLElement>) => {
-      e.preventDefault();
-
-      let noticeId = router.query.noticeId as string;
-
-      const content = editorRef.current?.getInstance().getMarkdown() || "";
-
-      dispatch(
-        setData(
-          noticeActions.createNoticeReq({
-            userId: user.id,
-            title: title.value,
-            content,
-            location: location,
-            date: date.value,
-          }),
-          noticeActions.updateNoticeReq({
-            id: noticeId,
-            title: title.value,
-            content,
-            location: location,
-            date: date.value,
-          })
-        )
-      );
-    },
-    [setData, router, user, title, date, location, dispatch]
-  );
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue({
+      ...value,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   const open = useDaumPostcodePopup();
 
@@ -144,6 +115,44 @@ const WysiwygEditor: NextPage<EditorType> = ({ pageName }) => {
     open({ onComplete: handleComplete });
   };
 
+  const onSubmit = useCallback(
+    (e: React.MouseEvent<HTMLElement>) => {
+      e.preventDefault();
+
+      let noticeId = router.query.noticeId as string;
+
+      const content = editorRef.current?.getInstance().getMarkdown() || "";
+
+      dispatch(
+        setData(
+          noticeActions.createNoticeReq({
+            userId: user.id,
+            title: value.title,
+            content,
+            location: location,
+            detailLocation: value.detailLocation,
+            date: value.date.value,
+            isImportant,
+          }),
+          noticeActions.updateNoticeReq({
+            id: noticeId,
+            title: value.title,
+            content,
+            location: location,
+            detailLocation: value.detailLocation,
+            date: value.date.value,
+            isImportant,
+          })
+        )
+      );
+    },
+    [setData, router, user, value, location, isImportant, dispatch]
+  );
+
+  const onChangeDate: DatePickerProps["onChange"] = (date, dateString) => {
+    setValue({ ...value, date: dateString });
+  };
+
   return (
     <div className="w-default p-24 h-fit shadow-editor">
       <div className="font-josefin text-[32px] font-bold text-center mb-4">
@@ -153,27 +162,52 @@ const WysiwygEditor: NextPage<EditorType> = ({ pageName }) => {
         Please notice detail below.
       </div>
       <input
-        className="w-full h-12 px-3 py-0 border border-solid border-[#dadde6] outline-none mb-3 rounded-3"
+        className="w-full h-12 px-3 py-0 border border-inputcolor outline-none mb-3 rounded-3 focus:outline-none focus:ring-0 focus:border-inputcolor"
         type="text"
         name="title"
         placeholder="Enter the Title."
-        value={title}
-        onChange={onChangeTitle}
+        value={value.title}
+        onChange={onChange}
       />
 
       <div className="w-full h-12 mb-3 flex justify-between gap-2">
         <button
           onClick={handleClick}
-          className="w-4/5 h-full flex justify-center flex-col text-[#757575] px-3 py-0 border border-solid border-[#dadde6] outline-none rounded-3"
+          className="w-1/2 h-full flex justify-center flex-col text-[#757575] px-3 py-0 border border-inputcolor outline-none rounded-3"
         >
           {location !== "" ? location : "Enter the Location."}
         </button>
         <input
-          className="w-1/5 h-full px-3 py-0 border border-solid border-[#dadde6] outline-none rounded-3"
-          type="date"
-          value={date}
-          onChange={onChangeDate}
+          className="w-1/2 h-full px-3 py-0 border border-inputcolor outline-none rounded-3 focus:outline-none focus:ring-0 focus:border-inputcolor"
+          type="text"
+          name="detailLocation"
+          placeholder="Enter the Detail Location."
+          value={value.detailLocation}
+          onChange={onChange}
         />
+      </div>
+
+      <div className="flex gap-2 mb-3">
+        {/* DatePicker 수정에 대한 Default Value 설정 안됨 */}
+        <DatePicker
+          onChange={onChangeDate}
+          className="w-4/5 h-12 rounded-3 hover:border-inputcolor border-inputcolor"
+        />
+        <div className="w-1/5 h-12 rounded-3 border-inputcolor border px-3 flex justify-between">
+          <div className="h-full flex justify-center flex-col font-lato">
+            Is Important?
+          </div>
+          <div className="h-full flex flex-col justify-center">
+            <div
+              className={`w-5 h-5 rounded-3 border border-inputcolor cursor-pointer ${
+                isImportant
+                  ? "bg-center bg-no-repeat bg-check bg-basered border-none"
+                  : ""
+              }`}
+              onClick={() => setIsImportant(!isImportant)}
+            ></div>
+          </div>
+        </div>
       </div>
 
       <EditorWithForwardedRef

@@ -6,6 +6,8 @@ export interface INotice {
   registerDate: string;
   creator: string;
   location: string;
+  detailLocation: string;
+  isImportant: boolean;
 }
 
 export interface LoadAllNoticeReq {
@@ -42,7 +44,9 @@ export interface CreateNoticeReq {
   title: string;
   content: string;
   location: string;
+  detailLocation: string;
   date: string;
+  isImportant: boolean;
 }
 
 export interface LoadNoticeReq {
@@ -62,7 +66,9 @@ export interface UpdateNoticeReq {
   title: string;
   content: string;
   location: string;
+  detailLocation: string;
   date: string;
+  isImportant: boolean;
 }
 
 export interface DeleteNoticeReq {

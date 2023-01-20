@@ -33,7 +33,7 @@ export default function NoticeSideBar() {
           Search
         </div>
         <input
-          className="w-full h-10 border border-solid border-gray-300 text-darkblue outline-none rounded-sm pr-10 pl-3 mt-5 bg-search bg-no-repeat bg-cr12 text-sm placeholder:text-sm placeholder:text-gray-300"
+          className="w-full h-10 border border-gray-300 text-darkblue outline-none rounded-sm pr-10 pl-3 mt-5 bg-search bg-no-repeat bg-cr12 text-sm placeholder:text-sm placeholder:text-gray-300"
           placeholder="Search For Notice"
           onKeyDown={onSearch}
           {...noticeSearchTerm}

@@ -103,7 +103,7 @@ const Notice: NextPage = () => {
                         </div>
                       </div>
                       <div className="bg-[#ffe7f9] text-darkblue text-sm font-lato font-semibold rounded-sm px-9 py-1 ml-3">
-                        {notice.location}
+                        {notice.location + ", " + notice.detailLocation}
                       </div>
                     </div>
                     <div className="font-lato text-[#8a8fb9] text-base mt-6">
@@ -137,7 +137,7 @@ const Notice: NextPage = () => {
                       Comment
                     </div>
                     <textarea
-                      className="w-full h-16 border border-solid border-[#8a8fb9] p-3 outline-none font-lato resize-none placeholder:font-lato focus:border-[#8a8fb9] focus:ring-0"
+                      className="w-full h-16 border border-[#8a8fb9] p-3 outline-none font-lato resize-none placeholder:font-lato focus:border-[#8a8fb9] focus:ring-0"
                       {...comment}
                       maxLength={200}
                       placeholder="Write your comment"

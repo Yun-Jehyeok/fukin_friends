@@ -62,7 +62,7 @@ const NoticeList: NextPage = () => {
                 {Array.isArray(notices)
                   ? notices.map((item) => (
                       <div
-                        className="w-[270px] h-[360px] mr-[30px] text-white shadow-md cursor-pointer relative top-3 box-border hover:border hover:border-solid hover:border-[#2f1ac4]"
+                        className="w-[270px] h-[360px] mr-[30px] text-white shadow-md cursor-pointer relative top-3 box-border hover:border hover:border-[#2f1ac4]"
                         key={item._id}
                       >
                         <Link href={`/notice/detail/${item._id}`}>
@@ -97,7 +97,7 @@ const NoticeList: NextPage = () => {
         </div>
       ) : (
         <div className="w-full flex justify-center">
-          <div className="w-default h-56 border border-solid border-gray-200 rounded-3 flex justify-center py-12">
+          <div className="w-default h-56 border border-gray-200 rounded-3 flex justify-center py-12">
             <div className="w-fit h-fit">
               <div className="w-24 h-24">
                 <svg
