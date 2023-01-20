@@ -46,7 +46,6 @@ const Login: NextPage = () => {
       const { email, name } = res.profileObj;
       const { tokenId } = res;
 
-      console.log("email:::", email);
       dispatch(userActions.googleReq({ email, name, token: tokenId }));
     },
     [dispatch]
@@ -71,7 +70,7 @@ const Login: NextPage = () => {
                 소셜 로그인
               </div>
               <GoogleLogin
-                clientId={process.env.GOOGLE_CLIENT_ID!}
+                clientId="534707785395-1c3aq9gp00tfbib4rgg0eemp6ma0ddup.apps.googleusercontent.com"
                 render={(renderProps) => (
                   <Google_Button onClick={renderProps.onClick}></Google_Button>
                 )}
