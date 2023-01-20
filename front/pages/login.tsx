@@ -71,7 +71,7 @@ const Login: NextPage = () => {
                 소셜 로그인
               </div>
               <GoogleLogin
-                clientId="534707785395-1c3aq9gp00tfbib4rgg0eemp6ma0ddup.apps.googleusercontent.com"
+                clientId={process.env.GOOGLE_CLIENT_ID!}
                 render={(renderProps) => (
                   <Google_Button onClick={renderProps.onClick}></Google_Button>
                 )}
