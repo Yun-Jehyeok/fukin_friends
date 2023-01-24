@@ -1,5 +1,6 @@
 import { useAppDispatch } from "hooks/reduxHooks";
 import { useInput } from "hooks/useInput";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useCallback, useEffect } from "react";
 import { useSelector } from "react-redux";
@@ -45,14 +46,18 @@ export default function NoticeSideBar() {
         </div>
         {importantNotices.length > 0 ? (
           importantNotices.map((item) => (
-            <div key={item._id} className="mb-6 cursor-pointer group">
-              <div className="group-hover:underline font-josefin text-sm text-[#3f509e]">
-                {item.title}
-              </div>
-              <div className="font-lato text-[11px] text-[#8a8fb9] mt-2 group-hover:underline">
-                {item.date.slice(0, 10)}
-              </div>
-            </div>
+            <Link key={item._id} href={`/notice/detail/${item._id}`}>
+              <a>
+                <div className="mb-6 cursor-pointer group">
+                  <div className="group-hover:underline font-josefin text-sm text-[#3f509e]">
+                    {item.title}
+                  </div>
+                  <div className="font-lato text-[11px] text-[#8a8fb9] mt-2 group-hover:underline">
+                    {item.date.slice(0, 10)}
+                  </div>
+                </div>
+              </a>
+            </Link>
           ))
         ) : (
           <div className="font-josefin text-sm text-[#3f509e]">

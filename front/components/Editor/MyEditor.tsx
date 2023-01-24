@@ -5,6 +5,7 @@ import "@toast-ui/editor/dist/toastui-editor.css";
 import { Editor as EditorT, EditorProps } from "@toast-ui/react-editor";
 import { DatePicker, DatePickerProps } from "antd";
 import { useAppDispatch } from "hooks/reduxHooks";
+import moment from "moment";
 import { NextPage } from "next";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
@@ -33,6 +34,8 @@ const EditorWithForwardedRef = React.forwardRef<
 >((props, ref) => (
   <Editor {...props} forwardedRef={ref as React.MutableRefObject<EditorT>} />
 ));
+
+const dateFormat = "YYYY-MM-DD";
 
 const WysiwygEditor: NextPage<EditorType> = ({ pageName }) => {
   const editorRef = useRef<EditorT>(null);
@@ -191,6 +194,10 @@ const WysiwygEditor: NextPage<EditorType> = ({ pageName }) => {
         {/* DatePicker 수정에 대한 Default Value 설정 안됨 */}
         <DatePicker
           onChange={onChangeDate}
+          defaultValue={setData(
+            moment(new Date()),
+            moment(notice.date.slice(0, 10))
+          )}
           className="w-4/5 h-12 rounded-3 hover:border-inputcolor border-inputcolor"
         />
         <div className="w-1/5 h-12 rounded-3 border-inputcolor border px-3 flex justify-between">
