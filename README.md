@@ -7,3 +7,7 @@ It developed with Next.js, TypeScript, Redux, Node.js, MongoDB.
 ## Getting Started
 
 Click this [URL](https://fukin-friends.vercel.app/)!!
+
+## Plus...
+
+If you have any issues, please register the issues!!
