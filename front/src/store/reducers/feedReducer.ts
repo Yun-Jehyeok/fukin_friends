@@ -43,6 +43,8 @@ const feedSlice = createSlice({
   initialState,
   reducers: {
     loadAllFeedReq(state, action: PayloadAction<GetAllFeedsReq>) {
+      if (action.payload.skip === 0) state.feeds = [];
+
       state.feedLoading = true;
       state.errMsg = null;
     },

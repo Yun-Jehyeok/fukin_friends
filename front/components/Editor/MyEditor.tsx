@@ -191,7 +191,6 @@ const WysiwygEditor: NextPage<EditorType> = ({ pageName }) => {
       </div>
 
       <div className="flex gap-2 mb-3">
-        {/* DatePicker 수정에 대한 Default Value 설정 안됨 */}
         <DatePicker
           onChange={onChangeDate}
           defaultValue={setData(
