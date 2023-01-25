@@ -55,47 +55,47 @@ export default function Feed() {
   };
 
   const skipNumberRef = useRef(0);
-  const postCountRef = useRef(0);
+  const feedCountRef = useRef(0);
   const endMsg = useRef(false);
 
-  postCountRef.current = allFeedsCnt - 12;
+  feedCountRef.current = allFeedsCnt - 12;
 
   const useOnScreen = (options: any) => {
-    const lastPostElementRef = useRef(null);
+    const lastFeedElementRef = useRef(null);
 
     useEffect(() => {
       const observer = new IntersectionObserver(([entry]) => {
         if (entry.isIntersecting) {
-          let remainPostCount = postCountRef.current - skipNumberRef.current;
+          let remainfeedCount = feedCountRef.current - skipNumberRef.current;
 
-          if (remainPostCount >= 0) {
+          if (remainfeedCount >= 0) {
             dispatch(
               feedActions.loadAllFeedReq({ skip: skipNumberRef.current + 12 })
             );
-            skipNumberRef.current += 6;
+            skipNumberRef.current += 12;
           } else {
             endMsg.current = true;
           }
         }
       }, options);
 
-      if (lastPostElementRef.current) {
-        observer.observe(lastPostElementRef.current);
+      if (lastFeedElementRef.current) {
+        observer.observe(lastFeedElementRef.current);
       }
 
       const LastElementReturnFunc = () => {
-        if (lastPostElementRef.current) {
-          observer.unobserve(lastPostElementRef.current);
+        if (lastFeedElementRef.current) {
+          observer.unobserve(lastFeedElementRef.current);
         }
       };
 
       return LastElementReturnFunc;
-    }, [lastPostElementRef, options]);
+    }, [lastFeedElementRef, options]);
 
-    return [lastPostElementRef];
+    return [lastFeedElementRef];
   };
 
-  const [lastPostElementRef] = useOnScreen({
+  const [lastFeedElementRef] = useOnScreen({
     threshold: "0.5",
   });
 
@@ -158,9 +158,10 @@ export default function Feed() {
           )}
         </div>
       </div>
-      <div ref={lastPostElementRef} className="flex justify-center">
+      <div ref={lastFeedElementRef} className="flex justify-center">
         {feedLoading && "Loading..."}
       </div>
+
       {openModal ? (
         <Modal
           open={openModal}
