@@ -46,7 +46,7 @@ const TermsOfService: NextPage<PageTypeProps> = ({ checkTOS }: child) => {
       <div className="w-[40%] my-0 mx-auto">
         <div className="mb-12 text-5xl font-bold text-center">
           <Link href="/">
-            <a className="text-lightblue hover:text-lightblue">FUKIN FRIENDS</a>
+            <a className="text-lightBlue hover:text-lightBlue">FUKIN FRIENDS</a>
           </Link>
         </div>
         <div>
@@ -63,7 +63,7 @@ const TermsOfService: NextPage<PageTypeProps> = ({ checkTOS }: child) => {
               />
             </span>
             FUKIN FRIEND 이용 약관 동의{" "}
-            <span className="text-lightblue relative bottom-0.5 text-base">
+            <span className="text-lightBlue relative bottom-0.5 text-base">
               (필수)
             </span>
           </div>
@@ -93,7 +93,7 @@ const TermsOfService: NextPage<PageTypeProps> = ({ checkTOS }: child) => {
               />
             </span>
             개인정보 수집 및 이용 동의{" "}
-            <span className="text-lightblue relative bottom-0.5 text-base">
+            <span className="text-lightBlue relative bottom-0.5 text-base">
               (필수)
             </span>
           </div>
@@ -131,7 +131,7 @@ const TermsOfService: NextPage<PageTypeProps> = ({ checkTOS }: child) => {
             취소
           </div>
           <div
-            className="w-1/2 h-14 text-white text-lg border-none outline-none cursor-pointer leading-14 text-center bg-lightblue hover:bg-hoverlightblue"
+            className="w-1/2 h-14 text-white text-lg border-none outline-none cursor-pointer leading-14 text-center bg-lightBlue hover:bg-hoverLightBlue"
             onClick={handleCheckTerms}
           >
             확인

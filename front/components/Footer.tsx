@@ -14,7 +14,7 @@ const Footer: NextPage = () => {
                 className="w-[220px] h-[44px] rounded-3 bg-white px-6 py-0 border-none outline-none"
                 placeholder="Enter Email Address"
               />
-              <button className="w-[135px] h-[39px] mt-[2.5px] mr-[2.5px] mt- bg-basered border-none outline-none rounded-3 text-white font-roboto cursor-pointer hover:bg-hoverred">
+              <button className="w-[135px] h-[39px] mt-[2.5px] mr-[2.5px] mt- bg-baseRed border-none outline-none rounded-3 text-white font-roboto cursor-pointer hover:bg-hoverRed">
                 Send
               </button>
             </div>

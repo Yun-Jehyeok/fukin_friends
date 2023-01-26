@@ -144,13 +144,13 @@ export default function Modal({ open, handleModal, data, handleEdit }: IModal) {
             <div>
               <div className="w-full font-josefin flex pb-1.5">
                 <div className="w-3.5 h-[22px] mr-1 bg-creator bg-no-repeat bg-center"></div>
-                <div className="text-darkblue text-sm">{creatorName}</div>
+                <div className="text-darkBlue text-sm">{creatorName}</div>
                 <div className="w-3.5 h-4.5 mr-1 ml-9 bg-calendar bg-no-repeat bg-center"></div>
-                <div className="text-darkblue text-sm">{date.slice(0, 10)}</div>
+                <div className="text-darkBlue text-sm">{date.slice(0, 10)}</div>
               </div>
 
               <div className="flex gap-2 mt-3 font-josefin">
-                <div className="text-darkblue font-bold mr-2 flex justify-center flex-col">
+                <div className="text-darkBlue font-bold mr-2 flex justify-center flex-col">
                   TAGS
                 </div>
                 {isEdit ? (

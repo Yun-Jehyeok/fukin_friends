@@ -60,7 +60,7 @@ const ChangePassword: NextPage = () => {
 
   return (
     <div className="w-full h-screen overflow-x-hidden overflow-y-auto flex justify-center flex-col bg-[#f4f9fc]">
-      <div className="font-bold text-5xl text-center mb-8 text-lightblue">
+      <div className="font-bold text-5xl text-center mb-8 text-lightBlue">
         비밀번호 변경
       </div>
       <div className="w-530 mx-auto my-0">
@@ -90,7 +90,7 @@ const ChangePassword: NextPage = () => {
               {...passwordCheck}
             />
             {isPasswordCheckErr ? errMsg(passwordCheckErrMsg) : ""}
-            <div className="w-full h-14 text-white bg-lightblue text-center text-lg cursor-pointer border-none outline-none hover:bg-hoverlightblue leading-14">
+            <div className="w-full h-14 text-white bg-lightBlue text-center text-lg cursor-pointer border-none outline-none hover:bg-hoverLightBlue leading-14">
               변경
             </div>
           </form>

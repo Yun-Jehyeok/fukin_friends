@@ -145,7 +145,7 @@ const Register: NextPage = () => {
               <div>
                 <div className="font-bold text-5xl text-center mb-8">
                   <Link href="/">
-                    <a className="text-lightblue hover:text-lightblue">
+                    <a className="text-lightBlue hover:text-lightBlue">
                       SIGN UP
                     </a>
                   </Link>
@@ -210,7 +210,7 @@ const Register: NextPage = () => {
                   </div>
                   <div className="w-1/5">
                     <button
-                      className={`w-full h-full leading text-white bg-lightblue text-center border-none cursor-pointer text-base hover:bg-hoverlightblue`}
+                      className={`w-full h-full leading text-white bg-lightBlue text-center border-none cursor-pointer text-base hover:bg-hoverLightBlue`}
                       onClick={sendPA}
                     >
                       {sendPASuccess ? "재발송" : "보내기"}
@@ -229,7 +229,7 @@ const Register: NextPage = () => {
                   </div>
                   <div className="w-1/5">
                     <button
-                      className="w-full h-full text-white bg-lightblue text-center border-none cursor-pointer text-base hover:bg-hoverlightblue"
+                      className="w-full h-full text-white bg-lightBlue text-center border-none cursor-pointer text-base hover:bg-hoverLightBlue"
                       onClick={checkPA}
                     >
                       확인
@@ -240,7 +240,7 @@ const Register: NextPage = () => {
                   ? errMsg("비밀번호 확인란은 비밀번호와 같아야 합니다.")
                   : ""}
                 <button
-                  className="w-full h-14 text-white bg-lightblue text-center text-lg cursor-pointer border-none outline-none hover:bg-hoverlightblue leading-14"
+                  className="w-full h-14 text-white bg-lightBlue text-center text-lg cursor-pointer border-none outline-none hover:bg-hoverLightBlue leading-14"
                   onClick={handleSubmit}
                 >
                   회원가입

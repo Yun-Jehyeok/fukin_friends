@@ -95,8 +95,8 @@ const Header: NextPage = () => {
                 <Link href={"/" + menu.path} key={menu.id}>
                   <div
                     className={`h-full leading-10 ${
-                      pathname.includes(menu.path) ? "text-basered" : ""
-                    } font-lato cursor-pointer transition-colors ease-linear duration-150 hover:text-basered`}
+                      pathname.includes(menu.path) ? "text-baseRed" : ""
+                    } font-lato cursor-pointer transition-colors ease-linear duration-150 hover:text-baseRed`}
                   >
                     {menu.content}
                   </div>
@@ -109,7 +109,7 @@ const Header: NextPage = () => {
               className="w-full h-full outline-none border-none rounded-[4px] bg-white py-0 px-4 placeholder:text-gray-300 text-sm placeholder:text-sm"
               placeholder="Search For All"
             />
-            <div className="w-[51px] h-10 relative bottom-[1px] rounded-tr-[4px] rounded-br-[4px] bg-basered bg-xsearch bg-no-repeat bg-center cursor-pointer"></div>
+            <div className="w-[51px] h-10 relative bottom-[1px] rounded-tr-[4px] rounded-br-[4px] bg-baseRed bg-xsearch bg-no-repeat bg-center cursor-pointer"></div>
           </div>
         </div>
       </div>

@@ -15,12 +15,12 @@ export default function ViewHeader({ title, desc, url, url_title }: IHeader) {
           <div className="text-4xl font-bold font-josefin text-[#101750]">
             {title}
           </div>
-          <div className="font-josefin text-basered text-base font-medium mt-6">
+          <div className="font-josefin text-baseRed text-base font-medium mt-6">
             {desc}
           </div>
         </div>
         {url ? (
-          <div className="cursor-pointer hover:bg-hoverred outline-none border-none h-[50px] w-[200px] flex justify-center flex-col text-center bg-basered font-josefin font-bold text-[17px] relative top-4">
+          <div className="cursor-pointer hover:bg-hoverRed outline-none border-none h-[50px] w-[200px] flex justify-center flex-col text-center bg-baseRed font-josefin font-bold text-4.25 relative top-4">
             <Link href={url}>
               <a className="text-white hover:text-white">{url_title}</a>
             </Link>

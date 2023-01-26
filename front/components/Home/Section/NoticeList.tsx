@@ -47,7 +47,7 @@ const NoticeList: NextPage = () => {
 
   return (
     <div className="w-full mt-[200px]">
-      <div className="text-darkblue font-bold text-[40px] text-center font-josefin mb-[53px]">
+      <div className="text-darkBlue font-bold text-[40px] text-center font-josefin mb-[53px]">
         Notice
       </div>
       {notices.length > 0 ? (
@@ -72,13 +72,13 @@ const NoticeList: NextPage = () => {
                             </div>
                             <div className="w-full h-2/5 text-center flex justify-center flex-col px-3 py-0">
                               <div className="h-fit">
-                                <div className="font-lato text-lg text-basered font-bold">
+                                <div className="font-lato text-lg text-baseRed font-bold">
                                   {item.title}
                                 </div>
-                                <div className="font-josefin text-sm text-darkblue mt-3">
+                                <div className="font-josefin text-sm text-darkBlue mt-3">
                                   {item.location}
                                 </div>
-                                <div className="font-josefin text-sm text-darkblue mt-2">
+                                <div className="font-josefin text-sm text-darkBlue mt-2">
                                   {item.date.slice(0, 10)}
                                 </div>
                               </div>

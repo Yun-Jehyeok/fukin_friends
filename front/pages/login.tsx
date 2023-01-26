@@ -62,7 +62,7 @@ const Login: NextPage = () => {
           <div>
             <div className="font-bold text-5xl text-center mb-8">
               <Link href="/">
-                <a className="text-lightblue hover:text-lightblue">SIGN IN</a>
+                <a className="text-lightBlue hover:text-lightBlue">SIGN IN</a>
               </Link>
             </div>
             <div className="w-full mb-8">
@@ -97,20 +97,20 @@ const Login: NextPage = () => {
                 data={password}
               />
               {isLoginErr ? errMsg("이메일 혹은 비밀번호를 확인해주세요.") : ""}
-              <button className="w-full h-14 text-white bg-lightblue text-center text-lg cursor-pointer border-none outline-none hover:bg-hoverlightblue leading-14">
+              <button className="w-full h-14 text-white bg-lightBlue text-center text-lg cursor-pointer border-none outline-none hover:bg-hoverLightBlue leading-14">
                 로그인
               </button>
             </form>
             <div className="w-full text-center mt-6 text-sm">
               <Link href="/pwinquiry">
-                <a className="text-lightblue hover:text-lightblue font-bold hover:underline">
+                <a className="text-lightBlue hover:text-lightBlue font-bold hover:underline">
                   비밀번호를 잊어버리셨나요?
                 </a>
               </Link>
               <div className="mt-2">
                 회원이 아니신가요?&nbsp;
                 <Link href="/register">
-                  <a className="text-lightblue hover:text-lightblue font-bold hover:underline">
+                  <a className="text-lightBlue hover:text-lightBlue font-bold hover:underline">
                     회원가입
                   </a>
                 </Link>

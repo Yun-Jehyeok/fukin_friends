@@ -30,18 +30,18 @@ export default function NoticeSideBar() {
   return (
     <div className="w-[270px]">
       <div className="w-full">
-        <div className="font-josefin text-darkblue font-bold text-2xl">
+        <div className="font-josefin text-darkBlue font-bold text-2xl">
           Search
         </div>
         <input
-          className="w-full h-10 border border-gray-300 text-darkblue outline-none rounded-sm pr-10 pl-3 mt-5 bg-search bg-no-repeat bg-cr12 text-sm placeholder:text-sm placeholder:text-gray-300"
+          className="w-full h-10 border border-gray-300 text-darkBlue outline-none rounded-sm pr-10 pl-3 mt-5 bg-search bg-no-repeat bg-cr12 text-sm placeholder:text-sm placeholder:text-gray-300"
           placeholder="Search For Notice"
           onKeyDown={onSearch}
           {...noticeSearchTerm}
         />
       </div>
       <div className="w-full mt-20">
-        <div className="font-josefin text-darkblue font-bold text-2xl mb-8">
+        <div className="font-josefin text-darkBlue font-bold text-2xl mb-8">
           Important Notice
         </div>
         {importantNotices.length > 0 ? (
@@ -52,7 +52,7 @@ export default function NoticeSideBar() {
                   <div className="group-hover:underline font-josefin text-sm text-[#3f509e]">
                     {item.title}
                   </div>
-                  <div className="font-lato text-[11px] text-[#8a8fb9] mt-2 group-hover:underline">
+                  <div className="font-lato text-[11px] text-subTextColor mt-2 group-hover:underline">
                     {item.date.slice(0, 10)}
                   </div>
                 </div>

@@ -92,21 +92,21 @@ const Notice: NextPage = () => {
               <div className="w-default flex justify-between">
                 <div className="w-[870px]">
                   <div key={notice._id} className="w-full mb-20">
-                    <div className="font-josefin text-[30px] font-bold text-darkblue">
+                    <div className="font-josefin text-[30px] font-bold text-darkBlue">
                       {notice.title}
                     </div>
                     <div className="flex mt-3">
                       <div className="flex">
                         <div className="w-4 h-4 bg-white bg-calendar bg-center bg-no-repeat relative top-1 mr-2"></div>
-                        <div className="bg-[#ffece2] text-darkblue text-sm font-lato font-semibold rounded-sm px-9 py-1">
+                        <div className="bg-[#ffece2] text-darkBlue text-sm font-lato font-semibold rounded-sm px-9 py-1">
                           {notice.date.slice(0, 10)}
                         </div>
                       </div>
-                      <div className="bg-[#ffe7f9] text-darkblue text-sm font-lato font-semibold rounded-sm px-9 py-1 ml-3">
+                      <div className="bg-[#ffe7f9] text-darkBlue text-sm font-lato font-semibold rounded-sm px-9 py-1 ml-3">
                         {notice.location + ", " + notice.detailLocation}
                       </div>
                     </div>
-                    <div className="font-lato text-[#8a8fb9] text-base mt-6">
+                    <div className="font-lato text-subTextColor text-base mt-6">
                       <EditorViewer data={notice.content} />
                     </div>
                     {user.id === notice.creator ? (
@@ -133,7 +133,7 @@ const Notice: NextPage = () => {
                     )}
                   </div>
                   <div className="w-full h-fit mt-16">
-                    <div className="text-darkblue text-2xl font-bold font-josefin mb-3">
+                    <div className="text-darkBlue text-2xl font-bold font-josefin mb-3">
                       Comment
                     </div>
                     <textarea
@@ -143,7 +143,7 @@ const Notice: NextPage = () => {
                       placeholder="Write your comment"
                     ></textarea>
                     <button
-                      className="w-full h-10 bg-basered outline-none border-none cursor-pointer text-white font-roboto hover:bg-hoverred"
+                      className="w-full h-10 bg-baseRed outline-none border-none cursor-pointer text-white font-roboto hover:bg-hoverRed"
                       onClick={submitComment}
                     >
                       Submit

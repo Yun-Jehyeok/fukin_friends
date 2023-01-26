@@ -80,8 +80,12 @@ const FeedList: NextPage = () => {
             <Image src={item.src} alt={item.title} className="w-full h-full" />
           </div>
           <div className="flex justify-end flex-col ml-3">
-            <div className="text-sm text-[#8a8fb9] text-left">{item.title}</div>
-            <div className="text-sm text-[#8a8fb9] text-left">{item.desc}</div>
+            <div className="text-sm text-subTextColor text-left">
+              {item.title}
+            </div>
+            <div className="text-sm text-subTextColor text-left">
+              {item.desc}
+            </div>
           </div>
         </div>
       ))}

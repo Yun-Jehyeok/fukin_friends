@@ -170,7 +170,7 @@ export default function FeedEditor() {
           <div className="mt-20">
             <div className="text-4xl font-bold mb-4">Tags</div>
             <input
-              className="w-full h-12 text-[13px] flex justify-center flex-col text-[#757575] px-3 py-0 border border-inputcolor active:border-inputcolor active:ring-0 focus:ring-0 focus:border-inputcolor outline-none rounded-3"
+              className="w-full h-12 text-xs flex justify-center flex-col text-lightGray px-3 py-0 border border-inputColor active:border-inputColor active:ring-0 focus:ring-0 focus:border-inputColor outline-none rounded-3"
               type="text"
               value={newTag}
               placeholder={
@@ -198,13 +198,13 @@ export default function FeedEditor() {
           <div className="mt-10">
             <div className="text-4xl font-bold mb-4">content</div>
             <textarea
-              className="w-full h-60 resize-none text-[13px] text-[#757575] p-3 border border-inputcolor active:border-inputcolor active:ring-0 focus:ring-0 focus:border-inputcolor outline-none rounded-3"
+              className="w-full h-60 resize-none text-xs text-lightGray p-3 border border-inputColor active:border-inputColor active:ring-0 focus:ring-0 focus:border-inputColor outline-none rounded-3"
               placeholder="Enter the content"
               {...content}
             ></textarea>
           </div>
           <button
-            className="w-full h-12 border-none outline-none text-white bg-basered rounded-3 font-bold text-[17px] font-lato mt-5 cursor-pointer hover:bg-hoverred"
+            className="w-full h-12 border-none outline-none text-white bg-baseRed rounded-3 font-bold text-4.25 font-lato mt-5 cursor-pointer hover:bg-hoverRed"
             onClick={handleSubmit}
           >
             Write

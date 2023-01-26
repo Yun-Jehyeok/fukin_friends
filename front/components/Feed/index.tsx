@@ -129,11 +129,11 @@ export default function Feed() {
                   <div className="w-full">
                     <div className="w-full py-4.75 px-3.5 font-josefin flex">
                       <div className="w-3.5 h-[22px] mr-1 bg-creator bg-no-repeat bg-center"></div>
-                      <div className="text-sm text-darkblue">
+                      <div className="text-sm text-darkBlue">
                         {item.creatorName}
                       </div>
                       <div className="w-3.5 h-4.5 mr-1 ml-9 bg-calendar bg-no-repeat bg-center"></div>
-                      <div className="text-sm text-darkblue">
+                      <div className="text-sm text-darkBlue">
                         {item.date.slice(0, 10)}
                       </div>
                     </div>

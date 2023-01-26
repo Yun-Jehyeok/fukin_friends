@@ -83,7 +83,7 @@ const Comment: React.FC<Props> = ({ comment, user }) => {
   return (
     <div key={comment._id} className="mb-9">
       <div className="w-full flex justify-between">
-        <div className="text-darkblue font-josefin text-lg font-bold mb-2">
+        <div className="text-darkBlue font-josefin text-lg font-bold mb-2">
           {comment.creator.name}
         </div>
         {comment.creator._id === user.id ? (
@@ -125,20 +125,20 @@ const Comment: React.FC<Props> = ({ comment, user }) => {
         {isEdit ? (
           <div className="flex justify-end mt-2">
             <div
-              className="text-sm text-gray-500 font-lato cursor-pointer ml-2 hover:text-basered"
+              className="text-sm text-gray-500 font-lato cursor-pointer ml-2 hover:text-baseRed"
               onClick={onChangeMode}
             >
               cancel
             </div>
             <div
-              className="text-sm text-gray-500 font-lato cursor-pointer ml-2 hover:text-basered"
+              className="text-sm text-gray-500 font-lato cursor-pointer ml-2 hover:text-baseRed"
               onClick={onEditComment}
             >
               edit
             </div>
           </div>
         ) : (
-          <div className="text-[#8a8fb9] text-sm font-lato">
+          <div className="text-subTextColor text-sm font-lato">
             {comment.date.slice(0, 10)}
           </div>
         )}

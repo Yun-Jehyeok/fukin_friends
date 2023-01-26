@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import { RootState } from "src/configureStore";
+import Album from "./Album/Album";
 import Feed from "./Feed";
 import FeedEditor from "./Feed/FeedEditor";
 import Footer from "./Footer";
@@ -55,9 +56,11 @@ export default function BaseContainer({ component }: IBaseContainer) {
       <FeedEditor />
     ) : component === "home" ? (
       <Home />
+    ) : component === "album" ? (
+      <Album />
     ) : (
       <div className="w-full h-screen text-center flex justify-center flex-col">
-        추후 오픈됩니다!!
+        추후 오픈됩니다!
       </div>
     );
 

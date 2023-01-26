@@ -161,11 +161,11 @@ const WysiwygEditor: NextPage<EditorType> = ({ pageName }) => {
       <div className="font-josefin text-[32px] font-bold text-center mb-4">
         {setData("Create Notice", "Updating Notice")}
       </div>
-      <div className="text-[#9096b2] text-[17px] font-lato mb-10 text-center">
+      <div className="text-[#9096b2] text-4.25 font-lato mb-10 text-center">
         Please notice detail below.
       </div>
       <input
-        className="w-full h-12 px-3 py-0 border border-inputcolor outline-none mb-3 rounded-3 focus:outline-none focus:ring-0 focus:border-inputcolor"
+        className="w-full h-12 px-3 py-0 border border-inputColor outline-none mb-3 rounded-3 focus:outline-none focus:ring-0 focus:border-inputColor"
         type="text"
         name="title"
         placeholder="Enter the Title."
@@ -176,12 +176,12 @@ const WysiwygEditor: NextPage<EditorType> = ({ pageName }) => {
       <div className="w-full h-12 mb-3 flex justify-between gap-2">
         <button
           onClick={handleClick}
-          className="w-1/2 h-full flex justify-center flex-col text-[#757575] px-3 py-0 border border-inputcolor outline-none rounded-3"
+          className="w-1/2 h-full flex justify-center flex-col text-lightGray px-3 py-0 border border-inputColor outline-none rounded-3"
         >
           {location !== "" ? location : "Enter the Location."}
         </button>
         <input
-          className="w-1/2 h-full px-3 py-0 border border-inputcolor outline-none rounded-3 focus:outline-none focus:ring-0 focus:border-inputcolor"
+          className="w-1/2 h-full px-3 py-0 border border-inputColor outline-none rounded-3 focus:outline-none focus:ring-0 focus:border-inputColor"
           type="text"
           name="detailLocation"
           placeholder="Enter the Detail Location."
@@ -197,17 +197,17 @@ const WysiwygEditor: NextPage<EditorType> = ({ pageName }) => {
             moment(new Date()),
             moment(notice.date.slice(0, 10))
           )}
-          className="w-4/5 h-12 rounded-3 hover:border-inputcolor border-inputcolor"
+          className="w-4/5 h-12 rounded-3 hover:border-inputColor border-inputColor"
         />
-        <div className="w-1/5 h-12 rounded-3 border-inputcolor border px-3 flex justify-between">
+        <div className="w-1/5 h-12 rounded-3 border-inputColor border px-3 flex justify-between">
           <div className="h-full flex justify-center flex-col font-lato">
             Is Important?
           </div>
           <div className="h-full flex flex-col justify-center">
             <div
-              className={`w-5 h-5 rounded-3 border border-inputcolor cursor-pointer ${
+              className={`w-5 h-5 rounded-3 border border-inputColor cursor-pointer ${
                 isImportant
-                  ? "bg-center bg-no-repeat bg-check bg-basered border-none"
+                  ? "bg-center bg-no-repeat bg-check bg-baseRed border-none"
                   : ""
               }`}
               onClick={() => setIsImportant(!isImportant)}
@@ -228,7 +228,7 @@ const WysiwygEditor: NextPage<EditorType> = ({ pageName }) => {
         plugins={[colorSyntax]}
       />
       <button
-        className="w-full h-12 border-none outline-none text-white bg-basered rounded-3 font-bold text-[17px] font-lato mt-5 cursor-pointer hover:bg-hoverred"
+        className="w-full h-12 border-none outline-none text-white bg-baseRed rounded-3 font-bold text-4.25 font-lato mt-5 cursor-pointer hover:bg-hoverRed"
         onClick={onSubmit}
       >
         {setData("Write", "Edit")}

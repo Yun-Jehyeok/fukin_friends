@@ -62,7 +62,7 @@ export default function NoticeList({ type }: INoticeList) {
       i++
     ) {
       if (i <= totalPage) {
-        pageList.push({ key: i, cls: i === currentPage ? "text-basered" : "" });
+        pageList.push({ key: i, cls: i === currentPage ? "text-baseRed" : "" });
       } else {
         break;
       }
@@ -182,21 +182,21 @@ export default function NoticeList({ type }: INoticeList) {
           <div key={item._id} className="w-full mb-20 cursor-pointer group">
             <Link href={`/notice/detail/${item._id}`}>
               <a>
-                <div className="font-josefin text-[30px] font-bold text-darkblue group-hover:underline">
+                <div className="font-josefin text-[30px] font-bold text-darkBlue group-hover:underline">
                   {item.title}
                 </div>
                 <div className="flex mt-3">
                   <div className="flex">
                     <div className="w-4 h-4 bg-white bg-center bg-calendar bg-no-repeat relative top-1 mr-2"></div>
-                    <div className="bg-[#ffece2] text-darkblue text-sm font-lato font-semibold rounded-sm px-9 py-1 group-hover:underline">
+                    <div className="bg-[#ffece2] text-darkBlue text-sm font-lato font-semibold rounded-sm px-9 py-1 group-hover:underline">
                       {item.date.slice(0, 10)}
                     </div>
                   </div>
-                  <div className="bg-[#ffe7f9] text-darkblue text-sm font-lato font-semibold rounded-sm px-9 py-1 ml-3 group-hover:underline">
+                  <div className="bg-[#ffe7f9] text-darkBlue text-sm font-lato font-semibold rounded-sm px-9 py-1 ml-3 group-hover:underline">
                     {item.location + ", " + item.detailLocation}
                   </div>
                 </div>
-                <div className="font-lato text-[#8a8fb9] text-base mt-6 group-hover:underline">
+                <div className="font-lato text-subTextColor text-base mt-6 group-hover:underline">
                   {item.content.length > 200
                     ? item.content
                         .slice(0, 200)
@@ -207,9 +207,9 @@ export default function NoticeList({ type }: INoticeList) {
                         ""
                       )}
                 </div>
-                <div className="font-lato text-lg font-semibold flex mt-6 text-darkblue group-hover:underline">
+                <div className="font-lato text-lg font-semibold flex mt-6 text-darkBlue group-hover:underline">
                   Read More
-                  <div className="w-[5px] h-[5px] rounded-full bg-basered ml-1 relative top-[9px]"></div>
+                  <div className="w-[5px] h-[5px] rounded-full bg-baseRed ml-1 relative top-[9px]"></div>
                 </div>
               </a>
             </Link>
@@ -234,7 +234,7 @@ export default function NoticeList({ type }: INoticeList) {
                   <div
                     key={page.key}
                     className={
-                      "w-9 h-9 text-center leading-9 rounded-full bg-white text-darkblue font-josefin cursor-pointer text-lg hover:bg-[#eeeffb] hover:text-basered " +
+                      "w-9 h-9 text-center leading-9 rounded-full bg-white text-darkBlue font-josefin cursor-pointer text-lg hover:bg-[#eeeffb] hover:text-baseRed " +
                       page.cls
                     }
                     onClick={() => onChangePage(page.key)}

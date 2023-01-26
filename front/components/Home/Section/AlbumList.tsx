@@ -25,7 +25,7 @@ let itemList = [
 const AlbumList: NextPage = () => {
   return (
     <div className="w-full mt-40">
-      <div className="text-darkblue font-bold text-[40px] text-center font-josefin mb-[53px]">
+      <div className="text-darkBlue font-bold text-[40px] text-center font-josefin mb-[53px]">
         Pictures
       </div>
       <div className="flex w-full h-fit overflow-hidden justify-center gap-6">

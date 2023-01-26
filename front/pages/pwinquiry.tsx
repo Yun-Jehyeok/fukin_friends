@@ -26,9 +26,9 @@ const PwInquiry: NextPage = () => {
   return (
     <div className="w-full h-screen overflow-x-hidden overflow-y-auto flex justify-center flex-col bg-[#f4f9fc]">
       <div className="w-530 mx-auto my-0">
-        <div className="font-bold text-5xl text-center mb-8 text-lightblue">
+        <div className="font-bold text-5xl text-center mb-8 text-lightBlue">
           <Link href="/">
-            <a className="text-lightblue hover:text-lightblue">비밀번호 찾기</a>
+            <a className="text-lightBlue hover:text-lightBlue">비밀번호 찾기</a>
           </Link>
         </div>
         <form onSubmit={handleSubmit}>
@@ -41,7 +41,7 @@ const PwInquiry: NextPage = () => {
             placeholder="이메일을 입력하세요"
             data={email}
           />
-          <div className="w-full h-14 text-white bg-lightblue text-center text-lg cursor-pointer border-none outline-none hover:bg-hoverlightblue leading-14">
+          <div className="w-full h-14 text-white bg-lightBlue text-center text-lg cursor-pointer border-none outline-none hover:bg-hoverLightBlue leading-14">
             전송
           </div>
         </form>
