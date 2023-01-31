@@ -11,10 +11,8 @@ const nodemailer = require("nodemailer");
 const { JWT_SECRET, NODEMAILER_USER, NODEMAILER_PASS } = config;
 const { User } = require("../../models/user");
 const { Feed } = require("../../models/feed");
-const { Event } = require("../../models/event");
 const { Notice } = require("../../models/notice");
 const { Photo } = require("../../models/photo");
-const { PlayList } = require("../../models/playList");
 
 const router = express.Router();
 
@@ -131,10 +129,8 @@ router.delete("/:id", async (req, res) => {
   try {
     await User.deleteOne({ _id: req.params.id });
     await Feed.deleteMany({ creator: req.params.id });
-    await Event.deleteMany({ creator: req.params.id });
     await Notice.deleteMany({ creator: req.params.id });
     await Photo.deleteMany({ creator: req.params.id });
-    await PlayList.deleteMany({ creator: req.params.id });
 
     return res.status(200).json({ success: true });
   } catch (e) {

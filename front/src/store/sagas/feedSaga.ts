@@ -6,7 +6,6 @@ import {
   deleteFeed,
   loadAllFeeds,
   loadFeed,
-  testApi,
   updateFeed,
 } from "../api/feedApi";
 import { feedActions } from "../reducers/feedReducer";
@@ -18,8 +17,6 @@ import {
   GetAllFeedsRes,
   GetFeedReq,
   GetFeedRes,
-  TestReq,
-  TestRes,
   UpdateFeedReq,
 } from "../types/feed";
 
@@ -127,35 +124,11 @@ export default function* feedSaga() {
     yield takeLatest(feedActions.deleteFeedReq, deleteFeedApi);
   }
 
-  function* testApis(action: PayloadAction<TestReq>) {
-    try {
-      console.log("here", action.payload);
-      const { data }: AxiosResponse<TestRes> = yield call(
-        testApi,
-        action.payload
-      );
-
-      console.log(data);
-
-      yield put(feedActions.testSuc(data));
-    } catch (e: any) {
-      yield put(
-        feedActions.testFail({
-          success: false,
-        })
-      );
-    }
-  }
-  function* watchtest() {
-    yield takeLatest(feedActions.testReq, testApis);
-  }
-
   yield all([
     fork(watchloadAllFeed),
     fork(watchcreateFeed),
     fork(watchloadFeed),
     fork(watchupdateFeed),
     fork(watchdeleteFeed),
-    fork(watchtest),
   ]);
 }

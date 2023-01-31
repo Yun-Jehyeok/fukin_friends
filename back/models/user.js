@@ -39,22 +39,10 @@ const UserSchema = new mongoose.Schema({
       ref: "notice",
     },
   ],
-  events: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "event",
-    },
-  ],
   photos: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "photo",
-    },
-  ],
-  playLists: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "playList",
     },
   ],
   comments: [

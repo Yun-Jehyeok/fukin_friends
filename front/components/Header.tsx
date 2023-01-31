@@ -33,7 +33,7 @@ const Header: NextPage = () => {
     setPathname(router.pathname.slice(1));
   }, [router]);
 
-  const { token } = useSelector((state: RootState) => state.user);
+  const { user, token } = useSelector((state: RootState) => state.user);
 
   const dispatch = useAppDispatch();
 
@@ -47,16 +47,20 @@ const Header: NextPage = () => {
     <div className="w-full h-fit box-border sticky top-[-44px] z-[1] shadow-md">
       <div className="w-full h-[44px] bg-[#7e33e0] flex justify-center">
         <div className="w-default h-full leading-[44px] flex justify-between">
-          <div className="flex gap-6">
-            <div className="text-[#f1f1f1] flex font-josefin">
-              <div className="w-4 h-4 bg-email bg-no-repeat bg-center mt-3"></div>
-              dbswpgur2@naver.com
+          {user.id !== "" ? (
+            <div className="flex gap-6">
+              <div className="text-[#f1f1f1] flex font-josefin">
+                <div className="w-4 h-4 bg-email bg-no-repeat bg-center mt-3"></div>
+                {user.email}
+              </div>
+              <div className="text-[#f1f1f1] flex font-josefin">
+                <div className="w-4 h-4 bg-phone bg-no-repeat bg-center mt-3"></div>
+                010-5629-4023
+              </div>
             </div>
-            <div className="text-[#f1f1f1] flex font-josefin">
-              <div className="w-4 h-4 bg-phone bg-no-repeat bg-center mt-3"></div>
-              010-5629-4023
-            </div>
-          </div>
+          ) : (
+            <div></div>
+          )}
           <div className="flex gap-6">
             <div className="text-[#f1f1f1] flex font-josefin cursor-pointer">
               English

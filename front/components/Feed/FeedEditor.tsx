@@ -38,6 +38,7 @@ export default function FeedEditor() {
       setEmpties(3 - totalLen);
     }
   };
+
   const onPreventDragOver = (e: React.DragEvent<HTMLLabelElement>) => {
     e.stopPropagation();
     e.preventDefault();
@@ -111,8 +112,8 @@ export default function FeedEditor() {
               onDragOver={onPreventDragOver}
               onMouseOver={() => setIsActive(true)}
               onMouseLeave={() => setIsActive(false)}
-              onDragLeave={() => setIsActive(false)}
               onDragEnter={() => setIsActive(true)}
+              onDragLeave={() => setIsActive(false)}
               className={`w-full cursor-pointer text-gray-600 flex items-center justify-center border-2 border-dashed ${
                 isActive ? "border-[#FB2E86]" : "border-gray-300"
               } h-48 rounded-md`}
@@ -196,7 +197,7 @@ export default function FeedEditor() {
             </div>
           </div>
           <div className="mt-10">
-            <div className="text-4xl font-bold mb-4">content</div>
+            <div className="text-4xl font-bold mb-4">Content</div>
             <textarea
               className="w-full h-60 resize-none text-xs text-lightGray p-3 border border-inputColor active:border-inputColor active:ring-0 focus:ring-0 focus:border-inputColor outline-none rounded-3"
               placeholder="Enter the content"

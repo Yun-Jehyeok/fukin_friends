@@ -7,8 +7,6 @@ import {
   GetAllFeedsRes,
   GetFeedReq,
   GetFeedRes,
-  TestReq,
-  TestRes,
   UpdateFeedReq,
 } from "../types/feed";
 
@@ -34,8 +32,4 @@ export const updateFeed = async (feed: UpdateFeedReq) => {
 
 export const deleteFeed = async (feed: DeleteFeedReq) => {
   return await axios.delete<BaseRes>(`/api/feed/${feed.id}/${feed.userId}`);
-};
-
-export const testApi = async (imgs: TestReq) => {
-  return await axios.post<TestRes>("/api/feed/image", imgs);
 };
