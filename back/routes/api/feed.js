@@ -23,21 +23,18 @@ const uploadS3 = multer({
     acl: "public-read",
     contentType: multerS3.AUTO_CONTENT_TYPE,
     key: function (req, file, cb) {
-      cb(
-        null,
-        `feed/${path.basename(file.originalname)}_${new Date().valueOf()}`
-      );
+      cb(null, `feed/${file.originalname}_${new Date().valueOf()}`);
     },
   }),
   limits: { fileSize: 5 * 1024 * 1024 },
 });
 
-router.post("/image", uploadS3.array("imgs", 3), async (req, res) => {
+router.post("/image", uploadS3.array("image", 3), async (req, res) => {
   try {
-    res.json({ upload: true, url: req.files.map((v) => v.location) });
+    res.json({ success: true, url: req.files.map((v) => v.location) });
   } catch (e) {
     console.error(e);
-    res.json({ upload: false, url: null });
+    res.json({ success: false, url: null });
   }
 });
 

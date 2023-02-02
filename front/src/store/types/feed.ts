@@ -44,3 +44,10 @@ export interface DeleteFeedReq {
   id: string;
   userId: string;
 }
+
+export interface ImageUploadTestReq {
+  imgs: FormData;
+}
+export interface ImageUploadTestRes {
+  success: boolean;
+}

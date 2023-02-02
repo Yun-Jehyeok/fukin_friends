@@ -1,4 +1,3 @@
-import { Carousel } from "antd";
 import ViewHeader from "components/ViewHeader";
 import Image from "next/image";
 import cat1 from "public/img/cat1.jpg";
@@ -6,23 +5,31 @@ import dresden from "public/img/dresden.jpg";
 import friend from "public/img/friend1.jpg";
 import memories from "public/img/memories.jpg";
 
-const datas = [
-  { id: 0, title: "Comfort Handy Craft" },
-  { id: 1, title: "Comfort Handy Craft" },
-  { id: 2, title: "Comfort Handy Craft" },
-  { id: 3, title: "Comfort Handy Craft" },
-  { id: 4, title: "Comfort Handy Craft" },
-  { id: 5, title: "Comfort Handy Craft" },
-  { id: 6, title: "Comfort Handy Craft" },
-  { id: 7, title: "Comfort Handy Craft" },
-  { id: 8, title: "Comfort Handy Craft" },
-  { id: 9, title: "Comfort Handy Craft" },
-];
 const images = [
   { id: 0, name: "cat1", src: cat1 },
   { id: 1, name: "dresden", src: dresden },
   { id: 2, name: "friend", src: friend },
   { id: 3, name: "memories", src: memories },
+  { id: 4, name: "cat1", src: cat1 },
+  { id: 5, name: "dresden", src: dresden },
+  { id: 6, name: "friend", src: friend },
+  { id: 7, name: "memories", src: memories },
+  { id: 8, name: "cat1", src: cat1 },
+  { id: 9, name: "dresden", src: dresden },
+  { id: 10, name: "friend", src: friend },
+  { id: 11, name: "memories", src: memories },
+  { id: 12, name: "cat1", src: cat1 },
+  { id: 13, name: "dresden", src: dresden },
+  { id: 14, name: "friend", src: friend },
+  { id: 15, name: "memories", src: memories },
+  { id: 16, name: "cat1", src: cat1 },
+  { id: 17, name: "dresden", src: dresden },
+  { id: 18, name: "friend", src: friend },
+  { id: 19, name: "memories", src: memories },
+  { id: 20, name: "cat1", src: cat1 },
+  { id: 21, name: "dresden", src: dresden },
+  { id: 22, name: "friend", src: friend },
+  { id: 23, name: "memories", src: memories },
 ];
 
 export default function Album() {
@@ -44,28 +51,17 @@ export default function Album() {
               About 9,620 memories
             </div>
           </div>
-          <div className="w-full flex gap-[48.5px] flex-wrap">
-            {datas.map((item) => {
+          <div className="w-full flex flex-wrap">
+            {images.map((item) => {
               return (
-                <div key={item.id} className="w-[360px] h-fit mb-16">
-                  <Carousel autoplay className="w-full h-[270px]">
-                    {images.map((item) => (
-                      <Image
-                        key={item.id}
-                        src={item.src}
-                        alt={item.name}
-                        width={360}
-                        height={270}
-                        className="rounded-md"
-                      />
-                    ))}
-                  </Carousel>
-                  <div className="w-full h-9 flex justify-center flex-col mt-1">
-                    <div className="w-fit font-josefin text-darkBlue text-base border-b-2 border-b-[#EEEFFB]">
-                      {item.title}
-                    </div>
-                  </div>
-                </div>
+                <Image
+                  key={item.id}
+                  src={item.src}
+                  alt={item.name}
+                  width={294.25}
+                  height={240}
+                  className="w-1/4 cursor-pointer hover:scale-110 transition-all ease-default duration-300"
+                />
               );
             })}
           </div>

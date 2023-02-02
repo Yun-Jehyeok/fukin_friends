@@ -4,6 +4,7 @@ import { all, call, fork, put, takeLatest } from "redux-saga/effects";
 import {
   createFeed,
   deleteFeed,
+  imageUploadTest,
   loadAllFeeds,
   loadFeed,
   updateFeed,
@@ -17,6 +18,7 @@ import {
   GetAllFeedsRes,
   GetFeedReq,
   GetFeedRes,
+  ImageUploadTestReq,
   UpdateFeedReq,
 } from "../types/feed";
 
@@ -124,11 +126,32 @@ export default function* feedSaga() {
     yield takeLatest(feedActions.deleteFeedReq, deleteFeedApi);
   }
 
+  function* imageUploadtestApi(action: PayloadAction<ImageUploadTestReq>) {
+    try {
+      const { data }: AxiosResponse<BaseRes> = yield call(
+        imageUploadTest,
+        action.payload
+      );
+
+      yield put(feedActions.imageUploadTestSuc(data));
+    } catch (e: any) {
+      yield put(
+        feedActions.imageUploadTestFail({
+          success: false,
+        })
+      );
+    }
+  }
+  function* watchimageUploadtest() {
+    yield takeLatest(feedActions.imageUploadTestReq, imageUploadtestApi);
+  }
+
   yield all([
     fork(watchloadAllFeed),
     fork(watchcreateFeed),
     fork(watchloadFeed),
     fork(watchupdateFeed),
     fork(watchdeleteFeed),
+    fork(watchimageUploadtest),
   ]);
 }

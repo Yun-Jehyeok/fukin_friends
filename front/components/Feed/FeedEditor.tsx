@@ -62,12 +62,18 @@ export default function FeedEditor() {
   };
 
   const handleImgs = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let imgs = Array.from(e.target.files as FileList).map((item) => item.name);
+    // let imgs = Array.from(e.target.files as FileList).map((item) => item.name);
 
     const files = Array.from(e.target.files as FileList);
     const selectedFiles: string[] = files.map((file) =>
       URL.createObjectURL(file)
     );
+
+    let formData = new FormData();
+    const testFiles = Array.from(e.target.files as FileList);
+    formData.append("image", testFiles[0]);
+
+    dispatch(feedActions.imageUploadTestReq({ imgs: formData }));
 
     const totalLen = imgs.length + selectedFiles.length;
 

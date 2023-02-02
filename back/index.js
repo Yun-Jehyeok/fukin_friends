@@ -35,6 +35,7 @@ if (process.env.NODE_ENV === "production") {
 }
 
 mongoose
+  .set("strictQuery", true)
   .connect(mongo_url, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
