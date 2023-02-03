@@ -9,6 +9,7 @@ import {
   GetFeedRes,
   IFeed,
   ImageUploadTestReq,
+  ImageUploadTestRes,
   UpdateFeedReq,
 } from "../types/feed";
 
@@ -18,6 +19,7 @@ export interface FeedStateType {
   feeds: IFeed[];
   feed: IFeed;
   allFeedsCnt: number;
+  testImg: string;
 }
 
 const initialState: FeedStateType = {
@@ -35,6 +37,7 @@ const initialState: FeedStateType = {
     tags: [],
     creatorName: "",
   },
+  testImg: "",
 };
 
 const feedSlice = createSlice({
@@ -119,10 +122,10 @@ const feedSlice = createSlice({
     },
 
     imageUploadTestReq(state, action: PayloadAction<ImageUploadTestReq>) {
-      console.log(action.payload + "payload zz");
       state.feedLoading = true;
     },
-    imageUploadTestSuc(state, action: PayloadAction<BaseRes>) {
+    imageUploadTestSuc(state, action: PayloadAction<ImageUploadTestRes>) {
+      state.testImg = action.payload.url[0];
       state.feedLoading = false;
     },
     imageUploadTestFail(state, action: PayloadAction<BaseRes>) {

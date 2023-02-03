@@ -8,6 +8,7 @@ import {
   GetFeedReq,
   GetFeedRes,
   ImageUploadTestReq,
+  ImageUploadTestRes,
   UpdateFeedReq,
 } from "../types/feed";
 
@@ -36,5 +37,7 @@ export const deleteFeed = async (feed: DeleteFeedReq) => {
 };
 
 export const imageUploadTest = async (imgs: ImageUploadTestReq) => {
-  return await axios.post<BaseRes>("/api/feed/image", imgs.imgs);
+  let formData = new FormData();
+  formData.append("image", imgs.imgs[0]);
+  return await axios.post<ImageUploadTestRes>("/api/feed/image", formData);
 };

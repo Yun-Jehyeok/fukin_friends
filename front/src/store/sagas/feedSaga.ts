@@ -19,6 +19,7 @@ import {
   GetFeedReq,
   GetFeedRes,
   ImageUploadTestReq,
+  ImageUploadTestRes,
   UpdateFeedReq,
 } from "../types/feed";
 
@@ -128,7 +129,7 @@ export default function* feedSaga() {
 
   function* imageUploadtestApi(action: PayloadAction<ImageUploadTestReq>) {
     try {
-      const { data }: AxiosResponse<BaseRes> = yield call(
+      const { data }: AxiosResponse<ImageUploadTestRes> = yield call(
         imageUploadTest,
         action.payload
       );

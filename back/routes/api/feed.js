@@ -23,19 +23,11 @@ const uploadS3 = multer({
     acl: "public-read",
     contentType: multerS3.AUTO_CONTENT_TYPE,
     key: function (req, file, cb) {
+      console.log("here");
       cb(null, `feed/${file.originalname}_${new Date().valueOf()}`);
     },
   }),
   limits: { fileSize: 5 * 1024 * 1024 },
-});
-
-router.post("/image", uploadS3.array("image", 3), async (req, res) => {
-  try {
-    res.json({ success: true, url: req.files.map((v) => v.location) });
-  } catch (e) {
-    console.error(e);
-    res.json({ success: false, url: null });
-  }
 });
 
 router.get("/skip/:skip", async (req, res) => {
@@ -54,6 +46,15 @@ router.get("/skip/:skip", async (req, res) => {
     });
   } catch (e) {
     res.status(400).json({ success: false, msg: e.message });
+  }
+});
+
+router.post("/image", uploadS3.array("image", 3), async (req, res) => {
+  try {
+    res.json({ success: true, url: req.files.map((v) => v.location) });
+  } catch (e) {
+    console.error(e);
+    res.json({ success: false, url: null });
   }
 });
 
