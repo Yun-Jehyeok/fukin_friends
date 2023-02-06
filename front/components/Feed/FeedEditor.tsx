@@ -13,16 +13,10 @@ export default function FeedEditor() {
   const [imgs, setImgs] = useState<string[]>([]);
   const [empties, setEmpties] = useState(3);
   const [isActive, setIsActive] = useState(false);
-  const [imaaaaaage, setImaage] = useState<File[]>();
 
   const content = useInput("");
 
   const { user } = useSelector((state: RootState) => state.user);
-  // const { testImg } = useSelector((state: RootState) => state.feed);
-
-  // useEffect(() => {
-  //   if (testImg) setImaage(testImg);
-  // }, [testImg, imaaaaaage]);
   const dispatch = useAppDispatch();
 
   const onDragAddImage = (e: React.DragEvent<HTMLLabelElement>) => {
@@ -72,7 +66,6 @@ export default function FeedEditor() {
       URL.createObjectURL(file)
     );
 
-    setImaage(files);
     // const testImgs = Array.from(e.target.files as FileList);
 
     // dispatch(feedActions.imageUploadTestReq({ imgs: testImgs }));
