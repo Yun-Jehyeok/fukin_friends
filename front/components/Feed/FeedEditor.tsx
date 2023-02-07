@@ -2,7 +2,7 @@ import ViewHeader from "components/ViewHeader";
 import { useAppDispatch } from "hooks/reduxHooks";
 import { useInput } from "hooks/useInput";
 import Image from "next/image";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "src/configureStore";
 import { feedActions } from "src/store/reducers/feedReducer";
@@ -13,10 +13,15 @@ export default function FeedEditor() {
   const [imgs, setImgs] = useState<string[]>([]);
   const [empties, setEmpties] = useState(3);
   const [isActive, setIsActive] = useState(false);
+  const [imgFiles, setImgFiles] = useState<File[]>();
 
   const content = useInput("");
 
   const { user } = useSelector((state: RootState) => state.user);
+  const { uploadImgSuccess, uploadedImgs } = useSelector(
+    (state: RootState) => state.feed
+  );
+
   const dispatch = useAppDispatch();
 
   const onDragAddImage = (e: React.DragEvent<HTMLLabelElement>) => {
@@ -66,22 +71,28 @@ export default function FeedEditor() {
       URL.createObjectURL(file)
     );
 
-    // const testImgs = Array.from(e.target.files as FileList);
-
-    // dispatch(feedActions.imageUploadTestReq({ imgs: testImgs }));
-
     const totalLen = imgs.length + selectedFiles.length;
 
     if (totalLen > 3) {
       alert("이미지는 총 3개까지 업로드 할 수 있습니다.");
     } else {
       setImgs((prev) => prev.concat(selectedFiles));
+      setImgFiles(files);
       setEmpties(3 - totalLen);
     }
   };
 
   const deleteImage = (e: React.MouseEvent<HTMLImageElement>) => {
+    let deleteIdx = -1;
+
+    imgs.map((image, idx) => {
+      if (image === e.currentTarget.currentSrc) {
+        deleteIdx = idx;
+      }
+    });
+
     setImgs(imgs.filter((image) => image !== e.currentTarget.currentSrc));
+    setImgFiles(imgFiles?.filter((image, idx) => idx !== deleteIdx));
     setEmpties(4 - imgs.length);
   };
 
@@ -89,17 +100,35 @@ export default function FeedEditor() {
     (e: React.MouseEvent<HTMLButtonElement>) => {
       e.preventDefault();
 
+      let formData = new FormData();
+      imgFiles!.map((item, idx) => {
+        formData.append("imgs", item);
+      });
+
       let feed = {
         userId: user.id,
         content: content.value,
-        imgs: imgs,
+        imgs: formData,
+        tags: tags,
+      };
+
+      dispatch(feedActions.imageUploadTestReq({ imgs: formData }));
+    },
+    [dispatch, user, content, imgFiles, tags]
+  );
+
+  useEffect(() => {
+    if (uploadImgSuccess) {
+      let feed = {
+        userId: user.id,
+        content: content.value,
+        imgs: uploadedImgs,
         tags: tags,
       };
 
       dispatch(feedActions.createFeedReq(feed));
-    },
-    [dispatch, user, content, imgs, tags]
-  );
+    }
+  }, [dispatch, uploadImgSuccess, uploadedImgs]);
 
   return (
     <div className="w-full">

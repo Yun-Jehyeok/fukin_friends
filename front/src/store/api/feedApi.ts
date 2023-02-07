@@ -37,7 +37,7 @@ export const deleteFeed = async (feed: DeleteFeedReq) => {
 };
 
 export const imageUploadTest = async (imgs: ImageUploadTestReq) => {
-  let formData = new FormData();
-  formData.append("image", imgs.imgs[0]);
-  return await axios.post<ImageUploadTestRes>("/api/feed/image", formData);
+  // let formData = new FormData();
+  // formData.append("image", imgs.imgs[0]);
+  return await axios.post<ImageUploadTestRes>("/api/feed/image", imgs.imgs);
 };

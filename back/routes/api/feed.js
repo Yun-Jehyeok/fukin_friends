@@ -23,7 +23,6 @@ const uploadS3 = multer({
     acl: "public-read",
     contentType: multerS3.AUTO_CONTENT_TYPE,
     key: function (req, file, cb) {
-      console.log("here");
       cb(null, `feed/${file.originalname}_${new Date().valueOf()}`);
     },
   }),
@@ -49,7 +48,7 @@ router.get("/skip/:skip", async (req, res) => {
   }
 });
 
-router.post("/image", uploadS3.array("image", 3), async (req, res) => {
+router.post("/image", uploadS3.array("imgs", 3), async (req, res) => {
   try {
     res.json({ success: true, url: req.files.map((v) => v.location) });
   } catch (e) {
@@ -58,12 +57,11 @@ router.post("/image", uploadS3.array("image", 3), async (req, res) => {
   }
 });
 
-router.post("/", (req, res) => {
+router.post("/", uploadS3.array("imgs", 3), async (req, res) => {
   const { userId, content, imgs, tags } = req.body;
 
   User.findOne({ _id: userId }).then((user) => {
     if (!user) return res.status(400).json({ success: false });
-
     const newFeed = new Feed({
       content,
       previewImg: imgs[0],
@@ -72,7 +70,6 @@ router.post("/", (req, res) => {
       creator: userId,
       creatorName: user.name,
     });
-
     newFeed.save().then(() => {
       User.findByIdAndUpdate(userId, {
         $push: {

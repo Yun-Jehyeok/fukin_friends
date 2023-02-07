@@ -46,7 +46,7 @@ export interface DeleteFeedReq {
 }
 
 export interface ImageUploadTestReq {
-  imgs: File[];
+  imgs: FormData;
 }
 export interface ImageUploadTestRes {
   success: boolean;

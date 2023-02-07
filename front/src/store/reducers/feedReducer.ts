@@ -20,6 +20,8 @@ export interface FeedStateType {
   feed: IFeed;
   allFeedsCnt: number;
   testImg: string;
+  uploadedImgs: string[];
+  uploadImgSuccess: boolean;
 }
 
 const initialState: FeedStateType = {
@@ -38,6 +40,8 @@ const initialState: FeedStateType = {
     creatorName: "",
   },
   testImg: "",
+  uploadedImgs: [],
+  uploadImgSuccess: false,
 };
 
 const feedSlice = createSlice({
@@ -62,6 +66,8 @@ const feedSlice = createSlice({
 
     createFeedReq(state, action: PayloadAction<CreateFeedReq>) {
       state.feedLoading = true;
+      state.uploadedImgs = [];
+      state.uploadImgSuccess = false;
       state.errMsg = null;
     },
     createFeedSuc(state, action: PayloadAction<BaseRes>) {
@@ -126,10 +132,12 @@ const feedSlice = createSlice({
     },
     imageUploadTestSuc(state, action: PayloadAction<ImageUploadTestRes>) {
       state.testImg = action.payload.url[0];
-      state.feedLoading = false;
+      state.uploadedImgs = action.payload.url;
+      state.uploadImgSuccess = true;
     },
     imageUploadTestFail(state, action: PayloadAction<BaseRes>) {
       state.feedLoading = false;
+      state.uploadImgSuccess = false;
     },
   },
 });
