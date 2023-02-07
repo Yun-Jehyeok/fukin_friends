@@ -149,7 +149,7 @@ export default function Modal({ open, handleModal, data, handleEdit }: IModal) {
                 <div className="text-darkBlue text-sm">{date.slice(0, 10)}</div>
               </div>
 
-              <div className="flex gap-2 mt-3 font-josefin">
+              <div className="flex gap-3 mt-3 font-josefin">
                 <div className="text-darkBlue font-bold mr-2 flex justify-center flex-col">
                   TAGS
                 </div>
@@ -158,9 +158,23 @@ export default function Modal({ open, handleModal, data, handleEdit }: IModal) {
                     {tags.map((item) => (
                       <div
                         key={tags.indexOf(item)}
-                        className="cursor-pointer h-fit bg-[#f6f2fe] text-[#9061f9] rounded-full p-1.5"
+                        className="relative cursor-pointer h-fit bg-[#f6f2fe] text-[#9061f9] rounded-full p-1.5"
                         onClick={onDeleteTag}
                       >
+                        <div className="w-5 h-5 absolute -top-2 -right-2">
+                          <svg
+                            fill="red"
+                            viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg"
+                            aria-hidden="true"
+                          >
+                            <path
+                              clip-rule="evenodd"
+                              fill-rule="evenodd"
+                              d="M10 18a8 8 0 100-16 8 8 0 000 16zM6.75 9.25a.75.75 0 000 1.5h6.5a.75.75 0 000-1.5h-6.5z"
+                            ></path>
+                          </svg>
+                        </div>
                         {item}
                       </div>
                     ))}
