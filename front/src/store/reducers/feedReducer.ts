@@ -128,14 +128,19 @@ const feedSlice = createSlice({
     },
 
     imageUploadTestReq(state, action: PayloadAction<ImageUploadTestReq>) {
+      console.log("here1");
       state.feedLoading = true;
     },
     imageUploadTestSuc(state, action: PayloadAction<ImageUploadTestRes>) {
+      console.log("here2");
+
       state.testImg = action.payload.url[0];
       state.uploadedImgs = action.payload.url;
       state.uploadImgSuccess = true;
     },
     imageUploadTestFail(state, action: PayloadAction<BaseRes>) {
+      console.log("here3");
+
       state.feedLoading = false;
       state.uploadImgSuccess = false;
     },
