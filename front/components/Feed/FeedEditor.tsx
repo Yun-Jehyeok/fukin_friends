@@ -101,16 +101,9 @@ export default function FeedEditor() {
       e.preventDefault();
 
       let formData = new FormData();
-      imgFiles!.map((item, idx) => {
+      imgFiles!.map((item) => {
         formData.append("imgs", item);
       });
-
-      let feed = {
-        userId: user.id,
-        content: content.value,
-        imgs: formData,
-        tags: tags,
-      };
 
       dispatch(feedActions.imageUploadTestReq({ imgs: formData }));
     },
@@ -125,6 +118,8 @@ export default function FeedEditor() {
         imgs: uploadedImgs,
         tags: tags,
       };
+
+      console.log("here");
 
       dispatch(feedActions.createFeedReq(feed));
     }

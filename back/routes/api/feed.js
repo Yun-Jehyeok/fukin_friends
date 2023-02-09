@@ -62,6 +62,7 @@ router.post("/", uploadS3.array("imgs", 3), async (req, res) => {
 
   User.findOne({ _id: userId }).then((user) => {
     if (!user) return res.status(400).json({ success: false });
+
     const newFeed = new Feed({
       content,
       previewImg: imgs[0],
