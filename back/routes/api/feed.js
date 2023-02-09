@@ -57,7 +57,7 @@ router.post("/image", uploadS3.array("imgs", 3), async (req, res) => {
   }
 });
 
-router.post("/", uploadS3.array("imgs", 3), async (req, res) => {
+router.post("/", async (req, res) => {
   const { userId, content, imgs, tags } = req.body;
 
   User.findOne({ _id: userId }).then((user) => {
