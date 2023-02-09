@@ -16,19 +16,6 @@ AWS.config.update({
   region: "ap-northeast-2",
 });
 
-const uploadS3 = multer({
-  storage: multerS3({
-    s3: new AWS.S3(),
-    bucket: "fukinfriends",
-    acl: "public-read",
-    contentType: multerS3.AUTO_CONTENT_TYPE,
-    key: function (req, file, cb) {
-      cb(null, `feed/${file.originalname}_${new Date().valueOf()}`);
-    },
-  }),
-  limits: { fileSize: 5 * 1024 * 1024 },
-});
-
 router.get("/skip/:skip", async (req, res) => {
   try {
     const feedCount = await Feed.countDocuments();
@@ -48,11 +35,24 @@ router.get("/skip/:skip", async (req, res) => {
   }
 });
 
+const uploadS3 = multer({
+  storage: multerS3({
+    s3: new AWS.S3(),
+    bucket: "fukinfriends",
+    acl: "public-read",
+    contentType: multerS3.AUTO_CONTENT_TYPE,
+    key: function (req, file, cb) {
+      cb(null, `feed/${file.originalname}_${new Date().valueOf()}`);
+    },
+  }),
+  limits: { fileSize: 5 * 1024 * 1024 },
+});
+
 router.post("/image", uploadS3.array("imgs", 3), async (req, res) => {
   try {
     res.json({ success: true, url: req.files.map((v) => v.location) });
   } catch (e) {
-    console.error(e);
+    console.error(e.message);
     res.json({ success: false, url: null });
   }
 });
