@@ -52,7 +52,7 @@ router.post("/image", uploadS3.array("imgs", 3), async (req, res) => {
   try {
     res.json({ success: true, url: req.files.map((v) => v.location) });
   } catch (e) {
-    console.error(e.message);
+    console.error(e);
     res.json({ success: false, url: null });
   }
 });
