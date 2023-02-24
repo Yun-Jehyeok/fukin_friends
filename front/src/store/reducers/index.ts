@@ -1,6 +1,7 @@
 import type { AnyAction, CombinedState } from "@reduxjs/toolkit";
 import { combineReducers } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
+import albumReducer, { AlbumStateType } from "./albumReducer";
 
 import commentReducer, { CommentStateType } from "./commentReducer";
 import feedReducer, { FeedStateType } from "./feedReducer";
@@ -12,6 +13,7 @@ interface ReducerState {
   notice: NoticeStateType;
   comment: CommentStateType;
   feed: FeedStateType;
+  album: AlbumStateType;
 }
 
 const rootReducer = (
@@ -31,6 +33,7 @@ const rootReducer = (
         notice: noticeReducer,
         comment: commentReducer,
         feed: feedReducer,
+        album: albumReducer,
       })(state, action);
   }
 };

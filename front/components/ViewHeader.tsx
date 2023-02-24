@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 interface IHeader {
   title: string;
@@ -29,6 +29,10 @@ export default function ViewHeader({ title, desc, url, url_title }: IHeader) {
       body.removeEventListener("wheel", preventScroll);
     };
   }, [openModal]);
+
+  const handleSubmit = useCallback(() => {
+    handleModal();
+  }, []);
 
   return (
     <div className="w-full h-[286px] bg-[#f6f5ff] flex justify-center">
@@ -99,7 +103,7 @@ export default function ViewHeader({ title, desc, url, url_title }: IHeader) {
               </div>
               <button
                 className="w-full mt-2 bg-baseRed text-white py-2 rounded-sm"
-                onClick={handleModal}
+                onClick={handleSubmit}
               >
                 Submit
               </button>

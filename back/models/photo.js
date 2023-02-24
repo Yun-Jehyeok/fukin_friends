@@ -2,25 +2,17 @@ const mongoose = require("mongoose");
 const moment = require("moment");
 
 const PhotoSchema = new mongoose.Schema({
-  title: {
-    type: String,
-    required: true,
-  },
   creator: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "user",
     required: true,
   },
-  tags: [
-    {
-      type: String,
-    },
-  ],
-  registerDate: {
+  createDate: {
     type: Date,
     default: moment().format("MMMM DD, YYYY"),
     required: true,
   },
+  imgs: { type: String },
 });
 
 const Photo = mongoose.model("photo", PhotoSchema);

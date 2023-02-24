@@ -1,4 +1,5 @@
 import { all, fork } from "redux-saga/effects";
+import albumSaga from "./albumSaga";
 
 import CommentSaga from "./commentSaga";
 import feedSaga from "./feedSaga";
@@ -11,5 +12,6 @@ export default function* rootSaga() {
     fork(noticeSaga),
     fork(CommentSaga),
     fork(feedSaga),
+    fork(albumSaga),
   ]);
 }
